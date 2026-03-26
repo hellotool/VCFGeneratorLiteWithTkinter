@@ -1,7 +1,7 @@
 <div align="center">
 <img src="./assets/images/icon.svg" width="192" height="192" alt="App icon" />
 
-# VCF Generator Lite ![with Tkinter](https://img.shields.io/badge/with-Tkinter-00319C)
+# VCF Generator Lite with Command Line Interface ![with Tkinter](https://img.shields.io/badge/with-Tkinter-00319C)
 
 **Repositories**:
 [![Gitee primary repository](https://img.shields.io/badge/Gitee-primary_repo-C71D23?logo=gitee)][repository-gitee]
@@ -17,6 +17,10 @@
 <small>More translations are welcome!</small>
 
 </div>
+
+> [!CAUTION]
+>
+> This variant has exceeded its original design scope and will no longer receive any maintenance or updates.
 
 VCF Generator Lite can convert a contact list into a single vCard file, which can be batch-imported into mobile phone contacts or used for other purposes.
 

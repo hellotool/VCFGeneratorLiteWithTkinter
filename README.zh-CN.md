@@ -1,7 +1,7 @@
 <div align="center">
 <img src="./assets/images/icon.svg" width="192" height="192" alt="App icon" />
 
-# VCF 生成器 Lite ![使用 Tkinter](https://img.shields.io/badge/使用-Tkinter-00319C)
+# 带有命令行界面的 VCF 生成器 Lite ![使用 Tkinter](https://img.shields.io/badge/使用-Tkinter-00319C)
 
 **仓库**：
 [![Gitee 主仓库](https://img.shields.io/badge/Gitee-主仓库-C71D23?logo=gitee)][repository-gitee]
@@ -17,6 +17,10 @@
 <small>期待您的翻译！</small>
 
 </div>
+
+> [!CAUTION]
+>
+> 本变体已超出原定设计范围，因此不再提供任何维护或更新支持。
 
 VCF 生成器 Lite 可以将联系人列表转换为单个 vCard 文件，可批量导入到手机通讯录，或者用作其它用途。
 
