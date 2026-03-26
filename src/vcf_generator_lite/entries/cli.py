@@ -85,7 +85,7 @@ def launch_cli(args: argparse.Namespace):
         if input_io is None or output_io is None:
             sys.exit(1)
 
-        if not args.input:
+        if not args.input and input_io.isatty():
             print(t("cli.prompt_contact_list").format(finish_keys="Ctrl+Z"))
 
         task = VCFGeneratorTask(input_text=input_io.read(), output_io=output_io)
