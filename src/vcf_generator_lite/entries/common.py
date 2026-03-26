@@ -31,13 +31,19 @@ def setup_logging(verbose: bool):
 def get_common_parent_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument(
-        "-V",
+        "-q",
+        "--quiet",
+        action="store_true",
+        help=t("cli.help_option_quiet"),
+    )
+    parser.add_argument(
+        "-v",
         "--verbose",
         action="store_true",
         help=t("cli.help_option_verbose"),
     )
     parser.add_argument(
-        "-v",
+        "-V",
         "--version",
         action="version",
         version=f"{t('app.name')} {__version__}",
@@ -46,4 +52,6 @@ def get_common_parent_parser() -> argparse.ArgumentParser:
 
 
 def setup_common(args: argparse.Namespace):
+    if args.quiet:
+        sys.stdout = None
     setup_logging(args.verbose)

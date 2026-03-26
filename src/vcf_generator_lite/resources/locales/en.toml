@@ -112,15 +112,16 @@ menu_select_all = "Select &All"
 [cli]
 prompt_contact_list = "Please enter data in the format 'Name Phone Remark' per line (Remark is optional). Press {finish_keys} to finish:"
 
-help_option_verbose = "Enable verbose mode to display more processing information"
-help_option_input = "Input file path (reads from stdin if not specified)"
-help_option_output = "Output file path (writes to stdout if not specified)"
-help_option_input_encoding = "Input file encoding (default: utf8)"
-help_option_delimiter = "Input file delimiter (default: space)"
+help_option_verbose = "Show details"
+help_option_input = "Input file (default: stdin)"
+help_option_output = "Output file (default: stdout)"
+help_option_input_encoding = "Input encoding (default: utf-8)"
+help_option_delimiter = "Field delimiter (default: space)"
+help_option_quiet = "Quiet mode"
 
 help_argument_launch_mode = "Launch mode"
-help_command_cli = "Start command-line interface"
-help_command_gui = "Start graphical user interface"
+help_command_cli = "CLI mode"
+help_command_gui = "GUI mode"
 
 info_generation_success = "File exported successfully to {path}."
 info_generation_success_stdout = "Generation successful."

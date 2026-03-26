@@ -78,7 +78,9 @@ def launch_cli(args: argparse.Namespace):
         output_io: TextIO | None = None
         input_io = stack.enter_context(Path(args.input).open(encoding="utf8")) if args.input else sys.stdin
         output_io = (
-            stack.enter_context(Path(args.output).open(mode="w", encoding="utf8")) if args.output else sys.stdout
+            stack.enter_context(Path(args.output).open(mode="w", encoding="utf8"))
+            if args.output
+            else (sys.stdout or sys.__stdout__)
         )
         if input_io is None or output_io is None:
             sys.exit(1)
