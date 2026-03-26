@@ -3,7 +3,7 @@
 
 #define MyAppName "VCF Generator Lite"
 #define MyAppPublisher "Jesse205"
-#define MyAppExeName "vcf-generator-lite.exe"
+#define MyAppExeName "vcf-generator-lite-gui.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.

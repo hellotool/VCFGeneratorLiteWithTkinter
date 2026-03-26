@@ -81,6 +81,25 @@ uvx <whl 文件路径>
 
 ## 使用方法
 
+### 启动方式
+
+本软件提供图形界面和命令行界面两种使用方式：
+
+| 启动方式         | 命令                     | 说明                       |
+| ---------------- | ------------------------ | -------------------------- |
+| 图形界面（默认） | `vcf-generator-lite`     | 统一入口，默认启动图形界面 |
+|                  | `vcf-generator-lite gui` | 通过统一入口启动图形界面   |
+|                  | `vcf-generator-lite-gui` | 直接启动图形界面           |
+| 命令行界面       | `vcf-generator-lite cli` | 通过统一入口启动命令行界面 |
+|                  | `vcf-generator-lite-cli` | 直接启动命令行界面         |
+
+> [!NOTE]
+>
+> - 统一入口（`vcf-generator-lite`）本质上是命令行程序，因此在 Windows 中会显示命令行窗口。
+> - Python ZIP 应用（.pyzw）与 `pythonw.exe` 关联，因此双击启动时不会显示命令行窗口。
+
+### 图形界面
+
 1. 把名字和电话以每行 `姓名 电话 备注` 的格式复制到主界面的文本框中，其中备注可忽略。例如：
    ```text
    张三	13345367789	网络名人
@@ -102,6 +121,52 @@ uvx <whl 文件路径>
 > > - 电话：13333333333
 > > - 备注：眉州眉山人
 >
+### 命令行界面
+
+命令行界面适用于脚本化处理、自动化集成等场景。
+
+**基本用法**：
+
+```bash
+vcf-generator-lite [全局选项] cli [命令选项]
+vcf-generator-lite-cli [全局选项] [命令选项]
+```
+
+**全局选项**（放在 `cli` 之前）：
+
+| 选项        | 简写 | 说明                   |
+| ----------- | ---- | ---------------------- |
+| `--verbose` | `-v` | 显示详细信息           |
+| `--quiet`   | `-q` | 静默模式，禁止所有输出 |
+| `--help`    | `-h` | 显示帮助信息           |
+| `--version` | `-V` | 显示版本信息           |
+
+**命令选项**（放在 `cli` 之后）：
+
+| 选项       | 简写 | 说明                                 |
+| ---------- | ---- | ------------------------------------ |
+| `--input`  | `-i` | 输入文件路径，未指定时从标准输入读取 |
+| `--output` | `-o` | 输出文件路径，未指定时输出到标准输出 |
+
+**示例**：
+
+```bash
+# 从文件读取，输出到文件
+vcf-generator-lite cli -i contacts.txt -o output.vcf
+
+# 从标准输入读取，输出到标准输出
+echo "张三 13345367789 网络名人" | vcf-generator-lite cli
+
+# 静默模式
+vcf-generator-lite -q cli -i contacts.txt -o output.vcf
+
+# 显示详细处理过程
+vcf-generator-lite -v cli -i contacts.txt -o output.vcf
+```
+
+> [!TIP]
+>
+> 使用 `vcf-generator-lite --help` 查看全局选项，或 `vcf-generator-lite cli --help` 查看命令行界面的完整选项说明。
 
 ### 使用 vCard 文件
 

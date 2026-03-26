@@ -81,6 +81,25 @@ uvx <path to whl file>
 
 ## Usage
 
+### Launch Methods
+
+This software provides both graphical and command-line interfaces:
+
+| Launch Method          | Command                  | Description                        |
+| ---------------------- | ------------------------ | ---------------------------------- |
+| GUI (default)          | `vcf-generator-lite`     | Default GUI mode via unified entry |
+|                        | `vcf-generator-lite gui` | Explicitly launch GUI              |
+|                        | `vcf-generator-lite-gui` | Direct GUI entry                   |
+| Command Line Interface | `vcf-generator-lite cli` | CLI mode via unified entry         |
+|                        | `vcf-generator-lite-cli` | Direct CLI entry                   |
+
+> [!NOTE]
+>
+> - The unified entry (`vcf-generator-lite`) is a command-line program at heart, so it shows a console window on Windows.
+> - The Python ZIP Application (.pyzw) is associated with `pythonw.exe`, so double-clicking it does not show a console window.
+
+### Graphical User Interface
+
 1. Copy the name and phone number in the format of `Name Phone Note` on each line into the text field below. The note can be omitted.
    ```text
    Isaac Newton	13445467890	British mathematician
@@ -95,13 +114,60 @@ uvx <path to whl file>
 > - You can use both tabs and spaces to separate the name and phone number.
 > - The program will automatically remove extra spaces from the text field.
 >
-> For example, ` Han Meimei   13333333333   A   well-known girl` will be recognized as
+> For example, `Han Meimei   13333333333   A well-known girl` will be recognized as
 >
 >
 > > - Name: Han Meimei
 > > - Phone: 13333333333
 > > - Note: A well-known girl
 >
+
+### Command Line Interface
+
+The command-line interface is suitable for scripting and automation scenarios.
+
+**Basic Usage**:
+
+```bash
+vcf-generator-lite [global options] cli [command options]
+vcf-generator-lite-cli [global options] [command options]
+```
+
+**Global Options** (place before `cli`):
+
+| Option      | Short | Description                     |
+| ----------- | ----- | ------------------------------- |
+| `--verbose` | `-v`  | Show detailed output            |
+| `--quiet`   | `-q`  | Quiet mode, suppress all output |
+| `--help`    | `-h`  | Show help information           |
+| `--version` | `-V`  | Show version information        |
+
+**Command Options** (place after `cli`):
+
+| Option     | Short | Description                                          |
+| ---------- | ----- | ---------------------------------------------------- |
+| `--input`  | `-i`  | Input file path (reads from stdin if not specified)  |
+| `--output` | `-o`  | Output file path (writes to stdout if not specified) |
+
+**Examples**:
+
+```bash
+# Read from file, output to file
+vcf-generator-lite cli -i contacts.txt -o output.vcf
+
+# Read from stdin, output to stdout
+echo "Isaac Newton 13445467890 British mathematician" | vcf-generator-lite cli
+
+# Quiet mode
+vcf-generator-lite -q cli -i contacts.txt -o output.vcf
+
+# Verbose mode
+vcf-generator-lite -v cli -i contacts.txt -o output.vcf
+```
+
+> [!TIP]
+>
+> Use `vcf-generator-lite --help` to view global options, or `vcf-generator-lite cli --help` to view the complete CLI help.
 
 ### Using vCard Files
 
