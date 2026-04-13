@@ -4,7 +4,7 @@ from tkinter import Event, PhotoImage, Tk, Toplevel, Wm
 from tkinter.ttk import Style
 from typing import TYPE_CHECKING, override
 
-from vcf_generator_lite.ui.themes import create_theme_patch
+from vcf_generator_lite.ui.themes.default_theme_patcher import DefaultThemePatcher
 from vcf_generator_lite.ui.windows.base_window.constants import EVENT_EXIT
 from vcf_generator_lite.utils import resources
 from vcf_generator_lite.utils.tkinter.window import (
@@ -15,7 +15,7 @@ from vcf_generator_lite.utils.tkinter.window import (
 )
 
 if TYPE_CHECKING:
-    from vcf_generator_lite.ui.themes.abs import ThemePatch
+    from vcf_generator_lite.ui.themes.abs import ThemePatcher
 
 __all__ = ["EnhancedDialog", "EnhancedTk", "EnhancedToplevel"]
 _logger = logging.getLogger(__name__)
@@ -64,8 +64,12 @@ class AppWindowExtension(
 class EnhancedTk(Tk, AppWindowExtension, ABC):
     def __init__(self, **kw):
         super().__init__(baseName="vcf_generator_lite", **kw)
-        self.theme_name: str | None = None
-        self.theme_patch: ThemePatch | None = None
+        self.previous_patched_theme: str | None = None
+
+        self.theme_patcher: ThemePatcher
+        if not hasattr(self, "theme_patcher"):  # 配置文件中可能已定义此属性，防止覆盖配置文件的属性
+            self.theme_patcher = DefaultThemePatcher(self)
+
         AppWindowExtension.__init__(self)
 
     @override
@@ -80,10 +84,10 @@ class EnhancedTk(Tk, AppWindowExtension, ABC):
 
     def apply_theme_patch(self):
         theme_name = Style(self).theme_use()
-        if self.theme_name == theme_name:
+        if self.previous_patched_theme == theme_name:
             return
-        self.theme_name = theme_name
-        self.theme_patch = create_theme_patch(self, theme_name)
+        self.previous_patched_theme = theme_name
+        self.theme_patcher.patch()
 
     def __on_theme_changed(self, event: Event):
         if event.widget != self:

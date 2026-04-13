@@ -1,17 +1,20 @@
-from abc import ABC
 from tkinter import Tk
 from tkinter.ttk import Style
+from typing import override
 
-from vcf_generator_lite.ui.themes.abs import ThemePatch
+from vcf_generator_lite.ui.themes.abs import ThemePatcher
 
 
-class BaseThemePatch(ThemePatch, ABC):
-    style: Style
-
+class BaseThemePatcher(ThemePatcher):
     def __init__(self, app: Tk):
-        self.style = Style(app)
-        background = self.style.lookup("TFrame", "background")
+        self.app: Tk = app
+        self.style: Style = Style(app)
+        self.last_patched_theme: str | None = None
 
-        # 使用 Sizegrip 调节窗口大小时可能会露出窗口背景，需要单独修改窗口背景色以避免露出破绽。
-        app.configure(background=background)
-        app.option_add("*Toplevel.background", background, "startupFile")
+    @override
+    def patch(self):
+        self.last_patched_theme = self.style.theme_use()
+
+    @override
+    def get_last_patched_theme(self) -> str | None:
+        return self.last_patched_theme
