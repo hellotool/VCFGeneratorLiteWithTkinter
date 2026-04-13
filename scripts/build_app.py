@@ -105,7 +105,7 @@ def build_with_zipapp():
     elif zipapp_path.is_file():
         zipapp_path.unlink()
     export_result = subprocess.run(
-        ["uv", "export", "--no-dev", "--no-editable"],  # noqa: S607
+        ["uv", "export", "--no-dev", "--no-editable", "--no-default-groups"],  # noqa: S607
         capture_output=True,
         text=True,
         check=True,
