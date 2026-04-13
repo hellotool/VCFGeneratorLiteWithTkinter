@@ -14,4 +14,4 @@ class BaseThemePatch(ThemePatch, ABC):
 
         # 使用 Sizegrip 调节窗口大小时可能会露出窗口背景，需要单独修改窗口背景色以避免露出破绽。
         app.configure(background=background)
-        app.option_add("*Toplevel", background, "startupFile")
+        app.option_add("*Toplevel.background", background, "startupFile")

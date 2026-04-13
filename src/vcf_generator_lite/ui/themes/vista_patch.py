@@ -15,7 +15,7 @@ class VistaThemePatch(BaseThemePatch):
 
         # 重写部分配置以适配高分屏
         self.style.configure("TButton", padding="2.5p")
-        self.style.configure("Treeview", rowheight=treeview_font_metrics.get("linespace") + app.winfo_pixels("2.5p"))
+        self.style.configure("Treeview", rowheight=treeview_font_metrics["linespace"] + app.winfo_pixels("2.5p"))
         self.style.configure("Heading", padding="1.5p")
 
         # 自定义组件
