@@ -69,7 +69,15 @@ class VCFGeneratorLiteApp(EnhancedTk, VerticalDialogLayout):
 
     @override
     def _create_content(self, parent: Misc):
-        self.content_text = ScrolledText(parent, undo=True, tabs="2c", tabstyle="wordprocessor", maxundo=5)
+        self.content_text = ScrolledText(
+            parent,
+            undo=True,
+            tabs="2c",
+            tabstyle="wordprocessor",
+            maxundo=5,
+            width=0,
+            height=0,
+        )
         self.content_text.insert(0.0, st("input_example"))
         self.content_text.edit_reset()
         self.content_text.pack(fill="both", expand=True, padx="7p", pady=0)
