@@ -1,8 +1,8 @@
 from tkinter import Tk
-from tkinter.font import nametofont
 from typing import override
 
 from vcf_generator_lite.ui.themes.base import BaseThemePatch
+from vcf_generator_lite.utils.tkinter.style import lookup_font
 
 
 class VistaThemePatch(BaseThemePatch):
@@ -10,7 +10,7 @@ class VistaThemePatch(BaseThemePatch):
     def __init__(self, app: Tk):
         super().__init__(app)
 
-        treeview_font = nametofont(self.style.lookup("Treeview", "font", default="TkDefaultFont"))
+        treeview_font = lookup_font(self.style, "Treeview", "font", default="TkDefaultFont")
         treeview_font_metrics = treeview_font.metrics()
 
         # 重写部分配置以适配高分屏
