@@ -34,10 +34,11 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
             style="DialogHeaderContent.TLabel",
             foreground="orange",
         )
-        self.header_icon.pack(side="left", padx="14p", pady="7p")
+        # 图标间距未严格遵循 Windows 的设计，因为那样会显得过于拥挤
+        self.header_icon.pack(side="left", padx="14p", pady="14p", anchor="n")
         self.header_label = Label(header_frame, style="DialogHeaderContent.TLabel")
         enable_auto_wrap(self.header_label)
-        self.header_label.pack(fill="x", padx=(0, "14p"), pady="14p")
+        self.header_label.pack(fill="x", padx=(0, "14p"), pady="14p", anchor="center", expand=True)
         return header_frame
 
     @override

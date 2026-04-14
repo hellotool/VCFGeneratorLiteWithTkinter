@@ -13,7 +13,7 @@ def copy_font(origin_name: str | Font, new_name: str | None = None, root: Misc |
 
     原始 `font#copy()` 是有问题的，因为其内部会调用`font#actual()`，这是错误的。
 
-    在 Kubuntu 中，`font#actual("size")` 会返回缩放后的字体大小，
+    在 Linux 中，`font#actual("size")` 会返回缩放后的字体大小，
     再次传入字体对象时会造成双倍缩放，使用此方法规避该问题。
     """
     origin_font = nametofont(origin_name, root=root) if isinstance(origin_name, str) else origin_name
