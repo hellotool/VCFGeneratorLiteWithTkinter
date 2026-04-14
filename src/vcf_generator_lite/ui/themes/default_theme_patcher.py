@@ -49,5 +49,5 @@ class DefaultThemePatcher(BaseThemePatcher):
     def _patch_builtin_platform_independence_theme(self) -> None:
         self._patch_builtin_theme_common()
 
-        self.style.configure("TButton", width=-8)
         self.style.configure("Vertical.TScrollbar", arrowsize="9p")
+        self.style.configure("Horizontal.TScrollbar", arrowsize="9p")  # 选择文件时使用
