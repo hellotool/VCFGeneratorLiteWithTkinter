@@ -28,6 +28,7 @@ class DefaultThemePatcher(BaseThemePatcher):
 
         # 重写部分配置以适配高分屏
         self.style.configure("TButton", padding="2.5p")
+        self.style.configure("TMenubutton", padding="2.5p")
         self.style.configure("Treeview", rowheight=treeview_font_metrics["linespace"] + self.app.winfo_pixels("2.5p"))
         self.style.configure("Heading", padding="1.5p")
 
@@ -48,6 +49,5 @@ class DefaultThemePatcher(BaseThemePatcher):
 
     def _patch_builtin_platform_independence_theme(self) -> None:
         self._patch_builtin_theme_common()
-
         self.style.configure("Vertical.TScrollbar", arrowsize="9p")
         self.style.configure("Horizontal.TScrollbar", arrowsize="9p")  # 选择文件时使用
