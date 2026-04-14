@@ -30,7 +30,7 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
         self.header_icon = Label(
             header_frame,
             text="\u26a0",
-            font=extend_font_scale("TkDefaultFont", 24 / 9),
+            font=extend_font_scale(24 / 9),
             style="DialogHeaderContent.TLabel",
             foreground="orange",
         )
