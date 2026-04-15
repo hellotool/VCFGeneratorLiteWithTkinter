@@ -12,16 +12,6 @@ jobs:
     uses: ./.github/workflows/test.yml
     name: Test
 
-  build-apps:
-    uses: ./.github/workflows/build.yml
-    name: Build All Apps
-    needs: test
-    with:
-      build-windows-installer: true
-      build-windows-portable: true
-      build-python3-zipapp: true
-      build-python3-wheel: true
-
   metadata:
     name: Get Metadata
     runs-on: ubuntu-latest
@@ -40,9 +30,56 @@ jobs:
           echo "Version: $VERSION"
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
+  check-release:
+    name: Check Release Status
+    needs: metadata
+    runs-on: ubuntu-latest
+    env:
+      VERSION_TAG: ${{ format('v{0}', needs.metadata.outputs.version) }}
+    outputs:
+      release_exists: ${{ steps.check.outputs.release_exists }}
+      is_draft: ${{ steps.check.outputs.is_draft }}
+    permissions:
+      contents: read
+    steps:
+      - name: Check if release exists and is published
+        id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if the release already exists
+          RELEASE_EXISTS=$(gh release view $VERSION_TAG --json isDraft,isPrerelease --repo $GITHUB_REPOSITORY 2>/dev/null || echo "not_found")
+          
+          if [ "$RELEASE_EXISTS" != "not_found" ]; then
+            IS_DRAFT=$(echo $RELEASE_EXISTS | jq -r '.isDraft')
+            
+            if [ "$IS_DRAFT" = "false" ]; then
+              echo "Error: Release $VERSION_TAG already exists and is published. Cannot upload to a published release."
+              exit 1
+            else
+              echo "Release $VERSION_TAG exists as a draft. Proceeding with build process."
+              echo "release_exists=true" >> $GITHUB_OUTPUT
+              echo "is_draft=true" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "Release $VERSION_TAG does not exist. Proceeding with build process."
+            echo "release_exists=false" >> $GITHUB_OUTPUT
+            echo "is_draft=false" >> $GITHUB_OUTPUT
+          fi
+
+  build-apps:
+    uses: ./.github/workflows/build.yml
+    name: Build All Apps
+    needs: [test, check-release]
+    with:
+      build-windows-installer: true
+      build-windows-portable: true
+      build-python3-zipapp: true
+      build-python3-wheel: true
+
   release:
     name: Upload Release
-    needs: [build-apps, metadata]
+    needs: [build-apps, check-release]
     runs-on: ubuntu-latest
     env:
       VERSION_TAG: ${{ format('v{0}', needs.metadata.outputs.version) }}
@@ -53,23 +90,26 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           merge-multiple: true
-      - name: Release Upload Assets
-        id: release-upload-assets
-        continue-on-error: true
+          
+      - name: Upload Assets to Existing Draft Release
+        if: needs.check-release.outputs.release_exists == 'true' && needs.check-release.outputs.is_draft == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "Uploading assets to existing draft release $VERSION_TAG..."
           gh release upload $VERSION_TAG \
             *-portable.zip \
             *-setup.exe \
             *.pyzw \
             *.whl \
             --clobber --repo $GITHUB_REPOSITORY
-      - name: Create Release if not exists
-        if: steps.release-upload-assets.outcome == 'failure'
+
+      - name: Create New Draft Release
+        if: needs.check-release.outputs.release_exists == 'false'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "Creating new draft release $VERSION_TAG..."
           gh release create $VERSION_TAG \
             *-portable.zip \
             *-setup.exe \
@@ -77,4 +117,10 @@ jobs:
             *.whl \
             --repo $GITHUB_REPOSITORY \
             --draft \
-            --title "VCF Generator Lite $VERSION_TAG" \
+            --title "VCF Generator Lite $VERSION_TAG"
+
+      - name: Error on Published Release
+        if: needs.check-release.outputs.is_draft == 'false' && needs.check-release.outputs.release_exists == 'true'
+        run: |
+          echo "ERROR: The release $VERSION_TAG is already published. Asset uploads are only allowed for draft releases."
+          exit 1
