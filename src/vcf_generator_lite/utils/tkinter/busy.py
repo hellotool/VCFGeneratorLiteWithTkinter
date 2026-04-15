@@ -2,7 +2,7 @@ from tkinter import Misc
 
 
 def tk_busy_hold(widget: Misc):
-    if hasattr(widget, "tk_buy_hold"):
+    if hasattr(widget, "tk_busy_hold"):
         # noinspection PyUnresolvedReferences
         widget.tk_busy_hold()  # pyright: ignore[reportAttributeAccessIssue, reportCallIssue]
     else:
