@@ -22,6 +22,10 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
         self.wm_size_pt(375, 300)
         self.wm_minsize_pt(225, 225)
         self._create_widgets(self, header_seperator=True)
+
+    @override
+    def _configure_ui(self):
+        super()._configure_ui()
         self.bell()
 
     @override

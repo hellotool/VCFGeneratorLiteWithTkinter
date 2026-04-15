@@ -55,6 +55,7 @@ class AppWindowExtension(
         elif self._windowingsystem == "win32":
             # 居中于屏幕功能在 Linux 端的多屏下表现得不是很好，因此遵循默认设定。
             self.center_reference_screen()
+        self.update_idletasks()
 
     def __apply_default_events(self):
         self.protocol("WM_DELETE_WINDOW", lambda: self.event_generate(EVENT_EXIT))
