@@ -1,3 +1,4 @@
+import dataclasses
 import logging
 import platform
 import re
@@ -91,16 +92,10 @@ class MainController:
         try:
             file_io = generation_file.open("w", encoding="utf-8", newline="\r\n")
         except PermissionError:
-            messagebox.showerror(
-                title=t("save_vcf_permission_denied_message_box.title"),
-                message=t("save_vcf_permission_denied_message_box.message"),
-            )
+            self._show_save_permission_denied_message()
             return None
         except OSError as e:
-            messagebox.showerror(
-                title=t("save_vcf_os_error_message_box.title"),
-                message=t("save_vcf_os_error_message_box.message").format(reason=str(e)),
-            )
+            self._show_save_os_error_message(e)
             return None
         return generation_file, file_io
 
@@ -166,7 +161,11 @@ class MainController:
     def on_generation_file_result(self, result: GenerateResult):
         if not self.current_generation:
             raise RuntimeError("Invoke callback without generating.")
-        self.current_generation.file_io.close()
+        try:
+            self.current_generation.file_io.close()
+        except OSError as e:
+            logger.exception("Failed to close file")
+            result = dataclasses.replace(result, exception=e)
 
         self.window.after_idle(self.on_generation_file_done, result)
 
@@ -204,9 +203,26 @@ class MainController:
             ),
         )
 
+    def _show_save_os_error_message(self, error: OSError):
+        messagebox.showerror(
+            parent=self.window,
+            title=t("save_vcf_os_error_message_box.title"),
+            message=t("save_vcf_os_error_message_box.message").format(reason=str(error)),
+        )
+
+    def _show_save_permission_denied_message(self):
+        messagebox.showerror(
+            parent=self.window,
+            title=t("save_vcf_permission_denied_message_box.title"),
+            message=t("save_vcf_permission_denied_message_box.message"),
+        )
+
     def _show_generation_done_dialog(self, display_path: str, generate_result: GenerateResult):
         if generate_result.exception:
-            self._show_generation_error_dialog(generate_result.exception)
+            if isinstance(generate_result.exception, OSError):
+                self._show_save_os_error_message(generate_result.exception)
+            else:
+                self._show_generation_error_dialog(generate_result.exception)
         elif len(generate_result.invalid_items) > 0:
             self._show_generation_invalid_dialog(display_path, generate_result.invalid_items)
         else:
