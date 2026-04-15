@@ -42,9 +42,10 @@ permissions:
   contents: read
 
 jobs:
-  build-windows-installer:
-    if: ${{ inputs.build-windows-installer }}
-    name: Build Windows Installer
+  # 合并相似的构建以加快速度、节约成本。
+  build-windows-installer-and-portable:
+    if: ${{ inputs.build-windows-installer || inputs.build-windows-portable }}
+    name: Build Windows Installer and Portable
     runs-on: windows-latest
     env:
       UV_NO_DEFAULT_GROUPS: true
@@ -55,44 +56,35 @@ jobs:
         with:
           python-version-file: ".python-version"
 
-      - name: Build Portable Package
+      - name: Build Installer
+        if: ${{ inputs.build-windows-installer }}
         run: uv run --group build --group basic poe build-installer
 
-      - name: Upload Package
-        id: upload-package
+      - name: Build Portable Package
+        if: ${{ inputs.build-windows-portable }}
+        run: uv run --group build --group basic poe build-portable
+
+      - name: Upload Installer
+        id: upload-installer
+        if: ${{ inputs.build-windows-installer }}
         uses: actions/upload-artifact@v7
         with:
           name: windows-installer
           path: dist/*-setup.exe
           if-no-files-found: error
 
-  build-windows-portable:
-    if: ${{ inputs.build-windows-portable }}
-    name: Build Windows Portable Package
-    runs-on: windows-latest
-    env:
-      UV_NO_DEFAULT_GROUPS: true
-    steps:
-      - uses: actions/checkout@v6
-      - uses: astral-sh/setup-uv@v8.0.0
-      - uses: actions/setup-python@v6
-        with:
-          python-version-file: ".python-version"
-
-      - name: Build Portable Package
-        run: uv run --group build --group basic poe build-portable
-
-      - name: Upload Package
-        id: upload-package
+      - name: Upload Portable Package
+        id: upload-portable
+        if: ${{ inputs.build-windows-portable }}
         uses: actions/upload-artifact@v7
         with:
           name: windows-portable
           path: dist/*-portable.zip
           if-no-files-found: error
 
-  build-python3-zipapp:
-    if: ${{ inputs.build-python3-zipapp }}
-    name: Build Python 3 Zip Application
+  build-python3-zipapp-and-wheel:
+    if: ${{ inputs.build-python3-zipapp || inputs.build-python3-wheel }}
+    name: Build Python 3 ZIP Application and Wheel
     runs-on: ubuntu-latest
     env:
       UV_NO_DEFAULT_GROUPS: true
@@ -104,34 +96,25 @@ jobs:
           python-version-file: ".python-version"
 
       - name: Build Zipapp
+        if: ${{ inputs.build-python3-zipapp }}
         run: uv run  --group build --group basic poe build-zipapp
 
-      - name: Upload Package
-        id: upload-package
+      - name: Build Wheel
+        if: ${{ inputs.build-python3-wheel }}
+        run: uv run --group build --group basic poe build-wheel
+
+      - name: Upload Zipapp
+        id: upload-zipapp
+        if: ${{ inputs.build-python3-zipapp }}
         uses: actions/upload-artifact@v7
         with:
           name: python3-zipapp
           path: dist/*.pyzw
           if-no-files-found: error
 
-  build-python3-wheel:
-    if: ${{ inputs.build-python3-wheel }}
-    name: Build Python 3 Wheel
-    runs-on: ubuntu-latest
-    env:
-      UV_NO_DEFAULT_GROUPS: true
-    steps:
-      - uses: actions/checkout@v6
-      - uses: astral-sh/setup-uv@v8.0.0
-      - uses: actions/setup-python@v6
-        with:
-          python-version-file: ".python-version"
-
-      - name: Build Wheel
-        run: uv run --group build --group basic poe build-wheel
-
       - name: Upload Wheel
         id: upload-wheel
+        if: ${{ inputs.build-python3-wheel }}
         uses: actions/upload-artifact@v7
         with:
           name: python3-wheel
