@@ -146,7 +146,6 @@ class VCFGeneratorLiteApp(EnhancedTk, VerticalDialogLayout):
         file_menu.add_command(
             **stop_generation_parse_result,
             command=lambda: self.event_generate(EVENT_STOP),
-            accelerator=ACCELERATOR_GENERATE_AQUA if self._windowingsystem == "aqua" else ACCELERATOR_GENERATE,
             state="disabled",
         )
 
