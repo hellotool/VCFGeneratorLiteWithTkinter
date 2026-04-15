@@ -141,25 +141,24 @@ uvx <path to whl file>
 | Windows Installer & Portable Package | Windows 8.1 or later          |
 | Python ZIP Application               | Python 3.12 or later, Tkinter |
 
-If you wish to use this application on Windows 8 or earlier versions, please see [Running on Older Windows](./docs/compatibility/runs-on-older-windows.md).
+If you need to use this application on Windows 8 or earlier versions, please see [Running on older versions of Windows](./docs/compatibility/runs-on-older-windows.md).
 
-On Windows systems, to launch the Python Zip Application by double-clicking, you need to install either the [Python Launcher][pylauncher] or [Python Install Manager][pymanager].
+If you need to double-click to launch a Python ZIP application directly on Windows, please install [Python Install Manager][pymanager] (recommended) or [Python Launcher][pylauncher].
 
-### Features Compatibility
-
-| System Environment  | Feature         | Details                                                            |
-| ------------------- | --------------- | ------------------------------------------------------------------ |
-| Windows 10 or later | Dark Mode       | Dark mode not supported                                            |
-| Windows 10 or later | Display Scaling | Display scaling adaptation is handled by the OS when switching DPI |
-
-If you want to use dark mode in Windows, you can [enable high contrast mode][windows-high-contrast-support], or use [Rectify11][rectify11] or other third-party tools to modify the system theme.
-
-### File Compatibility
+### vCard Compatibility
 
 - **vCard Version**: 2.1
 - **Supported Fields**: Name, Phone Number, Note
 - **Known Issues**:
   - **Windows Contacts**: May display garbled characters in non-UTF-8 environments.
+
+### Other Compatibility
+
+| System Environment                     | Issue                                                         | Description                                                                                                                              | Workaround                                                                                                                                  |
+| -------------------------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Windows 10 or later                    | Dark mode not supported                                       | Tkinter does not have a built-in dark theme.                                                                                             | Use [high contrast themes][windows-high-contrast-support] or modify the system theme with third-party tools (e.g., [Rectify11][rectify11]). |
+| Windows 10 or later                    | UI becomes blurry when DPI changes                            | The application does not support DPI adjustment after startup.                                                                           | Keep the same DPI to avoid blurriness.                                                                                                      |
+| Python Install Manager 26.0 or earlier | A command line window appears after double-clicking to launch | Python Install Manager 26.0 or earlier does not support automatically upgrading to a windowed Python interpreter. ([python/cpython#261]) | Upgrade the Python Install Manager to version 26.1 or later, or use the [Python launcher][pylauncher].                                      |
 
 ## License
 
@@ -203,3 +202,5 @@ limitations under the License.
 [windows-high-contrast-support]: https://support.microsoft.com/en-us/windows/turn-high-contrast-mode-on-or-off-in-windows-909e9d89-a0f9-a3a9-b993-7a6dcee85025
 [rectify11]: https://www.rectify11.com/
 [uv-homepage]: https://docs.astral.sh/uv/
+
+[python/cpython#261]: https://github.com/python/pymanager/issues/216

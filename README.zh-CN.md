@@ -138,28 +138,27 @@ uvx <whl 文件路径>
 
 | 软件包类型               | 系统环境                        |
 | ------------------------ | ------------------------------- |
-| Windows 安装程序、便携版 | Windows 8.1 或更高版本          |
+| Windows 安装程序、便携包 | Windows 8.1 或更高版本          |
 | Python ZIP 应用          | Python 3.12 或更高版本、Tkinter |
 
-如果您想在 Windows 8 及以下版本中使用本应用，请参阅 [在旧版本 Windows 中运行](./docs/compatibility/runs-on-older-windows.md)。
+如果您需要在 Windows 8 及以下版本中使用本应用，请参阅 [在旧版本 Windows 中运行](./docs/compatibility/runs-on-older-windows.md)。
 
-在 Windows 中，如果您想直接双击启动 Python ZIP 应用，您需要安装 [Python 启动器][pylauncher] 或者 [Python 安装管理器][pymanager]。
+如果您需要在 Windows 中直接双击启动 Python ZIP 应用，请安装 [Python 安装管理器][pymanager]（推荐）或者 [Python 启动器][pylauncher]。
 
-### 功能兼容性
-
-| 系统环境              | 特性     | 说明                                    |
-| --------------------- | -------- | --------------------------------------- |
-| Windows 10 或更高版本 | 深色模式 | 不支持深色模式                          |
-| Windows 10 或更高版本 | 显示缩放 | 切换 DPI 时，由操作系统自动完成缩放适配 |
-
-如果您想在 Windows 中使用深色模式，您可以[启用高对比度模式][windows-high-contrast-support]，或者使用 [Rectify11][rectify11] 等其他第三方工具修改系统主题。
-
-### 文件兼容性
+### vCard 兼容性
 
 - **支持 vCard 版本**：2.1
 - **支持字段**：姓名、电话号码、备注
 - **已知问题**：
   - **Windows 联系人**：在非 UTF-8 环境下可能出现乱码。
+
+### 其他兼容性
+
+| 系统环境                          | 问题                       | 说明                                                                                            | 规避方法                                                                                                         |
+| --------------------------------- | -------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Windows 10 或更高版本             | 不支持深色模式             | Tkinter 没有内置深色主题。                                                                      | 使用[高对比度主题][windows-high-contrast-support]，或者使用第三方工具（如 [Rectify11][rectify11]）修改系统主题。 |
+| Windows 10 或更高版本             | DPI 变化时界面变模糊       | 应用不支持启动后调节 DPI。                                                                      | 请尽量保持 DPI 相同以避免模糊。                                                                                  |
+| Python 安装管理器 26.0 或更低版本 | 双击启动后会显示命令行窗口 | Python 安装管理器 26.0 或更低版本不支持自动升级为窗口化的 Python 解释器。([python/cpython#261]) | 将 Python 安装管理器 升级到 26.1 或更高版本，或使用 [Python 启动器][pylauncher]。                                |
 
 ## 致谢
 
@@ -203,3 +202,5 @@ limitations under the License.
 [windows-high-contrast-support]: https://support.microsoft.com/zh-cn/windows/%E5%9C%A8-windows-%E4%B8%AD%E6%9B%B4%E6%94%B9%E9%A2%9C%E8%89%B2%E5%AF%B9%E6%AF%94%E5%BA%A6-fedc744c-90ac-69df-aed5-c8a90125e696
 [rectify11]: https://www.rectify11.com/
 [uv-homepage]: https://docs.astral.sh/uv/
+
+[python/cpython#261]: https://github.com/python/pymanager/issues/216
