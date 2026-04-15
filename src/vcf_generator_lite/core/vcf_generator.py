@@ -117,14 +117,14 @@ class VCFGeneratorTask(Thread):
         if exception:
             _logger.exception("An error occurred during VCF generation:", exc_info=exception)
 
-        self.result = GenerateResult(
+        self.result = result = GenerateResult(
             invalid_items=self._invalid_items,
             exception=exception,
             time_elapsed=end_time - start_time,
             saved_count=self._saved_count,
         )
         if self._result_listener:
-            self._result_listener(self.result)
+            self._result_listener(result)
 
     def _parse_input(self) -> None:
         lines = self._input_text.strip().split("\n")
@@ -143,7 +143,7 @@ class VCFGeneratorTask(Thread):
                 vcard = serialize_to_vcard(contact)
                 queue_item = _WriteQueueItem(row_position=position, raw_content=line, vcard=vcard)
             except MissingNumberError as e:
-                _logger.warning("Phone not found at line %s: %s", position, e)
+                _logger.info("Phone not found at line %s: %s", position, e)
 
                 # list 的 append 方法是原子的，因此不需要加锁
                 # https://docs.python.org/zh-cn/3/library/threadsafety.html#thread-safety-list
