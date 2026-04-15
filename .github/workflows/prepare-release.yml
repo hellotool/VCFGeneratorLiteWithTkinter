@@ -8,10 +8,6 @@ permissions:
   pull-requests: read
 
 jobs:
-  test:
-    uses: ./.github/workflows/test.yml
-    name: Test
-
   metadata:
     name: Get Metadata
     runs-on: ubuntu-latest
@@ -49,7 +45,7 @@ jobs:
         run: |
           # Check if the release already exists
           RELEASE_EXISTS=$(gh release view $VERSION_TAG --json isDraft,isPrerelease --repo $GITHUB_REPOSITORY 2>/dev/null || echo "not_found")
-          
+
           if [ "$RELEASE_EXISTS" != "not_found" ]; then
             IS_DRAFT=$(echo $RELEASE_EXISTS | jq -r '.isDraft')
             
@@ -66,11 +62,15 @@ jobs:
             echo "release_exists=false" >> $GITHUB_OUTPUT
             echo "is_draft=false" >> $GITHUB_OUTPUT
           fi
+  test:
+    uses: ./.github/workflows/test.yml
+    name: Test
+    needs: [check-release]
 
   build-apps:
     uses: ./.github/workflows/build.yml
     name: Build All Apps
-    needs: [test, check-release]
+    needs: [check-release]
     with:
       build-windows-installer: true
       build-windows-portable: true
@@ -79,7 +79,7 @@ jobs:
 
   release:
     name: Upload Release
-    needs: [build-apps, check-release]
+    needs: [test, build-apps, check-release, metadata]
     runs-on: ubuntu-latest
     env:
       VERSION_TAG: ${{ format('v{0}', needs.metadata.outputs.version) }}
@@ -90,7 +90,7 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           merge-multiple: true
-          
+
       - name: Upload Assets to Existing Draft Release
         if: needs.check-release.outputs.release_exists == 'true' && needs.check-release.outputs.is_draft == 'true'
         env:
