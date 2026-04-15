@@ -2,12 +2,14 @@ from tkinter import Misc
 from tkinter.ttk import Button, Frame, Label, Sizegrip
 from typing import override
 
+from vcf_generator_lite.core.vcf_generator import InvalidItem
 from vcf_generator_lite.ui.layouts.vertical_dialog_layout import VerticalDialogLayout
 from vcf_generator_lite.ui.widgets.scrolled_treeview import ScrolledTreeview
 from vcf_generator_lite.ui.windows.base_window import EnhancedDialog
 from vcf_generator_lite.ui.windows.base_window.constants import EVENT_EXIT
 from vcf_generator_lite.ui.windows.invalid_items_dialog.common import st
 from vcf_generator_lite.utils.locales import t
+from vcf_generator_lite.utils.localized_exception import get_localized_exception_msg
 from vcf_generator_lite.utils.tkinter.font import extend_font_scale
 from vcf_generator_lite.utils.tkinter.misc import scale_kw
 from vcf_generator_lite.utils.tkinter.widget import enable_auto_wrap
@@ -71,6 +73,7 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
         self.content_tree.heading("row", text=st("heading_row"), anchor="w")
         self.content_tree.heading("original", text=st("heading_original"), anchor="w")
         self.content_tree.heading("reason", text=st("heading_reason"), anchor="w")
+        self.content_tree.insert("", "end", id="loading_tip", values=("", st("cell_loading"), ""))
         self.content_tree.pack(fill="both", expand=True, padx="7p")
         return content_frame
 
@@ -87,3 +90,20 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
         )
         self.ok_button.pack(side="right", padx="7p", pady="7p")
         return footer_frame
+
+    def set_display_path(self, path: str):
+        self.header_label.configure(text=st("message").format(path=path))
+
+    def set_invalid_items(self, items: list[InvalidItem]):
+        self.content_tree.delete(*self.content_tree.get_children())
+        for item in items:
+            self.content_tree.insert(
+                parent="",
+                index="end",
+                id=item.row_position,
+                values=(
+                    st("cell_row").format(row=item.row_position),
+                    item.raw_content,
+                    get_localized_exception_msg(item.exception),
+                ),
+            )

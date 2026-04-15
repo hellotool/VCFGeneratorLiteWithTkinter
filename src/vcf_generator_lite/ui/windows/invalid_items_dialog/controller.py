@@ -2,9 +2,7 @@ from collections.abc import Callable
 from tkinter import Event, EventType
 
 from vcf_generator_lite.core.vcf_generator import InvalidItem
-from vcf_generator_lite.ui.windows.invalid_items_dialog.common import st
 from vcf_generator_lite.ui.windows.invalid_items_dialog.dialog import InvalidItemsDialog
-from vcf_generator_lite.utils.localized_exception import get_localized_exception_msg
 
 
 class InvalidItemsController:
@@ -18,20 +16,13 @@ class InvalidItemsController:
         self.__line_enter_listener: Callable[[int, str], None] | None = None
         window.bind("<Return>", self.__on_return)
 
-        window.header_label.configure(text=st("message").format(path=display_path))
-        for item in invalid_items:
-            window.content_tree.insert(
-                parent="",
-                index="end",
-                id=item.row_position,
-                values=(
-                    st("cell_row").format(row=item.row_position),
-                    item.raw_content,
-                    get_localized_exception_msg(item.exception),
-                ),
-            )
+        window.set_display_path(display_path)
+
         window.content_tree.bind("<Double-Button-1>", self.__on_tree_view_enter)
         window.content_tree.bind("<Return>", self.__on_tree_view_enter)
+
+        window.update()
+        window.set_invalid_items(invalid_items)
 
     def __on_return(self, event: Event):
         if event.widget is self.window.content_tree:
