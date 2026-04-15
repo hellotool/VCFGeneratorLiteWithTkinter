@@ -1,5 +1,5 @@
 from tkinter import Misc
-from tkinter.ttk import Button, Frame, Label, Separator, Sizegrip
+from tkinter.ttk import Button, Frame, Label, Sizegrip
 from typing import override
 
 from vcf_generator_lite.ui.layouts.vertical_dialog_layout import VerticalDialogLayout
@@ -21,7 +21,7 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
         self.resizable(True, True)
         self.wm_size_pt(375, 300)
         self.wm_minsize_pt(225, 225)
-        self._create_widgets(self)
+        self._create_widgets(self, header_seperator=True)
         self.bell()
 
     @override
@@ -43,7 +43,6 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
 
     @override
     def _create_content(self, parent: Misc):
-        Separator(parent).pack(fill="x")
         content_frame = Frame(parent)
         content_label = Label(content_frame, text=st("label_invalid_numbers"))
         content_label.pack(fill="x", padx="7p", pady=("7p", "2p"))
