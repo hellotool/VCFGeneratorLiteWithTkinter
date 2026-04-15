@@ -39,6 +39,9 @@ class FPixelPadding:
     def to_tuple(self) -> tuple[float, float, float, float]:
         return self.left, self.top, self.right, self.bottom
 
+    def to_pady(self) -> tuple[float, float]:
+        return self.top, self.bottom
+
 
 def parse_ttk_padding(master: Misc, value: str | float | tuple[str | int | float, ...]) -> FPixelPadding:
     if isinstance(value, (int, float)):
