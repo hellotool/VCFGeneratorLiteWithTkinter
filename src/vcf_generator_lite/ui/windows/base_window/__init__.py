@@ -31,7 +31,6 @@ class AppWindowExtension(
 
     特性：
     - 继承 GeometryWindowExtension: 提供基于物理/虚拟像素的窗口尺寸控制
-    - 继承 ScalingWindowExtension: 支持高 DPI 屏幕的自适应缩放
     - 继承 CenterWindowExtension: 实现窗口居中显示功能
     - 继承 WindowExtension: 基础窗口功能扩展
     """

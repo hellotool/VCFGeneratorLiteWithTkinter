@@ -24,11 +24,11 @@ class GeometryWindowExtension(WindowExtension, ABC):
     def wm_size_pt(self, width: int, height: int):
         self.wm_size(*scale_args(self, width, height))
 
-    def wm_minsize_pt(self, width: int, height: int) -> None:
-        return self.wm_minsize(*scale_args(self, width, height))
+    def wm_minsize_pt(self, width: int, height: int):
+        self.wm_minsize(*scale_args(self, width, height))
 
-    def wm_maxsize_pt(self, width: int, height: int) -> None:
-        return self.wm_maxsize(*scale_args(self, width, height))
+    def wm_maxsize_pt(self, width: int, height: int):
+        self.wm_maxsize(*scale_args(self, width, height))
 
 
 def get_client_to_geometry_offset(window: Misc) -> Offset:

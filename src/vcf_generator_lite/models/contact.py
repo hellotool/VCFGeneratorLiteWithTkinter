@@ -16,7 +16,7 @@ class MissingNumberError(ValueError):
 
 def _get_phone_index(contact_parts: list[str], rules: list[PhoneRule]) -> int:
     for i, part in enumerate(contact_parts):
-        if len(part) > 0 and any((rule.test(part)) for rule in rules):
+        if part and any(rule.test(part) for rule in rules):
             return i
     raise MissingNumberError
 

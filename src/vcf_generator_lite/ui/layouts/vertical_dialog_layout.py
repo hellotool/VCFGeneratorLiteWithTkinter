@@ -6,12 +6,12 @@ from vcf_generator_lite.utils.tkinter.window import WindowExtension
 
 
 class VerticalDialogLayout(WindowExtension, ABC):
-    def _create_widgets(self, parent: Misc, *, header_seperator: bool = False):
+    def _create_widgets(self, parent: Misc, *, header_separator: bool = False):
         header = self._create_header(parent)
         if header is not None:
             header.pack(fill="x")
 
-        if header_seperator:
+        if header_separator:
             Separator(parent).pack(fill="x")
 
         content = self._create_content(parent)

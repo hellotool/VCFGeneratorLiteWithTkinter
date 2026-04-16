@@ -23,7 +23,7 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
         self.resizable(True, True)
         self.wm_size_pt(375, 300)
         self.wm_minsize_pt(225, 225)
-        self._create_widgets(self, header_seperator=True)
+        self._create_widgets(self, header_separator=True)
 
     @override
     def _configure_ui(self):

@@ -65,18 +65,18 @@ message = "System error: {reason}"
 [vcf_generate_success_message_box]
 title = "vCard File Generated Successfully"
 message = "File exported to {path}."
-detail = """Number of contacts: {total}
-Time elapsed: {time} seconds"""
+detail = """Number of contacts: {count:n}
+Time elapsed: {time:.3f} seconds"""
 
 [vcf_generate_error_message_box]
 title = "Failed to Generate vCard File"
-message = "An unknown error occurred while generating the vCard file:\n\n{content}"
+message = "An unknown error occurred while generating the vCard file:\n\n{exception}"
 
 [vcf_generating_exit_message_box]
 title = "Generating vCard File"
 message = "Please wait for the file generation to complete"
 
-[vcf_generate_invalid_window]
+[vcf_generate_invalid_dialog]
 title = "vCard File Generation Complete"
 message = "File exported to {path}, invalid numbers have been ignored."
 label_invalid_numbers = "Invalid numbers: "

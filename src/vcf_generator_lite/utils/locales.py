@@ -15,15 +15,18 @@ def get_fallback_traversable_list(locale_name: str) -> list[Traversable]:
     fallback_names = [locale_name_parts[0]]
     for part in locale_name_parts[1:]:
         fallback_names.extend([f"{head_name}_{part}" for head_name in fallback_names])
+    fallback_names.reverse()
 
-    fallback_traversable_list: list[Traversable] = []
+    fallback_traversable_map: dict[str, Traversable] = {}
     for traversable in resources.traversable.joinpath("locales").iterdir():
         traversable_name = PurePath(traversable.name).stem
         if traversable_name in fallback_names:
-            fallback_traversable_list.append(traversable)
-            if len(fallback_traversable_list) == len(fallback_names):
+            fallback_traversable_map[traversable_name] = traversable
+            if len(fallback_traversable_map) == len(fallback_names):
                 break
-    fallback_traversable_list.reverse()
+    fallback_traversable_list: list[Traversable] = [
+        fallback_traversable_map[name] for name in fallback_names if name in fallback_traversable_map
+    ]
     return fallback_traversable_list
 
 
@@ -44,7 +47,8 @@ class Translator:
     def __init__(self, current_locale: str | None = None, fallback_locale: str = "en"):
         """根据 resources/locales/ 目录下的语言文件进行翻译。"""
         if current_locale is None:
-            # 不要使用 locale.getlocale() 因为 https://github.com/python/cpython/issues/130796
+            # 不要使用 locale.getlocale() 因为 https://github.com/python/cpython/issues/130796。
+            # 该函数在 3.15 中已取消弃用。
             current_locale = locale.getdefaultlocale()[0]
         self.loaded_translations: list[dict[str, Any]] = []
         current_traversable_list = get_fallback_traversable_list(current_locale) if current_locale is not None else []

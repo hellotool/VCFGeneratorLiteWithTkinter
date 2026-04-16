@@ -35,6 +35,16 @@ class Generation(NamedTuple):
     file_io: TextIO
 
 
+_CLEAN_QUOTES_RE = re.compile(
+    r'"'  # 左引号
+    r"\s*"  # 引号后可选空白
+    r'([^"]*)'  # 去引号后的内容
+    r"\s*"  # 引号前可选空白
+    r'"',  # 右引号
+    re.DOTALL,
+)
+
+
 class MainController:
     def __init__(self, window: VCFGeneratorLiteApp):
         self.window = window
@@ -268,5 +278,5 @@ class MainController:
 
     def _clean_quotes(self):
         origin_text = self.window.get_text_content()
-        new_text = re.sub(r'"\s*(([^"\s][^"]*[^"\s])|[^"\s]?)\s*"', r"\1", origin_text, flags=re.DOTALL)
+        new_text = re.sub(_CLEAN_QUOTES_RE, r"\1", origin_text)
         self.window.set_text_content(new_text)

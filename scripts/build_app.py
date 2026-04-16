@@ -89,10 +89,8 @@ def pack_with_zipfile():
     print("Packaging with ZipFile...")
     require_pyinstaller_output()
     with ZipFile(PATH_DIST.joinpath(DISTRIBUTION_PORTABLE_NAME), "w") as zip_file:
-        PATH_DIST.joinpath("vcf_generator_lite")
-        for path, _dirs, files in os.walk(PATH_DIST.joinpath("vcf_generator_lite")):
-            for file_path in (Path(path, file) for file in files):
-                zip_file.write(file_path, os.path.relpath(file_path, "dist"))
+        for file_path in PATH_DIST.joinpath("vcf_generator_lite").rglob("*"):
+            zip_file.write(file_path, file_path.relative_to(str(PATH_DIST)))
     print("Packaging finished.")
 
 
@@ -121,7 +119,7 @@ def build_with_zipapp():
     if (bin_path := site_packages_path / "bin").is_dir():
         shutil.rmtree(bin_path)
     site_packages_path.joinpath(".lock").unlink()
-    site_packages_path.glob("*.dist-info")
+
     for info_dir_paths in site_packages_path.glob("*.dist-info"):
         for file in info_dir_paths.iterdir():
             if file.name not in ("METADATA", "licenses"):
