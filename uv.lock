@@ -413,7 +413,7 @@ wheels = [
 
 [[package]]
 name = "vcf-generator-lite"
-version = "5.0.1"
+version = "5.0.2"
 source = { editable = "." }
 dependencies = [
     { name = "ttk-text" },
