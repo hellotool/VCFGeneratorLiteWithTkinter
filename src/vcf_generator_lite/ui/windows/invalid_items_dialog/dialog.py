@@ -69,10 +69,13 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
                 minwidth=45,
             ),
         )
-        self.content_tree.column("original", anchor="w")
+        # Tk 在创建窗口时调整 TreeView 列宽时不会考虑右侧 padding，添加 width=0 防止列溢出到滚动条区域。
+        self.content_tree.column("original", anchor="w", width=0)
+        self.content_tree.column("reason", anchor="w", width=0)
         self.content_tree.heading("row", text=st("heading_row"), anchor="w")
         self.content_tree.heading("original", text=st("heading_original"), anchor="w")
         self.content_tree.heading("reason", text=st("heading_reason"), anchor="w")
+        # 添加一个提示，告知用户正在加载中。
         self.content_tree.insert("", "end", id="loading_tip", values=("", st("cell_loading"), ""))
         self.content_tree.pack(fill="both", expand=True, padx="7p")
         return content_frame
