@@ -387,10 +387,10 @@ wheels = [
 
 [[package]]
 name = "ttk-text"
-version = "0.3.2.post1"
+version = "0.3.3"
 source = { registry = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/" }
 wheels = [
-    { url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/packages/5f/5e/076aac804d9d2cc9bf8203ea2693c72632c8ed59b32052d8b0078a8f38f8/ttk_text-0.3.2.post1-py3-none-any.whl", hash = "sha256:e08c6806ccfddc1e0c0e857900331631c33d03b55af04094031b88abab395ef6", size = 9008, upload-time = "2026-04-04T19:48:38.825Z" },
+    { url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/packages/33/1f/7f469403486308997f0cae2d9e3eee428ebceceb2626a0ff185f8948c7fe/ttk_text-0.3.3-py3-none-any.whl", hash = "sha256:b053d2ae8866385e7c9f0f11f6ba166c01f58ae0b86bc230f348d9d8a7b7a10b", size = 9377, upload-time = "2026-04-18T00:53:50.584Z" },
 ]
 
 [[package]]
@@ -447,7 +447,7 @@ test = [
 [package.metadata]
 requires-dist = [
     { name = "colorlog", marker = "extra == 'console'", specifier = ">=6.9.0" },
-    { name = "ttk-text", specifier = "==0.3.2.post1" },
+    { name = "ttk-text", specifier = "==0.3.3" },
 ]
 provides-extras = ["console"]
 

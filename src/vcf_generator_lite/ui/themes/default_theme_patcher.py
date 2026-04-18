@@ -1,6 +1,7 @@
 from typing import override
 
 from vcf_generator_lite.ui.themes.base import BaseThemePatcher
+from vcf_generator_lite.utils.environment import is_windows
 from vcf_generator_lite.utils.tkinter.style import lookup_font
 
 
@@ -8,19 +9,30 @@ class DefaultThemePatcher(BaseThemePatcher):
     @override
     def patch(self):
         super().patch()
-        self._patch_theme_common()
         theme_name = self.style.theme_use()
+        self._patch_legacy_widgets()
         if theme_name in ("vista", "winnative", "xpnative"):
             self._patch_vista_theme()
         elif theme_name in ("clam", "alt", "default", "classic"):
             self._patch_builtin_platform_independence_theme()
 
-    def _patch_theme_common(self) -> None:
-        background = self.style.lookup("TFrame", "background")
+    def _patch_legacy_widgets(self) -> None:
+        background = self.style.lookup(".", "background")
+        foreground = self.style.lookup(".", "foreground")
+        select_background = self.style.lookup(".", "selectbackground")
+        select_foreground = self.style.lookup(".", "selectforeground")
 
-        # 使用 Sizegrip 调节窗口大小时可能会露出窗口背景，需要单独修改窗口背景色以避免露出破绽。
         self.app.configure(background=background)
+
+        self.app.option_add("*Menu.background", background, "startupFile")
+        self.app.option_add("*Menu.foreground", foreground, "startupFile")
+        self.app.option_add("*Menu.activeBackground", select_background, "startupFile")
+        self.app.option_add("*Menu.activeForeground", select_foreground, "startupFile")
         self.app.option_add("*Toplevel.background", background, "startupFile")
+
+        if is_windows:
+            # Windows 7 中菜单默认不使用 TkMenuFont，因此需要手动设置字体。
+            self.app.option_add("*Menu.font", "TkMenuFont", "startupFile")
 
     def _patch_builtin_theme_common(self) -> None:
         treeview_font = lookup_font(self.style, "Treeview", "font", default="TkDefaultFont")
@@ -35,17 +47,19 @@ class DefaultThemePatcher(BaseThemePatcher):
     def _patch_vista_theme(self) -> None:
         self._patch_builtin_theme_common()
 
-        # 自定义组件
-        self.style.configure("ThemedText.TEntry", padding=0, borderwidth="1.5p")
+        # 使输入框边框始终具有 1.5p 的边框
+        self.style.configure(
+            "ThemedText.TEntry",
+            padding=0,
+            borderwidth="1.5p",
+        )
+        # 使输入框在没有获取焦点时也显示选择的文字
+        self.style.map("ThemedText.TEntry", selectbackground=[], selectforeground=[])
+
+        # 对话框头部为白色
         self.style.configure("DialogHeader.TFrame", background="systemWindow")
         self.style.configure("DialogHeaderContent.TFrame", background="systemWindow")
         self.style.configure("DialogHeaderContent.TLabel", background="systemWindow")
-
-        select_background = self.style.lookup("TEntry", "selectbackground", ["focus"])
-        self.app.option_add("*ThemedText.Text.inactiveSelectBackground", select_background, "startupFile")
-
-        # Windows 7 中菜单默认不使用 TkMenuFont，因此需要手动设置字体。
-        self.app.option_add("*Menu.font", "TkMenuFont", "startupFile")
 
     def _patch_builtin_platform_independence_theme(self) -> None:
         self._patch_builtin_theme_common()

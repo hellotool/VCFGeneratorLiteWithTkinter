@@ -73,13 +73,6 @@ class CenterWindowExtension(WindowExtension, ABC):
             rect_height=self.master.winfo_height(),
         )
 
-    def center(self):
-        """如果 `master` 为 `None`，则居中于屏幕；否则居中于 master 窗口。"""
-        if self.master is None:
-            self.center_reference_screen()
-        else:
-            self.center_reference_master()
-
 
 @contextmanager
 def withdraw_cm(wm: Wm):
