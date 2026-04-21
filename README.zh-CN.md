@@ -20,12 +20,15 @@
 
 VCF 生成器 Lite 可以将联系人列表转换为单个 vCard 文件，可批量导入到手机通讯录，或者用作其它用途。
 
-[![许可证](https://img.shields.io/github/license/hellotool/VCFGeneratorLiteWithTkinter?label=%E8%AE%B8%E5%8F%AF%E8%AF%81)](./LICENSE)
+[![许可证](https://img.shields.io/github/license/hellotool/VCFGeneratorLiteWithTkinter?label=许可证)](./LICENSE)
 [![贡献者公约](https://img.shields.io/badge/贡献者公约-2.1-4baaaa.svg)](./CODE_OF_CONDUCT.zh-CN.md)
 
-[![Test](https://github.com/hellotool/VCFGeneratorLiteWithTkinter/actions/workflows/test.yml/badge.svg)](https://github.com/hellotool/VCFGeneratorLiteWithTkinter/actions/workflows/test.yml)
+[![GitHub - 测试](https://github.com/hellotool/VCFGeneratorLiteWithTkinter/actions/workflows/test.yml/badge.svg)](https://github.com/hellotool/VCFGeneratorLiteWithTkinter/actions/workflows/test.yml)
+![GitHub - Release](https://img.shields.io/github/v/release/hellotool/VCFGeneratorLiteWithTkinter?logo=github)
+![GitHub - Stars](https://img.shields.io/github/stars/hellotool/VCFGeneratorLiteWithTkinter?style=flat&logo=github)
+[![Gitee - Stars](https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/badge/star.svg?theme=dark)](https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/stargazers)
 
-## 特性
+## 功能
 
 - **智能解析**：按 `姓名 电话 备注` 格式批量识别联系人（备注可选），自动处理制表符和空格。
 - **批量生成**：将所有联系人合并生成单个 `.vcf` 文件。
