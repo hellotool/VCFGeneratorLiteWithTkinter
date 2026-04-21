@@ -32,7 +32,7 @@ from vcf_generator_lite.utils.locales import scope, t
 from vcf_generator_lite.utils.tkinter.accelerators import get_default_accelerators
 from vcf_generator_lite.utils.tkinter.busy import tk_busy_forget, tk_busy_hold, tk_busy_status
 from vcf_generator_lite.utils.tkinter.menu import parse_underline_label
-from vcf_generator_lite.utils.tkinter.widget import enable_auto_wrap
+from vcf_generator_lite.utils.tkinter.widget import enable_auto_wrap, needs_sizegrip
 
 st = scope("main_window")
 
@@ -99,8 +99,9 @@ class VCFGeneratorLiteApp(EnhancedTk, VerticalDialogLayout):
     @override
     def _create_footer(self, parent: Misc):
         footer_frame = Frame(parent)
-        sizegrip = Sizegrip(footer_frame)
-        sizegrip.place(relx=1, rely=1, anchor="se")
+        if needs_sizegrip(parent):
+            sizegrip = Sizegrip(footer_frame)
+            sizegrip.place(relx=1, rely=1, anchor="se")
 
         self.progress_bar = Progressbar(footer_frame, orient="horizontal", length=200)
         self.progress_label = Label(master=footer_frame, text=st("label_generating"))

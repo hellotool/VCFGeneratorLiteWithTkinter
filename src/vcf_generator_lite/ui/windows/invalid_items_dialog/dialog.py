@@ -12,7 +12,7 @@ from vcf_generator_lite.utils.locales import t
 from vcf_generator_lite.utils.localized_exception import get_localized_exception_msg
 from vcf_generator_lite.utils.tkinter.font import extend_font_scale
 from vcf_generator_lite.utils.tkinter.misc import scale_kw
-from vcf_generator_lite.utils.tkinter.widget import enable_auto_wrap
+from vcf_generator_lite.utils.tkinter.widget import enable_auto_wrap, needs_sizegrip
 
 
 class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
@@ -83,8 +83,10 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
     @override
     def _create_footer(self, parent: Misc):
         footer_frame = Frame(parent)
-        sizegrip = Sizegrip(footer_frame)
-        sizegrip.place(relx=1, rely=1, anchor="se")
+        if needs_sizegrip(parent):
+            sizegrip = Sizegrip(footer_frame)
+            sizegrip.place(relx=1, rely=1, anchor="se")
+
         self.ok_button = Button(
             footer_frame,
             text=t("common.button_ok"),
