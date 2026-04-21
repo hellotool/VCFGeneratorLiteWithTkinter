@@ -60,25 +60,41 @@ VCF 生成器 Lite 可以将联系人列表转换为单个 vCard 文件，可批
 
 ### 使用 Python Wheel
 
-您可以通过多种方式使用 Python Wheel 文件。
+Python Wheel (`.whl`) 文件适合熟悉命令行的用户。推荐使用隔离环境运行，避免依赖冲突。
 
-**全局安装**：
+#### 方式一：临时运行（最简单，无需安装）
+
+使用 `uvx`，命令执行后会自动创建临时环境并运行程序。
 
 ```bash
-uv tool install <whl 文件路径>
+uvx <whl文件路径>
 ```
 
-安装完成后，可通过以下命令运行：
+> [!NOTE]
+>
+> `uvx` 是 `uv tool run` 的简写形式，由 [uv][uv-homepage] 工具提供。
+
+#### 方式二：安装后使用（适合长期使用）
+
+使用以下工具之一安装，会自动创建独立虚拟环境，不影响系统 Python。
+
+```bash
+# 使用 pipx
+pipx install <whl文件路径>
+
+# 或使用 uv
+uv tool install <whl文件路径>
+```
+
+安装完成后，以后只需在终端中输入以下命令即可运行：
 
 ```bash
 vcf-generator-lite
 ```
 
-**直接运行（无需安装）**：
-
-```bash
-uvx <whl 文件路径>
-```
+> [!TIP]
+>
+> 如果尚未安装 `uv` / `pipx`，请先运行 `pip install uv` 或 `pip install pipx`。
 
 ## 使用方法
 

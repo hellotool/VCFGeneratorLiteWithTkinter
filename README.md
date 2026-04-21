@@ -58,27 +58,43 @@ Please select the appropriate software package for your platform:
 | Cross-platform | Python Wheel           | Optional              | vcf_generator_lite-\<version\>-**py3-none-any**.*whl*     |
 | Cross-platform | Python ZIP Application | No                    | VCFGeneratorLite-\<version\>-**py3**.*pyzw*               |
 
-### Using the Python Wheel
+### Using Python Wheel
 
-There are several ways to use a Python Wheel file.
+Python Wheel (`.whl`) files are suitable for users familiar with the command line. It is recommended to run them in an isolated environment to avoid dependency conflicts.
 
-**Global Installation**:
+#### Method 1: Temporary Execution (Simplest, No Installation Required)
+
+Use `uvx`, which automatically creates a temporary environment and runs the program.
 
 ```bash
-uv tool install <path to whl file>
+uvx <path-to-whl-file>
 ```
 
-After installation, you can run it with:
+> [!NOTE]
+>
+> `uvx` is the shorthand for `uv tool run`, provided by the [uv][uv-homepage] tool.
+
+#### Method 2: Install for Long-Term Use
+
+Install using one of the tools below, which automatically create an isolated virtual environment without affecting your system Python.
+
+```bash
+# Using pipx
+pipx install <path-to-whl-file>
+
+# Or using uv
+uv tool install <path-to-whl-file>
+```
+
+After installation, simply run the following command in your terminal:
 
 ```bash
 vcf-generator-lite
 ```
 
-**Run directly (without installing)**:
-
-```bash
-uvx <path to whl file>
-```
+> [!TIP]
+>
+> If you haven't installed `uv` or `pipx` yet, please run `pip install uv` or `pip install pipx` first.
 
 ## Usage
 
