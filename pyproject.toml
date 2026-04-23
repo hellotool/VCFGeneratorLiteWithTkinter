@@ -1,6 +1,6 @@
 [project]
 name = "vcf-generator-lite"
-version = "5.0.2"
+version = "5.0.3"
 description = "Makes one vCard from a contact list."
 authors = [{ name = "Jesse205", email = "jesse205@qq.com" }]
 license = "Apache-2.0"
