@@ -1,6 +1,8 @@
-from typing import NamedTuple
+from typing import NamedTuple, override
 
 from vcf_generator_lite.models.phone_rule import DEFAULT_PHONE_RULES, PhoneRule
+from vcf_generator_lite.utils.locales import t
+from vcf_generator_lite.utils.localized_exception import LocalizedException
 
 
 class Contact(NamedTuple):
@@ -9,9 +11,14 @@ class Contact(NamedTuple):
     note: str | None = None
 
 
-class MissingNumberError(ValueError):
+class MissingNumberError(ValueError, LocalizedException):
     def __init__(self) -> None:
         super().__init__("No phone number found.")
+
+    @property
+    @override
+    def localized_msg(self) -> str:
+        return t("exception.missing_number")
 
 
 def _get_phone_index(contact_parts: list[str], rules: list[PhoneRule]) -> int:

@@ -13,6 +13,7 @@ from vcf_generator_lite.constants import (
     URL_REPORT,
     URL_REPOSITORY,
 )
+from vcf_generator_lite.ui.common.external_app import open_url_with_fallback
 from vcf_generator_lite.ui.layouts.vertical_dialog_layout import VerticalDialogLayout
 from vcf_generator_lite.ui.widgets.line_number_bar import LineNumberBar
 from vcf_generator_lite.ui.widgets.text_menu import TextContextMenu
@@ -27,7 +28,6 @@ from vcf_generator_lite.ui.windows.main_window.constants import (
     EVENT_GENERATE_OR_STOP,
     EVENT_STOP,
 )
-from vcf_generator_lite.utils.external_app import open_url_with_fallback
 from vcf_generator_lite.utils.locales import scope, t
 from vcf_generator_lite.utils.tkinter.accelerators import get_default_accelerators
 from vcf_generator_lite.utils.tkinter.busy import tk_busy_forget, tk_busy_hold, tk_busy_status
