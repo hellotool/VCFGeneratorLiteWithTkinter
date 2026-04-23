@@ -11,7 +11,7 @@ URL_CHINESE_SIMPLIFIED_ISL_LATEST = (
     "https://github.com/kira-96/Inno-Setup-Chinese-Simplified-Translation/raw/refs/heads/main/ChineseSimplified.isl"
 )
 
-PATH_INNOSETUP_EXTENSION = Path("./.innosetup")
+PATH_INNOSETUP_EXTENSION = Path("packaging", "innosetup", ".extensions").absolute()
 PATH_CHINESE_SIMPLIFIED = PATH_INNOSETUP_EXTENSION.joinpath("Languages", "ChineseSimplified.isl")
 
 

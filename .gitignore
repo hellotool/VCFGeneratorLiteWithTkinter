@@ -1,16 +1,15 @@
 /.venv
 .pdm-python
-.innosetup
-
-# IDE
 
 # Build
 /build
 /dist
 *.egg-info
 
+/packaging/innosetup/.extensions
+
 # Caches
 __pycache__
 
 # 设计资源输出
-assets/design/output/**
+/assets/design/output/**

@@ -20,10 +20,10 @@ app_author = app_metadata.get("Author")
 
 
 a = Analysis(
-    ["./src/vcf_generator_lite/__main__.py"],
+    ["../../src/vcf_generator_lite/__main__.py"],
     pathex=[],
     binaries=[],
-    datas=[("./src/vcf_generator_lite/resources/", "vcf_generator_lite/resources")],
+    datas=[("../../src/vcf_generator_lite/resources/", "vcf_generator_lite/resources")],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -51,7 +51,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=["./assets/images/icon.ico"],
+    icon=["../../assets/images/icon.ico"],
     version=VSVersionInfo(
         # For more details about fixed file info 'ffi' see:
         # http://msdn.microsoft.com/en-us/library/ms646997.aspx

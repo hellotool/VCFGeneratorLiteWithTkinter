@@ -19,10 +19,10 @@ AppReadmeFile={cm:MyAppReadmeFile}
 AppUpdatesURL={cm:MyAppUpdatesURL}
 DefaultDirName={autopf}\{#MyAppPublisher}\{#MyAppName}
 DisableProgramGroupPage=yes
-LicenseFile=.\LICENSE
+LicenseFile=..\..\LICENSE
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-OutputDir=.\dist
+OutputDir=..\..\dist
 OutputBaseFilename={#OutputBaseFilename}
 Compression=lzma2/max
 SolidCompression=yes
@@ -38,7 +38,7 @@ ShowLanguageDialog=auto
 
 [Languages]
 Name: en_us; MessagesFile: "compiler:Default.isl"
-Name: zh_cn; MessagesFile: ".innosetup\Languages\ChineseSimplified.isl"
+Name: zh_cn; MessagesFile: ".extensions\Languages\ChineseSimplified.isl"
 
 [CustomMessages]
 MyAppName=VCF Generator Lite
@@ -124,7 +124,7 @@ end;
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 
 [Files]
-Source: ".\dist\vcf_generator_lite\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\..\dist\vcf_generator_lite\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

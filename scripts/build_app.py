@@ -4,6 +4,7 @@ import shutil
 import subprocess
 import sys
 import sysconfig
+from tempfile import TemporaryDirectory
 import zipapp
 from pathlib import Path
 from zipfile import ZipFile
@@ -39,7 +40,7 @@ def require_pyinstaller_output():
 def build_with_pyinstaller():
     print("Building with PyInstaller...")
     ensure_dist_dir()
-    pyinstaller.run(["vcf_generator_lite.spec", "--noconfirm"])
+    pyinstaller.run(["./packaging/pyinstaller/vcf_generator_lite.spec", "--noconfirm"])
     print("Building finished.")
 
 
@@ -78,7 +79,7 @@ def pack_with_innosetup():
             "/D" + f"VersionInfoVersion={app_windows_version}",
             "/D" + f"ArchitecturesAllowed={architectures_allowed}",
             "/D" + f"ArchitecturesInstallIn64BitMode={architectures_install_in64_bit_mode}",
-            Path("vcf_generator_lite.iss").absolute(),
+            Path("packaging", "innosetup", "vcf_generator_lite.iss").absolute(),
         ],
         check=True,
     )
@@ -96,48 +97,49 @@ def pack_with_zipfile():
 
 def build_with_zipapp():
     ensure_dist_dir()
-    zipapp_path = PATH_BUILD / "zipapp"
-    site_packages_path = zipapp_path / "site-packages"
-    if zipapp_path.is_dir():
-        shutil.rmtree(zipapp_path)
-    elif zipapp_path.is_file():
-        zipapp_path.unlink()
-    export_result = subprocess.run(
-        ["uv", "export", "--no-dev", "--no-editable", "--no-default-groups"],  # noqa: S607
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    subprocess.run(  # noqa: S603
-        ["uv", "pip", "sync", "--no-cache", "--target", site_packages_path, "--link-mode", "copy", "-"],  # noqa: S607
-        input=export_result.stdout,
-        text=True,
-        check=True,
-    )
+    with TemporaryDirectory() as zipapp_path_str:
+        zipapp_path = Path(zipapp_path_str)
+        site_packages_path = zipapp_path / "site-packages"
+        if zipapp_path.is_dir():
+            shutil.rmtree(zipapp_path)
+        elif zipapp_path.is_file():
+            zipapp_path.unlink()
+        export_result = subprocess.run(
+            ["uv", "export", "--no-dev", "--no-editable", "--no-default-groups"],  # noqa: S607
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        subprocess.run(  # noqa: S603
+            ["uv", "pip", "sync", "--no-cache", "--target", site_packages_path, "--link-mode", "copy", "-"],  # noqa: S607
+            input=export_result.stdout,
+            text=True,
+            check=True,
+        )
 
-    # 清理无用内容
-    if (bin_path := site_packages_path / "bin").is_dir():
-        shutil.rmtree(bin_path)
-    site_packages_path.joinpath(".lock").unlink()
+        # 清理无用内容
+        if (bin_path := site_packages_path / "bin").is_dir():
+            shutil.rmtree(bin_path)
+        site_packages_path.joinpath(".lock").unlink()
 
-    for info_dir_paths in site_packages_path.glob("*.dist-info"):
-        for file in info_dir_paths.iterdir():
-            if file.name not in ("METADATA", "licenses"):
-                if file.is_file():
-                    file.unlink()
-                else:
-                    shutil.rmtree(file)
+        for info_dir_paths in site_packages_path.glob("*.dist-info"):
+            for file in info_dir_paths.iterdir():
+                if file.name not in ("METADATA", "licenses"):
+                    if file.is_file():
+                        file.unlink()
+                    else:
+                        shutil.rmtree(file)
 
-    archive_path = PATH_DIST.joinpath(DISTRIBUTION_ZIPAPP_NAME)
-    if archive_path.exists():
-        archive_path.unlink()
-    zipapp.create_archive(
-        site_packages_path,
-        target=archive_path,
-        main="vcf_generator_lite.__main__:main",
-        interpreter="/usr/bin/env python3",
-        compressed=True,
-    )
+        archive_path = PATH_DIST.joinpath(DISTRIBUTION_ZIPAPP_NAME)
+        if archive_path.exists():
+            archive_path.unlink()
+        zipapp.create_archive(
+            site_packages_path,
+            target=archive_path,
+            main="vcf_generator_lite.__main__:main",
+            interpreter="/usr/bin/env python3",
+            compressed=True,
+        )
 
     print("Building finished.")
 
