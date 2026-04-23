@@ -137,7 +137,6 @@ class VCFGeneratorTask(Thread):
                 self._skip_item()
                 continue
 
-            queue_item: _WriteQueueItem | None = None
             try:
                 contact = parse_contact(contact_text=line, rules=self._phone_rules, delimiter=self._part_delimiter)
                 vcard = serialize_to_vcard(contact)
@@ -148,11 +147,9 @@ class VCFGeneratorTask(Thread):
                 # list 的 append 方法是原子的，因此不需要加锁
                 # https://docs.python.org/zh-cn/3/library/threadsafety.html#thread-safety-list
                 self._invalid_items.append(InvalidItem(row_position=position, raw_content=line, exception=e))
-            finally:
-                if queue_item:
-                    self._write_queue.put(queue_item)
-                else:
-                    self._finish_item(success=False)
+                self._finish_item(success=False)
+            else:
+                self._write_queue.put(queue_item)
 
         self._write_queue.put(None)  # 结束信号
 
@@ -173,9 +170,10 @@ class VCFGeneratorTask(Thread):
         self._progress_listener(self._progress, self._total > 0)
 
     def _update_progress(self):
-        if self._total == 0:
+        total = self._total
+        if total == 0:
             return
-        new_progress = round(min(self._processed / self._total, 1.0), 1)
+        new_progress = round(min(self._processed / total, 1.0), 1)
         if self._progress != new_progress:
             with self._progress_lock:
                 if self._progress != new_progress:

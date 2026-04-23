@@ -11,7 +11,7 @@ class DequeQueue[T]:
 
     def __init__(self, max_size: int = 100):
         self.max_size = max_size
-        self.deque = collections.deque(maxlen=max_size)
+        self.deque = collections.deque()  # 这里不添加maxlen，防止数据丢失。
         self.condition = Condition()
         self.__shutdown = False
 

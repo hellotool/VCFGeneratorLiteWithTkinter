@@ -175,7 +175,8 @@ class MainController:
             self.current_generation.file_io.close()
         except OSError as e:
             logger.exception("Failed to close file")
-            result = dataclasses.replace(result, exception=e)
+            if result.exception is None:
+                result = dataclasses.replace(result, exception=e)
 
         self.window.after_idle(self.on_generation_file_done, result)
 
@@ -267,10 +268,9 @@ class MainController:
         if self.window.content_text.get(f"{line}.0", f"{line}.end") == data:
             actual_line = line
         else:
-            search_row = search_line(self.window.content_text, data, line, strip=True)
-            actual_line = int(search_row) if search_row else None
+            actual_line = search_line(self.window.content_text, data, line, strip=True)
 
-        if actual_line:
+        if actual_line is not None:
             self.window.deiconify()
             self.window.lift()
             self.window.content_text.focus()
