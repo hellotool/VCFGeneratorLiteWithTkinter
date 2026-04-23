@@ -1,11 +1,13 @@
 import argparse
-import contextlib
 import logging
 import os
 import sys
+from contextlib import contextmanager, nullcontext, redirect_stderr, redirect_stdout, suppress
+from io import StringIO
 from pathlib import Path
 
 from vcf_generator_lite.__version__ import __version__
+from vcf_generator_lite.utils.dpi_aware import enable_dpi_aware
 from vcf_generator_lite.utils.locales import t
 
 __all__ = ["main"]
@@ -34,14 +36,13 @@ def setup_logging(verbose: bool):
 
 def fix_home_env():
     """修复 Tkinter 在 Windows 中无法获取 HOME 的问题"""
-    with contextlib.suppress(RuntimeError):
+    with suppress(RuntimeError):
         os.environ["HOME"] = str(Path.home())
 
 
 def launch(*, quiet: bool, verbose: bool):
     from vcf_generator_lite.constants import URL_REPOSITORY
     from vcf_generator_lite.ui.windows.main_window import create_app
-    from vcf_generator_lite.utils.dpi_aware import enable_dpi_aware
 
     if quiet:
         sys.stdout = None
@@ -53,6 +54,29 @@ def launch(*, quiet: bool, verbose: bool):
 
     app, _controller = create_app()
     app.mainloop()
+
+
+@contextmanager
+def redirect_to_messagebox_if_needed(title: str | None = None):
+    with (
+        redirect_stderr(StringIO()) if not sys.stderr else nullcontext() as err_io,
+        redirect_stdout(StringIO()) if not sys.stdout else nullcontext() as out_io,
+    ):
+        try:
+            yield
+        finally:
+            err_msg = err_io and err_io.getvalue()
+            out_msg = out_io and out_io.getvalue()
+            if err_msg or out_msg:
+                import tkinter.messagebox
+
+                enable_dpi_aware()
+                tkinter.messagebox.Message(
+                    title=title,
+                    message=err_msg or out_msg,
+                    icon="error" if err_msg else "info",
+                    type=tkinter.messagebox.OK,
+                ).show()
 
 
 def main():
@@ -77,7 +101,10 @@ def main():
         action="version",
         version=f"{t('app.name')} {__version__}",
     )
-    args = parser.parse_args()
+
+    with redirect_to_messagebox_if_needed(title=t("app.name")):
+        args = parser.parse_args()
+
     launch(quiet=args.quiet, verbose=args.verbose)
 
 
