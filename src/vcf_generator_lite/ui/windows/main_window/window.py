@@ -6,7 +6,7 @@ from typing import Literal, override
 from ttk_text.scrolled_text import ScrolledText
 
 from vcf_generator_lite.constants import (
-    EMAIL_JESSE205,
+    EMAIL_AUTHOR,
     URL_LICENSE,
     URL_OS_NOTICES,
     URL_RELEASES,
@@ -223,7 +223,7 @@ class VCFGeneratorLiteApp(EnhancedTk, VerticalDialogLayout):
                 url=urllib.parse.SplitResult(
                     scheme="mailto",
                     netloc="",
-                    path=EMAIL_JESSE205,
+                    path=EMAIL_AUTHOR,
                     query="",
                     fragment="",
                 ).geturl(),

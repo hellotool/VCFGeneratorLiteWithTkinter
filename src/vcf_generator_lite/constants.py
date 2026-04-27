@@ -10,4 +10,4 @@ URL_REPORT = f"{URL_REPOSITORY}/issues/new/choose"
 URL_LICENSE = f"{URL_REPOSITORY}/blob/{SOURCE_REFERENCE}/LICENSE"
 URL_OS_NOTICES = f"{URL_REPOSITORY}/blob/{SOURCE_REFERENCE}/docs/legal/os-notices.md"
 
-EMAIL_JESSE205 = "jesse205@qq.com"
+EMAIL_AUTHOR = "jesse205@qq.com"
