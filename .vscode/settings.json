@@ -1,8 +1,8 @@
 {
   "explorer.fileNesting.patterns": {
     "pyproject.toml": "uv.lock, .editorconfig, .markdownlint.json, .python-version",
-    "README.md": "README_pypi.md",
-    "*": "${basename}.*.${extname}",
+    "README.md": "README_*.md",
+    "*": "${basename}.*.${extname}"
   },
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff",

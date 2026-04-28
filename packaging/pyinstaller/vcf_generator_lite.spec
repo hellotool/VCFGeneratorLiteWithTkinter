@@ -1,4 +1,4 @@
-import importlib.metadata
+from pathlib import Path, PurePath
 
 from PyInstaller.building.api import COLLECT, EXE, PYZ
 from PyInstaller.building.build_main import Analysis
@@ -12,18 +12,19 @@ from PyInstaller.utils.win32.versioninfo import (
     VSVersionInfo,
 )
 
-from scripts.version import app_version, app_windows_ffi_version
+from scripts.app_metadata import app_metadata, app_version_variants
 from vcf_generator_lite.constants import APP_COPYRIGHT
 
-app_metadata = importlib.metadata.metadata("vcf_generator_lite")
-app_author = app_metadata.get("Author")
+PATH_PROJECT = Path()
+PATH_SOURCE_MODULE = PATH_PROJECT / "src" / "vcf_generator_lite"
 
+DIST_PATH_MODULE = PurePath("vcf_generator_lite")
 
 a = Analysis(
-    ["../../src/vcf_generator_lite/__main__.py"],
+    [PATH_SOURCE_MODULE / "__main__.py"],
     pathex=[],
     binaries=[],
-    datas=[("../../src/vcf_generator_lite/resources/", "vcf_generator_lite/resources")],
+    datas=[(PATH_SOURCE_MODULE / "resources", DIST_PATH_MODULE / "resources")],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -51,15 +52,15 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=["../../assets/images/icon.ico"],
+    icon=[PATH_PROJECT / "assets" / "images" / "icon.ico"],
     version=VSVersionInfo(
         # For more details about fixed file info 'ffi' see:
         # http://msdn.microsoft.com/en-us/library/ms646997.aspx
         ffi=FixedFileInfo(
             # filevers and prodvers should be always a tuple with four items: (1, 2, 3, 4)
             # Set not needed items to zero 0. Must always contain 4 elements.
-            filevers=app_windows_ffi_version,
-            prodvers=app_windows_ffi_version,
+            filevers=app_version_variants.windows_ffi,
+            prodvers=app_version_variants.windows_ffi,
             # Contains a bitmask that specifies the valid bits 'flags'r
             mask=0x3F,
             # Contains a bitmask that specifies the Boolean attributes of the file.
@@ -77,19 +78,19 @@ exe = EXE(
             date=(0, 0),
         ),
         kids=[
-            # TODO: 本地化
+            # TODO @Jesse205: 本地化  # noqa: FIX002, TD003
             StringFileInfo(
                 [
                     StringTable(
                         "040904B0",
                         [
-                            StringStruct("CompanyName", app_author),
-                            StringStruct("FileVersion", app_version),
-                            StringStruct("InternalName", "VCF Generator Lite"),
+                            StringStruct("CompanyName", app_metadata.author),
+                            StringStruct("FileVersion", app_version_variants.wheel),
+                            StringStruct("InternalName", app_metadata.display_name),
                             StringStruct("LegalCopyright", APP_COPYRIGHT),
                             StringStruct("OriginalFilename", "vcf-generator-lite.exe"),
-                            StringStruct("ProductName", "VCF Generator Lite"),
-                            StringStruct("ProductVersion", app_version),
+                            StringStruct("ProductName", app_metadata.display_name),
+                            StringStruct("ProductVersion", app_version_variants.wheel),
                         ],
                     ),
                 ]

@@ -1,7 +1,7 @@
 [project]
 name = "vcf-generator-lite"
 version = "5.0.3"
-description = "Makes one vCard from a contact list."
+description = "A lightweight VCF creation tool written in Python."
 authors = [{ name = "Jesse205", email = "jesse205@qq.com" }]
 license = "Apache-2.0"
 license-files = ["LICENSE"]
@@ -14,10 +14,10 @@ import-names = ["vcf_generator_lite"]
 console = ["colorlog>=6.9.0"]
 
 [dependency-groups]
-basic = ["poethepoet>=0.42.1"]
-test = ["pytest>=9.0.2"]
-lint = ["pyright>=1.1.407", "ruff>=0.14.10"]
-build = ["packaging>=26.0", "pyinstaller>=6.17.0", "requests>=2.32.5"]
+basic = ["poethepoet>=0.44.0"]
+test = ["pytest>=9.0.3"]
+lint = ["pyright>=1.1.409", "ruff>=0.15.12"]
+build = ["packaging>=26.2", "pyinstaller>=6.20.0", "requests>=2.33.1"]
 dev = ["colorlog>=6.9.0"]
 
 
@@ -38,7 +38,9 @@ executor = "uv"
 
 [tool.poe.tasks]
 test = "pytest"
-lint = "ruff check"
+check.parallel = ["ruff check", "pyright"]
+check.ignore_fail = "return_non_zero"
+check.default_item_type = "cmd"
 format = "ruff format"
 
 build-installer.script = "scripts.build_app:build_installer"
@@ -55,7 +57,15 @@ universal = true
 
 [tool.ruff]
 line-length = 120
-extend-exclude = ["typings/**"]
+include = [
+    "pyproject.toml",
+    # "*.md",
+    # "docs/**/*.md",
+    "src/**/*.py",
+    "scripts/**/*.py",
+    "packaging/**/*.py",
+    "packaging/pyinstaller/*.spec",
+]
 
 [tool.ruff.lint]
 ignore = [
@@ -84,7 +94,6 @@ ignore = [
     "EM102",
 ]
 select = ["ALL"]
-exclude = ["tests/**"]
 allowed-confusables = ["，", "：", "（", "）", "；"] # 允许中文符号
 
 [tool.ruff.lint.pydocstyle]
@@ -108,7 +117,12 @@ reportMissingParameterType = "none"
 reportUnknownVariableType = "none"
 reportUnnecessaryIsInstance = "none"
 reportImplicitOverride = "error"
-ignore = ["typings", "build", "dist", ".venv"]
+include = [
+    "src/**/*.py",
+    "scripts/**/*.py",
+    "packaging/**/*.py",
+    "packaging/pyinstaller/*.spec",
+]
 
 [tool.pytest]
 testpaths = ["tests"]

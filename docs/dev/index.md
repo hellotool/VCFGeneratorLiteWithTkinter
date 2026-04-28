@@ -144,7 +144,7 @@ D = 基础偏移 + 预发布号 × 100 + 后发布号 × 10 + （开发号 或 9
 - **后发布号**：如果版本包含后发布标识（如 `post1`），则取其中的数字；否则为 `0`。
 - **开发号**：如果版本包含开发标识（如 `dev2`），则取其中的数字，此时**不加 9**；否则，在最后一项加 `9` 以表示非开发版本。
 
-#### 示例
+#### Windows 版本号映射示例
 
 | 应用版本             | FixedFileInfo 版本 | 计算过程                 |
 | -------------------- | ------------------ | ------------------------ |
@@ -159,6 +159,24 @@ D = 基础偏移 + 预发布号 × 100 + 后发布号 × 10 + （开发号 或 9
 | `1.2.3`              | `1.2.3.40009`      | 40000 + 0 + 0 + 9        |
 | `1.2.3.post1.dev2`   | `1.2.3.40012`      | 40000 + 0 + 1×10 + 2     |
 | `1.2.3.post1`        | `1.2.3.40019`      | 40000 + 0 + 1×10 + 9     |
+
+### 语义化版本号映射
+
+由于 Python 包版本号与[语义化版本规范（SemVer）][semver-spec]存在差异，采用以下映射规则：
+
+| 应用版本                 | 语义化版本           |
+|----------------------|-----------------|
+| `1.2.3.dev1`         | `1.2.3-alpha`   |
+| `1.2.3a`             | `1.2.3-alpha`   |
+| `1.2.3a1.dev2`       | `1.2.3-alpha`   |
+| `1.2.3a1`            | `1.2.3-alpha.1` |
+| `1.2.3a1.post2.dev3` | `1.2.3-alpha.1` |
+| `1.2.3a1.post2`      | `1.2.3-alpha.1` |
+| `1.2.3b1`            | `1.2.3-beta.1`  |
+| `1.2.3rc1`           | `1.2.3-rc.1`    |
+| `1.2.3`              | `1.2.3`         |
+| `1.2.3.post1.dev2`   | `1.2.3`         |
+| `1.2.3.post1`        | `1.2.3`         |
 
 [vscode-homepage]: https://code.visualstudio.com/
 [pycharm-homepage]: https://www.jetbrains.com/zh-cn/pycharm/
@@ -175,5 +193,7 @@ D = 基础偏移 + 预发布号 × 100 + 后发布号 × 10 + （开发号 或 9
 [pyinstaller-homepage]: https://pyinstaller.org/en/stable/
 [upx-homepage]: https://upx.github.io/
 [poethepoet-homepage]: https://poethepoet.natn.io/
+
+[semver-spec]: https://semver.org/spec/v2.0.0.html
 
 [python-docs-zipapp]: https://docs.python.org/zh-cn/3/library/zipapp.html
