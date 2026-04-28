@@ -15,7 +15,7 @@ from PyInstaller.utils.win32.versioninfo import (
 from scripts.app_metadata import app_metadata, app_version_variants
 from vcf_generator_lite.constants import APP_COPYRIGHT
 
-PATH_PROJECT = Path()
+PATH_PROJECT = Path.cwd()
 PATH_SOURCE_MODULE = PATH_PROJECT / "src" / "vcf_generator_lite"
 
 DIST_PATH_MODULE = PurePath("vcf_generator_lite")
