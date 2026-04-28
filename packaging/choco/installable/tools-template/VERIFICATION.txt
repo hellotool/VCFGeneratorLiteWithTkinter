@@ -1,0 +1,8 @@
+﻿VERIFICATION
+Verification is intended to assist the Chocolatey moderators and community
+in verifying that this package's contents are trustworthy.
+
+1. Download the following file from https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/v$dynamic:{version_wheel}:
+   - $dynamic:{installer_filename}
+2. Use any tool to verify the file information.
+   - SHA 256: $dynamic:{installer_sha256}

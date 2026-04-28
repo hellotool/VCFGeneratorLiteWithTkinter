@@ -46,6 +46,7 @@ format = "ruff format"
 build-installer.script = "scripts.build_app:build_installer"
 build-portable.script = "scripts.build_app:build_portable"
 build-zipapp.script = "scripts.build_app:build_zipapp"
+build-chocopkgs.script = "scripts.build_app:build_chocolatey_packages"
 build-wheel = "uv build --wheel"
 
 [tool.uv]
