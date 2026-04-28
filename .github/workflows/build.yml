@@ -56,22 +56,13 @@ jobs:
         with:
           python-version-file: ".python-version"
 
-      - name: Build Installer
-        if: ${{ inputs.build-windows-installer }}
-        run: uv run --group build --group basic poe build-installer
-
       - name: Build Portable Package
         if: ${{ inputs.build-windows-portable }}
         run: uv run --group build --group basic poe build-portable
 
-      - name: Upload Installer
-        id: upload-installer
+      - name: Build Installer
         if: ${{ inputs.build-windows-installer }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: windows-installer
-          path: dist/*-setup.exe
-          if-no-files-found: error
+        run: uv run --group build --group basic poe build-installer
 
       - name: Upload Portable Package
         id: upload-portable
@@ -80,6 +71,15 @@ jobs:
         with:
           name: windows-portable
           path: dist/*-portable.zip
+          if-no-files-found: error
+
+      - name: Upload Installer
+        id: upload-installer
+        if: ${{ inputs.build-windows-installer }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: windows-installer
+          path: dist/*-setup.exe
           if-no-files-found: error
 
   build-python3-zipapp-and-wheel:
@@ -95,22 +95,13 @@ jobs:
         with:
           python-version-file: ".python-version"
 
-      - name: Build Zipapp
-        if: ${{ inputs.build-python3-zipapp }}
-        run: uv run  --group build --group basic poe build-zipapp
-
       - name: Build Wheel
         if: ${{ inputs.build-python3-wheel }}
         run: uv run --group build --group basic poe build-wheel
 
-      - name: Upload Zipapp
-        id: upload-zipapp
+      - name: Build Zip Application
         if: ${{ inputs.build-python3-zipapp }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: python3-zipapp
-          path: dist/*.pyzw
-          if-no-files-found: error
+        run: uv run  --group build --group basic poe build-zipapp
 
       - name: Upload Wheel
         id: upload-wheel
@@ -119,4 +110,13 @@ jobs:
         with:
           name: python3-wheel
           path: dist/*.whl
+          if-no-files-found: error
+
+      - name: Upload Zip Application
+        id: upload-zipapp
+        if: ${{ inputs.build-python3-zipapp }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: python3-zipapp
+          path: dist/*.pyzw
           if-no-files-found: error
