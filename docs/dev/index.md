@@ -2,7 +2,7 @@
 
 ## 技术栈
 
-- **IDE**: [Visual Studio Code][vscode-homepage] 或者 [PyCharm 2025.3][pycharm-homepage]
+- **IDE**: [Visual Studio Code][vscode-homepage] 或者 [PyCharm 2026.1.1][pycharm-homepage]
 - **开发语言**: [Python 3.12+][python-homepage]
 - **UI 框架**: [Tkinter][tkinter-homepage]
 - **包管理工具**: [uv][uv-homepage]

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/VCFGeneratorLite.iml" filepath="$PROJECT_DIR$/.idea/VCFGeneratorLite.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/vcf-generator-lite.iml" filepath="$PROJECT_DIR$/.idea/vcf-generator-lite.iml" />
     </modules>
   </component>
 </project>

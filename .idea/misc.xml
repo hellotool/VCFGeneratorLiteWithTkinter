@@ -4,13 +4,7 @@
     <option name="sdkName" value="uv (VCFGeneratorLite)" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="uv (VCFGeneratorLite)" project-jdk-type="Python SDK" />
-  <component name="PyrightConfiguration">
-    <option name="enabled" value="true" />
-  </component>
   <component name="PythonCompatibilityInspectionAdvertiser">
     <option name="version" value="3" />
-  </component>
-  <component name="RuffConfiguration">
-    <option name="enabled" value="true" />
   </component>
 </project>
