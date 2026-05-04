@@ -38,10 +38,10 @@ menu_help_license = "许可协议(&L)"
 menu_help_os_notices = "开源声明(&N)"
 menu_help_about = "关于 VCF 生成器 Lite(&A)"
 
-input_example = """张三\t13345367789\t著名的法外狂徒
-李四\t13445467890
-王五\t13554678907
-赵六\t13645436748
+input_example = """屈原\t13333333333\t战国时期诗人
+曹操\t13444444444
+陶渊明\t13555555555
+谢灵运\t13666666666
 """
 
 usage = """使用说明：

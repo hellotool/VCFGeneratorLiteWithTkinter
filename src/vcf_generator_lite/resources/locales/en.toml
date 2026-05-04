@@ -38,10 +38,10 @@ menu_help_license = "&License"
 menu_help_os_notices = "Open Source &Notices"
 menu_help_about = "&About VCF Generator Lite"
 
-input_example = """John\t13345367789\tA famous scientist
-Jane\t13445467890
-Mike\t13554678907
-Alex\t13645436748
+input_example = """Qu Yuan\t13333333333\tPoet of the Warring States period
+Cao Cao\t13444444444
+Tao Yuanming\t13555555555
+Xie Lingyun\t13666666666
 """
 
 usage = """Instructions:
