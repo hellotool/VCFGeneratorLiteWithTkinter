@@ -23,11 +23,15 @@ def ensure_dist_dir():
         PATH_DIST.mkdir(parents=True, exist_ok=True)
 
 
-def require_external_tool(file_name: str, display_name: str, fallback_path: str | None = None) -> Path:
+def require_external_tool(executable: str, display_name: str, fallback_path: str | None = None) -> Path:
     path = os.environ["PATH"]
     if fallback_path is not None:
         path += os.pathsep + fallback_path
-    executable_path = shutil.which(file_name, path=path)
+    executable_path = shutil.which(executable, path=path)
     if executable_path is None:
         raise ToolNotFoundError(display_name)
     return Path(executable_path)
+
+
+def require_uv() -> Path:
+    return require_external_tool("uv", "uv")

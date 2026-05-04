@@ -15,10 +15,18 @@ console = ["colorlog>=6.9.0"]
 
 [dependency-groups]
 basic = ["poethepoet>=0.44.0"]
-test = ["pytest>=9.0.3"]
 lint = ["pyright>=1.1.409", "ruff>=0.15.12"]
+test = ["pytest>=9.0.3"]
 build = ["packaging>=26.2", "pyinstaller>=6.20.0", "requests>=2.33.1"]
-dev = ["colorlog>=6.9.0"]
+docs = ["jinja2>=3.1.6"]
+dev = [
+    "colorlog>=6.9.0",
+    { include-group = "basic" },
+    { include-group = "lint" },
+    { include-group = "test" },
+    { include-group = "build" },
+    { include-group = "docs" },
+]
 
 
 [project.urls]
@@ -37,20 +45,49 @@ build-backend = "uv_build"
 executor = "uv"
 
 [tool.poe.tasks]
-test = "pytest"
-check.parallel = ["ruff check", "pyright"]
-check.ignore_fail = "return_non_zero"
-check.default_item_type = "cmd"
-format = "ruff format"
 
-build-installer.script = "scripts.build_app:build_installer"
-build-portable.script = "scripts.build_app:build_portable"
-build-zipapp.script = "scripts.build_app:build_zipapp"
-build-wheel = "uv build --wheel"
+[tool.poe.tasks.test]
+help = "Run tests"
+cmd = "pytest"
+
+[tool.poe.tasks.format]
+help = "Format code"
+cmd = "ruff format"
+
+[tool.poe.tasks.check]
+help = " Check code quality"
+parallel = ["ruff check", "pyright"]
+ignore_fail = "return_non_zero"
+default_item_type = "cmd"
+
+[tool.poe.tasks.build-installer]
+help = "Build installer (*-setup.exe)"
+script = "scripts.build_app:build_installer"
+
+[[tool.poe.tasks.build-installer.args]]
+help = "Don't verify SSL"
+name = "no_verify_ssl"
+options = ["--no-verify-ssl"]
+type = "boolean"
+
+[tool.poe.tasks.build-portable]
+help = "Build portable package (*-portable.zip)"
+script = "scripts.build_app:build_portable"
+
+[tool.poe.tasks.build-zipapp]
+help = "Build zipapp (*.pyzw)"
+script = "scripts.build_app:build_zipapp"
+
+[tool.poe.tasks.build-wheel]
+help = "Build wheel (*.whl)"
+cmd = "uv build --wheel"
+
+[tool.poe.tasks.generate-os-notices]
+help = "Generate open source notices"
+script = "scripts.docs.os_notices:generate"
 
 [tool.uv]
 required-version = ">=0.10.1"
-default-groups = "all"
 
 [tool.uv.pip]
 universal = true
@@ -62,6 +99,7 @@ include = [
     # "*.md",
     # "docs/**/*.md",
     "src/**/*.py",
+    "tests/**/*.py",
     "scripts/**/*.py",
     "packaging/**/*.py",
     "packaging/pyinstaller/*.spec",
@@ -69,32 +107,33 @@ include = [
 
 [tool.ruff.lint]
 ignore = [
-    "D100", # 有时候文档不是必须的
+    "D100",    # 有时候文档不是必须的
     "D101",
     "D102",
     "D103",
     "D104",
     "D107",
-    "D400", # 不支持中文标点
+    "D400",    # 不支持中文标点
     "PLC0415", # 为了防止兼容性问题或者不必要的代码运行，需要将导入放到函数内。
-    "FBT001", # 在设置单个值时不需要命名参数
+    "FBT001",  # 在设置单个值时不需要命名参数
     "FBT003",
-    "ICN001", # 很多情况下简写语义不明，要尽量避免简写
-    "T201", # 有 CLI 需求
+    "ICN001",  # 很多情况下简写语义不明，要尽量避免简写
+    "T201",    # 有 CLI 需求
     "PLR0913", # 参数多不是问题，问题是参数多且没使用命名参数
     "PLR2004", # 有时候，一些长度判断、常见状态码不需要常量
-    "S113", # 万一就是要等很长时间
-    "ANN003", # 无法做到
-    "ANN201", # 为了保持简洁，None 类型不写返回类型
+    "S113",    # 万一就是要等很长时间
+    "ANN003",  # 无法做到
+    "ANN201",  # 为了保持简洁，None 类型不写返回类型
     "ANN202",
     "ANN204",
-    "COM812", # 可能与 Formatter 冲突
-    "TRY003", # 没有必要
+    "COM812",  # 可能与 Formatter 冲突
+    "TRY003",  # 没有必要
     "EM101",
     "EM102",
 ]
 select = ["ALL"]
 allowed-confusables = ["，", "：", "（", "）", "；"] # 允许中文符号
+exclude = ["tests/**"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"

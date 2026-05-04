@@ -2,13 +2,13 @@ import subprocess
 from pathlib import Path
 
 from scripts.app_metadata import app_version_variants
-from scripts.build_app.common import PATH_DIST, require_external_tool
+from scripts.build_app.common import PATH_DIST, require_uv
 
 PATH_DIST_WHEE = PATH_DIST.joinpath(f"vcf_generator_lite-{app_version_variants.wheel}-py3-none-any.whl")
 
 
 def build_wheel():
-    uv_path = require_external_tool("uv", "uv")
+    uv_path = require_uv()
     subprocess.run([uv_path, "build", "--wheel"], text=True, check=True)  # noqa: S603
 
 

@@ -1,6 +1,3 @@
-template = "./docs/legal/os_notices_template.py"
-output = "./docs/legal/os-notices.md"
-
 [[notices]]
 name = "CPython"
 repository = "https://github.com/python/cpython"

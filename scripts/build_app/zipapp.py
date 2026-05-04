@@ -5,7 +5,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from scripts.app_metadata import app_version_variants
-from scripts.build_app.common import PATH_DIST, ensure_dist_dir, require_external_tool
+from scripts.build_app.common import PATH_DIST, ensure_dist_dir, require_uv
 from scripts.build_app.wheel import require_wheel_dist
 
 DISTRIBUTION_ZIPAPP_NAME = f"VCFGeneratorLite-v{app_version_variants.wheel}-py3.pyzw"
@@ -15,9 +15,9 @@ PATH_DIST_ZIPAPP = PATH_DIST.joinpath(DISTRIBUTION_ZIPAPP_NAME)
 
 def build_zipapp():
     ensure_dist_dir()
-    uv_path = require_external_tool("uv", "uv")
+    uv_path = require_uv()
 
-    require_wheel_dist()
+    whl_path = require_wheel_dist()
 
     with TemporaryDirectory() as zipapp_build_path_str:
         zipapp_build_path = Path(zipapp_build_path_str)
@@ -28,7 +28,7 @@ def build_zipapp():
                 uv_path,
                 "pip",
                 "install",
-                next(PATH_DIST.glob("*.whl")),
+                whl_path,
                 "--no-cache",
                 "--target",
                 site_packages_path,
