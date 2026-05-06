@@ -26,6 +26,7 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 ### Changed
 
+- Changed example contacts to ancient Chinese poets.
 - Reorganized project documentation.
 
 ## [5.0.3] - 2026-04-28
