@@ -1,6 +1,8 @@
 # 在旧版本 Windows 中运行
 
-> [!WARNING] 免责声明
+## 免责声明
+
+> [!WARNING]
 >
 > **请注意，我们强烈不推荐普通用户进行以下操作，并在此明确相关风险：**
 >
@@ -11,13 +13,13 @@
 >
 > **如果您选择继续，即表示您已充分了解并自愿承担所有相关风险。** 本项目的开发者及贡献者不对由此引发的任何直接或间接损失负责。
 
-## 方案一：使用 [PythonWin7][pythonwin7_repository_github] ![Windows 7、Windows 8](https://img.shields.io/badge/Windows_7、Windows_8-0078D4)
+## 方案一：使用 [PythonVista][pythonvista_repository_github] ![Windows 7、Windows 8](https://img.shields.io/badge/Windows_7、Windows_8-0078D4)
 
 **对于安装程序、便携包用户：**
 
-您需要使用 PythonWin7 内的文件替换本应用的文件。
+您需要使用 PythonVista 内的文件替换本应用的文件。
 
-1. **获取 Python 嵌入包**：从 [PythonWin7][pythonwin7_repository_github] 仓库下载：
+1. **获取 Python 嵌入包**：从 [PythonVista][pythonvista_repository_github] 仓库下载：
    - `python-3.14.x-embed-amd64.zip`
 2. **提取 DLL 文件**：解压下载的 ZIP 包，从中获取以下文件：
    - `python314.dll`
@@ -29,9 +31,9 @@
 
 **对于 Python ZIP 应用用户：**
 
-您只需要安装 PythonWin7 提供的 Python。
+您只需要安装 PythonVista 提供的 Python。
 
-1. **获取 Python 安装程序**：从 [PythonWin7][pythonwin7_repository_github] 仓库下载：
+1. **获取 Python 安装程序**：从 [PythonVista][pythonvista_repository_github] 仓库下载：
    - 64 位系统：`python-3.14.x-amd64-full.exe`
    - 32 位系统：`python-3.14.x-full.exe`
 2. **安装 Python**：运行安装程序，按照提示进行安装。
@@ -64,5 +66,5 @@
 
 该方法适用于 Windows Server 2003 RTM、SP1 和 SP2、Windows XP RTM、SP1、SP2 和 SP3 以及 Windows XP x64 SP1/SP2。 -->
 
-[pythonwin7_repository_github]: https://github.com/adang1345/PythonWin7
+[pythonvista_repository_github]: https://github.com/adang1345/PythonVista
 [vxkex-next_release_github]: https://github.com/YuZhouRen86/VxKex-NEXT/releases/latest

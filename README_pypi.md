@@ -1,6 +1,6 @@
 # VCF Generator Lite ![with Tkinter](https://img.shields.io/badge/with-Tkinter-00319C)
 
-VCF Generator Lite can convert a contact list into a single vCard file, which can be batch-imported into mobile phone contacts or used for other purposes.
+VCF Generator Lite is a simple and efficient tool that converts contact lists into a single vCard (`.vcf`) file. Generated files can be batch-imported into mobile phone contacts or used for various other purposes. Built with Python and Tkinter for a native desktop experience.
 
 ## Features
 
@@ -13,25 +13,24 @@ VCF Generator Lite can convert a contact list into a single vCard file, which ca
 
 1. Copy the name and phone number in the format of `Name Phone Note` on each line into the text field below. The note can be omitted.
    ```text
-   Isaac Newton	13445467890	British mathematician
-   Muhammad		13554678907
-   Confucius		13645436748
+   Qu Yuan			13333333333	Poet of the Warring States period
+   Cao Cao			13444444444
+   Tao Yuanming	13555555555
+   Xie Lingyun		13666666666
    ```
 2. Click **Generate**, select a path to save the file.
 3. You can use the generated vCard file wherever you need it.
 
 > [!NOTE]
 >
-> - You can use both tabs and spaces to separate the name and phone number.
+> - You can use both tabs and spaces to separate the fields.
 > - The program will automatically remove extra spaces from the text field.
 >
-> For example, ` Han Meimei   13333333333   A   well-known girl` will be recognized as
+> Example: `Han Meimei   13333333333   A   well-known girl` will be recognized as
 >
->
-> > - Name: Han Meimei
-> > - Phone: 13333333333
-> > - Note: A well-known girl
->
+> | Name       | Phone       | Note              |
+> | ---------- | ----------- | ----------------- |
+> | Han Meimei | 13333333333 | A well-known girl |
 
 ## License
 

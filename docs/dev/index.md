@@ -2,13 +2,13 @@
 
 ## 技术栈
 
-- **IDE**: [Visual Studio Code][vscode-homepage] 或者 [PyCharm 2026.1.1][pycharm-homepage]
+- **IDE**: [Visual Studio Code][vscode-homepage] 或者 [PyCharm][pycharm-homepage]
 - **开发语言**: [Python 3.12+][python-homepage]
 - **UI 框架**: [Tkinter][tkinter-homepage]
 - **包管理工具**: [uv][uv-homepage]
 - **任务运行器**: [poethepoet][poethepoet-homepage]
 - **代码质量**:
-  - **测试工具**: [pytest](https://docs.pytest.org/en/7.4.x/)
+  - **测试工具**: [pytest][pytest-homepage]
   - **格式化工具**: [Ruff][ruff-formatter-homepage]
   - **代码检查工具**: [Ruff][ruff-linter-homepage]、[Pyright][pyright-homepage]
 - **构建工具**:
@@ -17,49 +17,45 @@
   - **创建安装程序（仅 Windows 平台）**：[InnoSetup 6.6+][innosetup-homepage]
   - **创建 ZIP 应用**：[zipapp][python-docs-zipapp]（Python 标准库）
 
-## 🛠️ 开发准备
+## 环境搭建
 
-1. **安装基础工具**：
-   - **Python 解释器**：Python 3.12+ (确保包含 Tkinter 支持)
-   - **包管理工具**：[uv][uv-installation]
-2. **安装依赖项**：执行命令 `uv sync`。
+### 前置要求
 
-## 📦 构建应用
+1. 安装 [Python 3.12+][python-homepage]（需包含 Tkinter 支持）
+2. 安装 [uv][uv-installation]
 
-1. 完成开发准备。
-2. 根据软件包类型，安装额外工具。
-3. 执行对应的构建命令。
+### 安装依赖
 
-| 软件包类型       | 额外工具                                                          | 构建命令                     |
-| ---------------- | ----------------------------------------------------------------- | ---------------------------- |
-| Windows 安装程序 | [InnoSetup 6.6+][innosetup-homepage]、[UPX][upx-homepage]（可选） | `uv run poe build-installer` |
-| Windows 便携包   | [UPX][upx-homepage]（可选）                                       | `uv run poe build-portable`  |
-| Python ZIP 应用  | 无                                                                | `uv run poe build-zipapp`    |
-| Python Wheel     | 无                                                                | `uv run poe build-wheel`     |
+```bash
+uv sync
+```
 
 ## 项目结构
 
 ```txt
 VCFGeneratorLiteWithTkinter/
-├── scripts/                        # 构建脚本
-├── src/                            # 源代码
-│   └── vcf_generator_lite/
-│       ├── core/                   # 业务逻辑
-│       ├── models                  # 数据模型
-│       ├── resources/              # 静态资源（图标、数据等）
-│       ├── utils/                  # 工具类
-│       ├── ui/
-│       │   ├── layouts/            # 布局
-│       │   ├── message_boxes/      # 全局信息框
-│       │   ├── themes/             # 应用主题
-│       │   ├── widgets/            # 自定义组件（增强型输入框等）
-│       │   └── windows/            # 窗口
-│       ├── __main__.py             # 程序入口
-│       └── constants.py            # 全局常量（名称、链接等）
+├── assets/                         # 项目资源
+├── dist/                           # 发布产物
+├── scripts/                        # 项目脚本
+├── packaging/                      # 打包配置
+│   ├── innosetup/                  # InnoSetup 配置
+│   └── pyinstaller/                # PyInstaller 配置
+├── src/vcf_generator_lite          # 源代码
+│   ├── core/                       # 业务逻辑
+│   ├── models                      # 数据模型
+│   ├── resources/                  # 静态资源（图标、数据等）
+│   ├── ui/
+│   │   ├── common/                 # 通用工具
+│   │   ├── layouts/                # 通用布局
+│   │   ├── themes/                 # 应用主题
+│   │   ├── widgets/                # 自定义组件（增强型输入框等）
+│   │   └── windows/                # 窗口
+│   ├── utils/                      # 工具类
+│   ├── __main__.py                 # 程序入口
+│   └── constants.py                # 全局常量（名称、链接等）
+├── tests/                          # 测试文件
 ├── pyproject.toml                  # 项目配置
-├── vcf_generator_lite.iss          # InnoSetup 配置脚本
-├── vcf_generator_lite.spec         # PyInstaller 配置
-└── os_notices.toml                 # 开源声明信息
+└── os-notices.toml                 # 开源声明信息
 ```
 
 ## 常用命令
@@ -68,132 +64,33 @@ VCFGeneratorLiteWithTkinter/
 | ------------------------------------ | ------------------------------ |
 | `uv run vcf-generator-lite`          | 运行应用                       |
 | `uv run poe test`                    | 测试应用                       |
-| `uv run poe format`                  | 格式化所有代码                 |
-| `uv run poe lint`                    | 检查所有代码                   |
+| `uv run poe format`                  | 格式化代码                     |
+| `uv run poe check`                   | 检查代码                       |
 | `uv version`                         | 查看当前版本                   |
 | `uv version 1.2.3`                   | 更新版本号为 `1.2.3`           |
 | `uv version --bump patch --bump dev` | 更新补丁版本，并更新为开发版本 |
 | `uv version --bump stable`           | 更新为稳定版本                 |
 
-## 🎨 UI 开发规范
+要查看更多命令，请运行 `uv --help` 与 `uv run poe --help`。
 
-### 单位系统
+## 相关文档
 
-- **设计单位**：使用字体单位点 (`p`)，是[有效像素 (epx)](https://learn.microsoft.com/zh-cn/windows/apps/design/layout/screen-sizes-and-breakpoints-for-responsive-design#effective-pixels-and-scale-factor) 的 **0.75** 倍；
-  - `7p` 为 `9.333epx`
-  - `9p` 为 `12epx`
-  - `12p` 为 `16epx`
-- **布局原则**：
-  - 尽量使用 `pack` 布局管理器，创建响应式 UI；
-  - 组件间距统一使用 `7p`。
-
-## 主题与图标
-
-- **应用主题**：跟随系统主题自动切换。
-- **系统图标**：使用 Emoji 替代传统图标。Emoji 具有以下优点：
-  - Emoji 图标跟随系统，风格统一。
-  - 天然适配缩放，无需手动处理，性能好。
-
-### 资源路径
-
-| 路径                                                  | 尺寸（px）      | 备注               |
-| ----------------------------------------------------- | --------------- | ------------------ |
-| `assets/images/icon.svg`                              | `48x48`（矢量） | 文档展示           |
-| `assets/images/icon.ico`                              | 多种尺寸        | Windows 端应用图标 |
-| `src/vcf_generator_lite/resources/images/icon-48.png` | `48x48`         | 窗口图标           |
-
-## UI 设计
-
-### 应用图标
-
-遵循 [Windows 11 图标设计规范](https://learn.microsoft.com/zh-cn/windows/apps/design/style/iconography/overview)。
-
-- **配色**：采用 [2014 Material Design 调色板](https://m2.material.io/design/color/the-color-system.html#tools-for-picking-colors)。
-- **设计文件**：`assets/design/icon.svg`，使用 Inkscape 编辑。
-
-#### 生成应用图标 ICO 文件
-
-使用 PhotoDemon 创建导出具有以下图标的 ICO 文件：
-
-- PNG：`256x256`
-- 32-bpp：`64x64`、`48x48`、`32x32`、`16x16`
-
-## 版本
-
-版本命名遵循 [Python 包版本规范][python-packaging-version-specifiers]。
-
-### Windows 版本号映射
-
-Windows 可执行文件的 `FixedFileInfo` 中的文件版本和产品版本仅支持四个 16 位整数（格式为 `A.B.C.D`）。为保留应用版本的详细信息，采用以下映射规则：
-
-- **A.B.C** 直接对应应用版本的 `major.minor.micro`。
-- **D（构建号）** 根据版本的预发布、开发、后发布状态计算得出。
-
-构建号的计算公式如下：
-
-```txt
-D = 基础偏移 + 预发布号 × 100 + 后发布号 × 10 + （开发号 或 9）
-```
-
-- **基础偏移**：
-  - Alpha 版本：`10000`
-  - Beta 版本：`20000`
-  - RC 版本：`30000`
-  - 正式版本：`40000`
-- **预发布号**：如果版本包含预发布标识（如 `a1`、`b2`、`rc3`），则取其中的数字；若无预发布标识，则视为 `0`。
-- **后发布号**：如果版本包含后发布标识（如 `post1`），则取其中的数字；否则为 `0`。
-- **开发号**：如果版本包含开发标识（如 `dev2`），则取其中的数字，此时**不加 9**；否则，在最后一项加 `9` 以表示非开发版本。
-
-#### Windows 版本号映射示例
-
-| 应用版本             | FixedFileInfo 版本 | 计算过程                 |
-| -------------------- | ------------------ | ------------------------ |
-| `1.2.3.dev1`         | `1.2.3.00001`      | 基础偏移 0 + 0 + 0 + 1   |
-| `1.2.3a`             | `1.2.3.10009`      | 10000 + 0 + 0 + 9        |
-| `1.2.3a1.dev2`       | `1.2.3.10102`      | 10000 + 1×100 + 0 + 2    |
-| `1.2.3a1`            | `1.2.3.10109`      | 10000 + 1×100 + 0 + 9    |
-| `1.2.3a1.post2.dev3` | `1.2.3.10123`      | 10000 + 1×100 + 2×10 + 3 |
-| `1.2.3a1.post2`      | `1.2.3.10129`      | 10000 + 1×100 + 2×10 + 9 |
-| `1.2.3b1`            | `1.2.3.20109`      | 20000 + 1×100 + 0 + 9    |
-| `1.2.3rc1`           | `1.2.3.30109`      | 30000 + 1×100 + 0 + 9    |
-| `1.2.3`              | `1.2.3.40009`      | 40000 + 0 + 0 + 9        |
-| `1.2.3.post1.dev2`   | `1.2.3.40012`      | 40000 + 0 + 1×10 + 2     |
-| `1.2.3.post1`        | `1.2.3.40019`      | 40000 + 0 + 1×10 + 9     |
-
-### 语义化版本号映射
-
-由于 Python 包版本号与[语义化版本规范（SemVer）][semver-spec]存在差异，采用以下映射规则：
-
-| 应用版本             | 语义化版本      |
-| -------------------- | --------------- |
-| `1.2.3.dev1`         | `1.2.3-alpha`   |
-| `1.2.3a`             | `1.2.3-alpha`   |
-| `1.2.3a1.dev2`       | `1.2.3-alpha`   |
-| `1.2.3a1`            | `1.2.3-alpha.1` |
-| `1.2.3a1.post2.dev3` | `1.2.3-alpha.1` |
-| `1.2.3a1.post2`      | `1.2.3-alpha.1` |
-| `1.2.3b1`            | `1.2.3-beta.1`  |
-| `1.2.3rc1`           | `1.2.3-rc.1`    |
-| `1.2.3`              | `1.2.3`         |
-| `1.2.3.post1.dev2`   | `1.2.3`         |
-| `1.2.3.post1`        | `1.2.3`         |
+- [视觉设计](./visual.md)
+- [构建指南](./building.md)
+- [版本管理规范](./versioning.md)
 
 [vscode-homepage]: https://code.visualstudio.com/
 [pycharm-homepage]: https://www.jetbrains.com/zh-cn/pycharm/
-
 [python-homepage]: https://www.python.org/
 [uv-homepage]: https://docs.astral.sh/uv/
 [uv-installation]: https://docs.astral.sh/uv/getting-started/installation/
 [tkinter-homepage]: https://docs.python.org/zh-cn/3/library/tk.html
+[pytest-homepage]: https://docs.pytest.org/en/stable/
 [ruff-formatter-homepage]: https://docs.astral.sh/ruff/formatter/
 [ruff-linter-homepage]: https://docs.astral.sh/ruff/linter/
-[innosetup-homepage]: https://jrsoftware.org/isinfo.php
-[pyright-homepage]: https://microsoft.github.io/pyright
-[python-packaging-version-specifiers]: https://packaging.python.org/en/latest/specifications/version-specifiers/
+[pyright-homepage]: https://microsoft.github.io/pyright/
 [pyinstaller-homepage]: https://pyinstaller.org/en/stable/
 [upx-homepage]: https://upx.github.io/
+[innosetup-homepage]: https://jrsoftware.org/isinfo.php
 [poethepoet-homepage]: https://poethepoet.natn.io/
-
-[semver-spec]: https://semver.org/spec/v2.0.0.html
-
 [python-docs-zipapp]: https://docs.python.org/zh-cn/3/library/zipapp.html

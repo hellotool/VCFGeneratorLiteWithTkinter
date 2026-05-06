@@ -18,15 +18,15 @@
 
 </div>
 
-VCF Generator Lite can convert a contact list into a single vCard file, which can be batch-imported into mobile phone contacts or used for other purposes.
+VCF Generator Lite is a simple and efficient tool that converts contact lists into a single vCard (`.vcf`) file. Generated files can be batch-imported into mobile phone contacts or used for various other purposes. Built with Python and Tkinter for a native desktop experience.
 
 [![License](https://img.shields.io/github/license/hellotool/VCFGeneratorLiteWithTkinter)](./LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](./CODE_OF_CONDUCT.md)
 
-[![GitHub - Test](https://github.com/hellotool/VCFGeneratorLiteWithTkinter/actions/workflows/test.yml/badge.svg)](https://github.com/hellotool/VCFGeneratorLiteWithTkinter/actions/workflows/test.yml)
-![GitHub - Release](https://img.shields.io/github/v/release/hellotool/VCFGeneratorLiteWithTkinter?logo=github)
+[![GitHub - Test](https://github.com/hellotool/VCFGeneratorLiteWithTkinter/actions/workflows/test.yml/badge.svg)][workflow-test]
+[![GitHub - Release](https://img.shields.io/github/v/release/hellotool/VCFGeneratorLiteWithTkinter?logo=github)][release-github]
 ![GitHub - Stars](https://img.shields.io/github/stars/hellotool/VCFGeneratorLiteWithTkinter?style=flat&logo=github)
-[![Gitee - Stars](https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/badge/star.svg?theme=dark)](https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/stargazers)
+[![Gitee - Stars](https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/badge/star.svg?theme=dark)][stargazers-gitee]
 
 ## Features
 
@@ -98,27 +98,26 @@ vcf-generator-lite
 
 ## Usage
 
-1. Copy the name and phone number in the format of `Name Phone Note` on each line into the text field below. The note can be omitted.
+1. Paste your contacts in the format `Name Phone Note` into the text field. The note is optional.
    ```text
-   Isaac Newton	13445467890	British mathematician
-   Muhammad		13554678907
-   Confucius		13645436748
+   Qu Yuan			13333333333	Poet of the Warring States period
+   Cao Cao			13444444444
+   Tao Yuanming	13555555555
+   Xie Lingyun		13666666666
    ```
 2. Click **Generate**, select a path to save the file.
-3. You can use the generated vCard file wherever you need it. For details, please refer to [Using vCard Files](#using-vcard-files) below.
+3. You can use the generated vCard file wherever you need it.
 
 > [!NOTE]
 >
-> - You can use both tabs and spaces to separate the name and phone number.
+> - You can use both tabs and spaces to separate fields.
 > - The program will automatically remove extra spaces from the text field.
 >
-> For example, `Han Meimei   13333333333   A well-known girl` will be recognized as
+> Example: `Han Meimei   13333333333   A   well-known girl` will be recognized as
 >
->
-> > - Name: Han Meimei
-> > - Phone: 13333333333
-> > - Note: A well-known girl
->
+> | Name       | Phone       | Note              |
+> | ---------- | ----------- | ----------------- |
+> | Han Meimei | 13333333333 | A well-known girl |
 
 ### Using vCard Files
 
@@ -173,11 +172,11 @@ If you need to double-click to launch a Python ZIP application directly on Windo
 
 ### Other Compatibility
 
-| System Environment                     | Issue                                                         | Description                                                                                                                              | Workaround                                                                                                                                  |
-| -------------------------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Windows 10 or later                    | Dark mode not supported                                       | Tkinter does not have a built-in dark theme.                                                                                             | Use [high contrast themes][windows-high-contrast-support] or modify the system theme with third-party tools (e.g., [Rectify11][rectify11]). |
-| Windows 10 or later                    | UI becomes blurry when DPI changes                            | The application does not support DPI adjustment after startup.                                                                           | Keep the same DPI to avoid blurriness.                                                                                                      |
-| Python Install Manager 26.0 or earlier | A command line window appears after double-clicking to launch | Python Install Manager 26.0 or earlier does not support automatically upgrading to a windowed Python interpreter. ([python/cpython#261]) | Upgrade the Python Install Manager to version 26.1 or later, or use the [Python launcher][pylauncher].                                      |
+| System Environment                     | Issue                              | Description                                                                                | Workaround                                                                                                                                  |
+| -------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Windows 10 or later                    | Dark mode not supported            | Tkinter has no built-in dark theme.                                                        | Use [high contrast themes][windows-high-contrast-support] or modify the system theme with third-party tools (e.g., [Rectify11][rectify11]). |
+| Windows 10 or later                    | UI becomes blurry when DPI changes | App doesn't support DPI adjustment after startup                                           | Avoid changing DPI while the application is running.                                                                                        |
+| Python Install Manager 26.0 or earlier | Command line window appears        | Doesn't support automatic upgrade to windowed Python interpreter. ([python/pymanager#216]) | Upgrade the Python Install Manager to version 26.1 or later, or use the [Python launcher][pylauncher].                                      |
 
 ## License
 
@@ -201,28 +200,39 @@ limitations under the License.
 
 ## Credits
 
-- **AI**: Parts of this project are generated by AI.
-  - **DeepSeek**: Guidance on coding, code generation.
-  - **Yuanbao**: Guidance on coding, code generation.
-  - **Tongyi Lingma**: Code completion, guidance on coding.
-  - **WorkBuddy**: Code review.
-  - **Trae**: Code generation.
-- **Open Source Code**: This project uses some open source code. For details, please see [Open Source Notices (Chinese)](./docs/legal/os-notices.md).
+### AI Assistance
+
+Parts of this project were generated with AI assistance:
+
+- **DeepSeek**: Coding guidance, code generation, documentation optimization, language translation.
+- **Yuanbao**: Coding guidance, code generation, language translation.
+- **Tongyi Lingma**: Code completion, coding guidance.
+- **WorkBuddy**: Code review, documentation optimization.
+- **Trae**: Code generation, documentation optimization.
+- **OpenCode**: Documentation optimization.
+
+### Open Source
+
+This project uses open source code. See [Open Source Notices (Chinese)](./docs/legal/os-notices.md) for details.
 
 ## More Documentation
 
-- [Development Guide (Chinese)](./docs/dev/index.md)
-- [Contribution Guide (Chinese)](./CONTRIBUTING.md)
+- [Contribution Guidelines](./CONTRIBUTING.md)
+- [Development (Chinese)](./docs/dev/index.md)
 - [FAQ (Chinese)](./docs/faq.md)
 
 [repository-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/
 [repository-github]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/
 [release-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/latest
 [release-github]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/latest
+[stargazers-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/stargazers
+
+[workflow-test]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/actions/workflows/test.yml
+
 [pylauncher]: https://docs.python.org/zh-cn/3.15/using/windows.html#python-launcher-for-windows-deprecated
 [pymanager]: https://docs.python.org/zh-cn/3.15/using/windows.html#python-install-manager
 [windows-high-contrast-support]: https://support.microsoft.com/en-us/windows/turn-high-contrast-mode-on-or-off-in-windows-909e9d89-a0f9-a3a9-b993-7a6dcee85025
 [rectify11]: https://www.rectify11.com/
 [uv-homepage]: https://docs.astral.sh/uv/
 
-[python/cpython#261]: https://github.com/python/pymanager/issues/216
+[python/pymanager#216]: https://github.com/python/pymanager/issues/216
