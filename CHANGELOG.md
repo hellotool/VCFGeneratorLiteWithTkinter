@@ -13,6 +13,21 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 ## [Unreleased]
 
+## [5.0.4] - 2026-05-07
+
+### Added
+
+- Added changelog.
+
+### Fixed
+
+- Fixed spacing between all components.
+- Fixed parameter error in the app icon.
+
+### Changed
+
+- Reorganized project documentation.
+
 ## [5.0.3] - 2026-04-28
 
 ### Added
@@ -343,7 +358,8 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 - Initial release.
 
-[Unreleased]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v5.0.3...HEAD
+[Unreleased]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v5.0.4...HEAD
+[5.0.4]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.4
 [5.0.3]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.3
 [5.0.2]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.2
 [5.0.1]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.1

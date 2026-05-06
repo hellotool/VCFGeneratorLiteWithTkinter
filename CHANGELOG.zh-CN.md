@@ -13,6 +13,8 @@
 
 ## [未发布]
 
+## [5.0.4] - 2026-05-07
+
 ### 新增
 
 - 新增更新日志。
@@ -356,7 +358,8 @@
 
 - 初始版本发布。
 
-[未发布]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v5.0.3...HEAD
+[未发布]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v5.0.4...HEAD
+[5.0.4]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.4
 [5.0.3]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.3
 [5.0.2]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.2
 [5.0.1]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.1
