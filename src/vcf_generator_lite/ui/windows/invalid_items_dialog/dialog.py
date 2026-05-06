@@ -21,7 +21,7 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
         super()._configure_ui_withdraw()
         self.title(st("title"))
         self.resizable(True, True)
-        self.wm_size_pt(375, 300)
+        self.wm_size_pt(360, 320)
         self.wm_minsize_pt(225, 225)
         self._create_widgets(self, header_separator=True)
 
@@ -41,17 +41,17 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
             foreground="orange",
         )
         # 图标间距未严格遵循 Windows 的设计，因为那样会显得过于拥挤
-        self.header_icon.pack(side="left", padx="14p", pady="7p", anchor="n")
+        self.header_icon.pack(side="left", padx="8.25p", pady="8.25p", anchor="n")
         self.header_label = Label(header_frame, style="DialogHeaderContent.TLabel")
         enable_auto_wrap(self.header_label)
-        self.header_label.pack(fill="x", padx=(0, "14p"), pady="7p", anchor="center", expand=True)
+        self.header_label.pack(fill="x", padx=(0, "8.25p"), pady="8.25p", anchor="center", expand=True)
         return header_frame
 
     @override
     def _create_content(self, parent: Misc):
         content_frame = Frame(parent)
         content_label = Label(content_frame, text=st("label_invalid_numbers"))
-        content_label.pack(fill="x", padx="7p", pady=("7p", "2p"))
+        content_label.pack(fill="x", padx="8.25p", pady=("8.25p", "2p"))
         self.content_tree = ScrolledTreeview(
             content_frame,
             columns=("row", "original", "reason"),
@@ -77,7 +77,7 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
         self.content_tree.heading("reason", text=st("heading_reason"), anchor="w")
         # 添加一个提示，告知用户正在加载中。
         self.content_tree.insert("", "end", id="loading_tip", values=("", st("cell_loading"), ""))
-        self.content_tree.pack(fill="both", expand=True, padx="7p")
+        self.content_tree.pack(fill="both", expand=True, padx="8.25p")
         return content_frame
 
     @override
@@ -93,7 +93,7 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
             default="active",
             command=lambda: self.event_generate(EVENT_EXIT),
         )
-        self.ok_button.pack(side="right", padx="7p", pady="7p")
+        self.ok_button.pack(side="right", padx="8.25p", pady="8.25p")
         return footer_frame
 
     def set_display_path(self, path: str):

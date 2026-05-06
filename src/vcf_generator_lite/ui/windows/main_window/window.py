@@ -64,7 +64,7 @@ class VCFGeneratorLiteApp(EnhancedTk, VerticalDialogLayout):
     def _create_header(self, parent: Misc):
         description_label = Label(parent, text=st("usage"), justify="left")
         enable_auto_wrap(description_label)
-        description_label.pack(fill="x", padx="7p", pady="7p")
+        description_label.pack(fill="x", padx="8.25p", pady="8.25p")
         return description_label
 
     @override
@@ -80,7 +80,7 @@ class VCFGeneratorLiteApp(EnhancedTk, VerticalDialogLayout):
         )
         self.content_text.insert(0.0, st("input_example"))
         self.content_text.edit_reset()
-        self.content_text.pack(fill="both", expand=True, padx="7p", pady=0)
+        self.content_text.pack(fill="both", expand=True, padx="8.25p", pady=0)
 
         self.line_numbers = LineNumberBar(self.content_text.frame)
         self.line_numbers.bind_text(self.content_text)
@@ -112,7 +112,7 @@ class VCFGeneratorLiteApp(EnhancedTk, VerticalDialogLayout):
             default="active",
             command=lambda: self.event_generate(EVENT_GENERATE_OR_STOP),
         )
-        self.generate_or_stop_button.pack(side="right", padx="7p", pady="7p")
+        self.generate_or_stop_button.pack(side="right", padx="8.25p", pady="8.25p")
         return footer_frame
 
     def _create_menu_bar(self):
@@ -256,8 +256,8 @@ class VCFGeneratorLiteApp(EnhancedTk, VerticalDialogLayout):
         return self.content_text.get(1.0, "end")[:-1]
 
     def show_progress(self):
-        self.progress_bar.pack(side="left", padx="7p", pady="7p")
-        self.progress_label.pack(side="left", padx=(0, "7p"), pady="7p")
+        self.progress_bar.pack(side="left", padx="8.25p", pady="8.25p")
+        self.progress_label.pack(side="left", padx=(0, "8.25p"), pady="8.25p")
 
     def hide_progress(self):
         self.progress_bar.pack_forget()
