@@ -55,7 +55,7 @@ help = "Format code"
 cmd = "ruff format"
 
 [tool.poe.tasks.check]
-help = " Check code quality"
+help = "Check code"
 parallel = ["ruff check", "pyright"]
 ignore_fail = "return_non_zero"
 default_item_type = "cmd"
