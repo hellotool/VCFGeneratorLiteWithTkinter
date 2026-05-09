@@ -14,7 +14,7 @@
 - **构建工具**:
   - **创建可执行文件**：[PyInstaller][pyinstaller-homepage]
   - **体积优化工具**：[UPX][upx-homepage]
-  - **创建安装程序（仅 Windows 平台）**：[InnoSetup 6.6+][innosetup-homepage]
+  - **创建安装程序（仅 Windows 平台）**：[InnoSetup 6.7+][innosetup-homepage]
   - **创建 ZIP 应用**：[zipapp][python-docs-zipapp]（Python 标准库）
 
 ## 环境搭建
