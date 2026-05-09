@@ -5,6 +5,7 @@
         "ms-python.debugpy",
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "charliermarsh.ruff"
+        "charliermarsh.ruff",
+        "redhat.vscode-xml"
     ]
 }

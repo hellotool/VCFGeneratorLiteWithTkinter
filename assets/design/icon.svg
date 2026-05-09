@@ -18,8 +18,7 @@
     xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
     xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    xmlns="http://www.w3.org/2000/svg"
->
+    xmlns="http://www.w3.org/2000/svg">
     <sodipodi:namedview
         id="namedview1"
         pagecolor="#ffffff"
@@ -50,20 +49,20 @@
             empspacing="6"
             enabled="true"
             visible="true"
-            dotted="false"/>
+            dotted="false" />
     </sodipodi:namedview>
-    <defs
-        id="defs1"><linearGradient
-     id="linearGradient5"
-     inkscape:collect="always">
+    <defs id="defs1">
+        <linearGradient
+            id="linearGradient5"
+            inkscape:collect="always">
             <stop
                 style="stop-color:#757575;stop-opacity:1;"
                 offset="0"
-                id="stop5"/>
+                id="stop5" />
             <stop
                 style="stop-color:#424242;stop-opacity:1;"
                 offset="1"
-                id="stop6"/>
+                id="stop6" />
         </linearGradient>
         <linearGradient
             id="linearGradient3"
@@ -71,11 +70,11 @@
             <stop
                 style="stop-color:#f5f5f5;stop-opacity:1;"
                 offset="0"
-                id="stop3"/>
+                id="stop3" />
             <stop
                 style="stop-color:#e0e0e0;stop-opacity:1;"
                 offset="1"
-                id="stop4"/>
+                id="stop4" />
         </linearGradient>
         <linearGradient
             id="linearGradient1"
@@ -83,11 +82,11 @@
             <stop
                 style="stop-color:#29b6f6;stop-opacity:1;"
                 offset="0"
-                id="stop1"/>
+                id="stop1" />
             <stop
                 style="stop-color:#039be5;stop-opacity:1;"
                 offset="1"
-                id="stop2"/>
+                id="stop2" />
         </linearGradient>
         <inkscape:path-effect
             effect="fillet_chamfer"
@@ -105,7 +104,7 @@
             apply_no_radius="true"
             apply_with_radius="true"
             only_selected="false"
-            hide_knots="false"/>
+            hide_knots="false" />
         <linearGradient
             inkscape:collect="always"
             xlink:href="#linearGradient1"
@@ -115,7 +114,7 @@
             y1="12"
             x2="44"
             y2="40"
-            gradientTransform="translate(1.9999999,-2.0000002)"/>
+            gradientTransform="translate(1.9999999,-2.0000002)" />
         <linearGradient
             inkscape:collect="always"
             xlink:href="#linearGradient5"
@@ -125,7 +124,7 @@
             x1="5"
             y1="27.071796"
             x2="13"
-            y2="34"/>
+            y2="34" />
         <linearGradient
             inkscape:collect="always"
             xlink:href="#linearGradient3"
@@ -135,7 +134,7 @@
             x1="5.9977975"
             y1="16.535898"
             x2="9.997797"
-            y2="23.464102"/>
+            y2="23.464102" />
         <filter
             style="color-interpolation-filters:sRGB;"
             inkscape:label="Fluent Shadow 1"
@@ -150,31 +149,31 @@
                 in="SourceGraphic"
                 flood-opacity="0.141176"
                 flood-color="rgb(0,0,0)"
-                id="feFlood322"/>
+                id="feFlood322" />
             <feGaussianBlur
                 result="blur"
                 in="SourceGraphic"
                 stdDeviation="1"
-                id="feGaussianBlur322"/>
+                id="feGaussianBlur322" />
             <feOffset
                 result="offset"
                 in="blur"
                 dx="0.000000"
                 dy="0.500000"
                 id="feOffset322"
-                preserveAlpha="false"/>
+                preserveAlpha="false" />
             <feComposite
                 result="comp1"
                 operator="in"
                 in2="offset"
                 id="feComposite322"
-                in="flood"/>
+                in="flood" />
             <feComposite
                 result="comp2"
                 operator="over"
                 id="feComposite323"
                 in2="comp1"
-                in="SourceGraphic"/>
+                in="SourceGraphic" />
         </filter>
         <mask
             maskUnits="userSpaceOnUse"
@@ -195,7 +194,7 @@
                     sodipodi:type="rect"
                     rx="2"
                     ry="2"
-                    transform="rotate(10,24,24)"/>
+                    transform="rotate(10,24,24)" />
                 <rect
                     style="display:inline;fill:#ffffff;fill-opacity:1"
                     id="rect26"
@@ -208,7 +207,7 @@
                     rx="2"
                     ry="2"
                     transform="rotate(5,24,24)"
-                    mask="none"/>
+                    mask="none" />
                 <rect
                     style="display:inline;fill:#ffffff;fill-opacity:1"
                     id="rect27"
@@ -219,9 +218,10 @@
                     inkscape:label="card-background-1"
                     sodipodi:type="rect"
                     rx="2"
-                    ry="2"/>
+                    ry="2" />
             </g>
-        </mask></defs>
+        </mask>
+    </defs>
     <g
         inkscape:label="Icon"
         inkscape:groupmode="layer"
@@ -243,7 +243,7 @@
                 sodipodi:type="rect"
                 rx="2"
                 ry="2"
-                transform="rotate(10,24,24)"/>
+                transform="rotate(10,24,24)" />
             <rect
                 style="display:inline;fill:#0288d1;fill-opacity:1;filter:url(#filter323)"
                 id="card-background-2"
@@ -256,7 +256,7 @@
                 rx="2"
                 ry="2"
                 transform="rotate(5,24,24)"
-                mask="none"/>
+                mask="none" />
             <rect
                 style="display:inline;fill:url(#linearGradient7);fill-opacity:1;filter:url(#filter323)"
                 id="card-background-1"
@@ -267,7 +267,7 @@
                 inkscape:label="Card Background 1"
                 sodipodi:type="rect"
                 rx="2"
-                ry="2"/>
+                ry="2" />
         </g>
         <g
             id="card-content"
@@ -284,14 +284,14 @@
                     inkscape:path-effect="#path-effect1-8"
                     inkscape:original-d="M 19,33 H 3 c 0,-4.418278 3.581722,-8 8,-8 4.418278,0 8,3.581722 8,8 z"
                     inkscape:label="Body"
-                    transform="matrix(1,0,0,1.0013126,2,0.967185)"/>
+                    transform="matrix(1,0,0,1.0013126,2,0.967185)" />
                 <circle
                     style="display:inline;fill:url(#linearGradient9)"
                     id="person-head"
                     cx="13"
                     cy="20"
                     inkscape:label="Head"
-                    r="4"/>
+                    r="4" />
             </g>
             <g
                 id="person-messages"
@@ -306,7 +306,7 @@
                     inkscape:label="Message 1"
                     rx="1"
                     ry="1"
-                    style="fill:#0d47a1;fill-opacity:0.501961"/>
+                    style="fill:#0d47a1;fill-opacity:0.501961" />
                 <rect
                     style="display:inline;fill:#0d47a1;fill-opacity:0.501961"
                     id="person-message-2"
@@ -317,7 +317,7 @@
                     sodipodi:type="rect"
                     inkscape:label="Message 2"
                     rx="1"
-                    ry="1"/>
+                    ry="1" />
                 <rect
                     style="display:inline;fill:#0d47a1;fill-opacity:0.501961"
                     id="person-message-3"
@@ -328,7 +328,7 @@
                     sodipodi:type="rect"
                     inkscape:label="Message 3"
                     rx="1"
-                    ry="1"/>
+                    ry="1" />
             </g>
         </g>
     </g>
