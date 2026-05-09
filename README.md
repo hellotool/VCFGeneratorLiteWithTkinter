@@ -38,7 +38,7 @@ VCF Generator Lite is a simple and efficient tool that converts contact lists in
 ## Screenshots
 
 <img src="./assets/images/screenshots/main_window.zh-CN.webp" width="451" alt="Main window" />
-<img src="./assets/images/screenshots/invalid_lines_window.zh-CN.webp" width="376" alt="Invalid Lines Window" />
+<img src="./assets/images/screenshots/invalid_lines_window.zh-CN.webp" width="362" alt="Invalid Lines Window" />
 
 ## Getting the App
 

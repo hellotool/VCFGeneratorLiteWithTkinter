@@ -38,7 +38,7 @@ VCF 生成器 Lite 是一个简单高效的工具，可以将联系人列表转�
 ## 软件截图
 
 <img src="./assets/images/screenshots/main_window.zh-CN.webp" width="451" alt="主窗口" />
-<img src="./assets/images/screenshots/invalid_lines_window.zh-CN.webp" width="376" alt="错误行展示窗口" />
+<img src="./assets/images/screenshots/invalid_lines_window.zh-CN.webp" width="362" alt="错误行展示窗口" />
 
 ## 获取应用
 
