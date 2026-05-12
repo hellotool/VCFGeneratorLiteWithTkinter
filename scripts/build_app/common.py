@@ -8,8 +8,8 @@ PYTHON_VERSION = sysconfig.get_python_version()
 PLATFORM_PYTHON = f"{sys.implementation.name}-{PYTHON_VERSION}"
 PLATFORM_NATIVE = sysconfig.get_platform()
 
-PATH_DIST = Path("dist").resolve()
-PATH_BUILD = Path("build").resolve()
+PATH_DIST: Path = Path("dist").resolve()
+PATH_BUILD: Path = Path("build").resolve()
 PATH_PACKAGING: Path = Path("packaging").resolve()
 
 

@@ -86,19 +86,22 @@ class AppMetadata:
     release_notes: str | None
 
 
-_metadata_raw = Distribution.from_name("vcf_generator_lite").read_text("METADATA")
-if _metadata_raw is None:
-    raise RuntimeError("Failed to read metadata")
-_metadata: Metadata = Metadata.from_email(_metadata_raw)
+def get_pkg_metadata(name: str) -> Metadata:
+    _metadata_raw = Distribution.from_name(name).read_text("METADATA")
+    if _metadata_raw is None:
+        raise RuntimeError("Failed to read metadata")
+    return Metadata.from_email(_metadata_raw)
 
+
+app_pkg_metadata = get_pkg_metadata("vcf_generator_lite")
 app_metadata = AppMetadata(
     display_name="VCF Generator Lite",
     repository=URL_REPOSITORY,
-    bug_tracker=_metadata.project_urls["Issues"] if _metadata.project_urls else None,
-    author=_metadata.author,
+    bug_tracker=app_pkg_metadata.project_urls["Issues"] if app_pkg_metadata.project_urls else None,
+    author=app_pkg_metadata.author,
     author_email=EMAIL_AUTHOR,
-    summary=_metadata.summary,
-    description=_metadata.description,
+    summary=app_pkg_metadata.summary,
+    description=app_pkg_metadata.description,
     copyright=APP_COPYRIGHT,
     release_notes=URL_RELEASES,
 )
