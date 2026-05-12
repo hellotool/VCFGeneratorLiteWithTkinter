@@ -8,9 +8,9 @@ from scripts.build_app.common import (
     PATH_DIST,
     PATH_PACKAGING,
     PLATFORM_NATIVE,
-    require_external_tool,
 )
 from scripts.build_app.pyinstaller import ensure_pyinstaller_dist
+from scripts.utils import require_external_tool
 from vcf_generator_lite.constants import APP_COPYRIGHT
 
 DISTRIBUTION_INSTALLER_BASE_NAME = f"VCFGeneratorLite-v{app_version_variants.wheel}-{PLATFORM_NATIVE}-setup"
