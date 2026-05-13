@@ -1,15 +1,18 @@
 import webbrowser
 from tkinter import Misc, messagebox
 
-from vcf_generator_lite.utils.locales import t
+from vcf_generator_lite.utils.l10n import pgettext
 
 
 def show_open_url_failure_message_box(parent: Misc, url: str):
     messagebox.showerror(
         parent=parent,
-        title=t("open_url_failure_message_box.title"),
-        message=t("open_url_failure_message_box.message"),
-        detail=t("open_url_failure_message_box.detail").format(url=url),
+        title=pgettext("open_url_failure_message_box.title", "Failed to Open External Application"),
+        message=pgettext(
+            "open_url_failure_message_box.message",
+            "Failed to open external application. Please check your default application settings.",
+        ),
+        detail=pgettext("open_url_failure_message_box.detail", "Link: {url}").format(url=url),
     )
 
 

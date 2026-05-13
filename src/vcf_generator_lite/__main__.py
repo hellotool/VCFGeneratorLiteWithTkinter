@@ -1,5 +1,5 @@
 import argparse
-import gettext
+import gettext as gettextlib
 import logging
 import os
 import sys
@@ -8,8 +8,8 @@ from io import StringIO
 from pathlib import Path
 
 from vcf_generator_lite.__version__ import __version__
+from vcf_generator_lite.utils import l10n
 from vcf_generator_lite.utils.dpi_aware import enable_dpi_aware
-from vcf_generator_lite.utils.l10n import gettext as l10n_gettext
 from vcf_generator_lite.utils.l10n import pgettext
 from vcf_generator_lite.utils.strings import get_app_description, get_app_name
 
@@ -38,10 +38,9 @@ def setup_logging(verbose: bool):
 
 
 def setup_l10n():
-    gettext.textdomain("vcf-generator-lite")
-    if getattr(argparse, "_", None) == gettext.gettext:
-        argparse._ = l10n_gettext  # pyright: ignore[reportAttributeAccessIssue]
-    gettext.pgettext = pgettext
+    if getattr(argparse, "_", None) == gettextlib.gettext:
+        argparse._ = l10n.gettext  # pyright: ignore[reportAttributeAccessIssue]
+    gettextlib.pgettext = pgettext
 
 
 def fix_home_env():

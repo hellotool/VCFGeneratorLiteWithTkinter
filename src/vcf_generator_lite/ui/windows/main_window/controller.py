@@ -23,7 +23,7 @@ from vcf_generator_lite.ui.windows.main_window.constants import (
     EVENT_STOP,
 )
 from vcf_generator_lite.ui.windows.main_window.window import VCFGeneratorLiteApp
-from vcf_generator_lite.utils.locales import t
+from vcf_generator_lite.utils.l10n import pgettext
 from vcf_generator_lite.utils.tkinter.text import search_line, select_text
 
 logger = logging.getLogger(__name__)
@@ -50,7 +50,7 @@ class MainController:
         self.window = window
         self.is_exiting = False
         self.current_generation: Generation | None = None
-        self.save_vcf_file_name: str = t("save_vcf_window.default_file_name")
+        self.save_vcf_file_name: str = pgettext("save_vcf_window.default_file_name", "My Contacts.vcf")
 
         window.bind(EVENT_ABOUT, self.on_about)
         window.bind(EVENT_CLEAN_QUOTES, self.on_clean_quotes)
@@ -89,10 +89,10 @@ class MainController:
 
     def pick_and_open_file(self) -> None | tuple[Path, TextIO]:
         file_path_str = filedialog.asksaveasfilename(
-            title=t("save_vcf_window.title"),
+            title=pgettext("save_vcf_window.title", "Select File Save Location"),
             parent=self.window,
             initialfile=self.save_vcf_file_name,
-            filetypes=[(t("save_vcf_window.label_type_vcf"), ".vcf")],
+            filetypes=[(pgettext("save_vcf_window.label_type_vcf", "vCard File (*.vcf)"), ".vcf")],
             defaultextension=".vcf",
         )
         if not file_path_str:
@@ -202,11 +202,19 @@ class MainController:
     def _show_about_message_box(self):
         messagebox.showinfo(
             parent=self.window,
-            title=t("about_message_box.title"),
-            message=t("about_message_box.message").format(
+            title=pgettext("about_message_box.title", "About VCF Generator Lite"),
+            message=pgettext("about_message_box.message", "VCF Generator Lite v{version}").format(
                 version=__version__,
             ),
-            detail=t("about_message_box.detail").format(
+            detail=pgettext(
+                "about_message_box.detail",
+                """{copyright}
+
+Environment Information:
+Python: {python_info}
+Tcl: {tcl_info}
+Tk: {tk_info}""",
+            ).format(
                 copyright=APP_COPYRIGHT,
                 python_info=f"{platform.python_implementation()} v{platform.python_version()}",
                 tcl_info=f"v{tkinter.TclVersion}",
@@ -217,15 +225,19 @@ class MainController:
     def _show_save_os_error_message(self, error: OSError):
         messagebox.showerror(
             parent=self.window,
-            title=t("save_vcf_os_error_message_box.title"),
-            message=t("save_vcf_os_error_message_box.message").format(reason=str(error)),
+            title=pgettext("save_vcf_os_error_message_box.title", "Save Failed"),
+            message=pgettext("save_vcf_os_error_message_box.message", "System error: {reason}").format(
+                reason=str(error)
+            ),
         )
 
     def _show_save_permission_denied_message(self):
         messagebox.showerror(
             parent=self.window,
-            title=t("save_vcf_permission_denied_message_box.title"),
-            message=t("save_vcf_permission_denied_message_box.message"),
+            title=pgettext("save_vcf_permission_denied_message_box.title", "Save Failed"),
+            message=pgettext(
+                "save_vcf_permission_denied_message_box.message", "Permission denied, please grant permission again."
+            ),
         )
 
     def _show_generation_done_dialog(self, display_path: str, generate_result: GenerateResult):
@@ -242,8 +254,11 @@ class MainController:
     def _show_generation_error_dialog(self, exception: BaseException):
         messagebox.showerror(
             parent=self.window,
-            title=t("vcf_generate_error_message_box.title"),
-            message=t("vcf_generate_error_message_box.message").format(
+            title=pgettext("vcf_generate_error_message_box.title", "Failed to Generate vCard File"),
+            message=pgettext(
+                "vcf_generate_error_message_box.message",
+                "An unknown error occurred while generating the vCard file:\n\n{exception}",
+            ).format(
                 exception="\n".join(traceback.format_exception(exception)),
             ),
         )
@@ -255,9 +270,15 @@ class MainController:
     def _show_generation_success_dialog(self, display_path: str, generate_result: GenerateResult):
         messagebox.showinfo(
             parent=self.window,
-            title=t("vcf_generate_success_message_box.title"),
-            message=t("vcf_generate_success_message_box.message").format(path=display_path),
-            detail=t("vcf_generate_success_message_box.detail").format(
+            title=pgettext("vcf_generate_success_message_box.title", "vCard File Generated Successfully"),
+            message=pgettext("vcf_generate_success_message_box.message", "File exported to {path}.").format(
+                path=display_path
+            ),
+            detail=pgettext(
+                "vcf_generate_success_message_box.detail",
+                """Number of contacts: {count:n}
+Time elapsed: {time:.3f} seconds""",
+            ).format(
                 count=generate_result.saved_count,
                 time=generate_result.time_elapsed,
             ),

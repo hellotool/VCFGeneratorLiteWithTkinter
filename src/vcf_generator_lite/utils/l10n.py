@@ -4,7 +4,7 @@ from gettext import NullTranslations
 from vcf_generator_lite.utils.resources import traversable
 from vcf_generator_lite.utils.zipapp_gettext import translation as translation_from_package
 
-__all__ = ["pgettext"]
+__all__ = ["gettext", "pgettext"]
 
 APP_DOMAIN = "vcf-generator-lite"
 

@@ -1,7 +1,7 @@
 from typing import NamedTuple, override
 
 from vcf_generator_lite.models.phone_rule import DEFAULT_PHONE_RULES, PhoneRule
-from vcf_generator_lite.utils.locales import t
+from vcf_generator_lite.utils.l10n import pgettext
 from vcf_generator_lite.utils.localized_exception import LocalizedException
 
 
@@ -18,7 +18,7 @@ class MissingNumberError(ValueError, LocalizedException):
     @property
     @override
     def localized_msg(self) -> str:
-        return t("exception.missing_number")
+        return pgettext("exception.missing_number", "Missing number or number is incorrect")
 
 
 def _get_phone_index(contact_parts: list[str], rules: list[PhoneRule]) -> int:

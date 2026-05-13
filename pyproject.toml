@@ -14,7 +14,7 @@ import-names = ["vcf_generator_lite"]
 console = ["colorlog>=6.9.0"]
 
 [dependency-groups]
-basic = ["poethepoet>=0.44.0", "poethepoet-tasks>=0.3.0"]
+basic = ["poethepoet>=0.44.0"]
 lint = ["pyright>=1.1.409", "ruff>=0.15.12"]
 test = ["pytest>=9.0.3"]
 build = [
@@ -47,7 +47,6 @@ build-backend = "uv_build"
 
 [tool.poe]
 executor = "uv"
-include_script = []
 
 [tool.poe.tasks]
 
@@ -207,4 +206,5 @@ log_cli_level = "INFO"
 [[tool.babel.mappings]]
 encoding = "utf-8"
 method = "python"
-pattern = "src/**.py"
+pattern = "src/**/*.py"
+keywords = ["pgettext:1c,2"]

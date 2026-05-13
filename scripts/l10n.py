@@ -22,6 +22,7 @@ def extract():
     if PATH_STD_LIB_SYMBOL.exists():
         PATH_STD_LIB_SYMBOL.unlink()
     PATH_STD_LIB_SYMBOL.symlink_to(PATH_STD_LIB, target_is_directory=True)
+    PATH_MSG_POT.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(  # noqa: S603
         [
             babel_path,

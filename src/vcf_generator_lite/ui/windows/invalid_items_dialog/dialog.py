@@ -7,8 +7,7 @@ from vcf_generator_lite.ui.layouts.vertical_dialog_layout import VerticalDialogL
 from vcf_generator_lite.ui.widgets.scrolled_treeview import ScrolledTreeview
 from vcf_generator_lite.ui.windows.base_window import EnhancedDialog
 from vcf_generator_lite.ui.windows.base_window.constants import EVENT_EXIT
-from vcf_generator_lite.ui.windows.invalid_items_dialog.common import st
-from vcf_generator_lite.utils.locales import t
+from vcf_generator_lite.utils.l10n import pgettext
 from vcf_generator_lite.utils.localized_exception import get_localized_exception_msg
 from vcf_generator_lite.utils.tkinter.font import extend_font_scale
 from vcf_generator_lite.utils.tkinter.misc import scale_kw
@@ -19,7 +18,7 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
     @override
     def _configure_ui_withdraw(self):
         super()._configure_ui_withdraw()
-        self.title(st("title"))
+        self.title(pgettext("vcf_generate_invalid_dialog.title", "vCard File Generation Complete"))
         self.resizable(True, True)
         self.wm_size_pt(360, 320)
         self.wm_minsize_pt(225, 225)
@@ -50,7 +49,9 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
     @override
     def _create_content(self, parent: Misc):
         content_frame = Frame(parent)
-        content_label = Label(content_frame, text=st("label_invalid_numbers"))
+        content_label = Label(
+            content_frame, text=pgettext("vcf_generate_invalid_dialog.label_invalid_numbers", "Invalid numbers: ")
+        )
         content_label.pack(fill="x", padx="8.25p", pady=("8.25p", "2p"))
         self.content_tree = ScrolledTreeview(
             content_frame,
@@ -72,11 +73,32 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
         # Tk 在创建窗口时调整 TreeView 列宽时不会考虑右侧 padding，添加 width=0 防止列溢出到滚动条区域。
         self.content_tree.column("original", anchor="w", width=0)
         self.content_tree.column("reason", anchor="w", width=0)
-        self.content_tree.heading("row", text=st("heading_row"), anchor="w")
-        self.content_tree.heading("original", text=st("heading_original"), anchor="w")
-        self.content_tree.heading("reason", text=st("heading_reason"), anchor="w")
+        self.content_tree.heading(
+            "row",
+            text=pgettext("vcf_generate_invalid_dialog.heading_row", "Position"),
+            anchor="w",
+        )
+        self.content_tree.heading(
+            "original",
+            text=pgettext("vcf_generate_invalid_dialog.heading_original", "Original Content"),
+            anchor="w",
+        )
+        self.content_tree.heading(
+            "reason",
+            text=pgettext("vcf_generate_invalid_dialog.heading_reason", "Reason"),
+            anchor="w",
+        )
         # 添加一个提示，告知用户正在加载中。
-        self.content_tree.insert("", "end", id="loading_tip", values=("", st("cell_loading"), ""))
+        self.content_tree.insert(
+            "",
+            "end",
+            id="loading_tip",
+            values=(
+                "",
+                pgettext("vcf_generate_invalid_dialog.cell_loading", "Loading..."),
+                "",
+            ),
+        )
         self.content_tree.pack(fill="both", expand=True, padx="8.25p")
         return content_frame
 
@@ -89,7 +111,7 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
 
         self.ok_button = Button(
             footer_frame,
-            text=t("common.button_ok"),
+            text=pgettext("common.button_ok", "OK"),
             default="active",
             command=lambda: self.event_generate(EVENT_EXIT),
         )
@@ -97,7 +119,11 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
         return footer_frame
 
     def set_display_path(self, path: str):
-        self.header_label.configure(text=st("message").format(path=path))
+        self.header_label.configure(
+            text=pgettext(
+                "vcf_generate_invalid_dialog.message", "File exported to {path}, invalid numbers have been ignored."
+            ).format(path=path)
+        )
 
     def set_invalid_items(self, items: list[InvalidItem]):
         self.content_tree.delete(*self.content_tree.get_children())
@@ -107,7 +133,7 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
                 index="end",
                 id=item.row_position,
                 values=(
-                    st("cell_row").format(row=item.row_position),
+                    pgettext("vcf_generate_invalid_dialog.cell_row", "Row {row}").format(row=item.row_position),
                     item.raw_content,
                     get_localized_exception_msg(item.exception),
                 ),
