@@ -1,0 +1,200 @@
+# Translations template for VCF Generator Lite.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the VCF Generator Lite project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: VCF Generator Lite 5.0.4\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-05-13 07:23+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: G:/programming/python/mine/VCFGeneratorLite/src/vcf_generator_lite/__main__.py:63
+#, python-brace-format
+msgctxt "startup.source_tip"
+msgid "💡Tip: Source code is hosted at {url}"
+msgstr ""
+
+#: G:/programming/python/mine/VCFGeneratorLite/src/vcf_generator_lite/__main__.py:101
+msgctxt "cli.help_option_quiet"
+msgid "quiet mode"
+msgstr ""
+
+#: G:/programming/python/mine/VCFGeneratorLite/src/vcf_generator_lite/__main__.py:107
+msgctxt "cli.help_option_verbose"
+msgid "show details"
+msgstr ""
+
+#: G:/programming/python/mine/VCFGeneratorLite/src/vcf_generator_lite/utils/strings.py:5
+msgctxt "app.name"
+msgid "VCF Generator Lite"
+msgstr ""
+
+#: G:/programming/python/mine/VCFGeneratorLite/src/vcf_generator_lite/utils/strings.py:9
+msgctxt "app.description"
+msgid "Generate VCF files from contacts"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:246
+#, python-format
+msgid "%(heading)s:"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:325
+msgid "usage: "
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:753
+#, python-format
+msgid " (default: %(default)s)"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:815
+#, python-format
+msgid "argument %(argument_name)s: %(message)s"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:1190
+msgid "show program's version number and exit"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:1304
+#, python-format
+msgid "unknown parser %(parser_name)r (choices: %(choices)s)"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:1308
+#, python-format
+msgid "command '%(parser_name)s' is deprecated"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:1375
+#, python-format
+msgid "argument \"-\" with mode %r"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:1384
+#, python-format
+msgid "can't open '%(filename)s': %(error)s"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:1722
+#, python-format
+msgid "conflicting option string: %s"
+msgid_plural "conflicting option strings: %s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .stdlib_shadow/argparse.py:1905
+msgid "positional arguments"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:1906
+msgid "options"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:1919
+msgid "show this help message and exit"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:1956
+msgid "subcommands"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2007 .stdlib_shadow/argparse.py:2570
+#, python-format
+msgid "unrecognized arguments: %s"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2113
+#, python-format
+msgid "not allowed with argument %s"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2132
+#, python-format
+msgid "ambiguous option: %(option)s could match %(matches)s"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2164 .stdlib_shadow/argparse.py:2196
+#, python-format
+msgid "ignored explicit argument %r"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2216
+#, python-format
+msgid "option '%(option)s' is deprecated"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2248
+#, python-format
+msgid "argument '%(argument_name)s' is deprecated"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2341
+#, python-format
+msgid "the following arguments are required: %s"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2356
+#, python-format
+msgid "one of the arguments %s is required"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2400
+msgid "expected one argument"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2401
+msgid "expected at most one argument"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2402
+msgid "expected at least one argument"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2406
+#, python-format
+msgid "expected %s argument"
+msgid_plural "expected %s arguments"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .stdlib_shadow/argparse.py:2516
+#, python-format
+msgid "unexpected option string: %s"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2664
+#, python-format
+msgid "invalid %(type)s value: %(value)r"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2682
+#, python-format
+msgid "invalid choice: %(value)r (choose from %(choices)s)"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2690
+#, python-format
+msgid "invalid choice: %(value)r, maybe you meant %(closest)r? (choose from %(choices)s)"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2782
+#, python-format
+msgid "%(prog)s: error: %(message)s\n"
+msgstr ""
+
+#: .stdlib_shadow/argparse.py:2786
+#, python-format
+msgid "%(prog)s: warning: %(message)s\n"
+msgstr ""
+

@@ -1,4 +1,5 @@
 import argparse
+import gettext
 import logging
 import os
 import sys
@@ -8,7 +9,9 @@ from pathlib import Path
 
 from vcf_generator_lite.__version__ import __version__
 from vcf_generator_lite.utils.dpi_aware import enable_dpi_aware
-from vcf_generator_lite.utils.locales import t
+from vcf_generator_lite.utils.l10n import gettext as l10n_gettext
+from vcf_generator_lite.utils.l10n import pgettext
+from vcf_generator_lite.utils.strings import get_app_description, get_app_name
 
 __all__ = ["main"]
 
@@ -34,6 +37,13 @@ def setup_logging(verbose: bool):
     )
 
 
+def setup_l10n():
+    gettext.textdomain("vcf-generator-lite")
+    if getattr(argparse, "_", None) == gettext.gettext:
+        argparse._ = l10n_gettext  # pyright: ignore[reportAttributeAccessIssue]
+    gettext.pgettext = pgettext
+
+
 def fix_home_env():
     """修复 Tkinter 在 Windows 中无法获取 HOME 的问题"""
     with suppress(RuntimeError):
@@ -46,11 +56,12 @@ def launch(*, quiet: bool, verbose: bool):
 
     if quiet:
         sys.stdout = None
+
     setup_logging(verbose=verbose)
     fix_home_env()
     enable_dpi_aware()
 
-    print(t("startup.source_tip").format(url=URL_REPOSITORY))
+    print(pgettext("startup.source_tip", "💡Tip: Source code is hosted at {url}").format(url=URL_REPOSITORY))
 
     app, _controller = create_app()
     app.mainloop()
@@ -80,29 +91,30 @@ def redirect_to_messagebox_if_needed(title: str | None = None):
 
 
 def main():
+    setup_l10n()
     parser = argparse.ArgumentParser(
-        description=t("app.description"),
+        description=get_app_description(),
     )
     parser.add_argument(
         "-q",
         "--quiet",
         action="store_true",
-        help=t("cli.help_option_quiet"),
+        help=pgettext("cli.help_option_quiet", "quiet mode"),
     )
     parser.add_argument(
         "-v",
         "--verbose",
         action="store_true",
-        help=t("cli.help_option_verbose"),
+        help=pgettext("cli.help_option_verbose", "show details"),
     )
     parser.add_argument(
         "-V",
         "--version",
         action="version",
-        version=f"{t('app.name')} {__version__}",
+        version=f"{get_app_name()} {__version__}",
     )
 
-    with redirect_to_messagebox_if_needed(title=t("app.name")):
+    with redirect_to_messagebox_if_needed(title=get_app_name()):
         args = parser.parse_args()
 
     launch(quiet=args.quiet, verbose=args.verbose)

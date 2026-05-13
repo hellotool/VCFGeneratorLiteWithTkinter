@@ -6,6 +6,7 @@ from pathlib import PurePath
 from typing import Any
 
 from vcf_generator_lite.utils import resources
+from vcf_generator_lite.utils.l10n import pgettext
 
 logger = logging.getLogger(__name__)
 
@@ -84,6 +85,11 @@ class Translator:
         return branch_translate
 
 
-translator = Translator()
-t = translator.translate
+translator = Translator("en")
+
+
+def t(context: str):
+    return pgettext(context, translator.translate(context))
+
+
 scope = translator.scope

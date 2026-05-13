@@ -1,8 +1,9 @@
 import importlib.resources
+from importlib.resources.abc import Traversable
 
 # 使用 .joinpath("resources") 以兼容 Python3.12
 # https://github.com/python/importlib_resources/issues/287
-traversable = importlib.resources.files("vcf_generator_lite").joinpath("resources")
+traversable: Traversable = importlib.resources.files("vcf_generator_lite").joinpath("resources")
 
 
 def read_binary(resource: str) -> bytes:
