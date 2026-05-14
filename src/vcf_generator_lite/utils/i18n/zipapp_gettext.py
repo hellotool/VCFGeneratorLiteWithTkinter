@@ -62,11 +62,14 @@ def find(domain: str, localedir: Traversable, languages: Iterable[str]) -> list[
     nelangs: list[str] = []
 
     for nelang in chain.from_iterable(_expand_lang(lang) for lang in languages):
-        if nelang not in nelangs:
+        if nelang and nelang not in nelangs:
             nelangs.append(nelang)
 
     result: list[Traversable] = []
     for lang in nelangs:
+        if lang == "C":
+            break
+
         mofile: Traversable = localedir.joinpath(lang, "LC_MESSAGES", f"{domain}.mo")
         if mofile.is_file():
             result.append(mofile)

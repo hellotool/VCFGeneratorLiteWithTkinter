@@ -22,24 +22,27 @@ def extract():
     if PATH_STD_LIB_SYMBOL.exists():
         PATH_STD_LIB_SYMBOL.unlink()
     PATH_STD_LIB_SYMBOL.symlink_to(PATH_STD_LIB, target_is_directory=True)
-    PATH_MSG_POT.parent.mkdir(parents=True, exist_ok=True)
-    subprocess.run(  # noqa: S603
-        [
-            babel_path,
-            "extract",
-            "--output-file",
-            PATH_MSG_POT,
-            "--no-wrap",
-            "--project",
-            "VCF Generator Lite",
-            "--version",
-            app_version_variants.wheel,
-            PATH_SOURCE,
-            PATH_STD_LIB_SYMBOL / (Path(argparse.__file__).relative_to(PATH_STD_LIB)),
-        ],
-        check=True,
-    )
-    PATH_STD_LIB_SYMBOL.unlink()
+    try:
+        PATH_MSG_POT.parent.mkdir(parents=True, exist_ok=True)
+        subprocess.run(  # noqa: S603
+            [
+                babel_path,
+                "extract",
+                "--output-file",
+                PATH_MSG_POT,
+                "--no-wrap",
+                "--project",
+                "VCF Generator Lite",
+                "--version",
+                app_version_variants.wheel,
+                PATH_SOURCE,
+                PATH_STD_LIB_SYMBOL / (Path(argparse.__file__).relative_to(PATH_STD_LIB)),
+            ],
+            check=True,
+        )
+    finally:
+        if PATH_STD_LIB_SYMBOL.exists():
+            PATH_STD_LIB_SYMBOL.unlink()
 
 
 def initialize(locale: str):
