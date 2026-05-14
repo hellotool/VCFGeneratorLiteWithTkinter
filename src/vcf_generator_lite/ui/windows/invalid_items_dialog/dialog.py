@@ -7,8 +7,8 @@ from vcf_generator_lite.ui.layouts.vertical_dialog_layout import VerticalDialogL
 from vcf_generator_lite.ui.widgets.scrolled_treeview import ScrolledTreeview
 from vcf_generator_lite.ui.windows.base_window import EnhancedDialog
 from vcf_generator_lite.ui.windows.base_window.constants import EVENT_EXIT
-from vcf_generator_lite.utils.l10n import pgettext
-from vcf_generator_lite.utils.localized_exception import get_localized_exception_msg
+from vcf_generator_lite.utils.i18n.app_l10n import pgettext
+from vcf_generator_lite.utils.i18n.localized_exception import get_localized_exception_msg
 from vcf_generator_lite.utils.tkinter.font import extend_font_scale
 from vcf_generator_lite.utils.tkinter.misc import scale_kw
 from vcf_generator_lite.utils.tkinter.widget import enable_auto_wrap, needs_sizegrip

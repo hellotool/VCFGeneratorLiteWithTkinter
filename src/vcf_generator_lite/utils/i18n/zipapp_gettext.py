@@ -5,8 +5,8 @@ from copy import copy
 from functools import cache
 from gettext import GNUTranslations, NullTranslations
 from importlib.resources.abc import Traversable
-from io import Reader
 from itertools import chain
+from typing import IO
 
 __all__ = ["find", "translation"]
 
@@ -74,7 +74,7 @@ def find(domain: str, localedir: Traversable, languages: Iterable[str]) -> list[
 
 
 @cache
-def _get_translation(class_: Callable[[Reader[bytes]], NullTranslations], mo_file: Traversable) -> NullTranslations:
+def _get_translation(class_: Callable[[IO[bytes]], NullTranslations], mo_file: Traversable) -> NullTranslations:
     with mo_file.open(mode="rb") as io:
         return class_(io)
 
@@ -84,7 +84,7 @@ def translation(
     localedir: Traversable,
     *,
     languages: Iterable[str],
-    class_: Callable[[Reader[bytes]], NullTranslations] | None = None,
+    class_: Callable[[IO[bytes]], NullTranslations] | None = None,
 ) -> NullTranslations:
     """
     Acquire a translation object from a Traversable.

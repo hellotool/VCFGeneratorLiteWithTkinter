@@ -8,9 +8,9 @@ from io import StringIO
 from pathlib import Path
 
 from vcf_generator_lite.__version__ import __version__
-from vcf_generator_lite.utils import l10n
 from vcf_generator_lite.utils.dpi_aware import enable_dpi_aware
-from vcf_generator_lite.utils.l10n import pgettext
+from vcf_generator_lite.utils.i18n import app_l10n
+from vcf_generator_lite.utils.i18n.app_l10n import pgettext
 from vcf_generator_lite.utils.strings import get_app_description, get_app_name
 
 __all__ = ["main"]
@@ -39,7 +39,7 @@ def setup_logging(verbose: bool):
 
 def setup_l10n():
     if getattr(argparse, "_", None) == gettextlib.gettext:
-        argparse._ = l10n.gettext  # pyright: ignore[reportAttributeAccessIssue]
+        argparse._ = app_l10n.gettext  # pyright: ignore[reportAttributeAccessIssue]
     gettextlib.pgettext = pgettext
 
 

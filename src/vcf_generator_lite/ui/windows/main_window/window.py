@@ -28,7 +28,7 @@ from vcf_generator_lite.ui.windows.main_window.constants import (
     EVENT_GENERATE_OR_STOP,
     EVENT_STOP,
 )
-from vcf_generator_lite.utils.l10n import pgettext
+from vcf_generator_lite.utils.i18n.app_l10n import pgettext
 from vcf_generator_lite.utils.tkinter.accelerators import get_default_accelerators
 from vcf_generator_lite.utils.tkinter.busy import tk_busy_forget, tk_busy_hold, tk_busy_status
 from vcf_generator_lite.utils.tkinter.menu import parse_underline_label

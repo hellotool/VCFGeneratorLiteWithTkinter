@@ -1,8 +1,8 @@
 import locale
 from gettext import NullTranslations
 
+from vcf_generator_lite.utils.i18n.zipapp_gettext import translation as translation_from_package
 from vcf_generator_lite.utils.resources import traversable
-from vcf_generator_lite.utils.zipapp_gettext import translation as translation_from_package
 
 __all__ = ["gettext", "pgettext"]
 

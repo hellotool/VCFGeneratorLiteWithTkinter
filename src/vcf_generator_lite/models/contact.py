@@ -1,8 +1,8 @@
 from typing import NamedTuple, override
 
 from vcf_generator_lite.models.phone_rule import DEFAULT_PHONE_RULES, PhoneRule
-from vcf_generator_lite.utils.l10n import pgettext
-from vcf_generator_lite.utils.localized_exception import LocalizedException
+from vcf_generator_lite.utils.i18n.app_l10n import pgettext
+from vcf_generator_lite.utils.i18n.localized_exception import LocalizedException
 
 
 class Contact(NamedTuple):
