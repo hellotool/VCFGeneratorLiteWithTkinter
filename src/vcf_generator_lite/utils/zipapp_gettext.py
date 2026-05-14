@@ -11,12 +11,12 @@ from itertools import chain
 __all__ = ["find", "translation"]
 
 COMPONENT_CODESET = 1 << 0
-COMPONENT_COUNTRY = 1 << 1
+COMPONENT_TERRITORY = 1 << 1
 COMPONENT_MODIFIER = 1 << 2
 
 LOCALE_REGEX = re.compile(r"^([^@._]+)(_[^@._]+)?(\.[^@]+)?(@.+)?$")
 """
-以 `language_country.codeset@modifier` 格式解析
+以 `language_territory.codeset@modifier` 格式解析
 """
 
 
@@ -29,21 +29,21 @@ def _expand_lang(loc: str) -> list[str]:
     loc_match = LOCALE_REGEX.match(locale.normalize(loc))
     if loc_match is None:
         return []
-    language, country, codeset, modifier = loc_match.groups("")
+    language, territory, codeset, modifier = loc_match.groups("")
 
     mask = 0
     if modifier:
         mask |= COMPONENT_MODIFIER
-    if country:
-        mask |= COMPONENT_COUNTRY
+    if territory:
+        mask |= COMPONENT_TERRITORY
     if codeset:
         mask |= COMPONENT_CODESET
     ret: list[str] = []
     for i in range(mask + 1):
         if not (i & ~mask):
             val = language
-            if i & COMPONENT_COUNTRY:
-                val += country
+            if i & COMPONENT_TERRITORY:
+                val += territory
             if i & COMPONENT_CODESET:
                 val += codeset
             if i & COMPONENT_MODIFIER:

@@ -81,8 +81,12 @@ def update():
     )
 
 
-def compile_():
+def compile_(locale: str | None):
     babel_path = require_babel()
+    dynamic_args = []
+    if locale is not None:
+        dynamic_args.append("--locale")
+        dynamic_args.append(locale)
     subprocess.run(  # noqa: S603
         [
             babel_path,
@@ -92,6 +96,7 @@ def compile_():
             "--use-fuzzy",
             "--domain",
             APP_DOMAIN,
+            *dynamic_args,
         ],
         check=True,
     )

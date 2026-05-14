@@ -99,6 +99,7 @@ help = "Locale"
 name = "locale"
 options = ["-l", "--locale"]
 type = "string"
+required = true
 
 [tool.poe.tasks.l10n-update]
 help = "Update localization files"
@@ -107,6 +108,12 @@ script = "scripts.l10n:update"
 [tool.poe.tasks.l10n-compile]
 help = "Compile localization files"
 script = "scripts.l10n:compile_"
+
+[[tool.poe.tasks.l10n-compile.args]]
+help = "Locale"
+name = "locale"
+options = ["-l", "--locale"]
+type = "string"
 
 [tool.uv]
 required-version = ">=0.10.1"
