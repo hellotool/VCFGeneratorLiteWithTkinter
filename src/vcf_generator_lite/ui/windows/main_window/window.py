@@ -31,7 +31,7 @@ from vcf_generator_lite.ui.windows.main_window.constants import (
 )
 from vcf_generator_lite.utils.tkinter.accelerators import get_default_accelerators
 from vcf_generator_lite.utils.tkinter.busy import tk_busy_forget, tk_busy_hold, tk_busy_status
-from vcf_generator_lite.utils.tkinter.menu import parse_underline_label
+from vcf_generator_lite.utils.tkinter.menu import pgettext_menu_label
 from vcf_generator_lite.utils.tkinter.widget import enable_auto_wrap, needs_sizegrip
 
 
@@ -136,15 +136,15 @@ Xie Lingyun\t13666666666
     def _create_menu_bar(self):
         menu_bar = Menu(self, tearoff=False, name="menubar")
         menu_bar.add_cascade(
-            **parse_underline_label(pgettext("main_window.menu_file", "&File")),
+            **pgettext_menu_label("main_window.menu_file", "&File"),
             menu=self._create_file_menu(menu_bar),
         )
         menu_bar.add_cascade(
-            **parse_underline_label(pgettext("main_window.menu_edit", "&Edit")),
+            **pgettext_menu_label("main_window.menu_edit", "&Edit"),
             menu=self._create_edit_menu(menu_bar),
         )
         menu_bar.add_cascade(
-            **parse_underline_label(pgettext("main_window.menu_help", "&Help")),
+            **pgettext_menu_label("main_window.menu_help", "&Help"),
             menu=self._create_help_menu(menu_bar),
         )
         return menu_bar
@@ -152,7 +152,7 @@ Xie Lingyun\t13666666666
     def _create_file_menu(self, master: Misc):
         self.file_menu = file_menu = Menu(master, tearoff=False)
 
-        generate_parse_result = parse_underline_label(pgettext("main_window.menu_file_generate", "&Generate file..."))
+        generate_parse_result = pgettext_menu_label("main_window.menu_file_generate", "&Generate file...")
         self.menu_generate_label = generate_parse_result["label"]
         file_menu.add_command(
             **generate_parse_result,
@@ -160,9 +160,7 @@ Xie Lingyun\t13666666666
             accelerator=ACCELERATOR_GENERATE_AQUA if self._windowingsystem == "aqua" else ACCELERATOR_GENERATE,
         )
 
-        stop_generation_parse_result = parse_underline_label(
-            pgettext("main_window.menu_file_stop_generation", "&Stop generation")
-        )
+        stop_generation_parse_result = pgettext_menu_label("main_window.menu_file_stop_generation", "&Stop generation")
         self.menu_stop_generation_label = stop_generation_parse_result["label"]
         file_menu.add_command(
             **stop_generation_parse_result,
@@ -174,7 +172,7 @@ Xie Lingyun\t13666666666
         # 通常不提供退出的快捷键
         # https://learn.microsoft.com/en-us/windows/win32/uxguide/cmd-menus
         file_menu.add_command(
-            **parse_underline_label(pgettext("main_window.menu_file_exit", "E&xit")),
+            **pgettext_menu_label("main_window.menu_file_exit", "E&xit"),
             command=lambda: self.event_generate(EVENT_EXIT),
         )
         return file_menu
@@ -184,39 +182,39 @@ Xie Lingyun\t13666666666
 
         edit_menu = Menu(master, tearoff=False)
         edit_menu.add_command(
-            **parse_underline_label(pgettext("main_window.menu_edit_undo", "&Undo")),
+            **pgettext_menu_label("main_window.menu_edit_undo", "&Undo"),
             command=lambda: self.__generate_focus_event("<<Undo>>"),
             accelerator=default_accelerators.undo,
         )
         edit_menu.add_command(
-            **parse_underline_label(pgettext("main_window.menu_edit_redo", "&Redo")),
+            **pgettext_menu_label("main_window.menu_edit_redo", "&Redo"),
             command=lambda: self.__generate_focus_event("<<Redo>>"),
             accelerator=default_accelerators.redo,
         )
         edit_menu.add_separator()
         edit_menu.add_command(
-            **parse_underline_label(pgettext("main_window.menu_edit_cut", "Cu&t")),
+            **pgettext_menu_label("main_window.menu_edit_cut", "Cu&t"),
             command=lambda: self.__generate_focus_event("<<Cut>>"),
             accelerator=default_accelerators.cut,
         )
         edit_menu.add_command(
-            **parse_underline_label(pgettext("main_window.menu_edit_copy", "&Copy")),
+            **pgettext_menu_label("main_window.menu_edit_copy", "&Copy"),
             command=lambda: self.__generate_focus_event("<<Copy>>"),
             accelerator=default_accelerators.copy,
         )
         edit_menu.add_command(
-            **parse_underline_label(pgettext("main_window.menu_edit_paste", "&Paste")),
+            **pgettext_menu_label("main_window.menu_edit_paste", "&Paste"),
             command=lambda: self.__generate_focus_event("<<Paste>>"),
             accelerator=default_accelerators.paste,
         )
         edit_menu.add_command(
-            **parse_underline_label(pgettext("main_window.menu_edit_select_all", "Select &All")),
+            **pgettext_menu_label("main_window.menu_edit_select_all", "Select &All"),
             command=lambda: self.__generate_focus_event("<<SelectAll>>"),
             accelerator=default_accelerators.select_all,
         )
         edit_menu.add_separator()
         edit_menu.add_command(
-            **parse_underline_label(pgettext("main_window.menu_edit_clean_quotes", "Remove &Quotes")),
+            **pgettext_menu_label("main_window.menu_edit_clean_quotes", "Remove &Quotes"),
             command=lambda: self.event_generate(EVENT_CLEAN_QUOTES),
         )
         return edit_menu
@@ -224,20 +222,20 @@ Xie Lingyun\t13666666666
     def _create_help_menu(self, master: Misc):
         help_menu = Menu(master, tearoff=False, name="help")
         help_menu.add_command(
-            **parse_underline_label(pgettext("main_window.menu_help_repository", "Rep&ository")),
+            **pgettext_menu_label("main_window.menu_help_repository", "Rep&ository"),
             command=lambda: open_url_with_fallback(self, URL_REPOSITORY),
         )
         help_menu.add_command(
-            **parse_underline_label(pgettext("main_window.menu_help_release", "&Releases")),
+            **pgettext_menu_label("main_window.menu_help_release", "&Releases"),
             command=lambda: open_url_with_fallback(self, URL_RELEASES),
         )
         help_menu.add_separator()
         help_menu.add_command(
-            **parse_underline_label(pgettext("main_window.menu_help_feedback", "&Feedback")),
+            **pgettext_menu_label("main_window.menu_help_feedback", "&Feedback"),
             command=lambda: open_url_with_fallback(self, URL_REPORT),
         )
         help_menu.add_command(
-            **parse_underline_label(pgettext("main_window.menu_help_contact", "&Contact author")),
+            **pgettext_menu_label("main_window.menu_help_contact", "&Contact author"),
             command=lambda: open_url_with_fallback(
                 parent=self,
                 url=urllib.parse.SplitResult(
@@ -251,16 +249,16 @@ Xie Lingyun\t13666666666
         )
         help_menu.add_separator()
         help_menu.add_command(
-            **parse_underline_label(pgettext("main_window.menu_help_license", "&License")),
+            **pgettext_menu_label("main_window.menu_help_license", "&License"),
             command=lambda: open_url_with_fallback(self, URL_LICENSE),
         )
         help_menu.add_command(
-            **parse_underline_label(pgettext("main_window.menu_help_os_notices", "Open Source &Notices")),
+            **pgettext_menu_label("main_window.menu_help_os_notices", "Open Source &Notices"),
             command=lambda: open_url_with_fallback(self, URL_OS_NOTICES),
         )
         help_menu.add_separator()
         help_menu.add_command(
-            **parse_underline_label(pgettext("main_window.menu_help_about", "&About VCF Generator Lite")),
+            **pgettext_menu_label("main_window.menu_help_about", "&About VCF Generator Lite"),
             command=lambda: self.event_generate(EVENT_ABOUT),
         )
         return help_menu

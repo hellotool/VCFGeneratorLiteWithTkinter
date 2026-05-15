@@ -212,10 +212,10 @@ filterwarnings = ["error", "ignore::DeprecationWarning"]
 log_cli = true
 log_cli_level = "INFO"
 
-
 [tool.babel]
 
 [[tool.babel.mappings]]
 encoding = "utf-8"
 method = "python"
-pattern = "src/**/*.py"
+pattern = "**.py"
+keywords = ["pgettext_menu_label:1c,2"]

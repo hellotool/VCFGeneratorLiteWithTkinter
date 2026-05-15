@@ -28,6 +28,8 @@ def extract():
             [
                 babel_path,
                 "extract",
+                "--mapping-file",
+                Path("pyproject.toml"),
                 "--output-file",
                 PATH_MSG_POT,
                 "--no-wrap",
