@@ -5,6 +5,7 @@ import re
 import signal
 import tkinter
 import traceback
+from gettext import pgettext
 from pathlib import Path
 from tkinter import Event, filedialog, messagebox
 from types import FrameType
@@ -23,7 +24,6 @@ from vcf_generator_lite.ui.windows.main_window.constants import (
     EVENT_STOP,
 )
 from vcf_generator_lite.ui.windows.main_window.window import VCFGeneratorLiteApp
-from vcf_generator_lite.utils.i18n.app_l10n import pgettext
 from vcf_generator_lite.utils.tkinter.text import search_line, select_text
 
 logger = logging.getLogger(__name__)

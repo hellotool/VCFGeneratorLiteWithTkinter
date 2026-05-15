@@ -1,7 +1,6 @@
 import webbrowser
+from gettext import pgettext
 from tkinter import Misc, messagebox
-
-from vcf_generator_lite.utils.i18n.app_l10n import pgettext
 
 
 def show_open_url_failure_message_box(parent: Misc, url: str):

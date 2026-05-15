@@ -1,12 +1,13 @@
 import locale
+import os
 import re
-from collections.abc import Callable, Iterable
+from collections.abc import Callable, Generator, Iterable
 from copy import copy
 from functools import cache
 from gettext import GNUTranslations, NullTranslations
 from importlib.resources.abc import Traversable
 from itertools import chain
-from typing import IO
+from typing import IO, Any
 
 __all__ = ["find", "translation"]
 
@@ -20,7 +21,7 @@ LOCALE_REGEX = re.compile(r"^([^@._]+)(_[^@._]+)?(\.[^@]+)?(@.+)?$")
 """
 
 
-def _expand_lang(loc: str) -> list[str]:
+def _expand_lang(loc: str) -> Generator[str]:
     """
     Expand a locale string into all possible combinations of language, territory, codeset, and modifier.
 
@@ -28,7 +29,7 @@ def _expand_lang(loc: str) -> list[str]:
     """
     loc_match = LOCALE_REGEX.match(locale.normalize(loc))
     if loc_match is None:
-        return []
+        return
     language, territory, codeset, modifier = loc_match.groups("")
 
     mask = 0
@@ -38,8 +39,7 @@ def _expand_lang(loc: str) -> list[str]:
         mask |= COMPONENT_TERRITORY
     if codeset:
         mask |= COMPONENT_CODESET
-    ret: list[str] = []
-    for i in range(mask + 1):
+    for i in range(mask, 0, -1):
         if not (i & ~mask):
             val = language
             if i & COMPONENT_TERRITORY:
@@ -48,36 +48,57 @@ def _expand_lang(loc: str) -> list[str]:
                 val += codeset
             if i & COMPONENT_MODIFIER:
                 val += modifier
-            ret.append(val)
-    ret.reverse()
-    return ret
+            yield val
 
 
-def find(domain: str, localedir: Traversable, languages: Iterable[str]) -> list[Traversable]:
+def _expanded_langs(languages: Iterable[str]) -> Generator[str, Any, None]:
+    yielded_langs: set[str] = set()
+    for lang in chain.from_iterable(_expand_lang(lang) for lang in languages):
+        if lang == "C":
+            break
+        if lang and lang not in yielded_langs:
+            yielded_langs.add(lang)
+            yield lang
+
+
+def _get_default_locales() -> Generator[str]:
+
+    language_env = os.environ.get("LANGUAGE")
+    if language_env:
+        # https://www.gnu.org/software/gettext/manual/html_node/The-LANGUAGE-variable.html
+        yield from (language for language in language_env.split(":") if language)
+
+    for env_var in ("LC_ALL", "LC_MESSAGES", "LC_CTYPE"):
+        value = os.environ.get(env_var)
+        if value:
+            yield value
+            return
+    # 此处不要使用 locale.getlocale() 因为 https://github.com/python/cpython/issues/130796。
+    # getdefaultlocale 是在 Windows 中获取 ISO 语言代码的唯一方法。
+    # 此函数在 Python 3.15 中已取消弃用。
+    default_language, default_encoding = locale.getdefaultlocale(envvars=("LANG",))
+    if default_language:
+        yield f"{default_language}.{default_encoding}" if default_encoding else default_language
+
+
+def find(domain: str, localedir: Traversable, languages: Iterable[str] | None = None) -> Generator[Traversable]:
     """
     Find all translation files for a given domain from a Traversable.
 
     Modified from ``gettext.find``.
     """
-    nelangs: list[str] = []
-
-    for nelang in chain.from_iterable(_expand_lang(lang) for lang in languages):
-        if nelang and nelang not in nelangs:
-            nelangs.append(nelang)
-
-    result: list[Traversable] = []
-    for lang in nelangs:
-        if lang == "C":
-            break
-
+    if languages is None:
+        languages = _get_default_locales()
+    for lang in _expanded_langs(languages):
         mofile: Traversable = localedir.joinpath(lang, "LC_MESSAGES", f"{domain}.mo")
         if mofile.is_file():
-            result.append(mofile)
-    return result
+            yield mofile
 
 
 @cache
-def _get_translation(class_: Callable[[IO[bytes]], NullTranslations], mo_file: Traversable) -> NullTranslations:
+def _get_or_create_translation(
+    class_: Callable[[IO[bytes]], NullTranslations], mo_file: Traversable
+) -> NullTranslations:
     with mo_file.open(mode="rb") as io:
         return class_(io)
 
@@ -86,7 +107,7 @@ def translation(
     domain: str,
     localedir: Traversable,
     *,
-    languages: Iterable[str],
+    languages: Iterable[str] | None = None,
     class_: Callable[[IO[bytes]], NullTranslations] | None = None,
 ) -> NullTranslations:
     """
@@ -96,12 +117,12 @@ def translation(
     """
     if class_ is None:
         class_ = GNUTranslations
-    files: list[Traversable] = find(domain, localedir, languages)
-    if not files:
+    files = find(domain, localedir, languages)
+    translations = (copy(_get_or_create_translation(class_, file)) for file in files)
+    try:
+        result = next(translations)
+    except StopIteration:
         return NullTranslations()
-
-    translations = (copy(_get_translation(class_, file)) for file in files)
-    result = next(translations)
     for translation in translations:
         result.add_fallback(translation)
     return result

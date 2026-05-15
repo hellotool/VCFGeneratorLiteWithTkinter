@@ -1,19 +1,22 @@
 import argparse
-import gettext as gettextlib
 import logging
 import os
 import sys
 from contextlib import contextmanager, nullcontext, redirect_stderr, redirect_stdout, suppress
+from gettext import pgettext
 from io import StringIO
 from pathlib import Path
 
 from vcf_generator_lite.__version__ import __version__
+from vcf_generator_lite.utils import resources
 from vcf_generator_lite.utils.dpi_aware import enable_dpi_aware
-from vcf_generator_lite.utils.i18n import app_l10n
-from vcf_generator_lite.utils.i18n.app_l10n import pgettext
+from vcf_generator_lite.utils.hack import replace_object
+from vcf_generator_lite.utils.i18n.zipapp_gettext import translation
 from vcf_generator_lite.utils.strings import get_app_description, get_app_name
 
 __all__ = ["main"]
+
+APP_DOMAIN = "vcf-generator-lite"
 
 
 def setup_logging(verbose: bool):
@@ -38,9 +41,13 @@ def setup_logging(verbose: bool):
 
 
 def setup_l10n():
-    if getattr(argparse, "_", None) == gettextlib.gettext:
-        argparse._ = app_l10n.gettext  # pyright: ignore[reportAttributeAccessIssue]
-    gettextlib.pgettext = pgettext
+    import gettext as gettextlib
+
+    app_translation = translation(domain=APP_DOMAIN, localedir=resources.traversable.joinpath("locales"))
+    replace_object(gettextlib.pgettext, app_translation.pgettext)
+    replace_object(gettextlib.gettext, app_translation.gettext)
+    replace_object(gettextlib.pgettext, app_translation.pgettext)
+    replace_object(gettextlib.npgettext, app_translation.npgettext)
 
 
 def fix_home_env():

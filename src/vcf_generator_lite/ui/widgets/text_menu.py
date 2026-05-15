@@ -1,8 +1,8 @@
+from gettext import pgettext
 from tkinter import Entry, Menu, TclError, Text
 from tkinter.constants import SEL_FIRST
 from typing import Literal
 
-from vcf_generator_lite.utils.i18n.app_l10n import pgettext
 from vcf_generator_lite.utils.tkinter.menu import parse_underline_label
 
 
