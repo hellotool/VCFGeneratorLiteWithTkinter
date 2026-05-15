@@ -44,8 +44,8 @@ def setup_l10n():
     import gettext as gettextlib
 
     app_translation = translation(domain=APP_DOMAIN, localedir=resources.traversable.joinpath("locales"))
-    replace_object(gettextlib.pgettext, app_translation.pgettext)
     replace_object(gettextlib.gettext, app_translation.gettext)
+    replace_object(gettextlib.ngettext, app_translation.ngettext)
     replace_object(gettextlib.pgettext, app_translation.pgettext)
     replace_object(gettextlib.npgettext, app_translation.npgettext)
 

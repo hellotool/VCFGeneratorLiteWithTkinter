@@ -35,8 +35,8 @@ def extract():
                 "VCF Generator Lite",
                 "--version",
                 app_version_variants.wheel,
-                PATH_SOURCE,
-                PATH_STD_LIB_SYMBOL / (Path(argparse.__file__).relative_to(PATH_STD_LIB)),
+                PATH_SOURCE.relative_to(Path.cwd()),
+                PATH_STD_LIB_SYMBOL.joinpath(Path(argparse.__file__).relative_to(PATH_STD_LIB)).relative_to(Path.cwd()),
             ],
             check=True,
         )
@@ -96,7 +96,6 @@ def compile_(locale: str | None):
             "compile",
             "--directory",
             PATH_LOCALES,
-            "--use-fuzzy",
             "--domain",
             APP_DOMAIN,
             *dynamic_args,

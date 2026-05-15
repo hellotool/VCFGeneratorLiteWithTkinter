@@ -214,4 +214,3 @@ log_cli_level = "INFO"
 encoding = "utf-8"
 method = "python"
 pattern = "src/**/*.py"
-keywords = ["pgettext:1c,2"]
