@@ -1,13 +1,13 @@
 import locale
 import os
 import re
-from collections.abc import Callable, Generator, Iterable
+from collections.abc import Callable, Iterable
 from copy import copy
 from functools import cache
 from gettext import GNUTranslations, NullTranslations
 from importlib.resources.abc import Traversable
 from itertools import chain
-from typing import IO, Any
+from typing import IO
 
 __all__ = ["find", "translation"]
 
@@ -21,7 +21,7 @@ LOCALE_REGEX = re.compile(r"^([^@._]+)(_[^@._]+)?(\.[^@]+)?(@.+)?$")
 """
 
 
-def _expand_lang(loc: str) -> Generator[str]:
+def _expand_lang(loc: str) -> Iterable[str]:
     """
     Expand a locale string into all possible combinations of language, territory, codeset, and modifier.
 
@@ -39,7 +39,7 @@ def _expand_lang(loc: str) -> Generator[str]:
         mask |= COMPONENT_TERRITORY
     if codeset:
         mask |= COMPONENT_CODESET
-    for i in range(mask, 0, -1):
+    for i in range(mask, -1, -1):
         if not (i & ~mask):
             val = language
             if i & COMPONENT_TERRITORY:
@@ -51,7 +51,7 @@ def _expand_lang(loc: str) -> Generator[str]:
             yield val
 
 
-def _expanded_langs(languages: Iterable[str]) -> Generator[str, Any, None]:
+def _expanded_langs(languages: Iterable[str]) -> Iterable[str]:
     yielded_langs: set[str] = set()
     for lang in chain.from_iterable(_expand_lang(lang) for lang in languages):
         if lang == "C":
@@ -61,7 +61,7 @@ def _expanded_langs(languages: Iterable[str]) -> Generator[str, Any, None]:
             yield lang
 
 
-def _get_default_locales() -> Generator[str]:
+def _get_default_locales() -> Iterable[str]:
 
     language_env = os.environ.get("LANGUAGE")
     if language_env:
@@ -81,7 +81,7 @@ def _get_default_locales() -> Generator[str]:
         yield f"{default_language}.{default_encoding}" if default_encoding else default_language
 
 
-def find(domain: str, localedir: Traversable, languages: Iterable[str] | None = None) -> Generator[Traversable]:
+def find(domain: str, localedir: Traversable, languages: Iterable[str] | None = None) -> Iterable[Traversable]:
     """
     Find all translation files for a given domain from a Traversable.
 
