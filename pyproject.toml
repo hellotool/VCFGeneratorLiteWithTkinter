@@ -190,10 +190,15 @@ reportUnnecessaryIsInstance = "none"
 reportImplicitOverride = "error"
 include = [
     "src/**/*.py",
+    "tests/**/*.py",
     "scripts/**/*.py",
     "packaging/**/*.py",
     "packaging/pyinstaller/*.spec",
 ]
+
+[[tool.pyright.executionEnvironments]]
+root = "tests"
+reportPrivateUsage = "none"
 
 [tool.pytest]
 testpaths = ["tests"]
