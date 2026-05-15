@@ -97,7 +97,8 @@ def find(domain: str, localedir: Traversable, languages: Iterable[str] | None = 
 
 @cache
 def _get_or_create_translation(
-    class_: Callable[[IO[bytes]], NullTranslations], mo_file: Traversable
+    class_: Callable[[IO[bytes]], NullTranslations],
+    mo_file: Traversable,
 ) -> NullTranslations:
     with mo_file.open(mode="rb") as io:
         return class_(io)

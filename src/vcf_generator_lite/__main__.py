@@ -1,22 +1,27 @@
-import argparse
 import logging
 import os
 import sys
 from contextlib import contextmanager, nullcontext, redirect_stderr, redirect_stdout, suppress
-from gettext import pgettext
 from io import StringIO
 from pathlib import Path
-
-from vcf_generator_lite.__version__ import __version__
-from vcf_generator_lite.utils import resources
-from vcf_generator_lite.utils.dpi_aware import enable_dpi_aware
-from vcf_generator_lite.utils.hack import replace_object
-from vcf_generator_lite.utils.i18n.zipapp_gettext import translation
-from vcf_generator_lite.utils.strings import get_app_description, get_app_name
 
 __all__ = ["main"]
 
 APP_DOMAIN = "vcf-generator-lite"
+
+
+def setup_l10n():
+    import gettext as gettextlib
+
+    from vcf_generator_lite.utils import resources
+    from vcf_generator_lite.utils.i18n.zipapp_gettext import translation
+
+    app_translation = translation(domain=APP_DOMAIN, localedir=resources.traversable.joinpath("locales"))
+
+    gettextlib.gettext = app_translation.gettext
+    gettextlib.ngettext = app_translation.ngettext
+    gettextlib.pgettext = app_translation.pgettext
+    gettextlib.npgettext = app_translation.npgettext
 
 
 def setup_logging(verbose: bool):
@@ -40,16 +45,6 @@ def setup_logging(verbose: bool):
     )
 
 
-def setup_l10n():
-    import gettext as gettextlib
-
-    app_translation = translation(domain=APP_DOMAIN, localedir=resources.traversable.joinpath("locales"))
-    replace_object(gettextlib.gettext, app_translation.gettext)
-    replace_object(gettextlib.ngettext, app_translation.ngettext)
-    replace_object(gettextlib.pgettext, app_translation.pgettext)
-    replace_object(gettextlib.npgettext, app_translation.npgettext)
-
-
 def fix_home_env():
     """修复 Tkinter 在 Windows 中无法获取 HOME 的问题"""
     with suppress(RuntimeError):
@@ -57,6 +52,8 @@ def fix_home_env():
 
 
 def launch(*, quiet: bool, verbose: bool):
+    from gettext import pgettext
+
     from vcf_generator_lite.constants import URL_REPOSITORY
     from vcf_generator_lite.ui.windows.main_window import create_app
 
@@ -65,7 +62,6 @@ def launch(*, quiet: bool, verbose: bool):
 
     setup_logging(verbose=verbose)
     fix_home_env()
-    enable_dpi_aware()
 
     print(pgettext("startup.source_tip", "💡Tip: Source code is hosted at {url}").format(url=URL_REPOSITORY))
 
@@ -87,7 +83,6 @@ def redirect_to_messagebox_if_needed(title: str | None = None):
             if err_msg or out_msg:
                 import tkinter.messagebox
 
-                enable_dpi_aware()
                 tkinter.messagebox.Message(
                     title=title,
                     message=err_msg or out_msg,
@@ -97,7 +92,17 @@ def redirect_to_messagebox_if_needed(title: str | None = None):
 
 
 def main():
+    # 因为要替换所有 gettext 方法，所以必须在导入主要内容（包括 argparse）之前执行。
     setup_l10n()
+
+    import argparse
+    from gettext import pgettext
+
+    from vcf_generator_lite.__version__ import __version__
+    from vcf_generator_lite.utils.dpi_aware import enable_dpi_aware
+    from vcf_generator_lite.utils.strings import get_app_description, get_app_name
+
+    enable_dpi_aware()
     parser = argparse.ArgumentParser(
         description=get_app_description(),
     )
