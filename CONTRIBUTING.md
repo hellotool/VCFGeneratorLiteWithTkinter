@@ -35,11 +35,19 @@ If you encounter problems or have improvement suggestions while using the applic
 
 To add new language support for the application, follow these steps:
 
-1. Navigate to the `src/vcf_generator_lite/resources/locales` directory.
-2. Create a new language file with the naming format `<language_code>[_<region_code>].toml`.
-   - Examples: `es.toml` (Spanish), `pt_BR.toml` (Brazilian Portuguese)
-3. Refer to the structure and key names of the existing `en.toml` (English) or `zh_CN.toml` (Simplified Chinese) files.
-4. Complete the corresponding translations.
+1. **Initialize Language Files**: Run the following command, where `<locale identifier>` follows the POSIX locale specification in the format `language[_territory]` (`language` is an ISO 639-1 code, `territory` is an ISO 3166-1 code, e.g., `zh_CN`, `en`, `zh_TW`):
+   ```bash
+   uv run poe l10n-init -l <locale identifier>
+   ```
+2. **Edit Translation Files**: Open the generated `.po` file located at:
+   ```txt
+   src/vcf_generator_lite/resources/locales/<locale identifier>/LC_MESSAGES/vcf-generator-lite.po
+   ```
+   Fill in the corresponding `msgstr` translation content based on each `msgid`.
+3. **Compile Language Files**: Once translation is complete, run the following command to generate the `.mo` file:
+   ```bash
+   uv run poe l10n-compile -l <locale identifier>
+   ```
 
 ### Participating in Development
 

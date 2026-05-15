@@ -35,11 +35,19 @@
 
 如需为应用添加新的语言支持，请按以下步骤操作：
 
-1. 进入 `src/vcf_generator_lite/resources/locales` 目录。
-2. 创建新的语言文件，命名格式为 `<语言代码>[_<区域代码>].toml`。
-   - 示例：`es.toml`（西班牙语）、`pt_BR.toml`（巴西葡萄牙语）
-3. 参照已有的 `en.toml`（英文）或 `zh_CN.toml`（简体中文）文件的结构和键名。
-4. 完成对应的翻译。
+1. **初始化语言文件**：执行以下命令，其中 `<语言标识>` 遵循 POSIX locale 规范，格式为 `语言[_地区]`（`语言` 为 ISO 639-1 代码，`地区` 为 ISO 3166-1 代码，如 `zh_CN`、`en`、`zh_TW`）：
+   ```bash
+   uv run poe l10n-init -l <语言代码>
+   ```
+2. **编辑翻译文件**：打开生成的 `.po` 文件，路径为：  
+   ```txt
+   src/vcf_generator_lite/resources/locales/<语言代码>/LC_MESSAGES/vcf-generator-lite.po
+   ```
+   根据 `msgid` 填写对应的 `msgstr` 翻译内容。
+3. **编译语言文件** ：翻译完成后，执行以下命令生成 `.mo` 文件：  
+   ```bash
+   uv run poe l10n-compile -l <语言代码>
+   ```
 
 ### 参与开发
 

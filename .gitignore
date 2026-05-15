@@ -13,3 +13,5 @@ __pycache__
 
 # 设计资源输出
 /assets/design/output/**
+
+/.stdlib_symbol

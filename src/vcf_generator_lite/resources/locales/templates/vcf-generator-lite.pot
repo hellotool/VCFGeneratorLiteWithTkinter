@@ -1,0 +1,537 @@
+# Translations template for VCF Generator Lite.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the VCF Generator Lite project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: VCF Generator Lite 5.0.4\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-05-16 06:56+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: src/vcf_generator_lite/__main__.py:66
+#, python-brace-format
+msgctxt "startup.source_tip"
+msgid "💡Tip: Source code is hosted at {url}"
+msgstr ""
+
+#: src/vcf_generator_lite/__main__.py:113
+msgctxt "cli.help_option_quiet"
+msgid "quiet mode"
+msgstr ""
+
+#: src/vcf_generator_lite/__main__.py:119
+msgctxt "cli.help_option_verbose"
+msgid "show details"
+msgstr ""
+
+#: src/vcf_generator_lite/models/contact.py:21
+msgctxt "exception.missing_number"
+msgid "Missing number or number is incorrect"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/common/external_app.py:9
+msgctxt "open_url_failure_message_box.title"
+msgid "Failed to Open External Application"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/common/external_app.py:11
+msgctxt "open_url_failure_message_box.message"
+msgid "Failed to open external application. Please check your default application settings."
+msgstr ""
+
+#: src/vcf_generator_lite/ui/common/external_app.py:14
+#, python-brace-format
+msgctxt "open_url_failure_message_box.detail"
+msgid "Link: {url}"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/widgets/text_menu.py:36
+msgctxt "entry_widget.menu_undo"
+msgid "&Undo"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/widgets/text_menu.py:40
+msgctxt "entry_widget.menu_redo"
+msgid "&Redo"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/widgets/text_menu.py:45
+msgctxt "entry_widget.menu_cut"
+msgid "Cu&t"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/widgets/text_menu.py:50
+msgctxt "entry_widget.menu_copy"
+msgid "&Copy"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/widgets/text_menu.py:56
+msgctxt "entry_widget.menu_paste"
+msgid "&Paste"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/widgets/text_menu.py:60
+msgctxt "entry_widget.menu_delete"
+msgid "&Delete"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/widgets/text_menu.py:66
+msgctxt "entry_widget.menu_select_all"
+msgid "Select &All"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/dialog.py:21
+msgctxt "vcf_generate_invalid_dialog.title"
+msgid "vCard File Generation Complete"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/dialog.py:53
+msgctxt "vcf_generate_invalid_dialog.label_invalid_numbers"
+msgid "Invalid numbers: "
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/dialog.py:78
+msgctxt "vcf_generate_invalid_dialog.heading_row"
+msgid "Position"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/dialog.py:83
+msgctxt "vcf_generate_invalid_dialog.heading_original"
+msgid "Original Content"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/dialog.py:88
+msgctxt "vcf_generate_invalid_dialog.heading_reason"
+msgid "Reason"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/dialog.py:98
+msgctxt "vcf_generate_invalid_dialog.cell_loading"
+msgid "Loading..."
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/dialog.py:114
+msgctxt "common.button_ok"
+msgid "OK"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/dialog.py:124
+#, python-brace-format
+msgctxt "vcf_generate_invalid_dialog.message"
+msgid "File exported to {path}, invalid numbers have been ignored."
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/dialog.py:136
+#, python-brace-format
+msgctxt "vcf_generate_invalid_dialog.cell_row"
+msgid "Row {row}"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/controller.py:53
+msgctxt "save_vcf_window.default_file_name"
+msgid "My Contacts.vcf"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/controller.py:92
+msgctxt "save_vcf_window.title"
+msgid "Select File Save Location"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/controller.py:95
+msgctxt "save_vcf_window.label_type_vcf"
+msgid "vCard File (*.vcf)"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/controller.py:205
+msgctxt "about_message_box.title"
+msgid "About VCF Generator Lite"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/controller.py:206
+#, python-brace-format
+msgctxt "about_message_box.message"
+msgid "VCF Generator Lite v{version}"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/controller.py:210
+#, python-brace-format
+msgctxt "about_message_box.detail"
+msgid ""
+"{copyright}\n"
+"\n"
+"Environment Information:\n"
+"Python: {python_info}\n"
+"Tcl: {tcl_info}\n"
+"Tk: {tk_info}"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/controller.py:228
+msgctxt "save_vcf_os_error_message_box.title"
+msgid "Save Failed"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/controller.py:229
+#, python-brace-format
+msgctxt "save_vcf_os_error_message_box.message"
+msgid "System error: {reason}"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/controller.py:237
+msgctxt "save_vcf_permission_denied_message_box.title"
+msgid "Save Failed"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/controller.py:239
+msgctxt "save_vcf_permission_denied_message_box.message"
+msgid "Permission denied, please grant permission again."
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/controller.py:257
+msgctxt "vcf_generate_error_message_box.title"
+msgid "Failed to Generate vCard File"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/controller.py:259
+#, python-brace-format
+msgctxt "vcf_generate_error_message_box.message"
+msgid ""
+"An unknown error occurred while generating the vCard file:\n"
+"\n"
+"{exception}"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/controller.py:273
+msgctxt "vcf_generate_success_message_box.title"
+msgid "vCard File Generated Successfully"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/controller.py:274
+#, python-brace-format
+msgctxt "vcf_generate_success_message_box.message"
+msgid "File exported to {path}."
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/controller.py:278
+#, python-brace-format
+msgctxt "vcf_generate_success_message_box.detail"
+msgid ""
+"Number of contacts: {count:n}\n"
+"Time elapsed: {time:.3f} seconds"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:49
+#: src/vcf_generator_lite/utils/strings.py:5
+msgctxt "app.name"
+msgid "VCF Generator Lite"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:66
+msgctxt "main_window.usage"
+msgid ""
+"Instructions:\n"
+"1. Copy names and phone numbers in the format \"Name Phone Notes\" (notes optional) into the edit box below.\n"
+"2. Click \"Generate\" and select a path to save the file.\n"
+"3. You can use the generated vCard file wherever you need it, such as importing it into your phone or email."
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:92
+msgctxt "main_window.input_example"
+msgid ""
+"Qu Yuan\t13333333333\tPoet of the Warring States period\n"
+"Cao Cao\t13444444444\n"
+"Tao Yuanming\t13555555555\n"
+"Xie Lingyun\t13666666666\n"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:125
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:303
+msgctxt "main_window.label_generating"
+msgid "Generating..."
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:129
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:307
+msgctxt "main_window.button_generate"
+msgid "Generate"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:139
+msgctxt "main_window.menu_file"
+msgid "&File"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:143
+msgctxt "main_window.menu_edit"
+msgid "&Edit"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:147
+msgctxt "main_window.menu_help"
+msgid "&Help"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:155
+msgctxt "main_window.menu_file_generate"
+msgid "&Generate file..."
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:163
+msgctxt "main_window.menu_file_stop_generation"
+msgid "&Stop generation"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:175
+msgctxt "main_window.menu_file_exit"
+msgid "E&xit"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:185
+msgctxt "main_window.menu_edit_undo"
+msgid "&Undo"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:190
+msgctxt "main_window.menu_edit_redo"
+msgid "&Redo"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:196
+msgctxt "main_window.menu_edit_cut"
+msgid "Cu&t"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:201
+msgctxt "main_window.menu_edit_copy"
+msgid "&Copy"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:206
+msgctxt "main_window.menu_edit_paste"
+msgid "&Paste"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:211
+msgctxt "main_window.menu_edit_select_all"
+msgid "Select &All"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:217
+msgctxt "main_window.menu_edit_clean_quotes"
+msgid "Remove &Quotes"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:225
+msgctxt "main_window.menu_help_repository"
+msgid "Rep&ository"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:229
+msgctxt "main_window.menu_help_release"
+msgid "&Releases"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:234
+msgctxt "main_window.menu_help_feedback"
+msgid "&Feedback"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:238
+msgctxt "main_window.menu_help_contact"
+msgid "&Contact author"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:252
+msgctxt "main_window.menu_help_license"
+msgid "&License"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:256
+msgctxt "main_window.menu_help_os_notices"
+msgid "Open Source &Notices"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:261
+msgctxt "main_window.menu_help_about"
+msgid "&About VCF Generator Lite"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:300
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:313
+msgctxt "main_window.button_stop"
+msgid "Stop"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:316
+msgctxt "main_window.label_stopping"
+msgid "Stopping..."
+msgstr ""
+
+#: src/vcf_generator_lite/utils/strings.py:9
+msgctxt "app.description"
+msgid "Generate VCF files from contacts"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:246
+#, python-format
+msgid "%(heading)s:"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:325
+msgid "usage: "
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:753
+#, python-format
+msgid " (default: %(default)s)"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:815
+#, python-format
+msgid "argument %(argument_name)s: %(message)s"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1190
+msgid "show program's version number and exit"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1304
+#, python-format
+msgid "unknown parser %(parser_name)r (choices: %(choices)s)"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1308
+#, python-format
+msgid "command '%(parser_name)s' is deprecated"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1375
+#, python-format
+msgid "argument \"-\" with mode %r"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1384
+#, python-format
+msgid "can't open '%(filename)s': %(error)s"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1722
+#, python-format
+msgid "conflicting option string: %s"
+msgid_plural "conflicting option strings: %s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .stdlib_symbol/argparse.py:1905
+msgid "positional arguments"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1906
+msgid "options"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1919
+msgid "show this help message and exit"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1956
+msgid "subcommands"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2007 .stdlib_symbol/argparse.py:2570
+#, python-format
+msgid "unrecognized arguments: %s"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2113
+#, python-format
+msgid "not allowed with argument %s"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2132
+#, python-format
+msgid "ambiguous option: %(option)s could match %(matches)s"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2164 .stdlib_symbol/argparse.py:2196
+#, python-format
+msgid "ignored explicit argument %r"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2216
+#, python-format
+msgid "option '%(option)s' is deprecated"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2248
+#, python-format
+msgid "argument '%(argument_name)s' is deprecated"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2341
+#, python-format
+msgid "the following arguments are required: %s"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2356
+#, python-format
+msgid "one of the arguments %s is required"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2400
+msgid "expected one argument"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2401
+msgid "expected at most one argument"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2402
+msgid "expected at least one argument"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2406
+#, python-format
+msgid "expected %s argument"
+msgid_plural "expected %s arguments"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .stdlib_symbol/argparse.py:2516
+#, python-format
+msgid "unexpected option string: %s"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2664
+#, python-format
+msgid "invalid %(type)s value: %(value)r"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2682
+#, python-format
+msgid "invalid choice: %(value)r (choose from %(choices)s)"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2690
+#, python-format
+msgid "invalid choice: %(value)r, maybe you meant %(closest)r? (choose from %(choices)s)"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2782
+#, python-format
+msgid "%(prog)s: error: %(message)s\n"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2786
+#, python-format
+msgid "%(prog)s: warning: %(message)s\n"
+msgstr ""
+

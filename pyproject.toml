@@ -17,7 +17,12 @@ console = ["colorlog>=6.9.0"]
 basic = ["poethepoet>=0.44.0"]
 lint = ["pyright>=1.1.409", "ruff>=0.15.12"]
 test = ["pytest>=9.0.3"]
-build = ["packaging>=26.2", "pyinstaller>=6.20.0", "requests>=2.33.1"]
+build = [
+    "babel>=2.18.0",
+    "packaging>=26.2",
+    "pyinstaller>=6.20.0",
+    "requests>=2.33.1",
+]
 docs = ["jinja2>=3.1.6"]
 dev = [
     "colorlog>=6.9.0",
@@ -27,7 +32,6 @@ dev = [
     { include-group = "build" },
     { include-group = "docs" },
 ]
-
 
 [project.urls]
 Repository = "https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter"
@@ -82,11 +86,43 @@ script = "scripts.build_app:build_zipapp"
 help = "Build wheel (*.whl)"
 cmd = "uv build --wheel"
 
+[tool.poe.tasks.l10n-extract]
+help = "Extract localization files"
+script = "scripts.l10n:extract"
+
+[tool.poe.tasks.l10n-init]
+help = "Initialize localization files"
+script = "scripts.l10n:initialize"
+
+[[tool.poe.tasks.l10n-init.args]]
+help = "Locale"
+name = "locale"
+options = ["-l", "--locale"]
+type = "string"
+required = true
+
+[tool.poe.tasks.l10n-update]
+help = "Update localization files"
+script = "scripts.l10n:update"
+
+[tool.poe.tasks.l10n-compile]
+help = "Compile localization files"
+script = "scripts.l10n:compile_"
+
+[[tool.poe.tasks.l10n-compile.args]]
+help = "Locale"
+name = "locale"
+options = ["-l", "--locale"]
+type = "string"
+
 [tool.uv]
 required-version = ">=0.10.1"
 
 [tool.uv.pip]
 universal = true
+
+[tool.uv.build-backend]
+source-exclude = ["*.pot", "*.po"]
 
 [tool.ruff]
 line-length = 120
@@ -154,10 +190,15 @@ reportUnnecessaryIsInstance = "none"
 reportImplicitOverride = "error"
 include = [
     "src/**/*.py",
+    "tests/**/*.py",
     "scripts/**/*.py",
     "packaging/**/*.py",
     "packaging/pyinstaller/*.spec",
 ]
+
+[[tool.pyright.executionEnvironments]]
+root = "tests"
+reportPrivateUsage = "none"
 
 [tool.pytest]
 testpaths = ["tests"]
@@ -170,3 +211,11 @@ strict_xfail = true
 filterwarnings = ["error", "ignore::DeprecationWarning"]
 log_cli = true
 log_cli_level = "INFO"
+
+[tool.babel]
+
+[[tool.babel.mappings]]
+encoding = "utf-8"
+method = "python"
+pattern = "**.py"
+keywords = ["pgettext_menu_label:1c,2"]

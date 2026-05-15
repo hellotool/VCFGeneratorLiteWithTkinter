@@ -2,7 +2,8 @@ import subprocess
 from pathlib import Path
 
 from scripts.app_metadata import app_version_variants
-from scripts.build_app.common import PATH_DIST, require_uv
+from scripts.build_app.common import PATH_DIST
+from scripts.utils import require_uv
 
 PATH_DIST_WHEE = PATH_DIST.joinpath(f"vcf_generator_lite-{app_version_variants.wheel}-py3-none-any.whl")
 
