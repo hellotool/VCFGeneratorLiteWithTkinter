@@ -43,7 +43,7 @@ To contribute translations to the application, follow these steps:
    ```txt
    src/vcf_generator_lite/resources/locales/<locale identifier>/LC_MESSAGES/vcf-generator-lite.po
    ```
-   Fill in the corresponding `msgstr` translation content based on each `msgid`.
+   Fill in the corresponding `msgstr` translation content based on each `msgid`. If `#, fuzzy` is automatically added, **remove this flag** after updating the translation, or the translation will be ignored during compilation.
 3. **Compile Language Files**: Once translation is complete, run the following command to generate the `.mo` file:
    ```bash
    uv run poe l10n-compile -l <locale identifier>

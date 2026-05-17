@@ -3,14 +3,18 @@ import subprocess
 import sysconfig
 
 from scripts.app_metadata import app_version_variants
-from scripts.utils import PATH_SOURCE, Path, require_external_tool
+from scripts.utils import PATH_SOURCE_RELATIVE, Path, require_external_tool
 
 APP_DOMAIN = "vcf-generator-lite"
 
-PATH_STD_LIB_SYMBOL = Path(".stdlib_symbol").absolute()
+PATH_STD_LIB_SYMBOL_RELATIVE = Path(".stdlib_symbol")
 PATH_STD_LIB = sysconfig.get_path("stdlib")
-PATH_LOCALES = PATH_SOURCE / "vcf_generator_lite" / "resources" / "locales"
-PATH_MSG_POT = PATH_LOCALES / "templates" / f"{APP_DOMAIN}.pot"
+PATH_ARG_PARSER_RELATIVE_STD_LIB = Path(argparse.__file__).relative_to(PATH_STD_LIB)
+PATH_ARG_PARSER_SYMBOL_RELATIVE = PATH_STD_LIB_SYMBOL_RELATIVE / PATH_ARG_PARSER_RELATIVE_STD_LIB
+
+
+PATH_LOCALES_RELATIVE = PATH_SOURCE_RELATIVE / "vcf_generator_lite" / "resources" / "locales"
+PATH_MSG_POT_RELATIVE = PATH_LOCALES_RELATIVE / "templates" / f"{APP_DOMAIN}.pot"
 
 
 def require_babel() -> Path:
@@ -19,11 +23,11 @@ def require_babel() -> Path:
 
 def extract():
     babel_path = require_babel()
-    if PATH_STD_LIB_SYMBOL.exists():
-        PATH_STD_LIB_SYMBOL.unlink()
-    PATH_STD_LIB_SYMBOL.symlink_to(PATH_STD_LIB, target_is_directory=True)
+    if PATH_STD_LIB_SYMBOL_RELATIVE.exists():
+        PATH_STD_LIB_SYMBOL_RELATIVE.unlink()
+    PATH_STD_LIB_SYMBOL_RELATIVE.symlink_to(PATH_STD_LIB, target_is_directory=True)
     try:
-        PATH_MSG_POT.parent.mkdir(parents=True, exist_ok=True)
+        PATH_MSG_POT_RELATIVE.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run(  # noqa: S603
             [
                 babel_path,
@@ -31,20 +35,20 @@ def extract():
                 "--mapping-file",
                 Path("pyproject.toml"),
                 "--output-file",
-                PATH_MSG_POT,
+                PATH_MSG_POT_RELATIVE,
                 "--no-wrap",
                 "--project",
                 "VCF Generator Lite",
                 "--version",
                 app_version_variants.wheel,
-                PATH_SOURCE.relative_to(Path.cwd()),
-                PATH_STD_LIB_SYMBOL.joinpath(Path(argparse.__file__).relative_to(PATH_STD_LIB)).relative_to(Path.cwd()),
+                PATH_SOURCE_RELATIVE,
+                PATH_ARG_PARSER_SYMBOL_RELATIVE,
             ],
             check=True,
         )
     finally:
-        if PATH_STD_LIB_SYMBOL.exists():
-            PATH_STD_LIB_SYMBOL.unlink()
+        if PATH_STD_LIB_SYMBOL_RELATIVE.exists():
+            PATH_STD_LIB_SYMBOL_RELATIVE.unlink()
 
 
 def initialize(locale: str):
@@ -54,9 +58,9 @@ def initialize(locale: str):
             babel_path,
             "init",
             "--input-file",
-            PATH_MSG_POT,
+            PATH_MSG_POT_RELATIVE,
             "--output-dir",
-            PATH_LOCALES,
+            PATH_LOCALES_RELATIVE,
             "--domain",
             APP_DOMAIN,
             "--no-wrap",
@@ -74,9 +78,9 @@ def update():
             babel_path,
             "update",
             "--input-file",
-            PATH_MSG_POT,
+            PATH_MSG_POT_RELATIVE,
             "--output-dir",
-            PATH_LOCALES,
+            PATH_LOCALES_RELATIVE,
             "--domain",
             APP_DOMAIN,
             "--no-wrap",
@@ -97,9 +101,10 @@ def compile_(locale: str | None):
             babel_path,
             "compile",
             "--directory",
-            PATH_LOCALES,
+            PATH_LOCALES_RELATIVE,
             "--domain",
             APP_DOMAIN,
+            "--statistics",
             *dynamic_args,
         ],
         check=True,

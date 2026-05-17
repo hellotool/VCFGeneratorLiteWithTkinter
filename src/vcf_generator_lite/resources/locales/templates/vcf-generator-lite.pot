@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VCF Generator Lite 5.0.4\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-05-17 13:03+0800\n"
+"POT-Creation-Date: 2026-05-18 07:02+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,20 +17,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: src/vcf_generator_lite/__main__.py:66
+#: src/vcf_generator_lite/__main__.py:59
+msgctxt "startup.colorlog_not_available_warning"
+msgid "⚠️WARNING: Colorlog is not available, using plain text instead. Please install colorlog to enable colored logging."
+msgstr ""
+
+#: src/vcf_generator_lite/__main__.py:104
 #, python-brace-format
 msgctxt "startup.source_tip"
 msgid "💡Tip: Source code is hosted at {url}"
 msgstr ""
 
-#: src/vcf_generator_lite/__main__.py:113
-msgctxt "cli.help_option_quiet"
-msgid "quiet mode"
+#: src/vcf_generator_lite/__main__.py:131
+msgctxt "cli.help_option_verbose"
+msgid "increase output (use -vv for debug level)"
 msgstr ""
 
-#: src/vcf_generator_lite/__main__.py:119
-msgctxt "cli.help_option_verbose"
-msgid "show details"
+#: src/vcf_generator_lite/__main__.py:138
+msgctxt "cli.help_option_quiet"
+msgid "decrease output (use -qq for errors only)"
 msgstr ""
 
 #: src/vcf_generator_lite/models/contact.py:21

@@ -98,6 +98,7 @@ class VCFGeneratorTask(Thread):
 
     @override
     def run(self):
+        _logger.info("Starting vcf generate task.")
         start_time = time.time()
         with ThreadPoolExecutor(max_workers=2, thread_name_prefix="VCFGenerator") as pipeline_executor:
             write_future = pipeline_executor.submit(self._write_output)
@@ -106,8 +107,14 @@ class VCFGeneratorTask(Thread):
             if not_done:
                 # 在线程未结束的情况下，executor 会等待线程执行完成，因此需要退出所有线程。
                 self.stop()
-
         end_time = time.time()
+        time_elapsed = end_time - start_time
+        _logger.info(
+            "Finished vcf generate task, processed %s items, saved %s items, time elapsed: %ss",
+            self._processed,
+            self._saved_count,
+            time_elapsed,
+        )
 
         exception: BaseException | None = None
         for future in done:
@@ -115,12 +122,12 @@ class VCFGeneratorTask(Thread):
                 exception = future_exception
                 break
         if exception:
-            _logger.exception("An error occurred during VCF generation:", exc_info=exception)
+            _logger.exception("An error occurred during VCF generation.", exc_info=exception)
 
         self.result = result = GenerateResult(
             invalid_items=self._invalid_items,
             exception=exception,
-            time_elapsed=end_time - start_time,
+            time_elapsed=time_elapsed,
             saved_count=self._saved_count,
         )
         if self._result_listener:
@@ -142,7 +149,7 @@ class VCFGeneratorTask(Thread):
                 vcard = serialize_to_vcard(contact)
                 queue_item = _WriteQueueItem(row_position=position, raw_content=line, vcard=vcard)
             except MissingNumberError as e:
-                _logger.info("Phone not found at line %s: %s", position, e)
+                _logger.info("Phone not found at line %s.", position)
 
                 # list 的 append 方法是原子的，因此不需要加锁
                 # https://docs.python.org/zh-cn/3/library/threadsafety.html#thread-safety-list
@@ -167,6 +174,7 @@ class VCFGeneratorTask(Thread):
     def _notify_progress(self):
         if self._progress_listener is None:
             return
+        _logger.debug("Notifying progress: %s/%s.", self._processed, self._total)
         self._progress_listener(self._progress, self._total > 0)
 
     def _update_progress(self):

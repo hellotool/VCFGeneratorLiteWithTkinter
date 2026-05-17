@@ -9,6 +9,8 @@ __all__ = ["main"]
 
 APP_DOMAIN = "vcf-generator-lite"
 
+_logger = logging.getLogger(__name__)
+
 
 def setup_l10n():
     import gettext as gettextlib
@@ -24,7 +26,9 @@ def setup_l10n():
     gettextlib.npgettext = app_translation.npgettext
 
 
-def setup_logging(verbose: bool):
+def setup_logging(quiet: int, verbose: int):
+    from gettext import pgettext
+
     try:
         import colorlog
     except ImportError:
@@ -34,39 +38,36 @@ def setup_logging(verbose: bool):
     handler.setStream(sys.stdout)
     log_format = "{asctime} {levelname:8} {name:50.50} {message}"
     if colorlog:
-        formatter = colorlog.ColoredFormatter("{log_color}" + log_format, style="{")
+        handler.setFormatter(colorlog.ColoredFormatter("{log_color}" + log_format, style="{"))
     else:
-        formatter = logging.Formatter(log_format, style="{")
+        handler.setFormatter(logging.Formatter(log_format, style="{"))
 
-    handler.setFormatter(formatter)
-    logging.basicConfig(
-        level=logging.DEBUG if verbose else logging.WARNING,
-        handlers=[handler],
-    )
+    if quiet >= 2:
+        level = logging.ERROR
+    elif verbose == 1:
+        level = logging.INFO
+    elif verbose >= 2:
+        level = logging.DEBUG
+    else:
+        level = logging.WARNING
+
+    logging.basicConfig(level=level, handlers=[handler])
+
+    if verbose >= 1 and not colorlog:
+        print(
+            pgettext(
+                "startup.colorlog_not_available_warning",
+                "⚠️WARNING: Colorlog is not available, using plain text instead. "
+                "Please install colorlog to enable colored logging.",
+            ),
+            file=sys.stderr,
+        )
 
 
 def fix_home_env():
     """修复 Tkinter 在 Windows 中无法获取 HOME 的问题"""
     with suppress(RuntimeError):
         os.environ["HOME"] = str(Path.home())
-
-
-def launch(*, quiet: bool, verbose: bool):
-    from gettext import pgettext
-
-    from vcf_generator_lite.constants import URL_REPOSITORY
-    from vcf_generator_lite.ui.windows.main_window import create_app
-
-    if quiet:
-        sys.stdout = None
-
-    setup_logging(verbose=verbose)
-    fix_home_env()
-
-    print(pgettext("startup.source_tip", "💡Tip: Source code is hosted at {url}").format(url=URL_REPOSITORY))
-
-    app, _controller = create_app()
-    app.mainloop()
 
 
 @contextmanager
@@ -91,6 +92,21 @@ def redirect_to_messagebox_if_needed(title: str | None = None):
                 ).show()
 
 
+def launch(*, quiet: int, verbose: int):
+    from gettext import pgettext
+
+    from vcf_generator_lite.constants import URL_REPOSITORY
+    from vcf_generator_lite.ui.windows.main_window import create_app
+
+    setup_logging(quiet=quiet, verbose=verbose)
+    fix_home_env()
+    if not quiet:
+        print(pgettext("startup.source_tip", "💡Tip: Source code is hosted at {url}").format(url=URL_REPOSITORY))
+
+    app, _controller = create_app()
+    app.mainloop()
+
+
 def main():
     # 因为要替换所有 gettext 方法，所以必须在导入主要内容（包括 argparse）之前执行。
     setup_l10n()
@@ -106,17 +122,20 @@ def main():
     parser = argparse.ArgumentParser(
         description=get_app_description(),
     )
-    parser.add_argument(
-        "-q",
-        "--quiet",
-        action="store_true",
-        help=pgettext("cli.help_option_quiet", "quiet mode"),
-    )
-    parser.add_argument(
+    output_level_group = parser.add_mutually_exclusive_group()
+    output_level_group.add_argument(
         "-v",
         "--verbose",
-        action="store_true",
-        help=pgettext("cli.help_option_verbose", "show details"),
+        action="count",
+        default=0,
+        help=pgettext("cli.help_option_verbose", "increase output (use -vv for debug level)"),
+    )
+    output_level_group.add_argument(
+        "-q",
+        "--quiet",
+        action="count",
+        default=0,
+        help=pgettext("cli.help_option_quiet", "decrease output (use -qq for errors only)"),
     )
     parser.add_argument(
         "-V",

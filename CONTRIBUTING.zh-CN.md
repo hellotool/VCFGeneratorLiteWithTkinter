@@ -43,7 +43,7 @@
    ```txt
    src/vcf_generator_lite/resources/locales/<语言代码>/LC_MESSAGES/vcf-generator-lite.po
    ```
-   根据 `msgid` 填写对应的 `msgstr` 翻译内容。
+   根据 `msgid` 填写对应的 `msgstr` 翻译内容。若自动标记了 `#, fuzzy`，更新翻译后请**同步删除该标记**，否则编译时将忽略对应的翻译。
 3. **编译语言文件** ：翻译完成后，执行以下命令生成 `.mo` 文件：  
    ```bash
    uv run poe l10n-compile -l <语言代码>

@@ -29,13 +29,13 @@
 ## 构建命令
 
 - 构建安装程序：`uv run poe build-installer`
-  - `--force`：强制重建上游输出（PyInstaller 分发包）
-  - `--force-download`：强制联网下载 InnoSetup 扩展
-  - `--no-verify-ssl`：下载时跳过 SSL 验证
+  - `--force`：强制重建上游输出（PyInstaller 分发包）。
+  - `--force-download`：强制联网下载 InnoSetup 扩展。
+  - `--no-verify-ssl`：下载时跳过 SSL 验证。
 - 构建便携包：`uv run poe build-portable`
-  - `--force`：强制重建上游输出（PyInstaller 分发包）
+  - `--force`：强制重建上游输出（PyInstaller 分发包）。
 - 构建 ZIP 应用：`uv run poe build-zipapp`
-  - `--force`：强制重建上游输出（Wheel）
+  - `--force`：强制重建上游输出（Wheel）。
 - 构建 Wheel：`uv run poe build-wheel`
 
 ### 本地化命令

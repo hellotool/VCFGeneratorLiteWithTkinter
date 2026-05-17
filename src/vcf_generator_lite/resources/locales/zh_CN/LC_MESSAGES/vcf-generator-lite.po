@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VCF Generator Lite 5.0.4\n"
 "Report-Msgid-Bugs-To: jesse205@qq.com\n"
-"POT-Creation-Date: 2026-05-17 13:03+0800\n"
+"POT-Creation-Date: 2026-05-18 07:02+0800\n"
 "PO-Revision-Date: 2026-05-13 04:51+0800\n"
 "Last-Translator: Jesse205 <jesse205@qq.com>\n"
 "Language: zh_Hans_CN\n"
@@ -18,21 +18,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: src/vcf_generator_lite/__main__.py:66
+#: src/vcf_generator_lite/__main__.py:59
+msgctxt "startup.colorlog_not_available_warning"
+msgid "⚠️WARNING: Colorlog is not available, using plain text instead. Please install colorlog to enable colored logging."
+msgstr "⚠️警告：Colorlog 不可用，将使用纯文本替代。请安装 colorlog 以启用彩色日志记录。"
+
+#: src/vcf_generator_lite/__main__.py:104
 #, python-brace-format
 msgctxt "startup.source_tip"
 msgid "💡Tip: Source code is hosted at {url}"
 msgstr "💡提示：源码已托管到 {url}"
 
-#: src/vcf_generator_lite/__main__.py:113
-msgctxt "cli.help_option_quiet"
-msgid "quiet mode"
-msgstr "静默模式"
-
-#: src/vcf_generator_lite/__main__.py:119
+#: src/vcf_generator_lite/__main__.py:131
 msgctxt "cli.help_option_verbose"
-msgid "show details"
-msgstr "显示详细信息"
+msgid "increase output (use -vv for debug level)"
+msgstr "增加输出（使用 -vv 显示调试信息）"
+
+#: src/vcf_generator_lite/__main__.py:138
+msgctxt "cli.help_option_quiet"
+msgid "decrease output (use -qq for errors only)"
+msgstr "减少输出（使用 -qq 仅显示错误）"
 
 #: src/vcf_generator_lite/models/contact.py:21
 msgctxt "exception.missing_number"
@@ -473,7 +478,7 @@ msgstr "无法识别的参数：%s"
 #: .stdlib_symbol/argparse.py:2113
 #, python-format
 msgid "not allowed with argument %s"
-msgstr "不允许使用参数 %s"
+msgstr "不允许与参数 %s 共用"
 
 #: .stdlib_symbol/argparse.py:2132
 #, python-format
@@ -552,4 +557,12 @@ msgstr "%(prog)s：错误：%(message)s\n"
 #, python-format
 msgid "%(prog)s: warning: %(message)s\n"
 msgstr "%(prog)s：警告：%(message)s\n"
+
+#~ msgctxt "cli.help_option_verbose"
+#~ msgid "increase verbosity (use -vv for debug level)"
+#~ msgstr ""
+
+#~ msgctxt "cli.help_option_quiet"
+#~ msgid "decrease verbosity (use -qq for errors only)"
+#~ msgstr ""
 

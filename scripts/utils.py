@@ -2,7 +2,7 @@ import os
 import shutil
 from pathlib import Path
 
-PATH_SOURCE: Path = Path("src").resolve()
+PATH_SOURCE_RELATIVE: Path = Path("src")
 
 
 class ToolNotFoundError(Exception):

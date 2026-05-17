@@ -64,6 +64,7 @@ class EnhancedTk(Tk, AppWindowExtension, ABC):
         self.theme_patcher: ThemePatcher
         if not hasattr(self, "theme_patcher"):  # 配置文件中可能已定义此属性，防止覆盖配置文件的属性
             self.theme_patcher = DefaultThemePatcher(self)
+        _logger.debug("Loaded theme patcher: %s.", self.theme_patcher)
 
         AppWindowExtension.__init__(self)
 
