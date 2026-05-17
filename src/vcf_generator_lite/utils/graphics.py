@@ -1,14 +1,9 @@
 from dataclasses import dataclass
 from tkinter import Misc
-from typing import TYPE_CHECKING, NamedTuple
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
-
-
-class Offset(NamedTuple):
-    x: int
-    y: int
 
 
 @dataclass(frozen=True)

@@ -6,7 +6,8 @@
 - **开发语言**: [Python 3.12+][python-homepage]
 - **UI 框架**: [Tkinter][tkinter-homepage]
 - **包管理工具**: [uv][uv-homepage]
-- **任务运行器**: [poethepoet][poethepoet-homepage]
+- **任务运行器**: [Poe the Poet][poethepoet-homepage]
+- **国际化**：[gettext][python-docs-gettext]
 - **代码质量**:
   - **测试工具**: [pytest][pytest-homepage]
   - **格式化工具**: [Ruff][ruff-formatter-homepage]
@@ -45,7 +46,7 @@ VCFGeneratorLiteWithTkinter/
 │   ├── models                      # 数据模型
 │   ├── resources/                  # 静态资源（图标、数据等）
 │   ├── ui/
-│   │   ├── common/                 # 通用工具
+│   │   ├── actions/                # 通用工具
 │   │   ├── layouts/                # 通用布局
 │   │   ├── themes/                 # 应用主题
 │   │   ├── widgets/                # 自定义组件（增强型输入框等）
@@ -94,3 +95,4 @@ VCFGeneratorLiteWithTkinter/
 [innosetup-homepage]: https://jrsoftware.org/isinfo.php
 [poethepoet-homepage]: https://poethepoet.natn.io/
 [python-docs-zipapp]: https://docs.python.org/zh-cn/3/library/zipapp.html
+[python-docs-gettext]: https://docs.python.org/zh-cn/3/library/gettext.html

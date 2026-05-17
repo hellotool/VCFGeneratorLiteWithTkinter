@@ -100,10 +100,10 @@ vcf-generator-lite
 
 1. Paste your contacts in the format `Name Phone Note` into the text field. The note is optional.
    ```text
-   Qu Yuan			13333333333	Poet of the Warring States period
-   Cao Cao			13444444444
-   Tao Yuanming	13555555555
-   Xie Lingyun		13666666666
+   Qu Yuan		13333333333	Poet of the Warring States period
+   Cao Cao		13444444444
+   Tao Y.M.	13555555555
+   Xie Lingyun	13666666666
    ```
 2. Click **Generate**, select a path to save the file.
 3. You can use the generated vCard file wherever you need it.

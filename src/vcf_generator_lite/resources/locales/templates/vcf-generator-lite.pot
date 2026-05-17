@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VCF Generator Lite 5.0.4\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-05-16 06:56+0800\n"
+"POT-Creation-Date: 2026-05-17 13:03+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,17 +38,17 @@ msgctxt "exception.missing_number"
 msgid "Missing number or number is incorrect"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/common/external_app.py:9
+#: src/vcf_generator_lite/ui/actions/external_app.py:9
 msgctxt "open_url_failure_message_box.title"
 msgid "Failed to Open External Application"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/common/external_app.py:11
+#: src/vcf_generator_lite/ui/actions/external_app.py:11
 msgctxt "open_url_failure_message_box.message"
 msgid "Failed to open external application. Please check your default application settings."
 msgstr ""
 
-#: src/vcf_generator_lite/ui/common/external_app.py:14
+#: src/vcf_generator_lite/ui/actions/external_app.py:14
 #, python-brace-format
 msgctxt "open_url_failure_message_box.detail"
 msgid "Link: {url}"
@@ -248,7 +248,7 @@ msgctxt "main_window.input_example"
 msgid ""
 "Qu Yuan\t13333333333\tPoet of the Warring States period\n"
 "Cao Cao\t13444444444\n"
-"Tao Yuanming\t13555555555\n"
+"Tao Y.M.\t13555555555\n"
 "Xie Lingyun\t13666666666\n"
 msgstr ""
 
@@ -346,7 +346,7 @@ msgstr ""
 
 #: src/vcf_generator_lite/ui/windows/main_window/window.py:238
 msgctxt "main_window.menu_help_contact"
-msgid "&Contact author"
+msgid "&Contact Author"
 msgstr ""
 
 #: src/vcf_generator_lite/ui/windows/main_window/window.py:252

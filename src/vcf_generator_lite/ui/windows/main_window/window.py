@@ -14,7 +14,7 @@ from vcf_generator_lite.constants import (
     URL_REPORT,
     URL_REPOSITORY,
 )
-from vcf_generator_lite.ui.common.external_app import open_url_with_fallback
+from vcf_generator_lite.ui.actions.external_app import open_url
 from vcf_generator_lite.ui.layouts.vertical_dialog_layout import VerticalDialogLayout
 from vcf_generator_lite.ui.widgets.line_number_bar import LineNumberBar
 from vcf_generator_lite.ui.widgets.text_menu import TextContextMenu
@@ -92,7 +92,7 @@ class VCFGeneratorLiteApp(EnhancedTk, VerticalDialogLayout):
                 "main_window.input_example",
                 """Qu Yuan\t13333333333\tPoet of the Warring States period
 Cao Cao\t13444444444
-Tao Yuanming\t13555555555
+Tao Y.M.\t13555555555
 Xie Lingyun\t13666666666
 """,
             ),
@@ -101,7 +101,7 @@ Xie Lingyun\t13666666666
         self.content_text.pack(fill="both", expand=True, padx="8.25p", pady=0)
 
         self.line_numbers = LineNumberBar(self.content_text.frame)
-        self.line_numbers.bind_text(self.content_text)
+        self.line_numbers.bind_text(self.content_text.text_proxy())
         self.line_numbers.grid(row=1, column=0, sticky="ns")
         self.__update_line_numbers_padding()
         self.content_text.frame.bind_widget(self.line_numbers, penetration_state=True)
@@ -223,20 +223,20 @@ Xie Lingyun\t13666666666
         help_menu = Menu(master, tearoff=False, name="help")
         help_menu.add_command(
             **pgettext_menu_label("main_window.menu_help_repository", "Rep&ository"),
-            command=lambda: open_url_with_fallback(self, URL_REPOSITORY),
+            command=lambda: open_url(self, URL_REPOSITORY),
         )
         help_menu.add_command(
             **pgettext_menu_label("main_window.menu_help_release", "&Releases"),
-            command=lambda: open_url_with_fallback(self, URL_RELEASES),
+            command=lambda: open_url(self, URL_RELEASES),
         )
         help_menu.add_separator()
         help_menu.add_command(
             **pgettext_menu_label("main_window.menu_help_feedback", "&Feedback"),
-            command=lambda: open_url_with_fallback(self, URL_REPORT),
+            command=lambda: open_url(self, URL_REPORT),
         )
         help_menu.add_command(
-            **pgettext_menu_label("main_window.menu_help_contact", "&Contact author"),
-            command=lambda: open_url_with_fallback(
+            **pgettext_menu_label("main_window.menu_help_contact", "&Contact Author"),
+            command=lambda: open_url(
                 parent=self,
                 url=urllib.parse.SplitResult(
                     scheme="mailto",
@@ -250,11 +250,11 @@ Xie Lingyun\t13666666666
         help_menu.add_separator()
         help_menu.add_command(
             **pgettext_menu_label("main_window.menu_help_license", "&License"),
-            command=lambda: open_url_with_fallback(self, URL_LICENSE),
+            command=lambda: open_url(self, URL_LICENSE),
         )
         help_menu.add_command(
             **pgettext_menu_label("main_window.menu_help_os_notices", "Open Source &Notices"),
-            command=lambda: open_url_with_fallback(self, URL_OS_NOTICES),
+            command=lambda: open_url(self, URL_OS_NOTICES),
         )
         help_menu.add_separator()
         help_menu.add_command(

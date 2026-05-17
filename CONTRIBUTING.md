@@ -33,9 +33,9 @@ If you encounter problems or have improvement suggestions while using the applic
 >
 > The application currently only supports recognition of 11-digit Mainland China mobile phone numbers. Other types of numbers are not supported at this time.
 
-To add new language support for the application, follow these steps:
+To contribute translations to the application, follow these steps:
 
-1. **Initialize Language Files**: Run the following command, where `<locale identifier>` follows the POSIX locale specification in the format `language[_territory]` (`language` is an ISO 639-1 code, `territory` is an ISO 3166-1 code, e.g., `zh_CN`, `en`, `zh_TW`):
+1. **Initialize Language Files**: If the language file does not exist, run the following command, where `<locale identifier>` follows the POSIX locale specification in the format `language[_territory]` (`language` is an ISO 639-1 code, `territory` is an ISO 3166-1 code, e.g., `zh_CN`, `en`, `zh_TW`):
    ```bash
    uv run poe l10n-init -l <locale identifier>
    ```

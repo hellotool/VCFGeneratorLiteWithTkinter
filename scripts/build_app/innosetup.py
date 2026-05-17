@@ -4,12 +4,12 @@ from pathlib import Path
 import requests
 
 from scripts.app_metadata import app_version_variants
-from scripts.build_app.common import (
+from scripts.build_app.pyinstaller import ensure_pyinstaller_dist
+from scripts.build_app.utils import (
     PATH_DIST,
     PATH_PACKAGING,
     PLATFORM_NATIVE,
 )
-from scripts.build_app.pyinstaller import ensure_pyinstaller_dist
 from scripts.utils import require_external_tool
 from vcf_generator_lite.constants import APP_COPYRIGHT
 

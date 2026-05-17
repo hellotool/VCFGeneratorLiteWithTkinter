@@ -1,6 +1,6 @@
 import PyInstaller.__main__ as pyinstaller
 
-from scripts.build_app.common import PATH_DIST, PATH_PACKAGING, ensure_dist_dir
+from scripts.build_app.utils import PATH_DIST, PATH_PACKAGING, ensure_dist_dir
 
 PATH_DIST_PYINSTALLER = PATH_DIST.joinpath("vcf_generator_lite")
 

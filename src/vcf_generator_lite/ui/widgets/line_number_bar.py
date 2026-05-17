@@ -42,7 +42,7 @@ class LineNumberBar(Text):
     def bind_text(self, text_widget: Text):
         self._bound_text = BoundText(
             widget=text_widget,
-            yscrollcommand_cmd=text_widget["yscrollcommand"],
+            yscrollcommand_cmd=text_widget.cget("yscrollcommand"),
         )
         self.update_style()
         self.update_lines()
@@ -58,14 +58,14 @@ class LineNumberBar(Text):
         if self._bound_text is None:
             return
         text_widget = self._bound_text.widget
-        background = text_widget["background"]
+        background = text_widget.cget("background")
         self.configure(
-            font=text_widget["font"],
+            font=text_widget.cget("font"),
             background=background,
             selectbackground=background,
             inactiveselectbackground=background,
-            borderwidth=text_widget["borderwidth"],
-            highlightthickness=text_widget["highlightthickness"],
+            borderwidth=text_widget.cget("borderwidth"),
+            highlightthickness=text_widget.cget("highlightthickness"),
             highlightcolor=background,
             highlightbackground=background,
         )

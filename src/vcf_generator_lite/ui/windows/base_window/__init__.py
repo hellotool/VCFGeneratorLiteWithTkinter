@@ -8,14 +8,15 @@ from vcf_generator_lite.ui.themes.default_theme_patcher import DefaultThemePatch
 from vcf_generator_lite.ui.windows.base_window.constants import EVENT_EXIT
 from vcf_generator_lite.utils import resources
 from vcf_generator_lite.utils.tkinter.window import (
-    CenterWindowExtension,
     GeometryWindowExtension,
     WindowExtension,
+    center_reference_master,
+    center_reference_screen,
     withdraw_cm,
 )
 
 if TYPE_CHECKING:
-    from vcf_generator_lite.ui.themes.abs import ThemePatcher
+    from vcf_generator_lite.ui.themes.abstract import ThemePatcher
 
 __all__ = ["EnhancedDialog", "EnhancedTk", "EnhancedToplevel"]
 _logger = logging.getLogger(__name__)
@@ -23,7 +24,6 @@ _logger = logging.getLogger(__name__)
 
 class AppWindowExtension(
     GeometryWindowExtension,
-    CenterWindowExtension,
     WindowExtension,
     ABC,
 ):
@@ -49,11 +49,6 @@ class AppWindowExtension(
         self.__apply_default_events()
 
     def _configure_ui(self):
-        if self.master is not None:
-            self.center_reference_master()
-        elif self._windowingsystem == "win32":
-            # 居中于屏幕功能在 Linux 端的多屏下表现得不是很好，因此遵循默认设定。
-            self.center_reference_screen()
         self.update_idletasks()
 
     def __apply_default_events(self):
@@ -71,6 +66,13 @@ class EnhancedTk(Tk, AppWindowExtension, ABC):
             self.theme_patcher = DefaultThemePatcher(self)
 
         AppWindowExtension.__init__(self)
+
+    @override
+    def _configure_ui(self):
+        if self._windowingsystem == "win32":
+            # 居中于屏幕功能在 Linux 端的多屏下表现得不是很好，因此遵循默认设定。
+            center_reference_screen(self)
+        super()._configure_ui()
 
     @override
     def _configure_ui_withdraw(self):
@@ -101,8 +103,9 @@ class EnhancedToplevel(Toplevel, AppWindowExtension, ABC):
         AppWindowExtension.__init__(self)
 
     @override
-    def _configure_ui_withdraw(self):
-        super()._configure_ui_withdraw()
+    def _configure_ui(self):
+        center_reference_master(self)
+        super()._configure_ui()
 
 
 class EnhancedDialog(EnhancedToplevel, ABC):

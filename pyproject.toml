@@ -7,21 +7,21 @@ license = "Apache-2.0"
 license-files = ["LICENSE"]
 readme = "README_pypi.md"
 requires-python = ">=3.12"
-dependencies = ["ttk-text==0.3.3"]
+dependencies = ["ttk-text==0.3.4"]
 import-names = ["vcf_generator_lite"]
 
 [project.optional-dependencies]
 console = ["colorlog>=6.9.0"]
 
 [dependency-groups]
-basic = ["poethepoet>=0.44.0"]
-lint = ["pyright>=1.1.409", "ruff>=0.15.12"]
+basic = ["poethepoet>=0.46.0"]
+lint = ["pyright>=1.1.409", "ruff>=0.15.13"]
 test = ["pytest>=9.0.3"]
 build = [
     "babel>=2.18.0",
     "packaging>=26.2",
     "pyinstaller>=6.20.0",
-    "requests>=2.33.1",
+    "requests>=2.34.2",
 ]
 docs = ["jinja2>=3.1.6"]
 dev = [
@@ -63,6 +63,10 @@ help = "Check code"
 parallel = ["ruff check", "pyright"]
 ignore_fail = "return_non_zero"
 default_item_type = "cmd"
+
+[tool.poe.tasks.fix]
+help = "Fix code"
+cmd = "ruff check --fix"
 
 [tool.poe.tasks.build-installer]
 help = "Build installer (*-setup.exe)"
@@ -195,6 +199,7 @@ include = [
     "packaging/**/*.py",
     "packaging/pyinstaller/*.spec",
 ]
+pythonVersion = "3.12"
 
 [[tool.pyright.executionEnvironments]]
 root = "tests"

@@ -1,11 +1,11 @@
 from zipfile import ZipFile
 
 from scripts.app_metadata import app_version_variants
-from scripts.build_app.common import PATH_DIST, PLATFORM_NATIVE
 from scripts.build_app.pyinstaller import (
     PATH_DIST_PYINSTALLER,
     ensure_pyinstaller_dist,
 )
+from scripts.build_app.utils import PATH_DIST, PLATFORM_NATIVE
 
 DISTRIBUTION_PORTABLE_NAME = f"VCFGeneratorLite-v{app_version_variants.wheel}-{PLATFORM_NATIVE}-portable.zip"
 

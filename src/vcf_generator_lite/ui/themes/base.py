@@ -2,7 +2,7 @@ from tkinter import Tk
 from tkinter.ttk import Style
 from typing import override
 
-from vcf_generator_lite.ui.themes.abs import ThemePatcher
+from vcf_generator_lite.ui.themes.abstract import ThemePatcher
 
 
 class BaseThemePatcher(ThemePatcher):

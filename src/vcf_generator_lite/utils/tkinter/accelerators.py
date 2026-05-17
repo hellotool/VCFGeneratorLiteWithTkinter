@@ -1,7 +1,7 @@
 from tkinter import Misc, Tk
 from typing import NamedTuple
 
-from vcf_generator_lite.utils.tkinter.misc import get_root
+from vcf_generator_lite.utils.tkinter.widget import get_root
 
 ATTR_DEFAULT_ACCELERATORS_CACHED = "_default_accelerators_cached"
 

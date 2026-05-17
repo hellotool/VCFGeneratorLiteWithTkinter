@@ -13,10 +13,10 @@ VCF Generator Lite is a simple and efficient tool that converts contact lists in
 
 1. Copy the name and phone number in the format of `Name Phone Note` on each line into the text field below. The note can be omitted.
    ```text
-   Qu Yuan			13333333333	Poet of the Warring States period
-   Cao Cao			13444444444
-   Tao Yuanming	13555555555
-   Xie Lingyun		13666666666
+   Qu Yuan		13333333333	Poet of the Warring States period
+   Cao Cao		13444444444
+   Tao Y.M.	13555555555
+   Xie Lingyun	13666666666
    ```
 2. Click **Generate**, select a path to save the file.
 3. You can use the generated vCard file wherever you need it.

@@ -15,7 +15,7 @@ def show_open_url_failure_message_box(parent: Misc, url: str):
     )
 
 
-def open_url_with_fallback(parent: Misc, url: str):
+def open_url(parent: Misc, url: str):
     result = webbrowser.open(url)
     if not result:
         show_open_url_failure_message_box(parent, url)
