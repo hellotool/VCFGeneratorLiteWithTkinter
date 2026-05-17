@@ -1,46 +1,51 @@
 # AGENTS.md
 
-## Introduction
+## 简介
 
-This project uses uv for management and Poe the poet for task management.
+本项目使用 uv 进行管理，使用 Poe the Poet 进行任务管理。
 
-No operation should modify the system environment. For example, no global packages should be installed.
+任何操作都不应修改系统环境。例如，不应安装全局包。
 
-## Tech Stack
+## 技术栈
 
-- Development Language: Python 3.12+
-- UI Framework: Tkinter
-- Package Manager: uv
-- Task Runner: Poe the Poet
-- Internationalization: gettext
-- Code Quality:
-  - Testing Tool: pytest
-  - Formatter: Ruff
-  - Linters: Ruff, Pyright
+- 开发语言：Python 3.12+
+- UI 框架：Tkinter
+- 包管理器：uv
+- 任务运行器：Poe the Poet
+- 国际化：gettext
+- 代码质量：
+  - 测试工具：pytest
+  - 格式化工具：Ruff
+  - 代码检查：Ruff、Pyright
 
-## Setup Commands
+## 设置命令
 
-- Install dependencies: `uv sync`
-- Run tests: `uv run poe test`
-- Format code: `uv run poe format`
-- Check code: `uv run poe check`
-- Fix code: `uv run poe fix`
+- 安装依赖：`uv sync`
+- 运行测试：`uv run poe test`
+- 格式化代码：`uv run poe format`
+- 检查代码：`uv run poe check`
+- 修复代码：`uv run poe fix`
 
-## Build Commands
+## 构建命令
 
-- Build installer: `uv run poe build-installer`
-- Build portable: `uv run poe build-portable`
-- Build zipapp: `uv run poe build-zipapp`
-- Build wheel: `uv run poe build-wheel`
+- 构建安装程序：`uv run poe build-installer`
+  - `--force`：强制重建上游输出（PyInstaller 分发包）
+  - `--force-download`：强制联网下载 InnoSetup 扩展
+  - `--no-verify-ssl`：下载时跳过 SSL 验证
+- 构建便携包：`uv run poe build-portable`
+  - `--force`：强制重建上游输出（PyInstaller 分发包）
+- 构建 ZIP 应用：`uv run poe build-zipapp`
+  - `--force`：强制重建上游输出（Wheel）
+- 构建 Wheel：`uv run poe build-wheel`
 
-### Localization Commands
+### 本地化命令
 
-- Extract: `uv run poe l10n-extract`
-- Compile: `uv run poe l10n-compile`
-- Initialize: `uv run poe l10n-init`
-- Update: `uv run poe l10n-update`
+- 提取：`uv run poe l10n-extract`
+- 编译：`uv run poe l10n-compile`
+- 初始化：`uv run poe l10n-init`
+- 更新：`uv run poe l10n-update`
 
-## Project Structure
+## 项目结构
 
 ```txt
 VCFGeneratorLiteWithTkinter/
@@ -68,13 +73,13 @@ VCFGeneratorLiteWithTkinter/
 └── os-notices.toml                 # 开源声明信息
 ```
 
-## Code Style
+## 代码风格
 
 - Python 3.12+
-- Ruff linter with strict type checking
-- Line length: 120 characters
-- No unnecessary type annotations for None returns
+- Ruff 检查器，严格类型检查
+- 行长度：120 字符
+- 无返回值的函数不添加不必要的类型注解
 
-## More Information
+## 更多信息
 
-For information on visual design, version management, and build guides, please refer to the `docs/dev` directory.
+有关视觉设计、版本管理和构建指南的信息，请参阅 `docs/dev` 目录。

@@ -78,13 +78,37 @@ name = "no_verify_ssl"
 options = ["--no-verify-ssl"]
 type = "boolean"
 
+[[tool.poe.tasks.build-installer.args]]
+help = "Force rebuild upstream outputs (PyInstaller dist)"
+name = "force"
+options = ["--force"]
+type = "boolean"
+
+[[tool.poe.tasks.build-installer.args]]
+help = "Force online download InnoSetup extensions"
+name = "force_download"
+options = ["--force-download"]
+type = "boolean"
+
 [tool.poe.tasks.build-portable]
 help = "Build portable package (*-portable.zip)"
 script = "scripts.build_app:build_portable"
 
+[[tool.poe.tasks.build-portable.args]]
+help = "Force rebuild upstream outputs (PyInstaller dist)"
+name = "force"
+options = ["--force"]
+type = "boolean"
+
 [tool.poe.tasks.build-zipapp]
 help = "Build zipapp (*.pyzw)"
 script = "scripts.build_app:build_zipapp"
+
+[[tool.poe.tasks.build-zipapp.args]]
+help = "Force rebuild upstream outputs (wheel)"
+name = "force"
+options = ["--force"]
+type = "boolean"
 
 [tool.poe.tasks.build-wheel]
 help = "Build wheel (*.whl)"

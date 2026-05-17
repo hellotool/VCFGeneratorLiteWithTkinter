@@ -7,12 +7,37 @@
 
 ## 构建命令
 
-| 软件包类型       | 额外工具                                                          | 构建命令                     |
-| ---------------- | ----------------------------------------------------------------- | ---------------------------- |
-| Windows 安装程序 | [InnoSetup 6.6+][innosetup-homepage]、[UPX][upx-homepage]（可选） | `uv run poe build-installer` |
-| Windows 便携包   | [UPX][upx-homepage]（可选）                                       | `uv run poe build-portable`  |
-| Python ZIP 应用  | 无                                                                | `uv run poe build-zipapp`    |
-| Python Wheel     | 无                                                                | `uv run poe build-wheel`     |
+- **构建安装程序**：`uv run poe build-installer`
+  - `--force`：强制重建上游输出（PyInstaller 分发包）
+  - `--force-download`：强制联网下载 InnoSetup 扩展（即使本地已存在）
+  - `--no-verify-ssl`：下载扩展时不验证 SSL 证书
+- **构建便携包**：`uv run poe build-portable`
+  - `--force`：强制重建上游输出（PyInstaller 分发包）
+- **构建 ZIP 应用**：`uv run poe build-zipapp`
+  - `--force`：强制重建上游输出（Wheel）
+- **构建 Wheel**：`uv run poe build-wheel`
+
+### 额外工具
+
+- [InnoSetup 6.6+][innosetup-homepage]：构建 Windows 安装程序
+- [UPX][upx-homepage]（可选）：构建 Windows 安装程序、Windows 便携包
+
+```bash
+# 强制重建 PyInstaller 分发包后打包便携版
+uv run poe build-portable --force
+
+# 强制重建 Wheel 后打包 ZIP 应用
+uv run poe build-zipapp --force
+
+# 强制重建 PyInstaller 分发包 + 强制下载扩展后构建安装程序
+uv run poe build-installer --force --force-download
+
+# 只强制下载扩展（不强制重建上游）
+uv run poe build-installer --force-download
+
+# 下载扩展时不验证 SSL
+uv run poe build-installer --no-verify-ssl
+```
 
 ## 版本管理
 

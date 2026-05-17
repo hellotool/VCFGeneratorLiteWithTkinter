@@ -4,7 +4,10 @@ from pathlib import Path
 import requests
 
 from scripts.app_metadata import app_version_variants
-from scripts.build_app.pyinstaller import ensure_pyinstaller_dist
+from scripts.build_app.pyinstaller import (
+    build_with_pyinstaller,
+    ensure_pyinstaller_dist,
+)
 from scripts.build_app.utils import (
     PATH_DIST,
     PATH_PACKAGING,
@@ -57,10 +60,16 @@ def require_iscc() -> Path:
     return require_external_tool("iscc", "InnoSetup", "C:\\Program Files (x86)\\Inno Setup 6\\")
 
 
-def build_installer(*, no_verify_ssl: bool = False):
+def build_installer(*, no_verify_ssl: bool = False, force: bool = False, force_download: bool = False):
     iscc_path = require_iscc()
-    ensure_pyinstaller_dist()
-    ensure_innosetup_extensions(verify_ssl=not no_verify_ssl)
+    if force:
+        build_with_pyinstaller()
+    else:
+        ensure_pyinstaller_dist()
+    if force_download:
+        prepare_innosetup_extensions(verify_ssl=not no_verify_ssl)
+    else:
+        ensure_innosetup_extensions(verify_ssl=not no_verify_ssl)
 
     match PLATFORM_NATIVE:
         case "win-amd64":
