@@ -247,4 +247,4 @@ log_cli_level = "INFO"
 encoding = "utf-8"
 method = "python"
 pattern = "**.py"
-keywords = ["pgettext_menu_label:1c,2"]
+keywords = ["pgettext_menu_label:1c,2", "LazyPgettext:1c,2"]

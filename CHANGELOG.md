@@ -235,6 +235,7 @@ The logs in "Unreleased" are scattered across various language files and will be
 ## [4.0.0] - 2025-03-01
 
 > [!CAUTION]
+>
 > The previous version 3.0.3 had serious bugs. It is recommended to use this version or later directly.
 
 ### Added
@@ -249,6 +250,7 @@ The logs in "Unreleased" are scattered across various language files and will be
 ## [3.0.3] - 2025-02-08
 
 > [!CAUTION]
+>
 > This version has a serious bug. The generated VCF file cannot be recognized. Please use version v4.0.0 or later directly.
 
 ### Added

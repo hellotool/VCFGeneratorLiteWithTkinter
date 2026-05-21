@@ -1,4 +1,5 @@
 import argparse
+import os
 import subprocess
 import sysconfig
 
@@ -28,6 +29,10 @@ def extract():
     PATH_STD_LIB_SYMBOL_RELATIVE.symlink_to(PATH_STD_LIB, target_is_directory=True)
     try:
         PATH_MSG_POT_RELATIVE.parent.mkdir(parents=True, exist_ok=True)
+        env = os.environ.copy()
+        scripts_root = str(Path(__file__).resolve().parent.parent)
+        existing_pythonpath = env.get("PYTHONPATH", "")
+        env["PYTHONPATH"] = scripts_root + (os.pathsep + existing_pythonpath if existing_pythonpath else "")
         subprocess.run(  # noqa: S603
             [
                 babel_path,
@@ -45,6 +50,7 @@ def extract():
                 PATH_ARG_PARSER_SYMBOL_RELATIVE,
             ],
             check=True,
+            env=env,
         )
     finally:
         if PATH_STD_LIB_SYMBOL_RELATIVE.exists():

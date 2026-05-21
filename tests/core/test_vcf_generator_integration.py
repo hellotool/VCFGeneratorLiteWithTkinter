@@ -1,6 +1,13 @@
+import re
 from io import StringIO
 
 from vcf_generator_lite.core.vcf_generator import VCFGeneratorTask
+from vcf_generator_lite.models.phone_format import PhoneRule
+
+
+TEST_PHONE_RULES = [
+    PhoneRule(length=11, regex=re.compile(r"^(?:\+86)?1[3456789]\d{9}$")),
+]
 
 
 class TestVCFGeneratorIntegration:
@@ -57,6 +64,7 @@ class TestVCFGeneratorIntegration:
         generator = VCFGeneratorTask(
             input_text=self.input_content,
             output_io=result_io,
+            phone_rules=TEST_PHONE_RULES,
             progress_listener=lambda progress, determinate: progress_history.append((progress, determinate)),
         )
         generator.start()
@@ -98,6 +106,7 @@ class TestVCFGeneratorIntegration:
         generator = VCFGeneratorTask(
             input_text="",
             output_io=result_io,
+            phone_rules=TEST_PHONE_RULES,
             progress_listener=lambda progress, determinate: progress_history.append((progress, determinate)),
         )
         generator.start()
@@ -124,6 +133,7 @@ class TestVCFGeneratorIntegration:
         generator = VCFGeneratorTask(
             input_text=invalid_content,
             output_io=result_io,
+            phone_rules=TEST_PHONE_RULES,
             progress_listener=lambda progress, determinate: progress_history.append((progress, determinate)),
         )
         generator.start()

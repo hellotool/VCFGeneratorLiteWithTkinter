@@ -1,4 +1,5 @@
 import locale
+import logging
 import os
 import re
 from collections.abc import Callable, Iterable
@@ -9,7 +10,7 @@ from importlib.resources.abc import Traversable
 from itertools import chain
 from typing import IO
 
-__all__ = ["find", "translation"]
+__all__ = ["find", "get_default_locales", "translation"]
 
 COMPONENT_CODESET = 1 << 0
 COMPONENT_TERRITORY = 1 << 1
@@ -19,6 +20,15 @@ LOCALE_REGEX = re.compile(r"^([^@._]+)(_[^@._]+)?(\.[^@]+)?(@.+)?$")
 """
 以 `language_territory.codeset@modifier` 格式解析
 """
+
+SAFE_LOCALE_REGEX = re.compile(r"^[a-zA-Z][a-zA-Z0-9@._\-]*$")
+
+_logger = logging.getLogger(__name__)
+
+
+def check_safe_locale(locale_str: str) -> bool:
+    """Check if a locale string is safe."""
+    return SAFE_LOCALE_REGEX.match(locale_str) is not None
 
 
 def _expand_lang(loc: str) -> Iterable[str]:
@@ -61,12 +71,11 @@ def _expanded_langs(languages: Iterable[str]) -> Iterable[str]:
             yield lang
 
 
-def _get_default_locales() -> Iterable[str]:
-
-    language_env = os.environ.get("LANGUAGE")
-    if language_env:
+def get_default_locales() -> Iterable[str]:
+    language_value = os.environ.get("LANGUAGE")
+    if language_value:
         # https://www.gnu.org/software/gettext/manual/html_node/The-LANGUAGE-variable.html
-        yield from (language for language in language_env.split(":") if language)
+        yield from (loc for loc in language_value.split(":") if loc)
 
     for env_var in ("LC_ALL", "LC_MESSAGES", "LC_CTYPE"):
         value = os.environ.get(env_var)
@@ -81,6 +90,14 @@ def _get_default_locales() -> Iterable[str]:
         yield f"{default_language}.{default_encoding}" if default_encoding else default_language
 
 
+def get_locale_territories(locales: Iterable[str]) -> Iterable[str]:
+    for locale_match in (LOCALE_REGEX.match(locale.normalize(locale_)) for locale_ in locales):
+        if locale_match:
+            _, territory, _, _ = locale_match.groups("")
+            if territory:
+                yield territory.removeprefix("_")
+
+
 def find(domain: str, localedir: Traversable, languages: Iterable[str] | None = None) -> Iterable[Traversable]:
     """
     Find all translation files for a given domain from a Traversable.
@@ -88,8 +105,11 @@ def find(domain: str, localedir: Traversable, languages: Iterable[str] | None = 
     Modified from ``gettext.find``.
     """
     if languages is None:
-        languages = _get_default_locales()
+        languages = get_default_locales()
     for lang in _expanded_langs(languages):
+        if not check_safe_locale(lang):
+            _logger.warning("Unsafe locale string: %s, skipping.", lang)
+            continue
         mofile: Traversable = localedir.joinpath(lang, "LC_MESSAGES", f"{domain}.mo")
         if mofile.is_file():
             yield mofile

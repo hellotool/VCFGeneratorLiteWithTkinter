@@ -1,6 +1,7 @@
 import urllib.parse
+from collections.abc import Callable
 from gettext import pgettext
-from tkinter import Menu, Misc, Text
+from tkinter import BooleanVar, Menu, Misc, Text
 from tkinter.ttk import Button, Frame, Label, Progressbar, Sizegrip
 from typing import Literal, override
 
@@ -14,7 +15,9 @@ from vcf_generator_lite.constants import (
     URL_REPORT,
     URL_REPOSITORY,
 )
+from vcf_generator_lite.core.phone_format_loader import CountryPhoneFormat
 from vcf_generator_lite.ui.actions.external_app import open_url
+from vcf_generator_lite.ui.app_text import app_name
 from vcf_generator_lite.ui.layouts.vertical_dialog_layout import VerticalDialogLayout
 from vcf_generator_lite.ui.widgets.line_number_bar import LineNumberBar
 from vcf_generator_lite.ui.widgets.text_menu import TextContextMenu
@@ -41,12 +44,16 @@ class VCFGeneratorLiteApp(EnhancedTk, VerticalDialogLayout):
     progress_bar: Progressbar
 
     def __init__(self):
+        self.phone_formats_menu: Menu | None = None
+        self._phone_format_vars: dict[str, BooleanVar] = {}
+        self._on_country_toggle: Callable[[str, bool], None] | None = None
+        self._on_select_all_toggle: Callable[[bool], None] | None = None
         super().__init__(className="VCFGeneratorLite")
 
     @override
     def _configure_ui_withdraw(self):
         super()._configure_ui_withdraw()
-        self.title(pgettext("app.name", "VCF Generator Lite"))
+        self.title(app_name())
         self.wm_minsize_pt(300, 300)
         self.wm_size_pt(450, 450)
         self._create_widgets(self)
@@ -144,10 +151,23 @@ Xie Lingyun\t13666666666
             menu=self._create_edit_menu(menu_bar),
         )
         menu_bar.add_cascade(
+            **pgettext_menu_label("main_window.menu_options", "&Options"),
+            menu=self._create_options_menu(menu_bar),
+        )
+        menu_bar.add_cascade(
             **pgettext_menu_label("main_window.menu_help", "&Help"),
             menu=self._create_help_menu(menu_bar),
         )
         return menu_bar
+
+    def _create_options_menu(self, master: Misc):
+        options_menu = Menu(master, tearoff=False)
+        self.phone_formats_menu = Menu(options_menu, tearoff=False)
+        options_menu.add_cascade(
+            **pgettext_menu_label("main_window.menu_phone_formats", "&Phone Formats"),
+            menu=self.phone_formats_menu,
+        )
+        return options_menu
 
     def _create_file_menu(self, master: Misc):
         self.file_menu = file_menu = Menu(master, tearoff=False)
@@ -318,3 +338,53 @@ Xie Lingyun\t13666666666
             self.set_progress_determinate(False)
         self.file_menu.entryconfigure(self.menu_generate_label, state="normal" if state is False else "disabled")
         self.file_menu.entryconfigure(self.menu_stop_generation_label, state="normal" if state is True else "disabled")
+
+    def set_phone_formats(
+        self,
+        phone_formats: list[CountryPhoneFormat],
+        selected_ids: set[str],
+        on_country_toggle: Callable[[str, bool], None],
+        on_select_all_toggle: Callable[[bool], None],
+    ):
+        if self.phone_formats_menu is None:
+            return
+        self._on_country_toggle = on_country_toggle
+        self._on_select_all_toggle = on_select_all_toggle
+        self._phone_format_vars.clear()
+        self.phone_formats_menu.delete(0, "end")
+
+        all_territories = set()
+        for fmt in phone_formats:
+            all_territories.update(fmt.locale_territories)
+        all_selected = selected_ids.issuperset(all_territories)
+
+        select_all_var = BooleanVar(value=all_selected)
+
+        def on_toggle_select_all():
+            new_state = select_all_var.get()
+            if self._on_select_all_toggle:
+                self._on_select_all_toggle(new_state)
+            for var in self._phone_format_vars.values():
+                var.set(new_state)
+
+        self.phone_formats_menu.add_checkbutton(
+            **pgettext_menu_label("main_window.menu_select_all_phone_formats", "Select &All"),
+            variable=select_all_var,
+            command=on_toggle_select_all,
+        )
+        self.phone_formats_menu.add_separator()
+
+        for fmt in phone_formats:
+            is_selected = fmt.id in selected_ids
+            var = BooleanVar(value=is_selected)
+            self._phone_format_vars[fmt.id] = var
+
+            def on_toggle_country(terr: str = fmt.id, v: BooleanVar = var):
+                if self._on_country_toggle:
+                    self._on_country_toggle(terr, v.get())
+
+            self.phone_formats_menu.add_checkbutton(
+                label=pgettext("phone_format.name", pgettext(fmt.name.context, fmt.name.message)),
+                variable=var,
+                command=on_toggle_country,
+            )

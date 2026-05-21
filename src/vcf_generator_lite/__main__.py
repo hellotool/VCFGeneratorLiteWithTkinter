@@ -1,13 +1,8 @@
 import logging
-import os
 import sys
-from contextlib import contextmanager, nullcontext, redirect_stderr, redirect_stdout, suppress
-from io import StringIO
-from pathlib import Path
 
 __all__ = ["main"]
 
-APP_DOMAIN = "vcf-generator-lite"
 
 _logger = logging.getLogger(__name__)
 
@@ -18,7 +13,7 @@ def setup_l10n():
     from vcf_generator_lite.utils import resources
     from vcf_generator_lite.utils.i18n.zipapp_gettext import translation
 
-    app_translation = translation(domain=APP_DOMAIN, localedir=resources.traversable.joinpath("locales"))
+    app_translation = translation(domain="vcf-generator-lite", localedir=resources.traversable.joinpath("locales"))
 
     gettextlib.gettext = app_translation.gettext
     gettextlib.ngettext = app_translation.ngettext
@@ -64,39 +59,12 @@ def setup_logging(quiet: int, verbose: int):
         )
 
 
-def fix_home_env():
-    """修复 Tkinter 在 Windows 中无法获取 HOME 的问题"""
-    with suppress(RuntimeError):
-        os.environ["HOME"] = str(Path.home())
-
-
-@contextmanager
-def redirect_to_messagebox_if_needed(title: str | None = None):
-    with (
-        redirect_stderr(StringIO()) if not sys.stderr else nullcontext() as err_io,
-        redirect_stdout(StringIO()) if not sys.stdout else nullcontext() as out_io,
-    ):
-        try:
-            yield
-        finally:
-            err_msg = err_io and err_io.getvalue()
-            out_msg = out_io and out_io.getvalue()
-            if err_msg or out_msg:
-                import tkinter.messagebox
-
-                tkinter.messagebox.Message(
-                    title=title,
-                    message=err_msg or out_msg,
-                    icon="error" if err_msg else "info",
-                    type=tkinter.messagebox.OK,
-                ).show()
-
-
 def launch(*, quiet: int, verbose: int):
     from gettext import pgettext
 
     from vcf_generator_lite.constants import URL_REPOSITORY
     from vcf_generator_lite.ui.windows.main_window import create_app
+    from vcf_generator_lite.utils.environment import fix_home_env
 
     setup_logging(quiet=quiet, verbose=verbose)
     fix_home_env()
@@ -115,12 +83,13 @@ def main():
     from gettext import pgettext
 
     from vcf_generator_lite.__version__ import __version__
+    from vcf_generator_lite.ui.app_text import app_description, app_name
     from vcf_generator_lite.utils.dpi_aware import enable_dpi_aware
-    from vcf_generator_lite.utils.strings import get_app_description, get_app_name
+    from vcf_generator_lite.utils.environment import redirect_to_messagebox_if_needed
 
     enable_dpi_aware()
     parser = argparse.ArgumentParser(
-        description=get_app_description(),
+        description=app_description(),
     )
     output_level_group = parser.add_mutually_exclusive_group()
     output_level_group.add_argument(
@@ -141,10 +110,10 @@ def main():
         "-V",
         "--version",
         action="version",
-        version=f"{get_app_name()} {__version__}",
+        version=f"{app_name()} {__version__}",
     )
 
-    with redirect_to_messagebox_if_needed(title=get_app_name()):
+    with redirect_to_messagebox_if_needed(title=app_name()):
         args = parser.parse_args()
 
     launch(quiet=args.quiet, verbose=args.verbose)

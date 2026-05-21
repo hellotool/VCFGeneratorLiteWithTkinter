@@ -29,17 +29,52 @@
 
 ### 本地化应用
 
-> [!NOTE]
->
-> 当前应用仅支持识别 11 位中国大陆手机号，暂不支持其他类型的号码。
+本地化工作分为两部分：添加新的**电话格式**以支持更多号码类型，以及翻译**应用界面**文本。
+
+#### 添加电话格式
+
+如需添加新的国家/地区电话格式，请按以下步骤操作：
+
+1. **编辑配置文件**：打开 `src/vcf_generator_lite/configs/phone_formats.py`。
+2. **添加格式条目**：在 `PHONE_FORMATS` 列表末尾追加一条 `CountryPhoneFormat` 实例，格式如下：
+   ```python
+   CountryPhoneFormat(
+       id="builtin.国家.地区",                      # 唯一标识符，使用小写 + 点分隔
+       locale_territories={"XX"},                   # ISO 3166-1 二位地区代码
+       name=LazyPgettext("country", "英文名称"),    # 可翻译的国家名称
+       rules=[
+           PhoneRule(
+               length=11,                           # 或 [11, 14]、range(10, 16)、None
+               regex=re.compile(r"^正则表达式$"),
+           ),
+       ],
+   ),
+   ```
+   - `id` 格式为 `builtin.<国家>.<地区>`，全部小写。
+   - `locale_territories` 是一个集合，包含该格式适用的地区代码。
+   - `length` 字段说明：
+     - `int`：固定长度。
+     - `list[int]`：允许多个可选长度（如 `[11, 14]` 匹配带/不带国际区号）。
+     - `range(min, max+1)`：长度范围。
+     - 省略该字段：不限制长度，仅用正则匹配。
+   - `regex` 中如有反斜杠，请使用原始字符串 `r"..."`。
+3. **运行检查**：提交前请确保代码通过 Ruff 和 Pyright 检查：
+   ```bash
+   uv run poe check
+   ```
+
+#### 翻译应用界面
 
 如需为应用贡献翻译，请按以下步骤操作：
 
-1. **初始化语言文件**：若语言文件不存在，执行以下命令，其中 `<语言标识>` 遵循 POSIX locale 规范，格式为 `语言[_地区]`（`语言` 为 ISO 639-1 代码，`地区` 为 ISO 3166-1 代码，如 `zh_CN`、`en`、`zh_TW`）：
+1. **初始化语言文件**：若语言文件不存在，执行以下命令：
    ```bash
-   uv run poe l10n-init -l <语言代码>
+   uv run poe l10n-init -l <语言[_地区]>
    ```
-2. **编辑翻译文件**：打开生成的 `.po` 文件，路径为：  
+   - `<语言[_地区]>` 遵循 [POSIX 规范][opengroup-pubs-posix-env]，例如 `zh_CN`、`en`、`zh_TW`。
+   - `语言` 为 [ISO 639][iso-639] 代码，例如 `zh`、`en`。
+   - `地区` 为 [ISO 3166][iso-3166] 代码，例如 `CN`、`US`。
+2. **编辑翻译文件**：打开生成的 `.po` 文件，路径为：
    ```txt
    src/vcf_generator_lite/resources/locales/<语言代码>/LC_MESSAGES/vcf-generator-lite.po
    ```
@@ -106,3 +141,6 @@
 [zh-style-guide]: https://zh-style-guide.readthedocs.io/zh-cn/latest/index.html
 
 [pep-0008]: https://peps.python.org/pep-0008/
+[opengroup-pubs-posix-env]: https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap08.html]
+[iso-639]: https://www.iso.org/iso-639-language-code
+[iso-3166]: https://www.iso.org/iso-3166-country-codes.html

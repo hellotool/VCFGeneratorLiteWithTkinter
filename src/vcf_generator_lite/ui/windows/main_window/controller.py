@@ -6,13 +6,15 @@ import signal
 import tkinter
 import traceback
 from gettext import pgettext
+from itertools import chain
 from pathlib import Path
 from tkinter import Event, filedialog, messagebox
 from types import FrameType
-from typing import NamedTuple, TextIO
+from typing import TYPE_CHECKING, NamedTuple, TextIO
 
 from vcf_generator_lite.__version__ import __version__
 from vcf_generator_lite.constants import APP_COPYRIGHT
+from vcf_generator_lite.core.phone_format_loader import CountryPhoneFormat, load_country_phone_formats
 from vcf_generator_lite.core.vcf_generator import GenerateResult, InvalidItem, VCFGeneratorTask
 from vcf_generator_lite.ui.windows.base_window.constants import EVENT_EXIT
 from vcf_generator_lite.ui.windows.invalid_items_dialog import create_invalid_items_dialog
@@ -24,7 +26,11 @@ from vcf_generator_lite.ui.windows.main_window.constants import (
     EVENT_STOP,
 )
 from vcf_generator_lite.ui.windows.main_window.window import VCFGeneratorLiteApp
+from vcf_generator_lite.utils.i18n.zipapp_gettext import get_default_locales, get_locale_territories
 from vcf_generator_lite.utils.tkinter.text import search_line, select_text
+
+if TYPE_CHECKING:
+    from vcf_generator_lite.models.phone_format import PhoneRule
 
 logger = logging.getLogger(__name__)
 
@@ -52,6 +58,21 @@ class MainController:
         self.current_generation: Generation | None = None
         self.save_vcf_file_name: str = pgettext("save_vcf_window.default_file_name", "My Contacts.vcf")
 
+        self.phone_formats_dict: dict[str, CountryPhoneFormat] = load_country_phone_formats()
+        sorted_phone_formats: list[CountryPhoneFormat] = sorted(
+            self.phone_formats_dict.values(),
+            key=lambda phone_format: phone_format.id,
+        )
+        locale_territories = set(get_locale_territories(get_default_locales()))
+        self.selected_phone_formats_keys: set[str] = {
+            phone_format.id
+            for phone_format in sorted_phone_formats
+            if phone_format.locale_territories & locale_territories
+        }
+
+        if not self.selected_phone_formats_keys:
+            self.selected_phone_formats_keys.add(sorted_phone_formats[0].id)
+
         window.bind(EVENT_ABOUT, self.on_about)
         window.bind(EVENT_CLEAN_QUOTES, self.on_clean_quotes)
         window.bind(EVENT_GENERATE, self.on_generate)
@@ -63,6 +84,13 @@ class MainController:
         window.bind(EVENT_EXIT, self.on_exit)
 
         signal.signal(signal.SIGINT, self.signal_handler)
+
+        self.window.set_phone_formats(
+            phone_formats=sorted_phone_formats,
+            selected_ids=self.selected_phone_formats_keys,
+            on_country_toggle=self._on_country_toggle,
+            on_select_all_toggle=self._on_select_all_toggle,
+        )
 
     def on_about(self, _: Event):
         self._show_about_message_box()
@@ -86,6 +114,18 @@ class MainController:
             self.on_stop(event)
         else:
             self.on_generate(event)
+
+    def _on_country_toggle(self, territory: str, selected: bool):
+        if selected:
+            self.selected_phone_formats_keys.add(territory)
+        else:
+            self.selected_phone_formats_keys.discard(territory)
+
+    def _on_select_all_toggle(self, select_all: bool):
+        if select_all:
+            self.selected_phone_formats_keys = set(self.phone_formats_dict.keys())
+        else:
+            self.selected_phone_formats_keys = set()
 
     def pick_and_open_file(self) -> None | tuple[Path, TextIO]:
         file_path_str = filedialog.asksaveasfilename(
@@ -115,14 +155,22 @@ class MainController:
         pick_result = self.pick_and_open_file()
         if not pick_result:
             return
-        origin_text = self.window.get_text_content()
         file, file_io = pick_result
+        origin_text = self.window.get_text_content()
+        selected_rules: list[PhoneRule] = list(
+            chain.from_iterable(
+                self.phone_formats_dict[selected_key].rules
+                for selected_key in self.selected_phone_formats_keys
+                if selected_key in self.phone_formats_dict
+            )
+        )
 
         generator = VCFGeneratorTask(
             input_text=origin_text,
             output_io=file_io,
             progress_listener=self.on_generation_update_progress,
             result_listener=self.on_generation_file_result,
+            phone_rules=selected_rules,
         )
         self.current_generation = Generation(
             generator=generator,

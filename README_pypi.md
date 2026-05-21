@@ -4,10 +4,15 @@ VCF Generator Lite is a simple and efficient tool that converts contact lists in
 
 ## Features
 
-- **Smart Parsing**: Batch contacts in `Name Phone Note` format (note optional), automatically handles tabs and spaces.
+- **Smart Parsing**: Recognizes contacts in the `Name Phone Notes` format, with automatic merging of tabs and spaces.
 - **Batch Generation**: Combines all contacts into a single `.vcf` file.
-- **Number Validation**: Automatically skips invalid numbers and quickly locates error rows.
-- **Editing Assistance**: Displays line numbers in text area, supports one-click quote removal.
+- **Number Validation**: Automatically skips invalid numbers and quickly locates erroneous lines.
+- **Editing Assistance**: Displays line numbers in the text area, supports one-click quote removal.
+- **Localization**: Supports Simplified Chinese and English, with phone number recognition for China (including Hong Kong, Macau, and Taiwan regions).
+- **Lightweight**: Provided as a Python ZIP application package.
+- **Ad-Free**: No advertisements; just download and use.
+- **Open Source**: Open-sourced under the MIT License.
+- **Free**: No payment required to use.
 
 ## Usage
 
@@ -24,7 +29,7 @@ VCF Generator Lite is a simple and efficient tool that converts contact lists in
 > [!NOTE]
 >
 > - You can use both tabs and spaces to separate the fields.
-> - The program will automatically remove extra spaces from the text field.
+> - The program will automatically collapse extra spaces and tabs within a text box.
 >
 > Example: `Han Meimei   13333333333   A   well-known girl` will be recognized as
 >

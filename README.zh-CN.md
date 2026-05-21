@@ -28,12 +28,17 @@ VCF 生成器 Lite 是一个简单高效的工具，可以将联系人列表转�
 ![GitHub - Stars](https://img.shields.io/github/stars/hellotool/VCFGeneratorLiteWithTkinter?style=flat&logo=github)
 [![Gitee - Stars](https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/badge/star.svg?theme=dark)][stargazers-gitee]
 
-## 功能
+## 特性
 
-- **智能解析**：按 `姓名 电话 备注` 格式批量识别联系人（备注可选），自动处理制表符和空格。
+- **智能解析**：按 `姓名 电话 备注` 格式识别联系人，自动合并制表符和空格。
 - **批量生成**：将所有联系人合并生成单个 `.vcf` 文件。
 - **号码校验**：自动跳过无效号码，并快速定位错误行。
 - **辅助编辑**：文本区显示行号，支持一键删除引号。
+- **本地化**：支持简体中文与英语，支持识别中国（含港澳台地区）电话号码。
+- **轻量化**：提供 Python ZIP 应用包格式。
+- **无广告**：无广告，仅需下载即可使用。
+- **开源**：遵循 MIT 许可协议开源。
+- **免费**：不需要支付任何费用即可使用。
 
 ## 软件截图
 
@@ -111,7 +116,7 @@ vcf-generator-lite
 > [!NOTE]
 >
 > - 您可以同时使用制表符和空格分割字段。
-> - 程序会自动去除文本框内多余的空格。
+> - 程序会自动合并文本框内多余的空格和制表符。
 >
 > 示例：`东坡居士    苏轼   13333333333  眉州眉山人` 将会被识别为
 >

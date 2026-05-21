@@ -4,11 +4,11 @@ from tkinter.ttk import Button, Frame, Label, Sizegrip
 from typing import override
 
 from vcf_generator_lite.core.vcf_generator import InvalidItem
+from vcf_generator_lite.ui.app_text import error_for
 from vcf_generator_lite.ui.layouts.vertical_dialog_layout import VerticalDialogLayout
 from vcf_generator_lite.ui.widgets.scrolled_treeview import ScrolledTreeview
 from vcf_generator_lite.ui.windows.base_window import EnhancedDialog
 from vcf_generator_lite.ui.windows.base_window.constants import EVENT_EXIT
-from vcf_generator_lite.utils.i18n.localized_exception import get_localized_exception_msg
 from vcf_generator_lite.utils.tkinter.font import extend_font_scale
 from vcf_generator_lite.utils.tkinter.scaling import scale_kw
 from vcf_generator_lite.utils.tkinter.widget import enable_auto_wrap, needs_sizegrip
@@ -135,6 +135,6 @@ class InvalidItemsDialog(EnhancedDialog, VerticalDialogLayout):
                 values=(
                     pgettext("vcf_generate_invalid_dialog.cell_row", "Row {row}").format(row=item.row_position),
                     item.raw_content,
-                    get_localized_exception_msg(item.exception),
+                    error_for(item.exception),
                 ),
             )

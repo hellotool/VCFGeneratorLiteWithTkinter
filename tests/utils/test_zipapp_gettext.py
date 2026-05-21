@@ -10,9 +10,9 @@ import pytest
 from vcf_generator_lite.utils.i18n.zipapp_gettext import (
     _expand_lang,
     _expanded_langs,
-    _get_default_locales,
     _get_or_create_translation,
     find,
+    get_default_locales,
     translation,
 )
 
@@ -115,7 +115,7 @@ class TestGetDefaultLocales:
         monkeypatch.delenv("LC_MESSAGES", raising=False)
         monkeypatch.delenv("LANG", raising=False)
         with patch("locale.getdefaultlocale", return_value=(None, None)):
-            result = list(_get_default_locales())
+            result = list(get_default_locales())
         assert result == ["zh_CN", "en_US", "de"]
 
     def test_lc_all_env_var(self, monkeypatch: pytest.MonkeyPatch):
@@ -123,7 +123,7 @@ class TestGetDefaultLocales:
         monkeypatch.setenv("LC_ALL", "zh_CN.UTF-8")
         monkeypatch.delenv("LC_MESSAGES", raising=False)
         monkeypatch.delenv("LANG", raising=False)
-        result = list(_get_default_locales())
+        result = list(get_default_locales())
         assert result == ["zh_CN.UTF-8"]
 
     def test_lc_messages_env_var(self, monkeypatch: pytest.MonkeyPatch):
@@ -131,7 +131,7 @@ class TestGetDefaultLocales:
         monkeypatch.delenv("LC_ALL", raising=False)
         monkeypatch.setenv("LC_MESSAGES", "zh_CN.UTF-8")
         monkeypatch.delenv("LANG", raising=False)
-        result = list(_get_default_locales())
+        result = list(get_default_locales())
         assert result == ["zh_CN.UTF-8"]
 
     def test_lc_ctype_env_var(self, monkeypatch: pytest.MonkeyPatch):
@@ -140,7 +140,7 @@ class TestGetDefaultLocales:
         monkeypatch.delenv("LC_MESSAGES", raising=False)
         monkeypatch.setenv("LC_CTYPE", "zh_CN.UTF-8")
         monkeypatch.delenv("LANG", raising=False)
-        result = list(_get_default_locales())
+        result = list(get_default_locales())
         assert result == ["zh_CN.UTF-8"]
 
     def test_lc_vars_priority(self, monkeypatch: pytest.MonkeyPatch):
@@ -148,7 +148,7 @@ class TestGetDefaultLocales:
         monkeypatch.setenv("LC_ALL", "fr_FR.UTF-8")
         monkeypatch.setenv("LC_MESSAGES", "zh_CN.UTF-8")
         monkeypatch.delenv("LANG", raising=False)
-        result = list(_get_default_locales())
+        result = list(get_default_locales())
         assert result == ["fr_FR.UTF-8"]
 
     def test_no_env_vars(self, monkeypatch: pytest.MonkeyPatch):
@@ -158,7 +158,7 @@ class TestGetDefaultLocales:
         monkeypatch.delenv("LC_CTYPE", raising=False)
         monkeypatch.delenv("LANG", raising=False)
         with patch("locale.getdefaultlocale", return_value=(None, None)):
-            result = list(_get_default_locales())
+            result = list(get_default_locales())
         assert result == []
 
     def test_language_env_with_empty_parts(self, monkeypatch: pytest.MonkeyPatch):
@@ -167,7 +167,7 @@ class TestGetDefaultLocales:
         monkeypatch.delenv("LC_MESSAGES", raising=False)
         monkeypatch.delenv("LANG", raising=False)
         with patch("locale.getdefaultlocale", return_value=(None, None)):
-            result = list(_get_default_locales())
+            result = list(get_default_locales())
         assert result == ["zh_CN", "en_US"]
 
 

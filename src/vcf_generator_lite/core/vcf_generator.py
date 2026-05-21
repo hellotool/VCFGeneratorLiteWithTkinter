@@ -7,8 +7,9 @@ from dataclasses import dataclass
 from threading import RLock, Thread
 from typing import IO, NamedTuple, override
 
-from vcf_generator_lite.models.contact import Contact, MissingNumberError, parse_contact
-from vcf_generator_lite.models.phone_rule import PhoneRule
+from vcf_generator_lite.core.contact_parser import parse_contact
+from vcf_generator_lite.models.contact import Contact, MissingNumberError
+from vcf_generator_lite.models.phone_format import PhoneRule
 from vcf_generator_lite.utils.deque_queue import DequeQueue, ShutDownError
 
 _logger = logging.getLogger(__name__)
@@ -58,9 +59,9 @@ class VCFGeneratorTask(Thread):
         input_text: str,
         output_io: IO[str],
         *,
+        phone_rules: list[PhoneRule],
         progress_listener: Callable[[float, bool], None] | None = None,
         result_listener: Callable[[GenerateResult], None] | None = None,
-        phone_rules: list[PhoneRule] | None = None,
         part_delimiter: str | None = None,
     ):
         super().__init__()
@@ -145,7 +146,11 @@ class VCFGeneratorTask(Thread):
                 continue
 
             try:
-                contact = parse_contact(contact_text=line, rules=self._phone_rules, delimiter=self._part_delimiter)
+                contact = parse_contact(
+                    contact_text=line,
+                    rules=self._phone_rules,
+                    delimiter=self._part_delimiter,
+                )
                 vcard = serialize_to_vcard(contact)
                 queue_item = _WriteQueueItem(row_position=position, raw_content=line, vcard=vcard)
             except MissingNumberError as e:
