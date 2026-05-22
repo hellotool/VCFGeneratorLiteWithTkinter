@@ -38,13 +38,6 @@
   - `--force`：强制重建上游输出（Wheel）。
 - 构建 Wheel：`uv run poe build-wheel`
 
-### 本地化命令
-
-- 提取：`uv run poe l10n-extract`
-- 编译：`uv run poe l10n-compile`
-- 初始化：`uv run poe l10n-init`
-- 更新：`uv run poe l10n-update`
-
 ## 项目结构
 
 ```txt

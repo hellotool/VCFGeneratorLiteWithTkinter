@@ -1,5 +1,5 @@
 # Translations template for VCF Generator Lite.
-# Copyright (C) 2026 ORGANIZATION
+# Copyright (C) 2026 Jesse205
 # This file is distributed under the same license as the VCF Generator Lite project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 #
@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: VCF Generator Lite 5.0.4\n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-05-21 18:27+0800\n"
+"Report-Msgid-Bugs-To: jesse205@qq.com\n"
+"POT-Creation-Date: 2026-05-22 15:54+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,161 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
+
+#: .stdlib_symbol/argparse.py:246
+#, python-format
+msgid "%(heading)s:"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:325
+msgid "usage: "
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:753
+#, python-format
+msgid " (default: %(default)s)"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:815
+#, python-format
+msgid "argument %(argument_name)s: %(message)s"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1190
+msgid "show program's version number and exit"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1304
+#, python-format
+msgid "unknown parser %(parser_name)r (choices: %(choices)s)"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1308
+#, python-format
+msgid "command '%(parser_name)s' is deprecated"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1375
+#, python-format
+msgid "argument \"-\" with mode %r"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1384
+#, python-format
+msgid "can't open '%(filename)s': %(error)s"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1722
+#, python-format
+msgid "conflicting option string: %s"
+msgid_plural "conflicting option strings: %s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .stdlib_symbol/argparse.py:1905
+msgid "positional arguments"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1906
+msgid "options"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1919
+msgid "show this help message and exit"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:1956
+msgid "subcommands"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2007 .stdlib_symbol/argparse.py:2570
+#, python-format
+msgid "unrecognized arguments: %s"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2113
+#, python-format
+msgid "not allowed with argument %s"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2132
+#, python-format
+msgid "ambiguous option: %(option)s could match %(matches)s"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2164 .stdlib_symbol/argparse.py:2196
+#, python-format
+msgid "ignored explicit argument %r"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2216
+#, python-format
+msgid "option '%(option)s' is deprecated"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2248
+#, python-format
+msgid "argument '%(argument_name)s' is deprecated"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2341
+#, python-format
+msgid "the following arguments are required: %s"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2356
+#, python-format
+msgid "one of the arguments %s is required"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2400
+msgid "expected one argument"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2401
+msgid "expected at most one argument"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2402
+msgid "expected at least one argument"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2406
+#, python-format
+msgid "expected %s argument"
+msgid_plural "expected %s arguments"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .stdlib_symbol/argparse.py:2516
+#, python-format
+msgid "unexpected option string: %s"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2664
+#, python-format
+msgid "invalid %(type)s value: %(value)r"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2682
+#, python-format
+msgid "invalid choice: %(value)r (choose from %(choices)s)"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2690
+#, python-format
+msgid "invalid choice: %(value)r, maybe you meant %(closest)r? (choose from %(choices)s)"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2782
+#, python-format
+msgid "%(prog)s: error: %(message)s\n"
+msgstr ""
+
+#: .stdlib_symbol/argparse.py:2786
+#, python-format
+msgid "%(prog)s: warning: %(message)s\n"
+msgstr ""
 
 #: src/vcf_generator_lite/__main__.py:54
 msgctxt "startup.colorlog_not_available_warning"
@@ -39,38 +194,23 @@ msgid "decrease output (use -qq for errors only)"
 msgstr ""
 
 #: src/vcf_generator_lite/configs/phone_formats.py:10
-msgctxt "phone_format.chinese.mainland"
+msgctxt "phone_format.china.mainland"
 msgid "Chinese mainland"
 msgstr ""
 
 #: src/vcf_generator_lite/configs/phone_formats.py:19
-msgctxt "phone_format.chinese.hongkong"
+msgctxt "phone_format.china.hongkong"
 msgid "Hong Kong, China"
 msgstr ""
 
 #: src/vcf_generator_lite/configs/phone_formats.py:28
-msgctxt "phone_format.chinese.macau"
+msgctxt "phone_format.china.macau"
 msgid "Macau, China"
 msgstr ""
 
 #: src/vcf_generator_lite/configs/phone_formats.py:37
-msgctxt "phone_format.chinese.taiwan"
+msgctxt "phone_format.china.taiwan"
 msgid "Taiwan, China"
-msgstr ""
-
-#: src/vcf_generator_lite/ui/app_text.py:7
-msgctxt "app.name"
-msgid "VCF Generator Lite"
-msgstr ""
-
-#: src/vcf_generator_lite/ui/app_text.py:11
-msgctxt "app.description"
-msgid "Generate VCF files from contacts"
-msgstr ""
-
-#: src/vcf_generator_lite/ui/app_text.py:16
-msgctxt "error.missing_number"
-msgid "Missing number or number is incorrect"
 msgstr ""
 
 #: src/vcf_generator_lite/ui/actions/external_app.py:9
@@ -87,6 +227,21 @@ msgstr ""
 #, python-brace-format
 msgctxt "open_url_failure_message_box.detail"
 msgid "Link: {url}"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/app_text.py:7
+msgctxt "app.name"
+msgid "VCF Generator Lite"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/app_text.py:11
+msgctxt "app.description"
+msgid "Generate VCF files from contacts"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/app_text.py:16
+msgctxt "error.missing_number"
+msgid "Missing number or number is incorrect"
 msgstr ""
 
 #: src/vcf_generator_lite/ui/widgets/text_menu.py:36
@@ -417,160 +572,5 @@ msgstr ""
 #: src/vcf_generator_lite/ui/windows/main_window/window.py:371
 msgctxt "main_window.menu_select_all_phone_formats"
 msgid "Select &All"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:246
-#, python-format
-msgid "%(heading)s:"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:325
-msgid "usage: "
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:753
-#, python-format
-msgid " (default: %(default)s)"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:815
-#, python-format
-msgid "argument %(argument_name)s: %(message)s"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:1190
-msgid "show program's version number and exit"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:1304
-#, python-format
-msgid "unknown parser %(parser_name)r (choices: %(choices)s)"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:1308
-#, python-format
-msgid "command '%(parser_name)s' is deprecated"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:1375
-#, python-format
-msgid "argument \"-\" with mode %r"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:1384
-#, python-format
-msgid "can't open '%(filename)s': %(error)s"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:1722
-#, python-format
-msgid "conflicting option string: %s"
-msgid_plural "conflicting option strings: %s"
-msgstr[0] ""
-msgstr[1] ""
-
-#: .stdlib_symbol/argparse.py:1905
-msgid "positional arguments"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:1906
-msgid "options"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:1919
-msgid "show this help message and exit"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:1956
-msgid "subcommands"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2007 .stdlib_symbol/argparse.py:2570
-#, python-format
-msgid "unrecognized arguments: %s"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2113
-#, python-format
-msgid "not allowed with argument %s"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2132
-#, python-format
-msgid "ambiguous option: %(option)s could match %(matches)s"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2164 .stdlib_symbol/argparse.py:2196
-#, python-format
-msgid "ignored explicit argument %r"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2216
-#, python-format
-msgid "option '%(option)s' is deprecated"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2248
-#, python-format
-msgid "argument '%(argument_name)s' is deprecated"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2341
-#, python-format
-msgid "the following arguments are required: %s"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2356
-#, python-format
-msgid "one of the arguments %s is required"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2400
-msgid "expected one argument"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2401
-msgid "expected at most one argument"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2402
-msgid "expected at least one argument"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2406
-#, python-format
-msgid "expected %s argument"
-msgid_plural "expected %s arguments"
-msgstr[0] ""
-msgstr[1] ""
-
-#: .stdlib_symbol/argparse.py:2516
-#, python-format
-msgid "unexpected option string: %s"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2664
-#, python-format
-msgid "invalid %(type)s value: %(value)r"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2682
-#, python-format
-msgid "invalid choice: %(value)r (choose from %(choices)s)"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2690
-#, python-format
-msgid "invalid choice: %(value)r, maybe you meant %(closest)r? (choose from %(choices)s)"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2782
-#, python-format
-msgid "%(prog)s: error: %(message)s\n"
-msgstr ""
-
-#: .stdlib_symbol/argparse.py:2786
-#, python-format
-msgid "%(prog)s: warning: %(message)s\n"
 msgstr ""
 

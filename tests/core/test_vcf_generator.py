@@ -1,3 +1,5 @@
+import pytest
+
 from vcf_generator_lite.core.vcf_generator import serialize_to_vcard, utf8_to_qp
 from vcf_generator_lite.models.contact import Contact
 
@@ -75,27 +77,15 @@ class TestSerializeToVCard:
 class TestUtf8ToQp:
     """测试 UTF-8 到 Quoted-Printable 编码的转换"""
 
-    def test_utf8_to_qp_basic_chinese(self):
-        """测试基本中文字符转换"""
-        result = utf8_to_qp("张三")
-        assert result == "=E5=BC=A0=E4=B8=89"
-
-    def test_utf8_to_qp_ascii_characters(self):
-        """测试 ASCII 字符转换"""
-        result = utf8_to_qp("John Doe")
-        assert result == "John Doe"
-
-    def test_utf8_to_qp_mixed_characters(self):
-        """测试混合字符（ASCII + 中文）转换"""
-        result = utf8_to_qp("John 张三")
-        assert result == "John =E5=BC=A0=E4=B8=89"
-
-    def test_utf8_to_qp_empty_string(self):
-        """测试空字符串转换"""
-        result = utf8_to_qp("")
-        assert result == ""
-
-    def test_utf8_to_qp_special_characters(self):
-        """测试特殊字符转换"""
-        result = utf8_to_qp("Hello & World!")
-        assert result == "Hello & World!"
+    @pytest.mark.parametrize(
+        "input_str,expected",
+        [
+            ("张三", "=E5=BC=A0=E4=B8=89"),
+            ("John Doe", "John Doe"),
+            ("John 张三", "John =E5=BC=A0=E4=B8=89"),
+            ("", ""),
+            ("Hello & World!", "Hello & World!"),
+        ],
+    )
+    def test_utf8_to_qp(self, input_str, expected):
+        assert utf8_to_qp(input_str) == expected

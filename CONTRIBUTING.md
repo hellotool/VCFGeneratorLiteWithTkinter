@@ -31,7 +31,14 @@ If you encounter problems or have improvement suggestions while using the applic
 
 Localization work is divided into two parts: adding new **phone formats** to support more number types, and translating **application interface** texts.
 
-#### Adding Phone Formats
+#### Using AI-Assisted Localization
+
+If you are unfamiliar with code or translation file formats, you can use modern AI tools such as GitHub Copilot or Trae. Simply describe your requirements in natural language, and the project's built-in AI configuration will automatically generate compliant code or complete translations.
+
+- **Adding Phone Formats**: Describe the new phone number rules to the AI (e.g., "Add Japan phone number format. Mobile numbers start with 090/080/070, total 11 digits. Landlines start with 0, area code 1-2 digits, local number 6-8 digits. Country code +81."), and the AI will automatically generate the configuration code and add it to the correct location.
+- **Translating the Application Interface**: Tell the AI the target language (e.g., "Translate the application interface into Japanese"), and the AI will automatically initialize language files, translate entry by entry, handle variable placeholders and fuzzy markers, and compile the `.mo` file.
+
+#### Manually Adding Phone Formats
 
 To add a new country or region phone format, follow these steps:
 
@@ -39,12 +46,12 @@ To add a new country or region phone format, follow these steps:
 2. **Add Format Entry**: Add a `CountryPhoneFormat` instance to the end of the `PHONE_FORMATS` list, using the following format:
    ```python
    CountryPhoneFormat(
-       id="builtin.country.region",                # Unique identifier, lowercase dot-separated
-       locale_territories={"XX"},                   # ISO 3166-1 alpha-2 territory code
-       name=LazyPgettext("country", "English Name"),  # Translatable country name
+       id="builtin.country.region",                      # Unique identifier, lowercase dot-separated
+       locale_territories={"XX"},                        # ISO 3166-1 alpha-2 territory code
+       name=LazyPgettext("phone_format.country.region", "English Name"),  # Translatable country name
        rules=[
            PhoneRule(
-               length=11,                           # or [11, 14], range(10, 16), None
+               length=11,                                # or [11, 14], range(10, 16), None
                regex=re.compile(r"^regex_pattern$"),
            ),
        ],
@@ -55,16 +62,15 @@ To add a new country or region phone format, follow these steps:
    - `length` field options:
      - `int`: Fixed length.
      - `list[int]`: Multiple allowed lengths (e.g., `[11, 14]` matches numbers with/without international prefix).
-     - `range(min, max+1)`: Length range.
+     - `range(min, max+1)`: Length range. Note that the upper bound of `range` is exclusive, so `range(10, 16)` matches lengths 10–15.
      - Omit the field: No length check, only regex matching applies.
    - Use raw strings `r"..."` if the `regex` contains backslashes.
 3. **Run Checks**: Ensure your code passes Ruff and Pyright checks before submitting:
-
    ```bash
    uv run poe check
    ```
 
-#### Translating the User Interface
+#### Manually Translating the User Interface
 
 To contribute translations to the application, follow these steps:
 
@@ -79,7 +85,9 @@ To contribute translations to the application, follow these steps:
    ```txt
    src/vcf_generator_lite/resources/locales/<locale identifier>/LC_MESSAGES/vcf-generator-lite.po
    ```
-   Fill in the corresponding `msgstr` translation content based on each `msgid`. If `#, fuzzy` is automatically added, **remove this flag** after updating the translation, or the translation will be ignored during compilation.
+   Fill in the corresponding `msgstr` translation content based on each `msgid`.
+   - If `#, fuzzy` is automatically added, **remove this flag** after updating the translation, or the translation will be ignored during compilation.
+   - Keep all variable placeholders intact (e.g., `%s`, `{url}`). The number and order of percent-format placeholders must not be changed, as this will cause runtime substitution errors.
 3. **Compile Language Files**: Once translation is complete, run the following command to generate the `.mo` file:
    ```bash
    uv run poe l10n-compile -l <locale identifier>
@@ -142,6 +150,6 @@ Follow [Conventional Commits][conventionalcommits-homepage].
 [zh-style-guide]: https://zh-style-guide.readthedocs.io/zh-cn/latest/index.html
 
 [pep-0008]: https://peps.python.org/pep-0008/
-[opengroup-pubs-posix-env]: https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap08.html]
+[opengroup-pubs-posix-env]: https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap08.html
 [iso-639]: https://www.iso.org/iso-639-language-code
 [iso-3166]: https://www.iso.org/iso-3166-country-codes.html

@@ -3,7 +3,7 @@ import os
 import subprocess
 import sysconfig
 
-from scripts.app_metadata import app_version_variants
+from scripts.app_metadata import app_metadata, app_version_variants
 from scripts.utils import PATH_SOURCE_RELATIVE, Path, require_external_tool
 
 APP_DOMAIN = "vcf-generator-lite"
@@ -33,6 +33,13 @@ def extract():
         scripts_root = str(Path(__file__).resolve().parent.parent)
         existing_pythonpath = env.get("PYTHONPATH", "")
         env["PYTHONPATH"] = scripts_root + (os.pathsep + existing_pythonpath if existing_pythonpath else "")
+        dynamic_args = []
+        if app_metadata.copyright:
+            dynamic_args.append("--copyright-holder")
+            dynamic_args.append(app_metadata.author)
+        if app_metadata.author_email:
+            dynamic_args.append("--msgid-bugs-address")
+            dynamic_args.append(app_metadata.author_email)
         subprocess.run(  # noqa: S603
             [
                 babel_path,
@@ -42,10 +49,12 @@ def extract():
                 "--output-file",
                 PATH_MSG_POT_RELATIVE,
                 "--no-wrap",
+                "--sort-by-file",
                 "--project",
-                "VCF Generator Lite",
+                app_metadata.display_name,
                 "--version",
                 app_version_variants.wheel,
+                *dynamic_args,
                 PATH_SOURCE_RELATIVE,
                 PATH_ARG_PARSER_SYMBOL_RELATIVE,
             ],
@@ -90,7 +99,6 @@ def update():
             "--domain",
             APP_DOMAIN,
             "--no-wrap",
-            "--update-header-comment",
         ],
         check=True,
     )
