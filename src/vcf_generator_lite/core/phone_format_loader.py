@@ -25,9 +25,9 @@ def filter_phone_formats_by_locale_territories(
     phone_formats: Iterable[CountryPhoneFormat],
     locale_territories: set[str],
 ) -> Iterable[CountryPhoneFormat]:
-    """根据给定的地区集合过滤电话格式。
+    """根据给定的地区集合过滤号码格式。
 
-    :param phone_formats: 全部电话格式。
+    :param phone_formats: 全部号码格式。
     :param locale_territories: 需要保留的地区代码集合。
     :yield: 至少有一个地区匹配的格式。
     """

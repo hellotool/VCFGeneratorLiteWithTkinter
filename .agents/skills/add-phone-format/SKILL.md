@@ -3,9 +3,9 @@ name: add-phone-format
 description: Adds new phone number formats to the VCF Generator Lite application. Use when user needs to add support for a new country or region's phone number formats, or when modifying existing phone format validation rules.
 ---
 
-# 添加电话格式
+# 添加号码格式
 
-为 VCF 生成器 Lite 应用添加新的电话格式配置。
+为 VCF 生成器 Lite 应用添加新的号码格式配置。
 
 ## 前置要求
 
