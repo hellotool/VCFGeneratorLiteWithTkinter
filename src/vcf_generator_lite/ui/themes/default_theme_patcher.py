@@ -10,11 +10,11 @@ class DefaultThemePatcher(BaseThemePatcher):
     def patch(self):
         super().patch()
         theme_name = self.style.theme_use()
-        self._patch_legacy_widgets()
         if theme_name in ("vista", "winnative", "xpnative"):
             self._patch_vista_theme()
         elif theme_name in ("clam", "alt", "default", "classic"):
             self._patch_builtin_platform_independence_theme()
+        self._patch_legacy_widgets()
 
     def _patch_legacy_widgets(self) -> None:
         background = self.style.lookup(".", "background")
