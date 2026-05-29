@@ -2,6 +2,7 @@ import logging
 from abc import ABC
 from tkinter import Event, PhotoImage, Tk, Toplevel, Wm
 from tkinter.ttk import Style
+from types import TracebackType
 from typing import TYPE_CHECKING, override
 
 from vcf_generator_lite.ui.themes.default_theme_patcher import DefaultThemePatcher
@@ -56,6 +57,10 @@ class AppWindowExtension(
         self.bind(EVENT_EXIT, lambda _: self.destroy())
 
 
+def raise_callback_exception(_exc: type[BaseException], val: BaseException, _tb: TracebackType | None = None):
+    raise val
+
+
 class EnhancedTk(Tk, AppWindowExtension, ABC):
     def __init__(self, **kw):
         super().__init__(baseName="vcf_generator_lite", **kw)
@@ -65,6 +70,8 @@ class EnhancedTk(Tk, AppWindowExtension, ABC):
         if not hasattr(self, "theme_patcher"):  # 配置文件中可能已定义此属性，防止覆盖配置文件的属性
             self.theme_patcher = DefaultThemePatcher(self)
         _logger.debug("Loaded theme patcher: %s.", self.theme_patcher)
+
+        self.report_callback_exception = raise_callback_exception
 
         AppWindowExtension.__init__(self)
 
