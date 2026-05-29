@@ -1,22 +1,3 @@
-import logging
-from tkinter import Tk, Toplevel
-
-from vcf_generator_lite.core.vcf_generator import InvalidItem
-from vcf_generator_lite.ui.windows.invalid_items_dialog.controller import InvalidItemsController
 from vcf_generator_lite.ui.windows.invalid_items_dialog.dialog import InvalidItemsDialog
 
-_logger = logging.getLogger(__name__)
-
-
-def create_invalid_items_dialog(
-    master: Tk | Toplevel,
-    display_path: str,
-    invalid_lines: list[InvalidItem],
-) -> tuple[InvalidItemsDialog, InvalidItemsController]:
-    invalid_items_dialog = InvalidItemsDialog(master)
-    invalid_items_controller = InvalidItemsController(invalid_items_dialog, display_path, invalid_lines)
-    _logger.debug(
-        "Created InvalidItemsDialog: %s.",
-        invalid_items_dialog,
-    )
-    return invalid_items_dialog, invalid_items_controller
+__all__ = ["InvalidItemsDialog"]

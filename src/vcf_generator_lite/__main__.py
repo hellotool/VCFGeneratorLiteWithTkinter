@@ -63,7 +63,7 @@ def launch(*, quiet: int, verbose: int):
     from gettext import pgettext
 
     from vcf_generator_lite.constants import URL_REPOSITORY
-    from vcf_generator_lite.ui.windows.main_window import create_app
+    from vcf_generator_lite.ui.windows.main_window import VCFGeneratorLiteApp
     from vcf_generator_lite.utils.environment import fix_home_env
 
     setup_logging(quiet=quiet, verbose=verbose)
@@ -71,7 +71,7 @@ def launch(*, quiet: int, verbose: int):
     if not quiet:
         print(pgettext("startup.source_tip", "💡Tip: Source code is hosted at {url}").format(url=URL_REPOSITORY))
 
-    app, _controller = create_app()
+    app = VCFGeneratorLiteApp()
     app.mainloop()
 
 

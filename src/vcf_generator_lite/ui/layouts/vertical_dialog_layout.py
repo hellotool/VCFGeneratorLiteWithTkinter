@@ -2,10 +2,8 @@ from abc import ABC, abstractmethod
 from tkinter import Misc, Widget
 from tkinter.ttk import Separator
 
-from vcf_generator_lite.utils.tkinter.window import WindowExtension
 
-
-class VerticalDialogLayout(WindowExtension, ABC):
+class VerticalDialogLayout(ABC):
     def _create_widgets(self, parent: Misc, *, header_separator: bool = False):
         header = self._create_header(parent)
         if header is not None:

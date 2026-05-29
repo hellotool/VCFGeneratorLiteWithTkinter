@@ -1,53 +1,65 @@
-import urllib.parse
-from collections.abc import Callable
+import dataclasses
+import logging
+import signal
 from gettext import pgettext
-from tkinter import BooleanVar, Menu, Misc, Text
-from tkinter.ttk import Button, Frame, Label, Progressbar, Sizegrip
-from typing import Literal, override
+from itertools import chain
+from pathlib import Path
+from tkinter import Event, filedialog
+from types import FrameType
+from typing import TYPE_CHECKING, NamedTuple, TextIO, override
 
-from ttk_text.scrolled_text import ScrolledText
-
-from vcf_generator_lite.constants import (
-    EMAIL_AUTHOR,
-    URL_LICENSE,
-    URL_OS_NOTICES,
-    URL_RELEASES,
-    URL_REPORT,
-    URL_REPOSITORY,
-)
-from vcf_generator_lite.core.phone_format_loader import CountryPhoneFormat
-from vcf_generator_lite.ui.actions.external_app import open_url
+from vcf_generator_lite.core.phone_format_loader import load_country_phone_formats
+from vcf_generator_lite.core.vcf_generator import GenerateResult, InvalidItem, PhoneRule, VCFGeneratorTask
 from vcf_generator_lite.ui.app_text import app_name
-from vcf_generator_lite.ui.layouts.vertical_dialog_layout import VerticalDialogLayout
-from vcf_generator_lite.ui.widgets.line_number_bar import LineNumberBar
-from vcf_generator_lite.ui.widgets.text_menu import TextContextMenu
 from vcf_generator_lite.ui.windows.base_window import EnhancedTk
 from vcf_generator_lite.ui.windows.base_window.constants import EVENT_EXIT
-from vcf_generator_lite.ui.windows.main_window.constants import (
-    ACCELERATOR_GENERATE,
-    ACCELERATOR_GENERATE_AQUA,
-    EVENT_ABOUT,
-    EVENT_CLEAN_QUOTES,
-    EVENT_GENERATE,
-    EVENT_GENERATE_OR_STOP,
-    EVENT_STOP,
+from vcf_generator_lite.ui.windows.main_window.layout import MainLayout
+from vcf_generator_lite.ui.windows.main_window.menu_bar import MainMenuBar
+from vcf_generator_lite.ui.windows.main_window.message_boxes import (
+    show_generation_error_dialog,
+    show_generation_success_dialog,
+    show_save_os_error_message,
+    show_save_permission_denied_message,
 )
-from vcf_generator_lite.utils.tkinter.accelerators import get_default_accelerators
-from vcf_generator_lite.utils.tkinter.busy import tk_busy_forget, tk_busy_hold, tk_busy_status
-from vcf_generator_lite.utils.tkinter.menu import pgettext_menu_label
-from vcf_generator_lite.utils.tkinter.widget import enable_auto_wrap, needs_sizegrip
+from vcf_generator_lite.ui.windows.main_window.states import GenerationState
+from vcf_generator_lite.ui.windows.message_boxes.about import show_about_message_box
+from vcf_generator_lite.utils.i18n.zipapp_gettext import get_default_locales, get_locale_territories
+from vcf_generator_lite.utils.text import clean_quotes
+from vcf_generator_lite.utils.tkinter.text import search_line, select_text
+
+if TYPE_CHECKING:
+    from vcf_generator_lite.models.phone_format import CountryPhoneFormat
+
+_logger = logging.getLogger(__name__)
 
 
-class VCFGeneratorLiteApp(EnhancedTk, VerticalDialogLayout):
-    generate_or_stop_button: Button
-    content_text: ScrolledText
-    progress_bar: Progressbar
+class Generation(NamedTuple):
+    generator: VCFGeneratorTask
+    file: Path
+    file_io: TextIO
 
+
+class VCFGeneratorLiteApp(EnhancedTk):
     def __init__(self):
-        self.phone_formats_menu: Menu | None = None
-        self._phone_format_vars: dict[str, BooleanVar] = {}
-        self._on_country_toggle: Callable[[str, bool], None] | None = None
-        self._on_select_all_toggle: Callable[[bool], None] | None = None
+        self.is_exiting = False
+        self.current_generation: Generation | None = None
+        self.save_vcf_file_name: str = pgettext("save_vcf_window.default_file_name", "My Contacts.vcf")
+        self.phone_formats_dict: dict[str, CountryPhoneFormat] = load_country_phone_formats()
+        self.phone_formats_list: list[CountryPhoneFormat] = sorted(
+            self.phone_formats_dict.values(),
+            key=lambda phone_format: phone_format.id,
+        )
+        locale_territories = set(get_locale_territories(get_default_locales()))
+        self.phone_formats_ids = set(self.phone_formats_dict.keys())
+        self.selected_phone_formats_ids: set[str] = {
+            phone_format.id
+            for phone_format in self.phone_formats_list
+            if phone_format.locale_territories & locale_territories
+        }
+
+        if not self.selected_phone_formats_ids and self.phone_formats_list:
+            self.selected_phone_formats_ids.add(self.phone_formats_list[0].id)
+
         super().__init__(className="VCFGeneratorLite")
 
     @override
@@ -56,335 +68,217 @@ class VCFGeneratorLiteApp(EnhancedTk, VerticalDialogLayout):
         self.title(app_name())
         self.wm_minsize_pt(300, 300)
         self.wm_size_pt(450, 450)
-        self._create_widgets(self)
-        menu_bar = self._create_menu_bar()
-        self.configure(menu=menu_bar)
+        self.layout = MainLayout(self, self)
+        self.menu_bar = MainMenuBar(self, self)
+        self.configure(menu=self.menu_bar)
+
+        self.bind("<Control-Lock-G>", self.on_generate)
+        self.bind("<Control-g>", self.on_generate)
+        self.bind("<Return>", self.on_return)
+        self.bind(EVENT_EXIT, self.on_exit)
+
+        signal.signal(signal.SIGINT, self._handle_sigint)
 
     @override
     def _configure_ui(self):
         super()._configure_ui()
-        self.content_text.focus_set()
+        self.layout.content_text.focus_set()
 
-    @override
-    def _create_header(self, parent: Misc):
-        description_label = Label(
-            parent,
-            text=pgettext(
-                "main_window.usage",
-                """Instructions:
-1. Copy names and phone numbers in the format "Name Phone Notes" (notes optional) into the edit box below.
-2. Click "Generate" and select a path to save the file.
-3. You can use the generated vCard file wherever you need it, such as importing it into your phone or email.""",
-            ),
-            justify="left",
-        )
-        enable_auto_wrap(description_label)
-        description_label.pack(fill="x", padx="8.25p", pady="8.25p")
-        return description_label
+    def on_about(self):
+        show_about_message_box(self)
 
-    @override
-    def _create_content(self, parent: Misc):
-        self.content_text = ScrolledText(
-            parent,
-            undo=True,
-            tabs="2c",
-            tabstyle="wordprocessor",
-            maxundo=5,
-            width=0,
-            height=0,
-        )
-        self.content_text.insert(
-            0.0,
-            pgettext(
-                "main_window.input_example",
-                """Qu Yuan\t13333333333\tPoet of the Warring States period
-Cao Cao\t13444444444
-Tao Y.M.\t13555555555
-Xie Lingyun\t13666666666
-""",
-            ),
-        )
-        self.content_text.edit_reset()
-        self.content_text.pack(fill="both", expand=True, padx="8.25p", pady=0)
+    def on_clean_quotes(self):
+        self._clean_quotes()
 
-        self.line_numbers = LineNumberBar(self.content_text.frame)
-        self.line_numbers.bind_text(self.content_text.text_proxy())
-        self.line_numbers.grid(row=1, column=0, sticky="ns")
-        self.__update_line_numbers_padding()
-        self.content_text.frame.bind_widget(self.line_numbers, penetration_state=True)
-        self.content_text.bind("<<ThemeChanged>>", lambda _: self.__update_line_numbers_padding(), "+")
+    def on_generate(self, _event: Event | None = None):
+        self._generate_file()
 
-        text_context_menu = TextContextMenu(self.content_text)
-        text_context_menu.bind_to_widget()
-        return self.content_text
+    def on_stop_generation(self):
+        self._stop_generation()
 
-    def __update_line_numbers_padding(self):
-        self.line_numbers.grid(pady=Text.grid_info(self.content_text).get("pady", None))
-
-    @override
-    def _create_footer(self, parent: Misc):
-        footer_frame = Frame(parent)
-        if needs_sizegrip(parent):
-            sizegrip = Sizegrip(footer_frame)
-            sizegrip.place(relx=1, rely=1, anchor="se")
-
-        self.progress_bar = Progressbar(footer_frame, orient="horizontal", length=200)
-        self.progress_label = Label(master=footer_frame, text=pgettext("main_window.label_generating", "Generating..."))
-
-        self.generate_or_stop_button = Button(
-            footer_frame,
-            text=pgettext("main_window.button_generate", "Generate"),
-            default="active",
-            command=lambda: self.event_generate(EVENT_GENERATE_OR_STOP),
-        )
-        self.generate_or_stop_button.pack(side="right", padx="8.25p", pady="8.25p")
-        return footer_frame
-
-    def _create_menu_bar(self):
-        menu_bar = Menu(self, tearoff=False, name="menubar")
-        menu_bar.add_cascade(
-            **pgettext_menu_label("main_window.menu_file", "&File"),
-            menu=self._create_file_menu(menu_bar),
-        )
-        menu_bar.add_cascade(
-            **pgettext_menu_label("main_window.menu_edit", "&Edit"),
-            menu=self._create_edit_menu(menu_bar),
-        )
-        menu_bar.add_cascade(
-            **pgettext_menu_label("main_window.menu_options", "&Options"),
-            menu=self._create_options_menu(menu_bar),
-        )
-        menu_bar.add_cascade(
-            **pgettext_menu_label("main_window.menu_help", "&Help"),
-            menu=self._create_help_menu(menu_bar),
-        )
-        return menu_bar
-
-    def _create_options_menu(self, master: Misc):
-        options_menu = Menu(master, tearoff=False)
-        self.phone_formats_menu = Menu(options_menu, tearoff=False)
-        options_menu.add_cascade(
-            **pgettext_menu_label("main_window.menu_phone_formats", "&Phone Formats"),
-            menu=self.phone_formats_menu,
-        )
-        return options_menu
-
-    def _create_file_menu(self, master: Misc):
-        self.file_menu = file_menu = Menu(master, tearoff=False)
-
-        generate_parse_result = pgettext_menu_label("main_window.menu_file_generate", "&Generate file...")
-        self.menu_generate_label = generate_parse_result["label"]
-        file_menu.add_command(
-            **generate_parse_result,
-            command=lambda: self.event_generate(EVENT_GENERATE),
-            accelerator=ACCELERATOR_GENERATE_AQUA if self._windowingsystem == "aqua" else ACCELERATOR_GENERATE,
-        )
-
-        stop_generation_parse_result = pgettext_menu_label("main_window.menu_file_stop_generation", "&Stop generation")
-        self.menu_stop_generation_label = stop_generation_parse_result["label"]
-        file_menu.add_command(
-            **stop_generation_parse_result,
-            command=lambda: self.event_generate(EVENT_STOP),
-            state="disabled",
-        )
-
-        file_menu.add_separator()
-        # 通常不提供退出的快捷键
-        # https://learn.microsoft.com/en-us/windows/win32/uxguide/cmd-menus
-        file_menu.add_command(
-            **pgettext_menu_label("main_window.menu_file_exit", "E&xit"),
-            command=lambda: self.event_generate(EVENT_EXIT),
-        )
-        return file_menu
-
-    def _create_edit_menu(self, master: Misc):
-        default_accelerators = get_default_accelerators(self)
-
-        edit_menu = Menu(master, tearoff=False)
-        edit_menu.add_command(
-            **pgettext_menu_label("main_window.menu_edit_undo", "&Undo"),
-            command=lambda: self.__generate_focus_event("<<Undo>>"),
-            accelerator=default_accelerators.undo,
-        )
-        edit_menu.add_command(
-            **pgettext_menu_label("main_window.menu_edit_redo", "&Redo"),
-            command=lambda: self.__generate_focus_event("<<Redo>>"),
-            accelerator=default_accelerators.redo,
-        )
-        edit_menu.add_separator()
-        edit_menu.add_command(
-            **pgettext_menu_label("main_window.menu_edit_cut", "Cu&t"),
-            command=lambda: self.__generate_focus_event("<<Cut>>"),
-            accelerator=default_accelerators.cut,
-        )
-        edit_menu.add_command(
-            **pgettext_menu_label("main_window.menu_edit_copy", "&Copy"),
-            command=lambda: self.__generate_focus_event("<<Copy>>"),
-            accelerator=default_accelerators.copy,
-        )
-        edit_menu.add_command(
-            **pgettext_menu_label("main_window.menu_edit_paste", "&Paste"),
-            command=lambda: self.__generate_focus_event("<<Paste>>"),
-            accelerator=default_accelerators.paste,
-        )
-        edit_menu.add_command(
-            **pgettext_menu_label("main_window.menu_edit_select_all", "Select &All"),
-            command=lambda: self.__generate_focus_event("<<SelectAll>>"),
-            accelerator=default_accelerators.select_all,
-        )
-        edit_menu.add_separator()
-        edit_menu.add_command(
-            **pgettext_menu_label("main_window.menu_edit_clean_quotes", "Remove &Quotes"),
-            command=lambda: self.event_generate(EVENT_CLEAN_QUOTES),
-        )
-        return edit_menu
-
-    def _create_help_menu(self, master: Misc):
-        help_menu = Menu(master, tearoff=False, name="help")
-        help_menu.add_command(
-            **pgettext_menu_label("main_window.menu_help_repository", "Rep&ository"),
-            command=lambda: open_url(self, URL_REPOSITORY),
-        )
-        help_menu.add_command(
-            **pgettext_menu_label("main_window.menu_help_release", "&Releases"),
-            command=lambda: open_url(self, URL_RELEASES),
-        )
-        help_menu.add_separator()
-        help_menu.add_command(
-            **pgettext_menu_label("main_window.menu_help_feedback", "&Feedback"),
-            command=lambda: open_url(self, URL_REPORT),
-        )
-        help_menu.add_command(
-            **pgettext_menu_label("main_window.menu_help_contact", "&Contact Author"),
-            command=lambda: open_url(
-                parent=self,
-                url=urllib.parse.SplitResult(
-                    scheme="mailto",
-                    netloc="",
-                    path=EMAIL_AUTHOR,
-                    query="",
-                    fragment="",
-                ).geturl(),
-            ),
-        )
-        help_menu.add_separator()
-        help_menu.add_command(
-            **pgettext_menu_label("main_window.menu_help_license", "&License"),
-            command=lambda: open_url(self, URL_LICENSE),
-        )
-        help_menu.add_command(
-            **pgettext_menu_label("main_window.menu_help_os_notices", "Open Source &Notices"),
-            command=lambda: open_url(self, URL_OS_NOTICES),
-        )
-        help_menu.add_separator()
-        help_menu.add_command(
-            **pgettext_menu_label("main_window.menu_help_about", "&About VCF Generator Lite"),
-            command=lambda: self.event_generate(EVENT_ABOUT),
-        )
-        return help_menu
-
-    def __generate_focus_event(self, sequence: str):
-        if widget := self.focus_get():
-            widget.event_generate(sequence)
-
-    def set_text_content(self, content: str):
-        self.content_text.replace(1.0, "end", content)
-
-    def get_text_content(self) -> str:
-        return self.content_text.get(1.0, "end")[:-1]
-
-    def show_progress(self):
-        self.progress_bar.pack(side="left", padx="8.25p", pady="8.25p")
-        self.progress_label.pack(side="left", padx=(0, "8.25p"), pady="8.25p")
-
-    def hide_progress(self):
-        self.progress_bar.pack_forget()
-        self.progress_label.pack_forget()
-
-    def set_progress(self, progress: float):
-        self.progress_bar.configure(value=progress)
-
-    def set_progress_determinate(self, value: bool):
-        previous_value: bool = self.progress_bar.cget("mode") == "determinate"
-        if value == previous_value:
-            return
-        if value:
-            self.progress_bar.configure(mode="determinate", maximum=1)
-            self.progress_bar.stop()
+    def on_generate_or_stop(self, _event: Event | None = None):
+        if self.current_generation:
+            self.on_stop_generation()
         else:
-            self.progress_bar.configure(mode="indeterminate", maximum=10)
-            self.progress_bar.start()
+            self.on_generate()
 
-    def set_generating(self, state: bool | Literal["stopping"]):
-        if state is True:
-            self.generate_or_stop_button.configure(text=pgettext("main_window.button_stop", "Stop"), state="normal")
-            if tk_busy_status(self.generate_or_stop_button):
-                tk_busy_forget(self.generate_or_stop_button)
-            self.progress_label.configure(text=pgettext("main_window.label_generating", "Generating..."))
-            self.show_progress()
-        elif state is False:
-            self.generate_or_stop_button.configure(
-                text=pgettext("main_window.button_generate", "Generate"), state="normal"
-            )
-            if tk_busy_status(self.generate_or_stop_button):
-                tk_busy_forget(self.generate_or_stop_button)
-            self.hide_progress()
-        elif state == "stopping":
-            self.generate_or_stop_button.configure(text=pgettext("main_window.button_stop", "Stop"), state="disabled")
-            if not tk_busy_status(self.generate_or_stop_button):
-                tk_busy_hold(self.generate_or_stop_button)
-            self.progress_label.configure(text=pgettext("main_window.label_stopping", "Stopping..."))
-            self.show_progress()
-            self.set_progress_determinate(False)
-        self.file_menu.entryconfigure(self.menu_generate_label, state="normal" if state is False else "disabled")
-        self.file_menu.entryconfigure(self.menu_stop_generation_label, state="normal" if state is True else "disabled")
+    def on_exit(self, _event: Event | None = None):
+        self.is_exiting = True
+        if self.current_generation:
+            self._stop_generation()
+        else:
+            self.destroy()
 
-    def set_phone_formats(
-        self,
-        phone_formats: list[CountryPhoneFormat],
-        selected_ids: set[str],
-        on_country_toggle: Callable[[str, bool], None],
-        on_select_all_toggle: Callable[[bool], None],
-    ):
-        if self.phone_formats_menu is None:
+    def on_return(self, event: Event):
+        if str(self.layout.content_text.frame).startswith(str(event.widget)):
             return
-        self._on_country_toggle = on_country_toggle
-        self._on_select_all_toggle = on_select_all_toggle
-        self._phone_format_vars.clear()
-        self.phone_formats_menu.delete(0, "end")
+        self.layout.generate_or_stop_button.invoke()
 
-        all_territories = set()
-        for fmt in phone_formats:
-            all_territories.update(fmt.locale_territories)
-        all_selected = selected_ids.issuperset(all_territories)
+    def on_toggle_phone_format(self, format_id: str):
+        if not self.is_phone_format_selected(format_id):
+            self.selected_phone_formats_ids.add(format_id)
+            self.menu_bar.update_phone_formats_selection({format_id}, True)
+        else:
+            self.selected_phone_formats_ids.discard(format_id)
+            self.menu_bar.update_phone_formats_selection({format_id}, False)
 
-        select_all_var = BooleanVar(value=all_selected)
+    def on_toggle_all_phone_formats(self):
+        if not self.is_all_phone_formats_selected():
+            self.selected_phone_formats_ids.update(self.phone_formats_ids)
+            self.menu_bar.update_phone_formats_selection(self.phone_formats_ids, True)
+        else:
+            self.selected_phone_formats_ids.clear()
+            self.menu_bar.update_phone_formats_selection(self.phone_formats_ids, False)
 
-        def on_toggle_select_all():
-            new_state = select_all_var.get()
-            if self._on_select_all_toggle:
-                self._on_select_all_toggle(new_state)
-            for var in self._phone_format_vars.values():
-                var.set(new_state)
+    def _generate_file(self):
+        if self.current_generation:
+            return
+        pick_result = self._pick_and_open_file()
+        if not pick_result:
+            return
+        file, file_io = pick_result
+        input_text = self.layout.get_text_content()
+        selected_rules = self._get_selected_rules()
+        self._prepare_ui_for_generation()
+        self._start_generation_task(input_text, selected_rules, file, file_io)
 
-        self.phone_formats_menu.add_checkbutton(
-            **pgettext_menu_label("main_window.menu_select_all_phone_formats", "Select &All"),
-            variable=select_all_var,
-            command=on_toggle_select_all,
+    def _pick_and_open_file(self) -> None | tuple[Path, TextIO]:
+        file_path_str = filedialog.asksaveasfilename(
+            title=pgettext("save_vcf_window.title", "Select File Save Location"),
+            parent=self,
+            initialfile=self.save_vcf_file_name,
+            filetypes=[(pgettext("save_vcf_window.label_type_vcf", "vCard File (*.vcf)"), ".vcf")],
+            defaultextension=".vcf",
         )
-        self.phone_formats_menu.add_separator()
+        if not file_path_str:
+            return None
+        generation_file = Path(file_path_str)
+        self.save_vcf_file_name = generation_file.name
+        try:
+            file_io = generation_file.open("w", encoding="utf-8", newline="\r\n")
+        except PermissionError:
+            show_save_permission_denied_message(self)
+            return None
+        except OSError as e:
+            show_save_os_error_message(self, e)
+            return None
+        return generation_file, file_io
 
-        for fmt in phone_formats:
-            is_selected = fmt.id in selected_ids
-            var = BooleanVar(value=is_selected)
-            self._phone_format_vars[fmt.id] = var
+    def _stop_generation(self):
+        generation = self.current_generation
+        if generation is None or generation.generator.is_stopping or not generation.generator.is_alive():
+            return
 
-            def on_toggle_country(terr: str = fmt.id, v: BooleanVar = var):
-                if self._on_country_toggle:
-                    self._on_country_toggle(terr, v.get())
+        self.layout.set_generating(GenerationState.STOPPING)
+        generation.generator.stop()
 
-            self.phone_formats_menu.add_checkbutton(
-                label=pgettext("phone_format.name", pgettext(fmt.name.context, fmt.name.message)),
-                variable=var,
-                command=on_toggle_country,
+    def _prepare_ui_for_generation(self):
+        self.layout.content_text.edit_modified(False)
+        self.layout.set_progress(progress=0)
+        self.layout.set_progress_determinate(False)
+        self.layout.set_generating(GenerationState.GENERATING)
+        self.menu_bar.update_generating_state(GenerationState.GENERATING)
+        self.update()
+
+    def _start_generation_task(self, input_text: str, rules: list[PhoneRule], file: Path, file_io: TextIO):
+        generator = VCFGeneratorTask(
+            input_text=input_text,
+            output_io=file_io,
+            progress_listener=self.on_generation_update_progress,
+            result_listener=self.on_generation_result,
+            phone_rules=rules,
+        )
+        self.current_generation = Generation(generator=generator, file=file, file_io=file_io)
+        generator.start()
+
+    def _get_selected_rules(self) -> list[PhoneRule]:
+        return list(
+            chain.from_iterable(
+                self.phone_formats_dict[format_id].rules for format_id in self.selected_phone_formats_ids
             )
+        )
+
+    def _clean_quotes(self):
+        self.layout.set_text_content(clean_quotes(self.layout.get_text_content()))
+
+    def _show_generation_done_dialog(self, display_path: str, generate_result: GenerateResult):
+        if generate_result.exception:
+            if isinstance(generate_result.exception, OSError):
+                show_save_os_error_message(self, generate_result.exception)
+            else:
+                show_generation_error_dialog(self, generate_result.exception)
+        elif len(generate_result.invalid_items) > 0:
+            self._show_generation_invalid_dialog(display_path, generate_result.invalid_items)
+        else:
+            show_generation_success_dialog(self, display_path, generate_result)
+
+    def _show_generation_invalid_dialog(self, display_path: str, invalid_items: list[InvalidItem]):
+        from vcf_generator_lite.ui.windows.invalid_items_dialog import InvalidItemsDialog
+
+        invalid_items_dialog = InvalidItemsDialog(self, display_path, invalid_items)
+        invalid_items_dialog.set_line_enter_listener(self._on_select_invalid_line)
+
+    def on_generation_update_progress(self, progress: float, determinate: bool):
+        generation = self._require_generation()
+        if generation.generator.is_stopping:
+            return
+
+        self.layout.set_progress_determinate(determinate)
+        if determinate:
+            self.layout.set_progress(progress)
+
+    def on_generation_done(self, result: GenerateResult):
+        generation = self._require_generation()
+        self.current_generation = None
+        self.layout.set_generating(GenerationState.IDLE)
+        self.menu_bar.update_generating_state(GenerationState.IDLE)
+        self.update()
+
+        if not self.is_exiting:
+            self._show_generation_done_dialog(
+                display_path=str(generation.file),
+                generate_result=result,
+            )
+        else:
+            self.destroy()
+
+    def on_generation_result(self, result: GenerateResult):
+        generation = self._require_generation()
+        try:
+            generation.file_io.close()
+        except OSError as e:
+            _logger.exception("Failed to close file after generation: %s", generation.file)
+            if result.exception is None:
+                result = dataclasses.replace(result, exception=e)
+
+        self.after_idle(self.on_generation_done, result)
+
+    def is_all_phone_formats_selected(self):
+        return (self.selected_phone_formats_ids & self.phone_formats_ids) == self.phone_formats_ids
+
+    def is_phone_format_selected(self, format_id: str):
+        if format_id not in self.phone_formats_dict:
+            raise ValueError(f"Unknown phone format: {format_id}")
+        return format_id in self.selected_phone_formats_ids
+
+    def _require_generation(self) -> Generation:
+        if not self.current_generation:
+            raise RuntimeError("Invoke callback without generating.")
+        return self.current_generation
+
+    def _on_select_invalid_line(self, line: int, data: str):
+        actual_line: int | None
+        if self.layout.content_text.get(f"{line}.0", f"{line}.end") == data:
+            actual_line = line
+        else:
+            actual_line = search_line(self.layout.content_text, data, line, strip=True)
+
+        if actual_line is not None:
+            self.deiconify()
+            self.lift()
+            self.layout.content_text.focus_set()
+            select_text(self.layout.content_text, f"{actual_line}.0", f"{actual_line}.end")
+
+    def _handle_sigint(self, sig_num: int, _frame: FrameType | None):
+        if sig_num == signal.SIGINT:
+            self.on_exit()
