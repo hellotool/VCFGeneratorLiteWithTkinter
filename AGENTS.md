@@ -76,3 +76,9 @@ VCFGeneratorLiteWithTkinter/
 ## 更多信息
 
 有关视觉设计、版本管理和构建指南的信息，请参阅 `docs/dev` 目录。
+
+## 规则
+
+- 在完成代码修改后，**请勿提交到版本控制**！
+- 代码生成后必须使用 `uv run poe format` 格式化代码。
+- 代码生成后必须使用 `uv run poe check` 检查代码。
