@@ -27,14 +27,14 @@ class PhoneRule:
 
 
 @dataclass(frozen=True)
-class CountryPhoneFormat:
+class PhoneFormat:
     id: str
     locale_territories: set[str]
     """ISO 3166-1 二位地区代码集合。一个格式可适用于多个地区。"""
     name: LazyPgettext
     rules: list[PhoneRule]
 
-    def __add__(self, other: "CountryPhoneFormat") -> "CountryPhoneFormat":
+    def __add__(self, other: "PhoneFormat") -> "PhoneFormat":
         """合并两个相同 ``id`` 的格式。"""
         if self.id != other.id:
             raise ValueError(f"Id mismatch: {self.id} != {other.id}")

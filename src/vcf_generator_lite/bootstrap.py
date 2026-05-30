@@ -10,16 +10,18 @@ from tempfile import NamedTemporaryFile
 from tkinter.messagebox import Message, showerror
 from types import TracebackType
 
+# 请勿去全局导入任何依赖 gettext 的模块，因为要打猴子补丁。
+
 _logger = logging.getLogger(__name__)
 
 
 def setup_l10n():
     import gettext as gettextlib
 
-    from vcf_generator_lite.utils import resources
     from vcf_generator_lite.utils.i18n.zipapp_gettext import translation
+    from vcf_generator_lite.utils.resources import resources_traversable
 
-    app_translation = translation(domain="vcf-generator-lite", localedir=resources.traversable.joinpath("locales"))
+    app_translation = translation(domain="vcf-generator-lite", localedir=resources_traversable.joinpath("locales"))
 
     gettextlib.gettext = app_translation.gettext
     gettextlib.ngettext = app_translation.ngettext

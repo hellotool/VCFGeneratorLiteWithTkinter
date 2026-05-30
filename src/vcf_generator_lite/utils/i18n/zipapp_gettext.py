@@ -66,7 +66,7 @@ def _expanded_langs(languages: Iterable[str]) -> Iterable[str]:
     for lang in chain.from_iterable(_expand_lang(lang) for lang in languages):
         if lang == "C":
             break
-        if lang and lang not in yielded_langs:
+        if lang and (lang not in yielded_langs):
             yielded_langs.add(lang)
             yield lang
 

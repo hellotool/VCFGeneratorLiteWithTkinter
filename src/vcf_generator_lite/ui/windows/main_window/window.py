@@ -28,7 +28,7 @@ from vcf_generator_lite.utils.text import clean_quotes
 from vcf_generator_lite.utils.tkinter.text import search_line, select_text
 
 if TYPE_CHECKING:
-    from vcf_generator_lite.models.phone_format import CountryPhoneFormat
+    from vcf_generator_lite.models.phone_format import PhoneFormat
 
 _logger = logging.getLogger(__name__)
 
@@ -44,8 +44,8 @@ class VCFGeneratorLiteApp(EnhancedTk):
         self.is_exiting = False
         self.current_generation: Generation | None = None
         self.save_vcf_file_name: str = pgettext("save_vcf_window.default_file_name", "My Contacts.vcf")
-        self.phone_formats_dict: dict[str, CountryPhoneFormat] = load_country_phone_formats()
-        self.phone_formats_list: list[CountryPhoneFormat] = sorted(
+        self.phone_formats_dict: dict[str, PhoneFormat] = load_country_phone_formats()
+        self.phone_formats_list: list[PhoneFormat] = sorted(
             self.phone_formats_dict.values(),
             key=lambda phone_format: phone_format.id,
         )

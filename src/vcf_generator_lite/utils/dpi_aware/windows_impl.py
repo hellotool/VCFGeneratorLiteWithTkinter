@@ -1,16 +1,11 @@
 import logging
 from ctypes import FormatError, get_last_error, windll
-from enum import Enum
 
 logger = logging.getLogger(__name__)
 
-
-class ProcessDpiAwareness(Enum):
-    """`PROCESS_DPI_AWARENESS 枚举 (shellscalingapi.h) <https://learn.microsoft.com/zh-cn/windows/win32/api/shellscalingapi/ne-shellscalingapi-process_dpi_awareness>`_。"""
-
-    PROCESS_DPI_UNAWARE = 0
-    PROCESS_SYSTEM_DPI_AWARE = 1
-    PROCESS_PER_MONITOR_DPI_AWARE = 2
+# ProcessDpiAwareness
+# https://learn.microsoft.com/zh-cn/windows/win32/api/shellscalingapi/ne-shellscalingapi-process_dpi_awareness
+PROCESS_SYSTEM_DPI_AWARE = 1
 
 
 def _try_set_process_dpi_awareness() -> bool:
@@ -21,7 +16,7 @@ def _try_set_process_dpi_awareness() -> bool:
     """
     if not hasattr(windll.shcore, "SetProcessDpiAwareness"):
         return False
-    result: int = windll.shcore.SetProcessDpiAwareness(ProcessDpiAwareness.PROCESS_SYSTEM_DPI_AWARE.value)
+    result: int = windll.shcore.SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE)
     if result != 0:
         logger.warning("Failed to call SetProcessDpiAwareness: %s", FormatError(result))
     return result == 0
@@ -41,7 +36,7 @@ def _try_set_process_dpi_aware() -> bool:
     return result
 
 
-def windows_enable_dpi_aware() -> bool:
+def enable_dpi_aware() -> bool:
     if _try_set_process_dpi_awareness():
         return True
     return _try_set_process_dpi_aware()

@@ -1,10 +1,10 @@
 import re
 
 from vcf_generator_lite.models.lazy import LazyPgettext
-from vcf_generator_lite.models.phone_format import CountryPhoneFormat, PhoneRule
+from vcf_generator_lite.models.phone_format import PhoneFormat, PhoneRule
 
-PHONE_FORMATS = [
-    CountryPhoneFormat(
+PHONE_FORMATS: list[PhoneFormat] = [
+    PhoneFormat(
         id="builtin.china.mainland",
         locale_territories={"CN"},
         name=LazyPgettext("phone_format.china.mainland", "Chinese mainland"),
@@ -13,7 +13,7 @@ PHONE_FORMATS = [
             PhoneRule(length=range(10, 16), regex=re.compile(r"^(?:\+86)?0\d{2,3}\d{7,8}$")),
         ],
     ),
-    CountryPhoneFormat(
+    PhoneFormat(
         id="builtin.china.hongkong",
         locale_territories={"HK"},
         name=LazyPgettext("phone_format.china.hongkong", "Hong Kong, China"),
@@ -22,7 +22,7 @@ PHONE_FORMATS = [
             PhoneRule(length=[8, 12], regex=re.compile(r"^(?:\+852)?[23]\d{7}$")),
         ],
     ),
-    CountryPhoneFormat(
+    PhoneFormat(
         id="builtin.china.macau",
         locale_territories={"MO"},
         name=LazyPgettext("phone_format.china.macau", "Macau, China"),
@@ -31,7 +31,7 @@ PHONE_FORMATS = [
             PhoneRule(length=[8, 12], regex=re.compile(r"^(?:\+853)?28\d{6}$")),
         ],
     ),
-    CountryPhoneFormat(
+    PhoneFormat(
         id="builtin.china.taiwan",
         locale_territories={"TW"},
         name=LazyPgettext("phone_format.china.taiwan", "Taiwan, China"),

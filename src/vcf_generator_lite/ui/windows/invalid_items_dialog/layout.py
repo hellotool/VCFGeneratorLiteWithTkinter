@@ -23,7 +23,7 @@ class InvalidItemsDialogLayout(VerticalDialogLayout):
     @override
     def _create_header(self, parent: Misc):
         header_frame = Frame(parent, style="DialogHeader.TFrame")
-        self.header_icon = Label(
+        header_icon = Label(
             header_frame,
             text="\u26a0",
             font=extend_font_scale(24 / 9),
@@ -31,16 +31,16 @@ class InvalidItemsDialogLayout(VerticalDialogLayout):
             foreground="orange",
         )
         # 图标间距未严格遵循 Windows 的设计，因为那样会显得过于拥挤
-        self.header_icon.pack(side="left", padx="8.25p", pady="8.25p", anchor="n")
-        self.header_label = Label(
+        header_icon.pack(side="left", padx="8.25p", pady="8.25p", anchor="n")
+        header_label = Label(
             header_frame,
             style="DialogHeaderContent.TLabel",
             text=pgettext(
                 "vcf_generate_invalid_dialog.message", "File exported to {path}, invalid numbers have been ignored."
             ).format(path=self.window.display_path),
         )
-        enable_auto_wrap(self.header_label)
-        self.header_label.pack(fill="x", padx=(0, "8.25p"), pady="8.25p", anchor="center", expand=True)
+        enable_auto_wrap(header_label)
+        header_label.pack(fill="x", padx=(0, "8.25p"), pady="8.25p", anchor="center", expand=True)
         return header_frame
 
     @override

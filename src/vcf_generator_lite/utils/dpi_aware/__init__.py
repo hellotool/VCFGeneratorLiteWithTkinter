@@ -1,10 +1,8 @@
 from vcf_generator_lite.utils.environment import is_windows
 
+if is_windows:
+    from vcf_generator_lite.utils.dpi_aware.windows_impl import enable_dpi_aware
+else:
+    from vcf_generator_lite.utils.dpi_aware.no_impl import enable_dpi_aware
 
-def enable_dpi_aware() -> bool:
-    if is_windows:
-        from vcf_generator_lite.utils.dpi_aware.windows_impl import windows_enable_dpi_aware
-
-        return windows_enable_dpi_aware()
-
-    return False
+__all__ = ["enable_dpi_aware"]

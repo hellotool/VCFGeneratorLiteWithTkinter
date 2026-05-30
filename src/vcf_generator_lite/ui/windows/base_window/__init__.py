@@ -28,14 +28,6 @@ class AppWindowExtension(
     WindowExtension,
     ABC,
 ):
-    """应用程序窗口扩展基类，集成多个窗口功能扩展
-
-    特性：
-    - 继承 GeometryWindowExtension: 提供基于物理/虚拟像素的窗口尺寸控制
-    - 继承 CenterWindowExtension: 实现窗口居中显示功能
-    - 继承 WindowExtension: 基础窗口功能扩展
-    """
-
     def __init__(self):
         super().__init__()
         with withdraw_cm(self):
@@ -64,8 +56,7 @@ def raise_callback_exception(_exc: type[BaseException], val: BaseException, _tb:
 class EnhancedTk(Tk, AppWindowExtension, ABC):
     def __init__(self, **kw):
         super().__init__(baseName="vcf_generator_lite", **kw)
-        self.previous_patched_theme: str | None = None
-
+        self._previous_patched_theme: str | None = None
         self.theme_patcher: ThemePatcher
         if not hasattr(self, "theme_patcher"):  # 配置文件中可能已定义此属性，防止覆盖配置文件的属性
             self.theme_patcher = DefaultThemePatcher(self)
@@ -90,13 +81,13 @@ class EnhancedTk(Tk, AppWindowExtension, ABC):
         self.bind("<<ThemeChanged>>", self.__on_theme_changed, "+")
 
     def __apply_default_icon(self):
-        self.iconphoto(True, PhotoImage(master=self, data=resources.read_binary("images/icon-48.png")))
+        self.iconphoto(True, PhotoImage(master=self, data=resources.read_image("icon-48.png")))
 
     def apply_theme_patch(self):
         theme_name = Style(self).theme_use()
-        if self.previous_patched_theme == theme_name:
+        if self._previous_patched_theme == theme_name:
             return
-        self.previous_patched_theme = theme_name
+        self._previous_patched_theme = theme_name
         self.theme_patcher.patch()
 
     def __on_theme_changed(self, event: Event):

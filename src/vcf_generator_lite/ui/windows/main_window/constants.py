@@ -1,9 +1,2 @@
 ACCELERATOR_GENERATE = "Ctrl+G"
 ACCELERATOR_GENERATE_AQUA = "⌃G"
-
-EVENT_ABOUT = "<<About>>"
-EVENT_CLEAN_QUOTES = "<<CleanQuotes>>"
-EVENT_EXIT = "<<Exit>>"
-EVENT_GENERATE = "<<Generate>>"
-EVENT_GENERATE_OR_STOP = "<<GenerateOrStop>>"
-EVENT_STOP = "<<Stop>>"
