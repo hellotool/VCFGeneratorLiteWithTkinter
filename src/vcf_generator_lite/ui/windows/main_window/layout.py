@@ -84,7 +84,7 @@ Xie Lingyun\t13666666666
             sizegrip = Sizegrip(footer_frame)
             sizegrip.place(relx=1, rely=1, anchor="se")
 
-        self.progress_bar = Progressbar(footer_frame, orient="horizontal", length=200)
+        self.progress_bar = Progressbar(footer_frame, orient="horizontal", length=200, mode="determinate", maximum=1)
         self.progress_label = Label(master=footer_frame, text=pgettext("main_window.label_generating", "Generating..."))
 
         self.generate_or_stop_button = Button(
@@ -114,7 +114,7 @@ Xie Lingyun\t13666666666
         self.progress_bar.configure(value=progress)
 
     def set_progress_determinate(self, value: bool):
-        previous_value: bool = self.progress_bar.cget("mode") == "determinate"
+        previous_value: bool = str(self.progress_bar.cget("mode")) == "determinate"
         if value == previous_value:
             return
         if value:
