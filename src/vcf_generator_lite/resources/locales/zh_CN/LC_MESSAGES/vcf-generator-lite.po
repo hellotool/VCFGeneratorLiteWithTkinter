@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VCF Generator Lite 5.0.4\n"
 "Report-Msgid-Bugs-To: jesse205@qq.com\n"
-"POT-Creation-Date: 2026-05-30 04:09+0800\n"
+"POT-Creation-Date: 2026-06-03 04:16+0800\n"
 "PO-Revision-Date: 2026-05-22 15:45+0800\n"
 "Last-Translator: Jesse205 <jesse205@qq.com>\n"
 "Language: zh_Hans_CN\n"
@@ -171,27 +171,27 @@ msgstr "%(prog)s：错误：%(message)s\n"
 msgid "%(prog)s: warning: %(message)s\n"
 msgstr "%(prog)s：警告：%(message)s\n"
 
-#: src/vcf_generator_lite/__main__.py:39
+#: src/vcf_generator_lite/__main__.py:25
 msgctxt "cli.help_option_verbose"
 msgid "increase output (use -vv for debug level)"
 msgstr "增加输出（使用 -vv 显示调试信息）"
 
-#: src/vcf_generator_lite/__main__.py:46
+#: src/vcf_generator_lite/__main__.py:32
 msgctxt "cli.help_option_quiet"
 msgid "decrease output (use -qq for errors only)"
 msgstr "减少输出（使用 -qq 仅显示错误）"
 
-#: src/vcf_generator_lite/bootstrap.py:60
+#: src/vcf_generator_lite/bootstrap.py:62
 msgctxt "startup.colorlog_not_available_warning"
 msgid "⚠️WARNING: Colorlog is not available, using plain text instead. Please install colorlog to enable colored logging."
 msgstr "⚠️警告：Colorlog 不可用，将使用纯文本替代。请安装 colorlog 以启用彩色日志记录。"
 
-#: src/vcf_generator_lite/bootstrap.py:96
+#: src/vcf_generator_lite/bootstrap.py:98
 msgctxt "startup.unexpected_error.message"
 msgid "An unexpected error occurred."
 msgstr "发生意外错误。"
 
-#: src/vcf_generator_lite/bootstrap.py:98
+#: src/vcf_generator_lite/bootstrap.py:100
 #, python-brace-format
 msgctxt "startup.unexpected_error.detail"
 msgid ""
@@ -209,7 +209,7 @@ msgstr ""
 "\n"
 "请将此文件发送给开发者。"
 
-#: src/vcf_generator_lite/bootstrap.py:135
+#: src/vcf_generator_lite/bootstrap.py:137
 #, python-brace-format
 msgctxt "startup.source_tip"
 msgid "💡Tip: Source code is hosted at {url}"
@@ -251,17 +251,23 @@ msgctxt "open_url_failure_message_box.detail"
 msgid "Link: {url}"
 msgstr "链接：{url}"
 
-#: src/vcf_generator_lite/ui/app_text.py:7
+#: src/vcf_generator_lite/ui/app_text.py:5
 msgctxt "app.name"
 msgid "VCF Generator Lite"
 msgstr "VCF 生成器 Lite"
 
-#: src/vcf_generator_lite/ui/app_text.py:11
+#: src/vcf_generator_lite/ui/app_text.py:9
 msgctxt "app.description"
 msgid "Generate VCF files from contacts"
 msgstr "将联系人列表转换为单个 vCard 文件。"
 
-#: src/vcf_generator_lite/ui/app_text.py:16
+#: src/vcf_generator_lite/ui/app_text.py:13
+#, python-brace-format
+msgctxt "app.third_party_notices_url"
+msgid "{repository}/blob/{version}/NOTICES.md"
+msgstr "{repository}/blob/{version}/NOTICES.zh-CN.md"
+
+#: src/vcf_generator_lite/ui/app_text.py:20
 msgctxt "error.missing_number"
 msgid "Missing number or number is incorrect"
 msgstr "缺失号码或号码不正确"
@@ -397,117 +403,117 @@ msgctxt "main_window.label_stopping"
 msgid "Stopping..."
 msgstr "正在停止……"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:39
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:40
 msgctxt "main_window.menu_file"
 msgid "&File"
 msgstr "文件(&F)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:43
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:44
 msgctxt "main_window.menu_edit"
 msgid "&Edit"
 msgstr "编辑(&E)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:47
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:48
 msgctxt "main_window.menu_options"
 msgid "&Options"
 msgstr "选项(&O)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:51
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:52
 msgctxt "main_window.menu_help"
 msgid "&Help"
 msgstr "帮助(&H)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:58
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:59
 msgctxt "main_window.menu_file_generate"
 msgid "&Generate file..."
 msgstr "生成文件(&G)…"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:66
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:67
 msgctxt "main_window.menu_file_stop_generation"
 msgid "&Stop generation"
 msgstr "停止生成(&S)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:78
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:79
 msgctxt "main_window.menu_file_exit"
 msgid "E&xit"
 msgstr "退出(&X)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:88
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:89
 msgctxt "main_window.menu_edit_undo"
 msgid "&Undo"
 msgstr "撤销(&U)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:93
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:94
 msgctxt "main_window.menu_edit_redo"
 msgid "&Redo"
 msgstr "重做(&R)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:99
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:100
 msgctxt "main_window.menu_edit_cut"
 msgid "Cu&t"
 msgstr "剪切(&T)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:104
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:105
 msgctxt "main_window.menu_edit_copy"
 msgid "&Copy"
 msgstr "复制(&C)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:109
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:110
 msgctxt "main_window.menu_edit_paste"
 msgid "&Paste"
 msgstr "粘贴(&P)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:114
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:115
 msgctxt "main_window.menu_edit_select_all"
 msgid "Select &All"
 msgstr "全选(&A)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:120
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:121
 msgctxt "main_window.menu_edit_clean_quotes"
 msgid "Remove &Quotes"
 msgstr "删除引号(&Q)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:129
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:130
 msgctxt "main_window.menu_phone_formats"
 msgid "&Phone Formats"
 msgstr "号码格式(&P)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:133
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:134
 msgctxt "main_window.menu_select_all_phone_formats"
 msgid "Select &All"
 msgstr "全选(&A)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:151
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:152
 msgctxt "main_window.menu_help_repository"
 msgid "Rep&ository"
 msgstr "项目仓库(&O)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:155
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:156
 msgctxt "main_window.menu_help_release"
 msgid "&Releases"
 msgstr "版本发布(&R)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:160
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:161
 msgctxt "main_window.menu_help_feedback"
 msgid "&Feedback"
 msgstr "提交反馈(&F)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:164
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:165
 msgctxt "main_window.menu_help_contact"
 msgid "&Contact Author"
 msgstr "联系作者(&C)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:178
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:179
 msgctxt "main_window.menu_help_license"
 msgid "&License"
 msgstr "许可协议(&L)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:182
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:183
 msgctxt "main_window.menu_help_os_notices"
 msgid "Open Source &Notices"
 msgstr "开源声明(&N)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:187
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:194
 msgctxt "main_window.menu_help_about"
 msgid "&About VCF Generator Lite"
 msgstr "关于 VCF 生成器 Lite(&A)"
@@ -576,12 +582,12 @@ msgctxt "save_vcf_window.default_file_name"
 msgid "My Contacts.vcf"
 msgstr "我的联系人.vcf"
 
-#: src/vcf_generator_lite/ui/windows/main_window/window.py:148
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:147
 msgctxt "save_vcf_window.title"
 msgid "Select File Save Location"
 msgstr "选择文件保存位置"
 
-#: src/vcf_generator_lite/ui/windows/main_window/window.py:151
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:150
 msgctxt "save_vcf_window.label_type_vcf"
 msgid "vCard File (*.vcf)"
 msgstr "vCard 文件 (*.vcf)"

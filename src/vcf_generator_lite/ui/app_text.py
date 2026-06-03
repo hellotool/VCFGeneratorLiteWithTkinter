@@ -9,6 +9,10 @@ def app_description() -> str:
     return pgettext("app.description", "Generate VCF files from contacts")
 
 
+def third_party_notices_url() -> str:
+    return pgettext("app.third_party_notices_url", "{repository}/blob/{version}/NOTICES.md")
+
+
 def error_for(exception: BaseException) -> str:
     from vcf_generator_lite.models.contact import MissingNumberError
 

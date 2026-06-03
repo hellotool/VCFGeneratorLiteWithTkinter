@@ -513,7 +513,6 @@ basic = [
     { name = "poethepoet" },
 ]
 build = [
-    { name = "babel" },
     { name = "packaging" },
     { name = "pyinstaller" },
     { name = "requests" },
@@ -533,6 +532,9 @@ dev = [
 docs = [
     { name = "jinja2" },
 ]
+l10n = [
+    { name = "babel" },
+]
 lint = [
     { name = "pyright" },
     { name = "ruff" },
@@ -551,7 +553,6 @@ provides-extras = ["console"]
 [package.metadata.requires-dev]
 basic = [{ name = "poethepoet", specifier = ">=0.46.0" }]
 build = [
-    { name = "babel", specifier = ">=2.18.0" },
     { name = "packaging", specifier = ">=26.2" },
     { name = "pyinstaller", specifier = ">=6.20.0" },
     { name = "requests", specifier = ">=2.34.2" },
@@ -569,6 +570,7 @@ dev = [
     { name = "ruff", specifier = ">=0.15.13" },
 ]
 docs = [{ name = "jinja2", specifier = ">=3.1.6" }]
+l10n = [{ name = "babel", specifier = ">=2.18.0" }]
 lint = [
     { name = "pyright", specifier = ">=1.1.409" },
     { name = "ruff", specifier = ">=0.15.13" },

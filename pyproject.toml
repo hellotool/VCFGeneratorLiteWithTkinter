@@ -17,13 +17,9 @@ console = ["colorlog>=6.9.0"]
 basic = ["poethepoet>=0.46.0"]
 lint = ["pyright>=1.1.409", "ruff>=0.15.13"]
 test = ["pytest>=9.0.3"]
-build = [
-    "babel>=2.18.0",
-    "packaging>=26.2",
-    "pyinstaller>=6.20.0",
-    "requests>=2.34.2",
-]
+build = ["packaging>=26.2", "pyinstaller>=6.20.0", "requests>=2.34.2"]
 docs = ["jinja2>=3.1.6"]
+l10n = ["babel>=2.18.0"]
 dev = [
     "colorlog>=6.9.0",
     { include-group = "basic" },
@@ -31,6 +27,7 @@ dev = [
     { include-group = "test" },
     { include-group = "build" },
     { include-group = "docs" },
+    { include-group = "l10n" },
 ]
 
 [project.urls]
@@ -142,6 +139,10 @@ help = "Locale"
 name = "locale"
 options = ["-l", "--locale"]
 type = "string"
+
+[tool.poe.tasks.gen-notices]
+help = "Generate NOTICES files"
+script = "scripts.gen_notices:render"
 
 [tool.uv]
 required-version = ">=0.10.1"

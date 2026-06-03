@@ -4,15 +4,16 @@ from gettext import pgettext
 from tkinter import BooleanVar, Menu, Misc
 from typing import TYPE_CHECKING
 
+from vcf_generator_lite.__version__ import __version__
 from vcf_generator_lite.constants import (
     EMAIL_AUTHOR,
     URL_LICENSE,
-    URL_OS_NOTICES,
     URL_RELEASES,
     URL_REPORT,
     URL_REPOSITORY,
 )
 from vcf_generator_lite.ui.actions.external_app import open_url
+from vcf_generator_lite.ui.app_text import third_party_notices_url
 from vcf_generator_lite.ui.windows.main_window.constants import (
     ACCELERATOR_GENERATE,
     ACCELERATOR_GENERATE_AQUA,
@@ -180,7 +181,13 @@ class MainMenuBar(Menu):
         )
         help_menu.add_command(
             **pgettext_menu_label("main_window.menu_help_os_notices", "Open Source &Notices"),
-            command=lambda: open_url(self, URL_OS_NOTICES),
+            command=lambda: open_url(
+                self,
+                third_party_notices_url().format(
+                    repository=URL_REPOSITORY,
+                    version=f"v{__version__}",
+                ),
+            ),
         )
         help_menu.add_separator()
         help_menu.add_command(

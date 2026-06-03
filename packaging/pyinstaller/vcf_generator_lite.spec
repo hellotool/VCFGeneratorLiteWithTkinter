@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
 from pathlib import Path, PurePath
 
 from PyInstaller.building.api import COLLECT, EXE, PYZ

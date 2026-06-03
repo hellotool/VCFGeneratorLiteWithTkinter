@@ -1,4 +1,5 @@
-import PyInstaller.__main__ as pyinstaller
+import subprocess
+import sys
 
 from scripts.build_app.utils import PATH_DIST, PATH_PACKAGING, ensure_dist_dir
 
@@ -9,7 +10,7 @@ PATH_PYINSTALLER_SPEC = PATH_PACKAGING.joinpath("pyinstaller", "vcf_generator_li
 
 def build_with_pyinstaller():
     ensure_dist_dir()
-    pyinstaller.run([str(PATH_PYINSTALLER_SPEC), "--noconfirm"])
+    subprocess.run([sys.executable, "-m", "PyInstaller", str(PATH_PYINSTALLER_SPEC), "--noconfirm"], check=True)  # noqa: S603
 
 
 def require_pyinstaller_dist():
