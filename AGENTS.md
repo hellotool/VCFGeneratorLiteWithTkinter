@@ -62,8 +62,7 @@ VCFGeneratorLiteWithTkinter/
 │   ├── __main__.py                 # 程序入口
 │   └── constants.py                # 全局常量（名称、链接等）
 ├── tests/                          # 测试文件
-├── pyproject.toml                  # 项目配置
-└── os-notices.toml                 # 开源声明信息
+└── pyproject.toml                  # 项目配置
 ```
 
 ## 代码风格
@@ -82,3 +81,4 @@ VCFGeneratorLiteWithTkinter/
 - 在完成代码修改后，**请勿提交到版本控制**！
 - 代码生成后必须使用 `uv run poe format` 格式化代码。
 - 代码生成后必须使用 `uv run poe check` 检查代码。
+- 每个文件结尾必须添加空行。

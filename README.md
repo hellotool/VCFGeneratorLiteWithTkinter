@@ -37,7 +37,7 @@ VCF Generator Lite is a simple and efficient tool that converts contact lists in
 - **Localization**: Supports Simplified Chinese and English, with phone number recognition for China (including Hong Kong, Macau, and Taiwan regions).
 - **Lightweight**: Provided as a Python ZIP application package.
 - **Ad-Free**: No advertisements; just download and use.
-- **Open Source**: Open-sourced under the MIT License.
+- **Open Source**: Open-sourced under the Apache License 2.0.
 - **Free**: No payment required to use.
 
 ## Screenshots
@@ -183,48 +183,38 @@ If you need to double-click to launch a Python ZIP application directly on Windo
 | Windows 10 or later                    | UI becomes blurry when DPI changes | App doesn't support DPI adjustment after startup                                           | Avoid changing DPI while the application is running.                                                                                        |
 | Python Install Manager 26.0 or earlier | Command line window appears        | Doesn't support automatic upgrade to windowed Python interpreter. ([python/pymanager#216]) | Upgrade the Python Install Manager to version 26.1 or later, or use the [Python launcher][pylauncher].                                      |
 
-## License
-
-This project is licensed under the Apache 2.0 license. For details, please refer to the [LICENSE file](./LICENSE).
-
-```txt
-Copyright 2023-2026 Jesse205
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
-
 ## Credits
 
 ### AI Assistance
 
 Parts of this project were generated with AI assistance:
 
+- **Trae**: Code generation, documentation optimization, code optimization, language translation.
 - **DeepSeek**: Coding guidance, code generation, documentation optimization, language translation.
 - **Yuanbao**: Coding guidance, code generation, language translation.
 - **Tongyi Lingma**: Code completion, coding guidance.
 - **WorkBuddy**: Code review, documentation optimization.
-- **Trae**: Code generation, documentation optimization.
 - **OpenCode**: Documentation optimization.
 
-### Open Source
+## License
 
-This project uses open source code. See [Open Source Notices (Chinese)](./docs/legal/os-notices.md) for details.
+This project is licensed under the Apache 2.0 license. For details, please refer to the [LICENSE file](./LICENSE).
+
+## Third-Party Notices
+
+This project uses third-party open source code. For details, please refer to the [NOTICES file](./NOTICES.md).
 
 ## More Documentation
 
 - [Contribution Guidelines](./CONTRIBUTING.md)
 - [Development (Chinese)](./docs/dev/index.md)
 - [FAQ (Chinese)](./docs/faq.md)
+
+---
+
+<center>
+Copyright © 2023-2026 Jesse205
+</center>
 
 [repository-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/
 [repository-github]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/

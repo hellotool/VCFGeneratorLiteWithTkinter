@@ -2,6 +2,9 @@
 
 # Third-Party Notices
 
+[简体中文](./NOTICES.zh-CN.j2.md) |
+**English**
+
 This document lists the third-party open source components used by this project and their license information.
 
 ## Runtime Dependencies

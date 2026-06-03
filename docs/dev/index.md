@@ -2,7 +2,7 @@
 
 ## 技术栈
 
-- **IDE**: [Visual Studio Code][vscode-homepage] 或者 [PyCharm][pycharm-homepage]
+- **IDE**: [Visual Studio Code][vscode-homepage] 或者 [PyCharm 2026.1+][pycharm-homepage]
 - **开发语言**: [Python 3.12+][python-homepage]
 - **UI 框架**: [Tkinter][tkinter-homepage]
 - **包管理工具**: [uv][uv-homepage]
@@ -55,8 +55,7 @@ VCFGeneratorLiteWithTkinter/
 │   ├── __main__.py                 # 程序入口
 │   └── constants.py                # 全局常量（名称、链接等）
 ├── tests/                          # 测试文件
-├── pyproject.toml                  # 项目配置
-└── os-notices.toml                 # 开源声明信息
+└── pyproject.toml                  # 项目配置
 ```
 
 ## 常用命令

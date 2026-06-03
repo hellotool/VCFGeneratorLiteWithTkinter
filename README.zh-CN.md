@@ -37,7 +37,7 @@ VCF 生成器 Lite 是一个简单高效的工具，可以将联系人列表转�
 - **本地化**：支持简体中文与英语，支持识别中国（含港澳台地区）电话号码。
 - **轻量化**：提供 Python ZIP 应用包格式。
 - **无广告**：无广告，仅需下载即可使用。
-- **开源**：遵循 MIT 许可协议开源。
+- **开源**：遵循 Apache License 2.0 开源。
 - **免费**：不需要支付任何费用即可使用。
 
 ## 软件截图
@@ -189,42 +189,32 @@ vcf-generator-lite
 
 本项目的部分内容通过 AI 辅助生成：
 
+- **Trae**：生成代码、文档优化、代码优化、语言翻译。
 - **DeepSeek**：指导编码、生成代码、文档优化、语言翻译。
 - **元宝**：指导编码、生成代码、语言翻译。
 - **通义灵码**：补全代码、指导编码。
 - **WorkBuddy**：审查代码、文档优化。
-- **Trae**：生成代码、文档优化。
 - **OpenCode**：文档优化。
-
-### 开源代码
-
-本项目使用了开源代码。详细信息请参阅 [开源声明](./docs/legal/os-notices.md)。
 
 ## 许可证
 
-本项目以 Apache 2.0 许可证授权，详情请参阅 [LICENSE 文件](./LICENSE)。
+本项目以 Apache 2.0 许可证授权，详情请参阅 [许可证文件](./LICENSE)。
 
-```txt
-Copyright 2023-2026 Jesse205
+## 第三方声明
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
+本项目使用了第三方开源代码，您可以在 [声明文件](./NOTICES.zh-CN.md) 中查看详细信息。
 
 ## 更多文档
 
 - [贡献指南](./CONTRIBUTING.zh-CN.md)
 - [开发文档](./docs/dev/index.md)
 - [常见问题](./docs/faq.md)
+
+---
+
+<center>
+Copyright © 2023-2026 Jesse205
+</center>
 
 [repository-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/
 [repository-github]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/
