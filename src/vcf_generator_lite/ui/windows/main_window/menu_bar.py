@@ -4,7 +4,6 @@ from gettext import pgettext
 from tkinter import BooleanVar, Menu, Misc
 from typing import TYPE_CHECKING
 
-from vcf_generator_lite.__version__ import __version__
 from vcf_generator_lite.constants import (
     EMAIL_AUTHOR,
     URL_LICENSE,
@@ -181,13 +180,7 @@ class MainMenuBar(Menu):
         )
         help_menu.add_command(
             **pgettext_menu_label("main_window.menu_help_os_notices", "Open Source &Notices"),
-            command=lambda: open_url(
-                self,
-                third_party_notices_url().format(
-                    repository=URL_REPOSITORY,
-                    version=f"v{__version__}",
-                ),
-            ),
+            command=lambda: open_url(self, third_party_notices_url()),
         )
         help_menu.add_separator()
         help_parsed_label = pgettext_menu_label("main_window.menu_help_about", "&About {app_name}")
