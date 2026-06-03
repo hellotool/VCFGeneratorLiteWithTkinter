@@ -16,13 +16,13 @@ from vcf_generator_lite.ui.windows.base_window.constants import EVENT_EXIT
 from vcf_generator_lite.ui.windows.main_window.layout import MainLayout
 from vcf_generator_lite.ui.windows.main_window.menu_bar import MainMenuBar
 from vcf_generator_lite.ui.windows.main_window.message_boxes import (
-    show_generation_error_dialog,
     show_generation_success_dialog,
-    show_save_os_error_message,
-    show_save_permission_denied_message,
+    show_save_file_os_error_dialog,
+    show_save_file_permission_denied_dialog,
 )
 from vcf_generator_lite.ui.windows.main_window.states import GenerationState
 from vcf_generator_lite.ui.windows.message_boxes.about import show_about_message_box
+from vcf_generator_lite.ui.windows.message_boxes.unexpected_error import show_unexpected_error_dialog
 from vcf_generator_lite.utils.i18n.zipapp_gettext import get_default_locales, get_locale_territories
 from vcf_generator_lite.utils.text import clean_quotes
 from vcf_generator_lite.utils.tkinter.text import search_line, select_text
@@ -157,10 +157,10 @@ class VCFGeneratorLiteApp(EnhancedTk):
         try:
             file_io = generation_file.open("w", encoding="utf-8", newline="\r\n")
         except PermissionError:
-            show_save_permission_denied_message(self)
+            show_save_file_permission_denied_dialog(self)
             return None
         except OSError as e:
-            show_save_os_error_message(self, e)
+            show_save_file_os_error_dialog(self, e)
             return None
         return generation_file, file_io
 
@@ -204,9 +204,9 @@ class VCFGeneratorLiteApp(EnhancedTk):
     def _show_generation_done_dialog(self, display_path: str, generate_result: GenerateResult):
         if generate_result.exception:
             if isinstance(generate_result.exception, OSError):
-                show_save_os_error_message(self, generate_result.exception)
+                show_save_file_os_error_dialog(self, generate_result.exception)
             else:
-                show_generation_error_dialog(self, generate_result.exception)
+                show_unexpected_error_dialog(generate_result.exception)
         elif len(generate_result.invalid_items) > 0:
             self._show_generation_invalid_dialog(display_path, generate_result.invalid_items)
         else:

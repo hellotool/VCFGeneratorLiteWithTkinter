@@ -5,13 +5,15 @@ from tkinter import Misc, messagebox
 from vcf_generator_lite.__version__ import __version__
 from vcf_generator_lite.constants import APP_COPYRIGHT
 from vcf_generator_lite.ui.actions.external_app import pgettext
+from vcf_generator_lite.ui.app_text import app_name
 
 
 def show_about_message_box(parent: Misc):
     messagebox.showinfo(
         parent=parent,
-        title=pgettext("about_message_box.title", "About VCF Generator Lite"),
-        message=pgettext("about_message_box.message", "VCF Generator Lite v{version}").format(
+        title=pgettext("about_message_box.title", "About {app_name}").format(app_name=app_name()),
+        message=pgettext("about_message_box.message", "{app_name} v{version}").format(
+            app_name=app_name(),
             version=__version__,
         ),
         detail=pgettext(

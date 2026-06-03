@@ -54,7 +54,7 @@ def main():
     from vcf_generator_lite.utils.dpi_aware import enable_dpi_aware
 
     enable_dpi_aware()
-    setup_excepthook(app_name=app_name())
+    setup_excepthook()
 
     with redirect_stdio_to_messagebox_if_needed(app_name=app_name()):
         args = get_args_parser().parse_args()

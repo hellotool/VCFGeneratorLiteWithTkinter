@@ -41,6 +41,19 @@ body:
       description: If possible, upload any screenshots related to the bug.
       placeholder: "[Upload images here]"
   - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: |
+        If you can obtain logs, please post them here (run with `-vv` for more detailed logs).
+        Must be enclosed in triple backticks ```txt ```. Please remember to sanitize sensitive information.
+      placeholder: |
+        ```txt
+        [Paste logs here]
+        ```
+    validations:
+      required: false
+  - type: textarea
     id: environments
     attributes:
       label: Environment

@@ -2,12 +2,10 @@ import logging
 import os
 import sys
 import tkinter.messagebox
-import traceback
 from contextlib import contextmanager, nullcontext, redirect_stderr, redirect_stdout, suppress
 from io import StringIO
 from pathlib import Path
-from tempfile import NamedTemporaryFile
-from tkinter.messagebox import Message, showerror
+from tkinter.messagebox import Message
 from types import TracebackType
 
 # 请勿去全局导入任何依赖 gettext 的模块，因为要打猴子补丁。
@@ -76,31 +74,13 @@ def fix_home_env():
             os.environ["HOME"] = str(Path.home())
 
 
-def setup_excepthook(app_name: str):
-    prev_excepthook = sys.excepthook
+def setup_excepthook():
 
-    def excepthook(type_: type[BaseException], value: BaseException, tb: TracebackType | None):
-        from gettext import pgettext
+    def excepthook(_type: type[BaseException], value: BaseException, _tb: TracebackType | None):
+        from vcf_generator_lite.ui.windows.message_boxes.unexpected_error import show_unexpected_error_dialog
 
-        prev_excepthook(type_, value, tb)
-
-        with NamedTemporaryFile(
-            mode="w",
-            encoding="utf-8",
-            delete=False,
-            suffix=".log",
-            prefix="vcf-generator-lite-error-",
-        ) as f:
-            traceback.print_exception(type_, value, tb, file=f)
-            log_path = f.name
-        showerror(
-            title=app_name,
-            message=pgettext("startup.unexpected_error.message", "An unexpected error occurred."),
-            detail=pgettext(
-                "startup.unexpected_error.detail",
-                "Error: {error}\n\nError details saved to:\n{path}\n\nPlease send this file to the developer.",
-            ).format(path=log_path, error=str(value)),
-        )
+        _logger.error("Unexpected error: %s", value, exc_info=value)
+        show_unexpected_error_dialog(value)
 
     sys.excepthook = excepthook
 

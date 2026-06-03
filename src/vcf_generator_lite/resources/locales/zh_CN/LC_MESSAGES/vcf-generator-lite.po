@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VCF Generator Lite 5.0.4\n"
 "Report-Msgid-Bugs-To: jesse205@qq.com\n"
-"POT-Creation-Date: 2026-06-03 04:16+0800\n"
+"POT-Creation-Date: 2026-06-04 07:03+0800\n"
 "PO-Revision-Date: 2026-05-22 15:45+0800\n"
 "Last-Translator: Jesse205 <jesse205@qq.com>\n"
 "Language: zh_Hans_CN\n"
@@ -181,35 +181,12 @@ msgctxt "cli.help_option_quiet"
 msgid "decrease output (use -qq for errors only)"
 msgstr "减少输出（使用 -qq 仅显示错误）"
 
-#: src/vcf_generator_lite/bootstrap.py:62
+#: src/vcf_generator_lite/bootstrap.py:60
 msgctxt "startup.colorlog_not_available_warning"
 msgid "⚠️WARNING: Colorlog is not available, using plain text instead. Please install colorlog to enable colored logging."
 msgstr "⚠️警告：Colorlog 不可用，将使用纯文本替代。请安装 colorlog 以启用彩色日志记录。"
 
-#: src/vcf_generator_lite/bootstrap.py:98
-msgctxt "startup.unexpected_error.message"
-msgid "An unexpected error occurred."
-msgstr "发生意外错误。"
-
-#: src/vcf_generator_lite/bootstrap.py:100
-#, python-brace-format
-msgctxt "startup.unexpected_error.detail"
-msgid ""
-"Error: {error}\n"
-"\n"
-"Error details saved to:\n"
-"{path}\n"
-"\n"
-"Please send this file to the developer."
-msgstr ""
-"错误：{error}\n"
-"\n"
-"错误详情已保存至：\n"
-"{path}\n"
-"\n"
-"请将此文件发送给开发者。"
-
-#: src/vcf_generator_lite/bootstrap.py:137
+#: src/vcf_generator_lite/bootstrap.py:117
 #, python-brace-format
 msgctxt "startup.source_tip"
 msgid "💡Tip: Source code is hosted at {url}"
@@ -513,69 +490,47 @@ msgctxt "main_window.menu_help_os_notices"
 msgid "Open Source &Notices"
 msgstr "开源声明(&N)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:194
-msgctxt "main_window.menu_help_about"
-msgid "&About VCF Generator Lite"
-msgstr "关于 VCF 生成器 Lite(&A)"
-
-#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:11
-msgctxt "save_vcf_os_error_message_box.title"
-msgid "Save Failed"
-msgstr "保存失败"
-
-#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:12
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:193
 #, python-brace-format
-msgctxt "save_vcf_os_error_message_box.message"
-msgid "System error: {reason}"
-msgstr "系统错误：{reason}"
+msgctxt "main_window.menu_help_about"
+msgid "&About {app_name}"
+msgstr "关于 {app_name}(&A)"
 
-#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:19
-msgctxt "save_vcf_permission_denied_message_box.title"
+#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:10
+msgctxt "save_file_os_error_dialog.title"
 msgid "Save Failed"
 msgstr "保存失败"
 
-#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:21
-msgctxt "save_vcf_permission_denied_message_box.message"
+#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:18
+msgctxt "save_file_permission_denied_dialog.title"
+msgid "Save Failed"
+msgstr "保存失败"
+
+#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:20
+msgctxt "save_file_permission_denied_dialog.message"
 msgid "Permission denied, please grant permission again."
 msgstr "权限被拒，请授予权限后再试。"
 
+#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:28
+msgctxt "vcf_generate_success_msg_box.title"
+msgid "Generation Successful"
+msgstr "生成成功"
+
 #: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:29
-msgctxt "vcf_generate_error_message_box.title"
-msgid "Failed to Generate vCard File"
-msgstr "生成 vCard 文件失败"
-
-#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:31
 #, python-brace-format
-msgctxt "vcf_generate_error_message_box.message"
-msgid ""
-"An unknown error occurred while generating the vCard file:\n"
-"\n"
-"{exception}"
-msgstr ""
-"生成 vCard 文件时出现未知异常：\n"
-"\n"
-"{exception}"
-
-#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:42
-msgctxt "vcf_generate_success_message_box.title"
-msgid "vCard File Generated Successfully"
-msgstr "生成 vCard 文件成功"
-
-#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:43
-#, python-brace-format
-msgctxt "vcf_generate_success_message_box.message"
+msgctxt "vcf_generate_success_msg_box.message"
 msgid "File exported to {path}."
 msgstr "已导出文件到 {path}。"
 
-#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:47
+#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:31
 #, python-brace-format
-msgctxt "vcf_generate_success_message_box.detail"
+msgctxt "vcf_generate_success_msg_box.detail"
 msgid ""
-"Number of contacts: {count:n}\n"
-"Time elapsed: {time:.3f} seconds"
+"Count: {count:n}\n"
+"Time elapsed: {time:.3f}s"
 msgstr ""
-"成功生成：{count:n} 个\n"
-"消耗时间：{time:.3f} 秒"
+"数量：{count:n} 个\n"
+"耗时：{time:.3f} 秒"
 
 #: src/vcf_generator_lite/ui/windows/main_window/window.py:46
 msgctxt "save_vcf_window.default_file_name"
@@ -592,18 +547,19 @@ msgctxt "save_vcf_window.label_type_vcf"
 msgid "vCard File (*.vcf)"
 msgstr "vCard 文件 (*.vcf)"
 
-#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:13
-msgctxt "about_message_box.title"
-msgid "About VCF Generator Lite"
-msgstr "关于 VCF 生成器 Lite"
-
 #: src/vcf_generator_lite/ui/windows/message_boxes/about.py:14
 #, python-brace-format
-msgctxt "about_message_box.message"
-msgid "VCF Generator Lite v{version}"
-msgstr "VCF 生成器 Lite v{version}"
+msgctxt "about_message_box.title"
+msgid "About {app_name}"
+msgstr "关于 {app_name}"
 
-#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:18
+#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:15
+#, python-brace-format
+msgctxt "about_message_box.message"
+msgid "{app_name} v{version}"
+msgstr "{app_name} v{version}"
+
+#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:20
 #, python-brace-format
 msgctxt "about_message_box.detail"
 msgid ""
@@ -620,4 +576,20 @@ msgstr ""
 "Python：{python_info}\n"
 "Tcl：{tcl_info}\n"
 "Tk：{tk_info}"
+
+#: src/vcf_generator_lite/ui/windows/message_boxes/unexpected_error.py:7
+msgctxt "unexpected_error_dialog.title"
+msgid "Unexpected Error"
+msgstr "意外错误"
+
+#: src/vcf_generator_lite/ui/windows/message_boxes/unexpected_error.py:9
+msgctxt "unexpected_error_dialog.message"
+msgid "An unexpected error occurred, please report this error to the maintainer."
+msgstr "发生意外错误，请向维护者报告此问题。"
+
+#: src/vcf_generator_lite/ui/windows/message_boxes/unexpected_error.py:12
+#, python-brace-format
+msgctxt "unexpected_error_dialog.detail"
+msgid "Error message: {error}"
+msgstr "错误信息：{error}"
 

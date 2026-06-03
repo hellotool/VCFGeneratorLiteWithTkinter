@@ -13,7 +13,7 @@ from vcf_generator_lite.constants import (
     URL_REPOSITORY,
 )
 from vcf_generator_lite.ui.actions.external_app import open_url
-from vcf_generator_lite.ui.app_text import third_party_notices_url
+from vcf_generator_lite.ui.app_text import app_name, third_party_notices_url
 from vcf_generator_lite.ui.windows.main_window.constants import (
     ACCELERATOR_GENERATE,
     ACCELERATOR_GENERATE_AQUA,
@@ -190,8 +190,10 @@ class MainMenuBar(Menu):
             ),
         )
         help_menu.add_separator()
+        help_parsed_label = pgettext_menu_label("main_window.menu_help_about", "&About {app_name}")
+        help_parsed_label["label"] = help_parsed_label["label"].format(app_name=app_name())
         help_menu.add_command(
-            **pgettext_menu_label("main_window.menu_help_about", "&About VCF Generator Lite"),
+            **help_parsed_label,
             command=self.window.on_about,
         )
         return help_menu
