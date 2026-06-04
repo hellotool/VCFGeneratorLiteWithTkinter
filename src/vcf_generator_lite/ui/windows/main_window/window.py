@@ -39,7 +39,7 @@ class Generation(NamedTuple):
     file_io: TextIO
 
 
-class VCFGeneratorLiteApp(EnhancedTk):
+class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener):
     def __init__(self):
         self.is_exiting = False
         self.current_generation: Generation | None = None
@@ -69,7 +69,11 @@ class VCFGeneratorLiteApp(EnhancedTk):
         self.wm_minsize_pt(300, 300)
         self.wm_size_pt(450, 450)
         self.layout = MainLayout(self, self)
-        self.menu_bar = MainMenuBar(self, self)
+        self.menu_bar = MainMenuBar(self, self.phone_formats_list, self)
+        self.menu_bar.set_phone_formats_selection(
+            self.is_all_phone_formats_selected(),
+            {id_: self.is_phone_format_selected(id_) for id_ in self.phone_formats_ids},
+        )
         self.configure(menu=self.menu_bar)
 
         self.bind("<Control-Lock-G>", self.on_generate)
@@ -84,24 +88,30 @@ class VCFGeneratorLiteApp(EnhancedTk):
         super()._configure_ui()
         self.layout.content_text.focus_set()
 
+    @override
     def on_about(self):
         show_about_message_box(self)
 
+    @override
     def on_clean_quotes(self):
         self._clean_quotes()
 
+    @override
     def on_generate(self, _event: Event | None = None):
         self._generate_file()
 
+    @override
     def on_stop_generation(self):
         self._stop_generation()
 
+    @override
     def on_generate_or_stop(self, _event: Event | None = None):
         if self.current_generation:
             self.on_stop_generation()
         else:
             self.on_generate()
 
+    @override
     def on_exit(self, _event: Event | None = None):
         self.is_exiting = True
         if self.current_generation:
@@ -114,21 +124,23 @@ class VCFGeneratorLiteApp(EnhancedTk):
             return
         self.layout.generate_or_stop_button.invoke()
 
+    @override
     def on_toggle_phone_format(self, format_id: str):
-        if not self.is_phone_format_selected(format_id):
+        new_state = not self.is_phone_format_selected(format_id)
+        if new_state:
             self.selected_phone_formats_ids.add(format_id)
-            self.menu_bar.update_phone_formats_selection({format_id}, True)
         else:
             self.selected_phone_formats_ids.discard(format_id)
-            self.menu_bar.update_phone_formats_selection({format_id}, False)
+        self.menu_bar.set_phone_formats_selection(self.is_all_phone_formats_selected(), {format_id: new_state})
 
+    @override
     def on_toggle_all_phone_formats(self):
-        if not self.is_all_phone_formats_selected():
+        new_state = not self.is_all_phone_formats_selected()
+        if new_state:
             self.selected_phone_formats_ids.update(self.phone_formats_ids)
-            self.menu_bar.update_phone_formats_selection(self.phone_formats_ids, True)
         else:
             self.selected_phone_formats_ids.clear()
-            self.menu_bar.update_phone_formats_selection(self.phone_formats_ids, False)
+        self.menu_bar.set_phone_formats_selection(new_state, dict.fromkeys(self.phone_formats_ids, new_state))
 
     def _generate_file(self):
         if self.current_generation:
@@ -177,7 +189,7 @@ class VCFGeneratorLiteApp(EnhancedTk):
         self.layout.set_progress(progress=0)
         self.layout.set_progress_determinate(False)
         self.layout.set_generating(GenerationState.GENERATING)
-        self.menu_bar.update_generating_state(GenerationState.GENERATING)
+        self.menu_bar.set_generating_state(GenerationState.GENERATING)
         self.update()
 
     def _start_generation_task(self, input_text: str, rules: list[PhoneRule], file: Path, file_io: TextIO):
@@ -215,8 +227,12 @@ class VCFGeneratorLiteApp(EnhancedTk):
     def _show_generation_invalid_dialog(self, display_path: str, invalid_items: list[InvalidItem]):
         from vcf_generator_lite.ui.windows.invalid_items_dialog import InvalidItemsDialog
 
-        invalid_items_dialog = InvalidItemsDialog(self, display_path, invalid_items)
-        invalid_items_dialog.set_line_enter_listener(self._on_select_invalid_line)
+        InvalidItemsDialog(
+            self,
+            display_path=display_path,
+            invalid_items=invalid_items,
+            line_enter_listener=self._on_select_invalid_line,
+        )
 
     def on_generation_update_progress(self, progress: float, determinate: bool):
         generation = self._require_generation()
@@ -231,7 +247,7 @@ class VCFGeneratorLiteApp(EnhancedTk):
         generation = self._require_generation()
         self.current_generation = None
         self.layout.set_generating(GenerationState.IDLE)
-        self.menu_bar.update_generating_state(GenerationState.IDLE)
+        self.menu_bar.set_generating_state(GenerationState.IDLE)
         self.update()
 
         if not self.is_exiting:
@@ -266,12 +282,8 @@ class VCFGeneratorLiteApp(EnhancedTk):
             raise RuntimeError("Invoke callback without generating.")
         return self.current_generation
 
-    def _on_select_invalid_line(self, line: int, data: str):
-        actual_line: int | None
-        if self.layout.content_text.get(f"{line}.0", f"{line}.end") == data:
-            actual_line = line
-        else:
-            actual_line = search_line(self.layout.content_text, data, line, strip=True)
+    def _on_select_invalid_line(self, item: InvalidItem):
+        actual_line = search_line(self.layout.content_text, item.raw_content, near_row=item.row_position, strip=True)
 
         if actual_line is not None:
             self.deiconify()

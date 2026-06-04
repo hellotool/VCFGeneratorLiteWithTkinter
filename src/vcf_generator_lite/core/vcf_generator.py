@@ -156,7 +156,13 @@ class VCFGeneratorTask(Thread):
 
                 # list 的 append 方法是原子的，因此不需要加锁
                 # https://docs.python.org/zh-cn/3/library/threadsafety.html#thread-safety-list
-                self._invalid_items.append(InvalidItem(row_position=position, raw_content=line, exception=e))
+                self._invalid_items.append(
+                    InvalidItem(
+                        row_position=position,
+                        raw_content=line,
+                        exception=e.with_traceback(None),
+                    )
+                )
                 self._finish_item(success=False)
             else:
                 self._write_queue.put(queue_item)

@@ -1,8 +1,8 @@
 import urllib.parse
+from abc import ABC, abstractmethod
 from functools import partial
 from gettext import pgettext
 from tkinter import BooleanVar, Menu, Misc
-from typing import TYPE_CHECKING
 
 from vcf_generator_lite.constants import (
     EMAIL_AUTHOR,
@@ -11,6 +11,7 @@ from vcf_generator_lite.constants import (
     URL_REPORT,
     URL_REPOSITORY,
 )
+from vcf_generator_lite.core.phone_format_loader import PhoneFormat
 from vcf_generator_lite.ui.actions.external_app import open_url
 from vcf_generator_lite.ui.app_text import app_name, third_party_notices_url
 from vcf_generator_lite.ui.windows.main_window.constants import (
@@ -21,19 +22,38 @@ from vcf_generator_lite.ui.windows.main_window.states import GenerationState
 from vcf_generator_lite.utils.tkinter.accelerators import get_default_accelerators
 from vcf_generator_lite.utils.tkinter.menu import pgettext_menu_label
 
-if TYPE_CHECKING:
-    from vcf_generator_lite.ui.windows.main_window.window import VCFGeneratorLiteApp
-
 
 class MainMenuBar(Menu):
-    def __init__(self, parent: Misc | None, window: "VCFGeneratorLiteApp"):
+    class Listener(ABC):
+        """MainMenuBar listener interface"""
+
+        @abstractmethod
+        def on_generate(self): ...
+
+        @abstractmethod
+        def on_stop_generation(self): ...
+
+        @abstractmethod
+        def on_exit(self): ...
+
+        @abstractmethod
+        def on_clean_quotes(self): ...
+
+        @abstractmethod
+        def on_toggle_all_phone_formats(self): ...
+
+        @abstractmethod
+        def on_toggle_phone_format(self, format_id: str): ...
+
+        @abstractmethod
+        def on_about(self): ...
+
+    def __init__(self, parent: Misc | None, phone_formats: list[PhoneFormat], listener: Listener):
         super().__init__(parent, tearoff=False, name="menubar")
-        self.window = window
-        self.phone_formats_select_all_var = BooleanVar(value=window.is_all_phone_formats_selected())
-        self.phone_format_vars = {
-            format_id: BooleanVar(value=window.is_phone_format_selected(format_id))
-            for format_id in self.window.phone_formats_ids
-        }
+        self.phone_formats = phone_formats
+        self.listener = listener
+        self.phone_formats_select_all_var = BooleanVar(value=False)
+        self.phone_format_vars = {phone_format.id: BooleanVar(value=False) for phone_format in self.phone_formats}
 
         self.add_cascade(
             **pgettext_menu_label("main_window.menu_file", "&File"),
@@ -59,7 +79,7 @@ class MainMenuBar(Menu):
         self.menu_generate_label = generate_parse_result["label"]
         file_menu.add_command(
             **generate_parse_result,
-            command=self.window.on_generate,
+            command=self.listener.on_generate,
             accelerator=ACCELERATOR_GENERATE_AQUA if self._windowingsystem == "aqua" else ACCELERATOR_GENERATE,
         )
 
@@ -67,7 +87,7 @@ class MainMenuBar(Menu):
         self.menu_stop_generation_label = stop_generation_parse_result["label"]
         file_menu.add_command(
             **stop_generation_parse_result,
-            command=self.window.on_stop_generation,
+            command=self.listener.on_stop_generation,
             state="disabled",
         )
 
@@ -76,7 +96,7 @@ class MainMenuBar(Menu):
         # https://learn.microsoft.com/en-us/windows/win32/uxguide/cmd-menus
         file_menu.add_command(
             **pgettext_menu_label("main_window.menu_file_exit", "E&xit"),
-            command=self.window.on_exit,
+            command=self.listener.on_exit,
         )
         return file_menu
 
@@ -118,7 +138,7 @@ class MainMenuBar(Menu):
         edit_menu.add_separator()
         edit_menu.add_command(
             **pgettext_menu_label("main_window.menu_edit_clean_quotes", "Remove &Quotes"),
-            command=self.window.on_clean_quotes,
+            command=self.listener.on_clean_quotes,
         )
         return edit_menu
 
@@ -132,15 +152,15 @@ class MainMenuBar(Menu):
         phone_formats_menu.add_checkbutton(
             **pgettext_menu_label("main_window.menu_select_all_phone_formats", "Select &All"),
             variable=self.phone_formats_select_all_var,
-            command=self.window.on_toggle_all_phone_formats,
+            command=self.listener.on_toggle_all_phone_formats,
         )
         phone_formats_menu.add_separator()
 
-        for phone_format in self.window.phone_formats_list:
+        for phone_format in self.phone_formats:
             phone_formats_menu.add_checkbutton(
                 label=pgettext(phone_format.name.context, phone_format.name.message),
                 variable=self.phone_format_vars[phone_format.id],
-                command=partial(self.window.on_toggle_phone_format, format_id=phone_format.id),
+                command=partial(self.listener.on_toggle_phone_format, format_id=phone_format.id),
             )
 
         return options_menu
@@ -187,15 +207,15 @@ class MainMenuBar(Menu):
         help_parsed_label["label"] = help_parsed_label["label"].format(app_name=app_name())
         help_menu.add_command(
             **help_parsed_label,
-            command=self.window.on_about,
+            command=self.listener.on_about,
         )
         return help_menu
 
     def _generate_focus_event(self, sequence: str):
-        if widget := self.master.focus_get():
+        if widget := self.focus_get():
             widget.event_generate(sequence)
 
-    def update_generating_state(self, state: GenerationState):
+    def set_generating_state(self, state: GenerationState):
         self.file_menu.entryconfigure(
             self.menu_generate_label,
             state="normal" if state is GenerationState.IDLE else "disabled",
@@ -205,7 +225,7 @@ class MainMenuBar(Menu):
             state="normal" if state is GenerationState.GENERATING else "disabled",
         )
 
-    def update_phone_formats_selection(self, format_ids: set[str], selected: bool):
-        self.phone_formats_select_all_var.set(self.window.is_all_phone_formats_selected())
-        for format_id in format_ids:
+    def set_phone_formats_selection(self, all_selected: bool, selection: dict[str, bool]):
+        self.phone_formats_select_all_var.set(all_selected)
+        for format_id, selected in selection.items():
             self.phone_format_vars[format_id].set(selected)

@@ -35,7 +35,7 @@ def select_lines(text: Text, first_row: int, last_row: int, *, see: bool = True)
     select_text(text, f"{first_row}.0", f"{last_row + 1}.0", see=see)
 
 
-def search_line(text: Text, search_text: str, near_row: int, max_offset: int = 20, *, strip: bool = True) -> int | None:
+def search_line(text: Text, search_text: str, *, near_row: int, max_offset: int = 20, strip: bool = True) -> int | None:
     """在 ``near_row`` 周围搜索整行，仅当 ``search_text`` 完全匹配该行时返回行号。
 
     为了防止数据过大时卡顿，默认会限制最大 20 的搜索范围。

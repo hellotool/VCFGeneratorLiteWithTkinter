@@ -1,23 +1,24 @@
 from collections.abc import Callable
 from gettext import pgettext
-from tkinter import Event, EventType, Tk, Toplevel
+from tkinter import Event, Tk, Toplevel
 from typing import override
 
 from vcf_generator_lite.core.vcf_generator import InvalidItem
-from vcf_generator_lite.ui.app_text import error_for
 from vcf_generator_lite.ui.windows.base_window import EnhancedDialog
-from vcf_generator_lite.ui.windows.invalid_items_dialog.layout import InvalidItemsDialogLayout
+from vcf_generator_lite.ui.windows.base_window.constants import EVENT_EXIT
+from vcf_generator_lite.ui.windows.invalid_items_dialog.layout import InvalidItemsLayout
 
 
-class InvalidItemsDialog(EnhancedDialog):
+class InvalidItemsDialog(EnhancedDialog, InvalidItemsLayout.Listener):
     def __init__(
         self,
         master: Tk | Toplevel,
+        *,
         display_path: str,
         invalid_items: list[InvalidItem],
-        line_enter_listener: Callable[[int, str], None] | None = None,
+        line_enter_listener: Callable[[InvalidItem], None] | None = None,
     ):
-        self._line_enter_listener: Callable[[int, str], None] | None = line_enter_listener
+        self._line_enter_listener: Callable[[InvalidItem], None] | None = line_enter_listener
         self.display_path = display_path
         self.invalid_items = invalid_items
         super().__init__(master)
@@ -29,8 +30,9 @@ class InvalidItemsDialog(EnhancedDialog):
         self.resizable(True, True)
         self.wm_size_pt(360, 320)
         self.wm_minsize_pt(225, 225)
-        self.layout = InvalidItemsDialogLayout(self, self)
-        self.set_invalid_items(self.invalid_items)
+
+        self.layout = InvalidItemsLayout(self, self.display_path, self)
+        self.layout.set_invalid_items(self.invalid_items)
 
         self.bind("<Return>", self.on_return)
 
@@ -40,38 +42,16 @@ class InvalidItemsDialog(EnhancedDialog):
         self.bell()
         self.update()
 
-    def set_invalid_items(self, items: list[InvalidItem]):
-        self.layout.content_tree.delete(*self.layout.content_tree.get_children())
-        for item in items:
-            self.layout.content_tree.insert(
-                parent="",
-                index="end",
-                id=item.row_position,
-                values=(
-                    pgettext("vcf_generate_invalid_dialog.cell_row", "Row {row}").format(row=item.row_position),
-                    item.raw_content,
-                    error_for(item.exception),
-                ),
-            )
-
-    def set_line_enter_listener(self, listener: Callable[[int, str], None] | None):
-        self._line_enter_listener = listener
-
     def on_return(self, event: Event):
         if event.widget is self.layout.content_tree:
             return
         self.layout.ok_button.invoke()
 
-    def on_tree_view_enter(self, event: Event):
-        selection = self.layout.content_tree.selection()
-        if (
-            self._line_enter_listener
-            and len(selection) > 0
-            and (
-                self.layout.content_tree.identify_region(event.x, event.y) == "cell"
-                or event.type != EventType.ButtonPress
-            )
-        ):
-            line = int(selection[0])
-            data = self.layout.content_tree.item(line, "values")[1]
-            self._line_enter_listener(line, data)
+    @override
+    def on_ok(self):
+        self.event_generate(EVENT_EXIT)
+
+    @override
+    def on_tree_view_enter(self, id_: int):
+        if self._line_enter_listener:
+            self._line_enter_listener(next(item for item in self.invalid_items if item.row_position == id_))

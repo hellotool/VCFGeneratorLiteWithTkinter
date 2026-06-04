@@ -1,7 +1,8 @@
+from abc import ABC, abstractmethod
 from gettext import pgettext
 from tkinter import Misc
 from tkinter.ttk import Button, Frame, Label, Progressbar, Sizegrip
-from typing import TYPE_CHECKING, override
+from typing import override
 
 from ttk_text.scrolled_text import ScrolledText
 
@@ -11,14 +12,17 @@ from vcf_generator_lite.ui.widgets.text_menu import TextContextMenu
 from vcf_generator_lite.ui.windows.main_window.states import GenerationState
 from vcf_generator_lite.utils.tkinter.widget import enable_auto_wrap, needs_sizegrip
 
-if TYPE_CHECKING:
-    from vcf_generator_lite.ui.windows.main_window.window import VCFGeneratorLiteApp
-
 
 class MainLayout(VerticalDialogLayout):
-    def __init__(self, parent: Misc, window: "VCFGeneratorLiteApp"):
+    class Listener(ABC):
+        """Main layout listener interface."""
+
+        @abstractmethod
+        def on_generate_or_stop(self): ...
+
+    def __init__(self, parent: Misc, listener: Listener):
         super().__init__()
-        self.window = window
+        self.listener = listener
         self._create_widgets(parent)
 
     @override
@@ -91,7 +95,7 @@ Xie Lingyun\t13666666666
             footer_frame,
             text=pgettext("main_window.button_generate", "Generate"),
             default="active",
-            command=self.window.on_generate_or_stop,
+            command=self.listener.on_generate_or_stop,
         )
         self.generate_or_stop_button.pack(side="right", padx="8.25p", pady="8.25p")
         return footer_frame
