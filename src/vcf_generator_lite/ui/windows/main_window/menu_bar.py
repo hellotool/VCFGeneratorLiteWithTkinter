@@ -20,7 +20,7 @@ from vcf_generator_lite.ui.windows.main_window.constants import (
 )
 from vcf_generator_lite.ui.windows.main_window.states import GenerationState
 from vcf_generator_lite.utils.tkinter.accelerators import get_default_accelerators
-from vcf_generator_lite.utils.tkinter.menu import pgettext_menu_label
+from vcf_generator_lite.utils.tkinter.menu import parse_menu_label, pgettext_menu_label
 
 
 class MainMenuBar(Menu):
@@ -203,10 +203,10 @@ class MainMenuBar(Menu):
             command=lambda: open_url(self, third_party_notices_url()),
         )
         help_menu.add_separator()
-        help_parsed_label = pgettext_menu_label("main_window.menu_help_about", "&About {app_name}")
-        help_parsed_label["label"] = help_parsed_label["label"].format(app_name=app_name())
         help_menu.add_command(
-            **help_parsed_label,
+            **parse_menu_label(
+                pgettext("main_window.menu_help_about", "&About {app_name}").format(app_name=app_name())
+            ),
             command=self.listener.on_about,
         )
         return help_menu

@@ -17,6 +17,6 @@ def parse_menu_label(label: str) -> ParsedLabel:
     )
 
 
-def pgettext_menu_label(context: str, message: str) -> ParsedLabel:
+def pgettext_menu_label(context: str, message: str, /) -> ParsedLabel:
     """获取翻译后的字符串，并解析快捷键"""
     return parse_menu_label(pgettext(context, message))
