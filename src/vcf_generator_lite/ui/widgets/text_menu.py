@@ -9,7 +9,7 @@ def boolean_to_state(state: bool) -> Literal["normal", "disabled"]:
     return "normal" if state else "disabled"
 
 
-def state_to_boolean(state: Literal["normal", "disabled"]) -> bool:
+def state_to_boolean(state: str) -> bool:
     return state == "normal"
 
 
@@ -30,7 +30,7 @@ class TextContextMenu(Menu):
         self.master.focus()
         self.delete(0, "end")
         state_by_selected = boolean_to_state(self.is_selected())
-        is_master_editable = state_to_boolean(self.master.cget("state"))
+        is_master_editable = state_to_boolean(str(self.master.cget("state")))
         if is_master_editable:
             self.add_command(
                 **pgettext_menu_label("entry_widget.menu_undo", "&Undo"),

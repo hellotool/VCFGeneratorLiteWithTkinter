@@ -114,6 +114,7 @@ Xie Lingyun\t13666666666
         self.progress_bar.configure(value=progress)
 
     def set_progress_determinate(self, value: bool):
+        # 需要添加 str()，因为 https://github.com/python/cpython/issues/126008
         previous_value: bool = str(self.progress_bar.cget("mode")) == "determinate"
         if value == previous_value:
             return
