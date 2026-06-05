@@ -26,7 +26,7 @@ class InvalidItemsDialog(EnhancedDialog, InvalidItemsLayout.Listener):
     @override
     def _configure_ui_withdraw(self):
         super()._configure_ui_withdraw()
-        self.title(pgettext("vcf_generate_invalid_dialog.title", "vCard File Generation Complete"))
+        self.title(pgettext("dialog_invalid_items.title", "vCard File Generation Complete"))
         self.resizable(True, True)
         self.wm_size_pt(360, 320)
         self.wm_minsize_pt(225, 225)

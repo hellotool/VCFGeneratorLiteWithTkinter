@@ -6,12 +6,12 @@ from tkinter import Misc, messagebox
 def show_open_url_failure_message_box(parent: Misc, url: str):
     messagebox.showerror(
         parent=parent,
-        title=pgettext("open_url_failure_message_box.title", "Failed to Open External Application"),
+        title=pgettext("dialog_open_url_failure.title", "Failed to Open External Application"),
         message=pgettext(
-            "open_url_failure_message_box.message",
+            "dialog_open_url_failure.message",
             "Failed to open external application. Please check your default application settings.",
         ),
-        detail=pgettext("open_url_failure_message_box.detail", "Link: {url}").format(url=url),
+        detail=pgettext("dialog_open_url_failure.detail", "Link: {url}").format(url=url),
     )
 
 

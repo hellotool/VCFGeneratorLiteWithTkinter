@@ -13,7 +13,7 @@ def app_description() -> str:
 
 
 def third_party_notices_url() -> str:
-    return pgettext("app.third_party_notices_url", "{repository}/blob/{version}/NOTICES.md").format(
+    return pgettext("app.url_third_party_notices", "{repository}/blob/{version}/NOTICES.md").format(
         repository=URL_REPOSITORY,
         version=f"v{__version__}",
     )
@@ -23,5 +23,5 @@ def error_for(exception: BaseException) -> str:
     from vcf_generator_lite.models.contact import MissingNumberError
 
     if isinstance(exception, MissingNumberError):
-        return pgettext("error.missing_number", "Missing number or number is incorrect")
+        return pgettext("error_missing_number", "Missing number or number is incorrect")
     return str(exception)

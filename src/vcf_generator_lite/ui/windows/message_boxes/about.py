@@ -11,13 +11,13 @@ from vcf_generator_lite.ui.app_text import app_name
 def show_about_message_box(parent: Misc):
     messagebox.showinfo(
         parent=parent,
-        title=pgettext("about_message_box.title", "About {app_name}").format(app_name=app_name()),
-        message=pgettext("about_message_box.message", "{app_name} v{version}").format(
+        title=pgettext("dialog_about.title", "About {app_name}").format(app_name=app_name()),
+        message=pgettext("dialog_about.message", "{app_name} v{version}").format(
             app_name=app_name(),
             version=__version__,
         ),
         detail=pgettext(
-            "about_message_box.detail",
+            "dialog_about.detail",
             """{copyright}
 
 Environment Information:

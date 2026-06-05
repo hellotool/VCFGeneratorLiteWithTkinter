@@ -54,6 +54,31 @@ def serialize_to_vcard(contact: Contact):
 
 
 class VCFGeneratorTask(Thread):
+    """在两个工作线程中并发地解析输入并写入 vCard。
+
+    工作流程：
+
+    1. 主线程调用 :meth:`start` 后，:meth:`run` 会启动一个最多 2 个工作线程的线程池。
+    2. :meth:`_parse_input` 在 Worker 1 中逐行解析输入文本，把生成的 vCard 放入有界队列。
+    3. :meth:`_write_output` 在 Worker 2 中从队列取出 vCard 写入输出 IO。
+    4. 主线程等待两个工作线程结束；若任一线程抛出异常，则调用 :meth:`stop` 关闭队列，
+       让另一个线程快速退出。
+    5. 结束后通过 ``result_listener`` 回调或读取 :attr:`result` 获取 :class:`GenerateResult`。
+
+    线程安全：
+
+    - ``_total``、``_processed``、``_progress``、``_saved_count`` 各自由独立 ``RLock`` 保护。
+    - ``_invalid_items`` 列表的 ``append`` 是原子操作（CPython 解释器级别），
+      因此无需额外加锁。
+    - ``_write_queue`` 是线程安全的（内部使用 ``Condition``）。
+
+    取消机制：
+
+    - 调用 :meth:`stop` 会将内部停止标志置位并关闭写入队列。
+    - 解析线程会在下一轮循环检查停止标志后退出。
+    - 写入线程在下一次 ``get()`` 时会因为队列关闭而抛出 :class:`ShutDownError`。
+    """
+
     def __init__(
         self,
         input_text: str,

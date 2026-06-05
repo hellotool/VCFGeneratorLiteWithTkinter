@@ -43,7 +43,7 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
     def __init__(self):
         self.is_exiting = False
         self.current_generation: Generation | None = None
-        self.save_vcf_file_name: str = pgettext("save_vcf_window.default_file_name", "My Contacts.vcf")
+        self.save_vcf_file_name: str = pgettext("window_save_vcf.default_file_name", "My Contacts.vcf")
         self.phone_formats_dict: dict[str, PhoneFormat] = load_country_phone_formats()
         self.phone_formats_list: list[PhoneFormat] = sorted(
             self.phone_formats_dict.values(),
@@ -156,10 +156,10 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
 
     def _pick_and_open_file(self) -> None | tuple[Path, TextIO]:
         file_path_str = filedialog.asksaveasfilename(
-            title=pgettext("save_vcf_window.title", "Select File Save Location"),
+            title=pgettext("window_save_vcf.title", "Select File Save Location"),
             parent=self,
             initialfile=self.save_vcf_file_name,
-            filetypes=[(pgettext("save_vcf_window.label_type_vcf", "vCard File (*.vcf)"), ".vcf")],
+            filetypes=[(pgettext("window_save_vcf.label_type_vcf", "vCard File (*.vcf)"), ".vcf")],
             defaultextension=".vcf",
         )
         if not file_path_str:

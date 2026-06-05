@@ -45,7 +45,7 @@ class InvalidItemsLayout(VerticalDialogLayout):
             header_frame,
             style="DialogHeaderContent.TLabel",
             text=pgettext(
-                "vcf_generate_invalid_dialog.message", "File exported to {path}, invalid numbers have been ignored."
+                "dialog_invalid_items.message", "File exported to {path}, invalid numbers have been ignored."
             ).format(path=self.display_path),
         )
         enable_auto_wrap(header_label)
@@ -56,7 +56,7 @@ class InvalidItemsLayout(VerticalDialogLayout):
     def _create_content(self, parent: Misc):
         content_frame = Frame(parent)
         content_label = Label(
-            content_frame, text=pgettext("vcf_generate_invalid_dialog.label_invalid_numbers", "Invalid numbers: ")
+            content_frame, text=pgettext("dialog_invalid_items.label_invalid_numbers", "Invalid numbers: ")
         )
         content_label.pack(fill="x", padx="8.25p", pady=("8.25p", "2p"))
         self.content_tree = ScrolledTreeview(
@@ -81,17 +81,17 @@ class InvalidItemsLayout(VerticalDialogLayout):
         self.content_tree.column("reason", anchor="w", width=0)
         self.content_tree.heading(
             "row",
-            text=pgettext("vcf_generate_invalid_dialog.heading_row", "Position"),
+            text=pgettext("dialog_invalid_items.heading_row", "Position"),
             anchor="w",
         )
         self.content_tree.heading(
             "original",
-            text=pgettext("vcf_generate_invalid_dialog.heading_original", "Original Content"),
+            text=pgettext("dialog_invalid_items.heading_original", "Original Content"),
             anchor="w",
         )
         self.content_tree.heading(
             "reason",
-            text=pgettext("vcf_generate_invalid_dialog.heading_reason", "Reason"),
+            text=pgettext("dialog_invalid_items.heading_reason", "Reason"),
             anchor="w",
         )
         # 添加一个提示，告知用户正在加载中。
@@ -99,7 +99,7 @@ class InvalidItemsLayout(VerticalDialogLayout):
             "",
             "end",
             id="loading_tip",
-            values=("", pgettext("vcf_generate_invalid_dialog.cell_loading", "Loading..."), ""),
+            values=("", pgettext("dialog_invalid_items.cell_loading", "Loading..."), ""),
         )
         self.content_tree.pack(fill="both", expand=True, padx="8.25p")
         self.content_tree.bind("<Double-Button-1>", self.on_tree_view_enter)
@@ -130,7 +130,7 @@ class InvalidItemsLayout(VerticalDialogLayout):
                 index="end",
                 id=item.row_position,
                 values=(
-                    pgettext("vcf_generate_invalid_dialog.cell_row", "Row {row}").format(row=item.row_position),
+                    pgettext("dialog_invalid_items.cell_row", "Row {row}").format(row=item.row_position),
                     item.raw_content,
                     error_for(item.exception),
                 ),

@@ -8,7 +8,7 @@ from pathlib import Path
 from tkinter.messagebox import Message
 from types import TracebackType
 
-# 请勿去全局导入任何依赖 gettext 的模块，因为要打猴子补丁。
+# 由于需要打猴子补丁，因此请勿全局导入任何依赖 gettext 的模块。
 
 _logger = logging.getLogger(__name__)
 

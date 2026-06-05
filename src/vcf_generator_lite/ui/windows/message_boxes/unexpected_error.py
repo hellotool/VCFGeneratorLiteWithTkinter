@@ -4,10 +4,10 @@ from tkinter.messagebox import showerror
 
 def show_unexpected_error_dialog(error: BaseException) -> None:
     showerror(
-        title=pgettext("unexpected_error_dialog.title", "Unexpected Error"),
+        title=pgettext("dialog_unexpected_error.title", "Unexpected Error"),
         message=pgettext(
-            "unexpected_error_dialog.message",
+            "dialog_unexpected_error.message",
             "An unexpected error occurred, please report this error to the maintainer.",
         ),
-        detail=pgettext("unexpected_error_dialog.detail", "Error message: {error}").format(error=str(error)),
+        detail=pgettext("dialog_unexpected_error.detail", "Error message: {error}").format(error=str(error)),
     )

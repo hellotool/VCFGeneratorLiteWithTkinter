@@ -30,7 +30,7 @@ class MainLayout(VerticalDialogLayout):
         description_label = Label(
             parent,
             text=pgettext(
-                "main_window.usage",
+                "window_main.label_usage",
                 """Instructions:
 1. Copy names and phone numbers in the format "Name Phone Notes" (notes optional) into the edit box below.
 2. Click "Generate" and select a path to save the file.
@@ -56,7 +56,7 @@ class MainLayout(VerticalDialogLayout):
         self.content_text.insert(
             0.0,
             pgettext(
-                "main_window.input_example",
+                "window_main.entry_content",
                 """Qu Yuan\t13333333333\tPoet of the Warring States period
 Cao Cao\t13444444444
 Tao Y.M.\t13555555555
@@ -89,11 +89,11 @@ Xie Lingyun\t13666666666
             sizegrip.place(relx=1, rely=1, anchor="se")
 
         self.progress_bar = Progressbar(footer_frame, orient="horizontal", length=200, mode="determinate", maximum=1)
-        self.progress_label = Label(master=footer_frame, text=pgettext("main_window.label_generating", "Generating..."))
+        self.progress_label = Label(master=footer_frame, text=pgettext("window_main.label_generating", "Generating..."))
 
         self.generate_or_stop_button = Button(
             footer_frame,
-            text=pgettext("main_window.button_generate", "Generate"),
+            text=pgettext("window_main.button_generate", "Generate"),
             default="active",
             command=self.listener.on_generate_or_stop,
         )
@@ -132,15 +132,15 @@ Xie Lingyun\t13666666666
     def set_generating(self, state: GenerationState):
         if state is GenerationState.IDLE:
             self.generate_or_stop_button.configure(
-                text=pgettext("main_window.button_generate", "Generate"), state="normal"
+                text=pgettext("window_main.button_generate", "Generate"), state="normal"
             )
             self.hide_progress()
         elif state is GenerationState.GENERATING:
-            self.generate_or_stop_button.configure(text=pgettext("main_window.button_stop", "Stop"), state="normal")
-            self.progress_label.configure(text=pgettext("main_window.label_generating", "Generating..."))
+            self.generate_or_stop_button.configure(text=pgettext("window_main.button_stop", "Stop"), state="normal")
+            self.progress_label.configure(text=pgettext("window_main.label_generating", "Generating..."))
             self.show_progress()
         elif state is GenerationState.STOPPING:
-            self.generate_or_stop_button.configure(text=pgettext("main_window.button_stop", "Stop"), state="disabled")
-            self.progress_label.configure(text=pgettext("main_window.label_stopping", "Stopping..."))
+            self.generate_or_stop_button.configure(text=pgettext("window_main.button_stop", "Stop"), state="disabled")
+            self.progress_label.configure(text=pgettext("window_main.label_stopping", "Stopping..."))
             self.show_progress()
             self.set_progress_determinate(False)
