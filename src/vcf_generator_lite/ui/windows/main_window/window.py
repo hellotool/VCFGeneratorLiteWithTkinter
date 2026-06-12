@@ -8,7 +8,7 @@ from tkinter import Event, filedialog
 from types import FrameType
 from typing import TYPE_CHECKING, NamedTuple, TextIO, override
 
-from vcf_generator_lite.core.phone_format_loader import load_country_phone_formats
+from vcf_generator_lite.core.phone_detector_loader import load_country_phone_detectors
 from vcf_generator_lite.core.vcf_generator import GenerateResult, InvalidItem, PhoneRule, VCFGeneratorTask
 from vcf_generator_lite.ui.app_text import app_name
 from vcf_generator_lite.ui.windows.base_window import EnhancedTk
@@ -28,7 +28,7 @@ from vcf_generator_lite.utils.text import clean_quotes
 from vcf_generator_lite.utils.tkinter.text import search_line, select_text
 
 if TYPE_CHECKING:
-    from vcf_generator_lite.models.phone_format import PhoneFormat
+    from vcf_generator_lite.models.phone_detector import PhoneDetector
 
 _logger = logging.getLogger(__name__)
 
@@ -44,21 +44,21 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
         self.is_exiting = False
         self.current_generation: Generation | None = None
         self.save_vcf_file_name: str = pgettext("window_save_vcf.default_file_name", "My Contacts.vcf")
-        self.phone_formats_dict: dict[str, PhoneFormat] = load_country_phone_formats()
-        self.phone_formats_list: list[PhoneFormat] = sorted(
-            self.phone_formats_dict.values(),
-            key=lambda phone_format: phone_format.id,
+        self.phone_detectors_dict: dict[str, PhoneDetector] = load_country_phone_detectors()
+        self.phone_detectors_list: list[PhoneDetector] = sorted(
+            self.phone_detectors_dict.values(),
+            key=lambda phone_detector: phone_detector.id,
         )
         locale_territories = set(get_locale_territories(get_default_locales()))
-        self.phone_formats_ids = set(self.phone_formats_dict.keys())
-        self.selected_phone_formats_ids: set[str] = {
-            phone_format.id
-            for phone_format in self.phone_formats_list
-            if phone_format.locale_territories & locale_territories
+        self.phone_detectors_ids = set(self.phone_detectors_dict.keys())
+        self.selected_phone_detectors_ids: set[str] = {
+            phone_detector.id
+            for phone_detector in self.phone_detectors_list
+            if phone_detector.locale_territories & locale_territories
         }
 
-        if not self.selected_phone_formats_ids and self.phone_formats_list:
-            self.selected_phone_formats_ids.add(self.phone_formats_list[0].id)
+        if not self.selected_phone_detectors_ids and self.phone_detectors_list:
+            self.selected_phone_detectors_ids.add(self.phone_detectors_list[0].id)
 
         super().__init__(className="VCFGeneratorLite")
 
@@ -69,10 +69,10 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
         self.wm_minsize_pt(300, 300)
         self.wm_size_pt(450, 450)
         self.layout = MainLayout(self, self)
-        self.menu_bar = MainMenuBar(self, self.phone_formats_list, self)
-        self.menu_bar.set_phone_formats_selection(
-            self.is_all_phone_formats_selected(),
-            {id_: self.is_phone_format_selected(id_) for id_ in self.phone_formats_ids},
+        self.menu_bar = MainMenuBar(self, self.phone_detectors_list, self)
+        self.menu_bar.set_phone_detectors_selection(
+            self.is_all_phone_detectors_selected(),
+            {id_: self.is_phone_detector_selected(id_) for id_ in self.phone_detectors_ids},
         )
         self.configure(menu=self.menu_bar)
 
@@ -125,22 +125,22 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
         self.layout.generate_or_stop_button.invoke()
 
     @override
-    def on_toggle_phone_format(self, format_id: str):
-        new_state = not self.is_phone_format_selected(format_id)
+    def on_toggle_phone_detector(self, detector_id: str):
+        new_state = not self.is_phone_detector_selected(detector_id)
         if new_state:
-            self.selected_phone_formats_ids.add(format_id)
+            self.selected_phone_detectors_ids.add(detector_id)
         else:
-            self.selected_phone_formats_ids.discard(format_id)
-        self.menu_bar.set_phone_formats_selection(self.is_all_phone_formats_selected(), {format_id: new_state})
+            self.selected_phone_detectors_ids.discard(detector_id)
+        self.menu_bar.set_phone_detectors_selection(self.is_all_phone_detectors_selected(), {detector_id: new_state})
 
     @override
-    def on_toggle_all_phone_formats(self):
-        new_state = not self.is_all_phone_formats_selected()
+    def on_toggle_all_phone_detectors(self):
+        new_state = not self.is_all_phone_detectors_selected()
         if new_state:
-            self.selected_phone_formats_ids.update(self.phone_formats_ids)
+            self.selected_phone_detectors_ids.update(self.phone_detectors_ids)
         else:
-            self.selected_phone_formats_ids.clear()
-        self.menu_bar.set_phone_formats_selection(new_state, dict.fromkeys(self.phone_formats_ids, new_state))
+            self.selected_phone_detectors_ids.clear()
+        self.menu_bar.set_phone_detectors_selection(new_state, dict.fromkeys(self.phone_detectors_ids, new_state))
 
     def _generate_file(self):
         if self.current_generation:
@@ -206,7 +206,7 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
     def _get_selected_rules(self) -> list[PhoneRule]:
         return list(
             chain.from_iterable(
-                self.phone_formats_dict[format_id].rules for format_id in self.selected_phone_formats_ids
+                self.phone_detectors_dict[detector_id].rules for detector_id in self.selected_phone_detectors_ids
             )
         )
 
@@ -269,13 +269,13 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
 
         self.after_idle(self.on_generation_done, result)
 
-    def is_all_phone_formats_selected(self):
-        return (self.selected_phone_formats_ids & self.phone_formats_ids) == self.phone_formats_ids
+    def is_all_phone_detectors_selected(self):
+        return (self.selected_phone_detectors_ids & self.phone_detectors_ids) == self.phone_detectors_ids
 
-    def is_phone_format_selected(self, format_id: str):
-        if format_id not in self.phone_formats_dict:
-            raise ValueError(f"Unknown phone format: {format_id}")
-        return format_id in self.selected_phone_formats_ids
+    def is_phone_detector_selected(self, detector_id: str):
+        if detector_id not in self.phone_detectors_dict:
+            raise ValueError(f"Unknown phone detector: {detector_id}")
+        return detector_id in self.selected_phone_detectors_ids
 
     def _require_generation(self) -> Generation:
         if not self.current_generation:

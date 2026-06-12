@@ -9,7 +9,7 @@ from typing import IO, NamedTuple, override
 
 from vcf_generator_lite.core.contact_parser import parse_contact
 from vcf_generator_lite.models.contact import Contact, MissingNumberError
-from vcf_generator_lite.models.phone_format import PhoneRule
+from vcf_generator_lite.models.phone_detector import PhoneRule
 from vcf_generator_lite.utils.deque_queue import DequeQueue, ShutDownError
 
 _logger = logging.getLogger(__name__)

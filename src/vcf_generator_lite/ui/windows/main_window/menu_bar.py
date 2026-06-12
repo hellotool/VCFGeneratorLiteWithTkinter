@@ -11,9 +11,9 @@ from vcf_generator_lite.constants import (
     URL_REPORT,
     URL_REPOSITORY,
 )
-from vcf_generator_lite.core.phone_format_loader import PhoneFormat
+from vcf_generator_lite.core.phone_detector_loader import PhoneDetector
 from vcf_generator_lite.ui.actions.external_app import open_url
-from vcf_generator_lite.ui.app_text import app_name, third_party_notices_url
+from vcf_generator_lite.ui.app_text import app_name, documentation_url, third_party_notices_url
 from vcf_generator_lite.ui.windows.main_window.constants import (
     ACCELERATOR_GENERATE,
     ACCELERATOR_GENERATE_AQUA,
@@ -40,20 +40,22 @@ class MainMenuBar(Menu):
         def on_clean_quotes(self): ...
 
         @abstractmethod
-        def on_toggle_all_phone_formats(self): ...
+        def on_toggle_all_phone_detectors(self): ...
 
         @abstractmethod
-        def on_toggle_phone_format(self, format_id: str): ...
+        def on_toggle_phone_detector(self, detector_id: str): ...
 
         @abstractmethod
         def on_about(self): ...
 
-    def __init__(self, parent: Misc | None, phone_formats: list[PhoneFormat], listener: Listener):
+    def __init__(self, parent: Misc | None, phone_detectors: list[PhoneDetector], listener: Listener):
         super().__init__(parent, tearoff=False, name="menubar")
-        self.phone_formats = phone_formats
+        self.phone_detectors = phone_detectors
         self.listener = listener
-        self.phone_formats_select_all_var = BooleanVar(value=False)
-        self.phone_format_vars = {phone_format.id: BooleanVar(value=False) for phone_format in self.phone_formats}
+        self.phone_detectors_select_all_var = BooleanVar(value=False)
+        self.phone_detector_vars = {
+            phone_detector.id: BooleanVar(value=False) for phone_detector in self.phone_detectors
+        }
 
         self.add_cascade(
             **pgettext_menu_label("window_main.menu_file", "&File"),
@@ -144,23 +146,24 @@ class MainMenuBar(Menu):
 
     def _create_options_menu(self, master: Misc):
         options_menu = Menu(master, tearoff=False)
-        phone_formats_menu = Menu(options_menu, tearoff=False)
+        phone_detectors_menu = Menu(options_menu, tearoff=False)
+        # Use Phone Format instead of Phone Detectors for visibility
         options_menu.add_cascade(
-            **pgettext_menu_label("window_main.menu_phone_formats", "&Phone Formats"),
-            menu=phone_formats_menu,
+            **pgettext_menu_label("window_main.menu_phone_detectors", "&Phone Format"),
+            menu=phone_detectors_menu,
         )
-        phone_formats_menu.add_checkbutton(
-            **pgettext_menu_label("window_main.menu_select_all_phone_formats", "Select &All"),
-            variable=self.phone_formats_select_all_var,
-            command=self.listener.on_toggle_all_phone_formats,
+        phone_detectors_menu.add_checkbutton(
+            **pgettext_menu_label("window_main.menu_select_all_phone_detectors", "Select &All"),
+            variable=self.phone_detectors_select_all_var,
+            command=self.listener.on_toggle_all_phone_detectors,
         )
-        phone_formats_menu.add_separator()
+        phone_detectors_menu.add_separator()
 
-        for phone_format in self.phone_formats:
-            phone_formats_menu.add_checkbutton(
-                label=pgettext(phone_format.name.context, phone_format.name.message),
-                variable=self.phone_format_vars[phone_format.id],
-                command=partial(self.listener.on_toggle_phone_format, format_id=phone_format.id),
+        for phone_detector in self.phone_detectors:
+            phone_detectors_menu.add_checkbutton(
+                label=pgettext(phone_detector.name.context, phone_detector.name.message),
+                variable=self.phone_detector_vars[phone_detector.id],
+                command=partial(self.listener.on_toggle_phone_detector, detector_id=phone_detector.id),
             )
 
         return options_menu
@@ -174,6 +177,10 @@ class MainMenuBar(Menu):
         help_menu.add_command(
             **pgettext_menu_label("window_main.menu_help_release", "&Releases"),
             command=lambda: open_url(self, URL_RELEASES),
+        )
+        help_menu.add_command(
+            **pgettext_menu_label("window_main.menu_help_documentation", "&Documentation"),
+            command=lambda: open_url(self, documentation_url()),
         )
         help_menu.add_separator()
         help_menu.add_command(
@@ -225,7 +232,7 @@ class MainMenuBar(Menu):
             state="normal" if state is GenerationState.GENERATING else "disabled",
         )
 
-    def set_phone_formats_selection(self, all_selected: bool, selection: dict[str, bool]):
-        self.phone_formats_select_all_var.set(all_selected)
-        for format_id, selected in selection.items():
-            self.phone_format_vars[format_id].set(selected)
+    def set_phone_detectors_selection(self, all_selected: bool, selection: dict[str, bool]):
+        self.phone_detectors_select_all_var.set(all_selected)
+        for detector_id, selected in selection.items():
+            self.phone_detector_vars[detector_id].set(selected)

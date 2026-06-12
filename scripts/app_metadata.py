@@ -39,6 +39,8 @@ def get_windows_file_info_version(version: Version) -> tuple[int, int, int, int]
 
 def get_semantic_version(version: Version) -> str:
     sem_ver = f"{version.major}.{version.minor}.{version.micro}"
+    if version.is_devrelease and not version.pre and not version.is_postrelease:
+        sem_ver += "-alpha"
     if version.pre:
         match version.pre[0]:
             case "a":

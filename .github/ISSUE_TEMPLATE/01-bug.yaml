@@ -47,7 +47,7 @@ body:
       description: |
         If you can obtain logs, please post them here (run with `-vv` for more detailed logs).
         Must be enclosed in triple backticks ```txt ```. Please remember to sanitize sensitive information.
-      value: |
+      placeholder: |
         ```txt
         [Paste logs here]
         ```

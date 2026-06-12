@@ -1,5 +1,5 @@
 from vcf_generator_lite.models.contact import Contact, MissingNumberError
-from vcf_generator_lite.models.phone_format import PhoneRule
+from vcf_generator_lite.models.phone_detector import PhoneRule
 
 
 def _get_phone_index(contact_parts: list[str], rules: list[PhoneRule]) -> int:

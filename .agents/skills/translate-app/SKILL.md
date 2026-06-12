@@ -11,8 +11,8 @@ description: Translates the VCF Generator Lite application interface to new lang
 
 在开始翻译前，必须：
 
-1. 阅读 `src/vcf_generator_lite/resources/locales/zh_CN/LC_MESSAGES/vcf-generator-lite.po`，了解现有翻译文件的格式和约定。
-2. 了解 gettext 的 `.po` 文件格式：`msgctxt`（翻译上下文）、`msgid`（原文）、`msgstr`（译文）。
+1. 了解 gettext 的 `.po` 文件格式：`msgctxt`（翻译上下文）、`msgid`（原文）、`msgstr`（译文）。
+2. 阅读 `docs/dev/l10n/translation.md`，了解翻译约定。
 
 ## 文件位置
 
@@ -28,34 +28,19 @@ description: Translates the VCF Generator Lite application interface to new lang
 
 如果源代码中的翻译字符串发生了变更，需要先同步模板：
 
-1. 提取翻译字符串：
-   ```bash
-   uv run poe l10n-extract
-   ```
-2. 更新语言文件：
-   ```bash
-   uv run poe l10n-update
-   ```
+1. 提取翻译字符串：`uv run poe l10n-extract`
+2. 更新语言文件：`uv run poe l10n-update`
 
 ### 翻译贡献者前置步骤
 
 1. 准备语言文件：
-   - 如果是首次翻译某个语言：
-     ```bash
-     uv run poe l10n-init -l <language[_territory]>
-     ```
-   - 如果该语言的 `.po` 文件已存在，同步最新模板：
-     ```bash
-     uv run poe l10n-update
-     ```
+   - 如果是首次翻译某个语言：`uv run poe l10n-init -l <language[_territory]>`
+   - 如果该语言的 `.po` 文件已存在，同步最新模板：`uv run poe l10n-update`
 
 ### 通用步骤（所有角色）
 
 1. 编辑 `.po` 文件：逐条翻译新增或变更的条目。
-2. 编译翻译：
-   ```bash
-   uv run poe l10n-compile -l <language_code>
-   ```
+2. 编译翻译：`uv run poe l10n-compile -l <language_code>`
 
 ## 翻译约定
 
@@ -94,12 +79,6 @@ msgstr "找不到文件"
 3. 特殊字符：`msgstr` 中的 `"` 需要转义为 `\"`。
 4. 使用 UTF-8 编码：所有 `.po` 文件均为 UTF-8 编码。
 5. 参考已有翻译：不确定时，参考 `zh_CN` 的翻译风格保持一致。
-
-## 验证翻译
-
-1. 启动应用，切换系统语言或设置 `LANG` 环境变量为对应的 locale。
-2. 检查所有界面文本是否已翻译，特别注意菜单、按钮、错误提示。
-3. 确认变量占位符在翻译后仍能正确替换。
 
 ## 常见错误
 

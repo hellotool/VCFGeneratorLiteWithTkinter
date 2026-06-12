@@ -1,13 +1,13 @@
-name: "添加电话号码格式"
-description: 提交新的国家/地区电话号码格式添加请求。
-title: "[添加电话格式]: "
+name: "添加号码检测器"
+description: 提交新的国家/地区电话号码检测器添加请求。
+title: "[添加号码检测器]: "
 labels:
   - enhancement
 body:
   - type: markdown
     attributes:
       value: |
-        感谢您帮助完善电话号码格式覆盖！请提供以下关于国家/地区的信息。
+        感谢您帮助完善电话号码检测器覆盖！请提供以下关于国家/地区的信息。
   - type: input
     id: country-name
     attributes:
@@ -65,7 +65,7 @@ body:
     id: reference-links
     attributes:
       label: 参考资料链接
-      description: 电话号码格式的官方文档或可靠来源链接
+      description: 电话号码规则的官方文档或可靠来源链接
       placeholder: "例如：https://nac.miit.gov.cn/"
     validations:
       required: false

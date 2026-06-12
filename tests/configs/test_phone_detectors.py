@@ -2,13 +2,13 @@ from functools import cache
 
 import pytest
 
-from vcf_generator_lite.core.phone_format_loader import load_country_phone_formats
+from vcf_generator_lite.core.phone_detector_loader import load_country_phone_detectors
 
 
 @cache
-def _get_formats():
-    """Cached wrapper to ensure load_country_phone_formats is called only once."""
-    return load_country_phone_formats()
+def _get_detectors():
+    """Cached wrapper to ensure load_country_phone_detectors is called only once."""
+    return load_country_phone_detectors()
 
 
 def _test_rules_match(rules, phone):
@@ -21,15 +21,15 @@ def _test_rules_not_match(rules, phone):
     assert not any(rule.test(phone) for rule in rules)
 
 
-class TestChinaMainlandPhoneFormat:
-    """China mainland phone format tests."""
+class TestChinaMainlandPhoneDetector:
+    """China mainland phone detector tests."""
 
     @pytest.fixture
-    def fmt(self):
-        return _get_formats()["builtin.china.mainland"]
+    def detector(self):
+        return _get_detectors()["builtin.china.mainland"]
 
-    def test_locale_territories(self, fmt):
-        assert "CN" in fmt.locale_territories
+    def test_locale_territories(self, detector):
+        assert "CN" in detector.locale_territories
 
     @pytest.mark.parametrize(
         "phone",
@@ -67,9 +67,9 @@ class TestChinaMainlandPhoneFormat:
             "+8607551234567",
         ],
     )
-    def test_valid(self, fmt, phone):
+    def test_valid(self, detector, phone):
         """Test valid phone numbers."""
-        _test_rules_match(fmt.rules, phone)
+        _test_rules_match(detector.rules, phone)
 
     @pytest.mark.parametrize(
         "phone",
@@ -92,20 +92,20 @@ class TestChinaMainlandPhoneFormat:
             "",
         ],
     )
-    def test_invalid(self, fmt, phone):
+    def test_invalid(self, detector, phone):
         """Test invalid phone numbers."""
-        _test_rules_not_match(fmt.rules, phone)
+        _test_rules_not_match(detector.rules, phone)
 
 
-class TestChinaHongKongPhoneFormat:
-    """Hong Kong phone format tests."""
+class TestChinaHongKongPhoneDetector:
+    """Hong Kong phone detector tests."""
 
     @pytest.fixture
-    def fmt(self):
-        return _get_formats()["builtin.china.hongkong"]
+    def detector(self):
+        return _get_detectors()["builtin.china.hongkong"]
 
-    def test_locale_territories(self, fmt):
-        assert "HK" in fmt.locale_territories
+    def test_locale_territories(self, detector):
+        assert "HK" in detector.locale_territories
 
     @pytest.mark.parametrize(
         "phone",
@@ -130,9 +130,9 @@ class TestChinaHongKongPhoneFormat:
             "+85231234567",
         ],
     )
-    def test_valid(self, fmt, phone):
+    def test_valid(self, detector, phone):
         """Test valid phone numbers."""
-        _test_rules_match(fmt.rules, phone)
+        _test_rules_match(detector.rules, phone)
 
     @pytest.mark.parametrize(
         "phone",
@@ -146,20 +146,20 @@ class TestChinaHongKongPhoneFormat:
             "+852512345678",  # 13 digits with +852, not 12
         ],
     )
-    def test_invalid(self, fmt, phone):
+    def test_invalid(self, detector, phone):
         """Test invalid phone numbers."""
-        _test_rules_not_match(fmt.rules, phone)
+        _test_rules_not_match(detector.rules, phone)
 
 
-class TestChinaMacauPhoneFormat:
-    """Macau phone format tests."""
+class TestChinaMacauPhoneDetector:
+    """Macau phone detector tests."""
 
     @pytest.fixture
-    def fmt(self):
-        return _get_formats()["builtin.china.macau"]
+    def detector(self):
+        return _get_detectors()["builtin.china.macau"]
 
-    def test_locale_territories(self, fmt):
-        assert "MO" in fmt.locale_territories
+    def test_locale_territories(self, detector):
+        assert "MO" in detector.locale_territories
 
     @pytest.mark.parametrize(
         "phone",
@@ -182,9 +182,9 @@ class TestChinaMacauPhoneFormat:
             "+85328345678",
         ],
     )
-    def test_valid(self, fmt, phone):
+    def test_valid(self, detector, phone):
         """Test valid phone numbers."""
-        _test_rules_match(fmt.rules, phone)
+        _test_rules_match(detector.rules, phone)
 
     @pytest.mark.parametrize(
         "phone",
@@ -209,20 +209,20 @@ class TestChinaMacauPhoneFormat:
             "+853281234567",  # 13 digits with +853
         ],
     )
-    def test_invalid(self, fmt, phone):
+    def test_invalid(self, detector, phone):
         """Test invalid phone numbers."""
-        _test_rules_not_match(fmt.rules, phone)
+        _test_rules_not_match(detector.rules, phone)
 
 
-class TestChinaTaiwanPhoneFormat:
-    """Taiwan phone format tests."""
+class TestChinaTaiwanPhoneDetector:
+    """Taiwan phone detector tests."""
 
     @pytest.fixture
-    def fmt(self):
-        return _get_formats()["builtin.china.taiwan"]
+    def detector(self):
+        return _get_detectors()["builtin.china.taiwan"]
 
-    def test_locale_territories(self, fmt):
-        assert "TW" in fmt.locale_territories
+    def test_locale_territories(self, detector):
+        assert "TW" in detector.locale_territories
 
     @pytest.mark.parametrize(
         "phone",
@@ -253,9 +253,9 @@ class TestChinaTaiwanPhoneFormat:
             "+88681234567",
         ],
     )
-    def test_valid(self, fmt, phone):
+    def test_valid(self, detector, phone):
         """Test valid phone numbers."""
-        _test_rules_match(fmt.rules, phone)
+        _test_rules_match(detector.rules, phone)
 
     @pytest.mark.parametrize(
         "phone",
@@ -278,6 +278,6 @@ class TestChinaTaiwanPhoneFormat:
             "+886212345678",  # 13 digits with +886
         ],
     )
-    def test_invalid(self, fmt, phone):
+    def test_invalid(self, detector, phone):
         """Test invalid phone numbers."""
-        _test_rules_not_match(fmt.rules, phone)
+        _test_rules_not_match(detector.rules, phone)
