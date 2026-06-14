@@ -110,6 +110,8 @@ def find(domain: str, localedir: Traversable, languages: Iterable[str] | None = 
         if not check_safe_locale(lang):
             _logger.warning("Unsafe locale string: %s, skipping.", lang)
             continue
+        if lang == "en":
+            break
         mofile: Traversable = localedir.joinpath(lang, "LC_MESSAGES", f"{domain}.mo")
         if mofile.is_file():
             yield mofile
