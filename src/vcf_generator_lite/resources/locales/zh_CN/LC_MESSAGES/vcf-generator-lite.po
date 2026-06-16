@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: VCF Generator Lite 5.0.4\n"
 "Report-Msgid-Bugs-To: jesse205@qq.com\n"
 "POT-Creation-Date: 2026-06-11 17:19+0800\n"
-"PO-Revision-Date: 2026-06-11 17:00+0800\n"
+"PO-Revision-Date: 2026-06-15 08:15+0800\n"
 "Last-Translator: Jesse205 <jesse205@qq.com>\n"
 "Language: zh_Hans_CN\n"
 "Language-Team: zh_Hans_CN <LL@li.org>\n"
@@ -236,7 +236,7 @@ msgstr "VCF 生成器 Lite"
 #: src/vcf_generator_lite/ui/app_text.py:11
 msgctxt "app.description"
 msgid "Generate VCF files from contacts"
-msgstr "将联系人列表转换为单个 vCard 文件。"
+msgstr "将联系人列表转换为单个 vCard 文件"
 
 #: src/vcf_generator_lite/ui/app_text.py:15
 msgctxt "app.url_repository"
@@ -459,7 +459,7 @@ msgstr "全选(&A)"
 #: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:142
 msgctxt "window_main.menu_edit_clean_quotes"
 msgid "Remove &Quotes"
-msgstr "删除引号(&Q)"
+msgstr "清除引号(&Q)"
 
 #: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:152
 msgctxt "window_main.menu_phone_detectors"
@@ -608,4 +608,3 @@ msgstr "发生意外错误，请向维护者报告此问题。"
 msgctxt "dialog_unexpected_error.detail"
 msgid "Error message: {error}"
 msgstr "错误信息：{error}"
-

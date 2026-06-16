@@ -206,7 +206,7 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
     def _get_selected_rules(self) -> list[PhoneRule]:
         return list(
             chain.from_iterable(
-                self.phone_detectors_dict[detector_id].rules for detector_id in self.selected_phone_detectors_ids
+                self.phone_detectors_dict[detector_id].rules() for detector_id in self.selected_phone_detectors_ids
             )
         )
 

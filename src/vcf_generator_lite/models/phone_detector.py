@@ -1,3 +1,4 @@
+from collections.abc import Callable
 from dataclasses import dataclass, replace
 from re import Pattern
 
@@ -32,7 +33,7 @@ class PhoneDetector:
     locale_territories: set[str]
     """ISO 3166-1 二位地区代码集合。一个检测器可适用于多个地区。"""
     name: LazyPgettext
-    rules: list[PhoneRule]
+    rules: Callable[[], list[PhoneRule]]
 
     def __add__(self, other: "PhoneDetector") -> "PhoneDetector":
         """合并两个相同 ``id`` 的检测器。"""
@@ -41,5 +42,5 @@ class PhoneDetector:
         return replace(
             self,
             locale_territories=self.locale_territories | other.locale_territories,
-            rules=self.rules + other.rules,
+            rules=lambda: self.rules() + other.rules(),
         )
