@@ -7,11 +7,13 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Python Packaging Version Specifiers](https://packaging.python.org/en/latest/specifications/version-specifiers/).
+The format is based on [Keep a Changelog][keep-a-changelog], and this project adheres to [Python Packaging Version Specifiers][pep-440-spec].
 
 The logs in "Unreleased" are scattered across various language files and will be merged when a new version is released.
 
 ## [Unreleased]
+
+## [6.0.0] - 2026-06-17
 
 ### Added
 
@@ -381,7 +383,8 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 - Initial release.
 
-[Unreleased]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v5.0.4...HEAD
+[Unreleased]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v6.0.0...HEAD
+[6.0.0]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.0
 [5.0.4]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.4
 [5.0.3]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.3
 [5.0.2]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.2
@@ -406,3 +409,5 @@ The logs in "Unreleased" are scattered across various language files and will be
 [2.0.0]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v2.0.0
 [1.1]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v1.1
 [1.0]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v1.0
+[keep-a-changelog]: https://keepachangelog.com/en/1.1.0/
+[pep-440-spec]: https://packaging.python.org/en/latest/specifications/version-specifiers/

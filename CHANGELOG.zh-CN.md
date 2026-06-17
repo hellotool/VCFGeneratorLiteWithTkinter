@@ -7,11 +7,13 @@
 
 本项目的所有重要变更都将记录在此文件中。
 
-格式基于汉化后的 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [Python 包版本规范](https://packaging.python.org/en/latest/specifications/version-specifiers/)。
+格式基于汉化后的 [Keep a Changelog][keep-a-changelog-zh-cn]，版本号遵循 [Python 包版本规范][pep-440-spec]。
 
 “未发布”中的日志散落在各个语言文件中，将会在发布新版本时合并。
 
 ## [未发布]
+
+## [6.0.0] - 2026-06-17
 
 ### 新增
 
@@ -381,7 +383,8 @@
 
 - 初始版本发布。
 
-[未发布]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v5.0.4...HEAD
+[未发布]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v6.0.0...HEAD
+[6.0.0]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.0
 [5.0.4]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.4
 [5.0.3]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.3
 [5.0.2]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.2
@@ -406,3 +409,5 @@
 [2.0.0]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v2.0.0
 [1.1]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v1.1
 [1.0]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v1.0
+[keep-a-changelog-zh-cn]: https://keepachangelog.com/zh-CN/1.1.0/
+[pep-440-spec]: https://packaging.python.org/en/latest/specifications/version-specifiers/
