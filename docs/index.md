@@ -2,15 +2,27 @@
 
 VCF 生成器 Lite 是一款简单高效的桌面工具，可将联系人列表批量转换为 vCard（`.vcf`）文件，便于导入手机通讯录、邮箱或其他通讯录应用。
 
+```mermaid
+graph LR
+    A[Excel] --> D[VCF 生成器 Lite]
+    B[微信/邮件] --> D
+    C[网页/其他] --> D
+    D --> E[.vcf 文件]
+    E --> F[手机通讯录]
+    E --> G[QQ 邮箱/Outlook]
+    E --> H[飞书/其他]
+```
+
 ## 入门教程
 
 - [快速开始](./getting-started.md) — 下载、安装与第一次使用
 
 ## 操作指南
 
-- [使用 vCard 文件](./guides/vcard-usage.md) — 将生成的文件导入到各类设备和服务
+- [导入联系人](./guides/import-contacts.md) — 将联系人数据导入到应用中
+- [使用 vCard 文件](./guides/vcard-usage.md) — 将生成的 vCard 文件导入到各类设备和服务
 
-## 技术参考
+## 参考文档
 
 - [应用功能](./reference/functions.md) — 应用提供的功能和选项
 - [命令行参数](./reference/command-line.md) — 命令行启动时的参数说明
