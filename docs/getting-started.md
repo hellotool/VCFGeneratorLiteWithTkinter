@@ -81,7 +81,7 @@ uv tool install <whl 文件路径>
 ## 后续步骤
 
 - 学习 [使用 vCard 文件](./guides/vcard-usage.md)，将生成的文件导入到各类设备和服务。
-- 阅读 [用户指南](./guides/index.md) 了解完整功能。
+- 阅读 [应用功能](./reference/functions.md) 了解完整功能。
 - 遇到问题时查阅 [常见问题](./troubleshooting/faq.md)。
 
 [release-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/latest
