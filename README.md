@@ -104,9 +104,9 @@ This project uses third-party open source code. For details, please refer to the
 
 ---
 
-<center>
+<div align="center">
 Copyright © 2023-2026 Jesse205
-</center>
+</div>
 
 [repository-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/
 [repository-github]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/
