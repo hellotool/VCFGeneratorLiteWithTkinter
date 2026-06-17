@@ -13,12 +13,12 @@
 
 根据您的系统环境选择合适的软件包：
 
-| 平台    | 软件包类型      | 需要安装 | 文件                                                      |
-| ------- | --------------- | -------- | --------------------------------------------------------- |
-| Windows | 安装程序        | 是       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**-setup.exe    |
-| Windows | 便携包          | 否       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**-portable.zip |
-| 跨平台  | Python Wheel    | 可选     | vcf_generator_lite-\<应用版本\>-**py3-none-any**.whl      |
-| 跨平台  | Python ZIP 应用 | 否       | VCFGeneratorLite-v\<应用版本\>-**py3**.pyzw               |
+| 平台    | 软件包类型      | 需要安装 | 文件                                                        |
+| ------- | --------------- | -------- | ----------------------------------------------------------- |
+| Windows | 安装程序        | 是       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**--*setup.exe*   |
+| Windows | 便携包          | 否       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**-*portable.zip* |
+| 跨平台  | Python Wheel    | 可选     | vcf_generator_lite-\<应用版本\>-**py3-none-any**.*whl*      |
+| 跨平台  | Python ZIP 应用 | 否       | VCFGeneratorLite-v\<应用版本\>-**py3**.*pyzw*               |
 
 > [!TIP]
 >
