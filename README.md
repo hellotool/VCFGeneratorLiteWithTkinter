@@ -116,7 +116,7 @@ vcf-generator-lite
 > [!NOTE]
 >
 > - You can use both tabs and spaces to separate fields.
-> - The program will automatically collapse extra spaces and tabs within a text box.
+> - Multiple spaces and tabs between fields will be automatically merged into one.
 >
 > Example: `Han Meimei   13333333333   A   well-known girl` will be recognized as
 >
@@ -164,7 +164,7 @@ vcf-generator-lite
 | Windows Installer & Portable Package | Windows 8.1 or later          |
 | Python ZIP Application               | Python 3.12 or later, Tkinter |
 
-If you need to use this application on Windows 8 or earlier versions, please see [Running on older versions of Windows](./docs/compatibility/runs-on-older-windows.md).
+If you need to use this application on Windows 8 or earlier versions, please see [Running on older versions of Windows](./docs/troubleshooting/runs-on-older-windows.md).
 
 If you need to double-click to launch a Python ZIP application directly on Windows, please install [Python Install Manager][pymanager] (recommended) or [Python Launcher][pylauncher].
 
@@ -189,12 +189,12 @@ If you need to double-click to launch a Python ZIP application directly on Windo
 
 Parts of this project were generated with AI assistance:
 
-- **Trae**: Code generation, documentation optimization, code optimization, language translation.
-- **DeepSeek**: Coding guidance, code generation, documentation optimization, language translation.
-- **Yuanbao**: Coding guidance, code generation, language translation.
-- **Tongyi Lingma**: Code completion, coding guidance.
-- **WorkBuddy**: Code review, documentation optimization.
-- **OpenCode**: Documentation optimization.
+- **Trae**: Code generation, document optimization, code optimization, language translation.  
+- **Qoder**: Code completion, document optimization, coding guidance.  
+- **DeepSeek**: Coding guidance, code generation, document optimization, language translation.  
+- **Yuanbao**: Coding guidance, code generation, language translation.  
+- **WorkBuddy**: Code review, document optimization.  
+- **OpenCode**: Document optimization.
 
 ## License
 
@@ -208,7 +208,7 @@ This project uses third-party open source code. For details, please refer to the
 
 - [Contribution Guidelines](./CONTRIBUTING.md)
 - [Development (Chinese)](./docs/dev/index.md)
-- [FAQ (Chinese)](./docs/faq.md)
+- [User Documentation (Chinese)](./docs/index.md)
 
 ---
 

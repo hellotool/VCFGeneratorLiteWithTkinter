@@ -14,7 +14,7 @@ description: Adds new phone number detectors to the VCF Generator Lite applicati
 1. `src/vcf_generator_lite/models/phone_detector.py` — `PhoneRule` 和 `PhoneDetector` 的字段定义与约束。
 2. `src/vcf_generator_lite/models/lazy.py` — `LazyPgettext` 的用法。
 3. `src/vcf_generator_lite/configs/phone_detectors.py` — 现有配置，确认格式和排布。
-4. `docs/dev/l10n/phone-detector.md` — 添加号码检测器的指南，包含字段说明、示例和测试要求。
+4. `docs/dev/globalization/phone-detector.md` — 添加号码检测器的指南，包含字段说明、示例和测试要求。
 
 ## 示例
 

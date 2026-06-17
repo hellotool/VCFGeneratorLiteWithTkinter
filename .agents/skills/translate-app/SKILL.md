@@ -12,7 +12,7 @@ description: Translates the VCF Generator Lite application interface to new lang
 在开始翻译前，必须：
 
 1. 了解 gettext 的 `.po` 文件格式：`msgctxt`（翻译上下文）、`msgid`（原文）、`msgstr`（译文）。
-2. 阅读 `docs/dev/l10n/translation.md`，了解翻译约定。
+2. 阅读 `docs/dev/globalization/translation.md`，了解翻译约定。
 
 ## 文件位置
 

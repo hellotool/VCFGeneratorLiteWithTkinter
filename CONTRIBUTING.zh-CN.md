@@ -9,14 +9,14 @@
 
 > [!TIP]
 >
-> 如果你是开源贡献的新手，这些资源或许能帮到你：
+> 如果您是开源贡献的新手，这些资源或许能帮到您：
 >
 > - GitHub 社区的 [开源软件指南][how-to-contribute-github-opensource-guide]。
 > - Gitee 社区的 [开源指北][participating-gitee-opensource-guide]。
 
 ## 行为准则
 
-参与本项目时，请遵守我们的 [贡献者公约](./CODE_OF_CONDUCT.zh-CN.md)。我们致力于为每个人提供友善、包容的社区环境。
+参与本项目时，请您遵守我们的 [贡献者公约](./CODE_OF_CONDUCT.zh-CN.md)。我们致力于为每个人提供友善、包容的社区环境。
 
 ## 如何贡献
 
@@ -29,69 +29,18 @@
 
 ### 本地化应用
 
-本地化工作分为两部分：添加新的**号码格式**以支持更多号码类型，以及翻译**应用界面**文本。
+本地化工作包括添加**号码检测器**以支持更多号码类型，以及翻译**应用界面**文本。
 
-#### 使用 AI 辅助本地化
+> [!TIP]
+>
+> **使用 AI 辅助本地化**
+>
+> 如果您不熟悉代码或翻译文件格式，可以使用 GitHub Copilot、Trae 等现代 AI 工具，只需用自然语言描述需求，AI 工具会自动生成符合规范的代码或完成翻译。
 
-如果您不熟悉代码或翻译文件格式，可以使用 GitHub Copilot、Trae 等现代 AI 工具，只需用自然语言描述需求，项目内置的 AI 配置会自动生成符合规范的代码或完成翻译。
+详细步骤请参考：
 
-- **添加号码格式**：向 AI 描述要新增的电话号码规则（例如：“添加日本的电话号码格式，手机号以 090/080/070 开头，共 11 位；固话以 0 开头，区号 1-2 位，本地号码 6-8 位；国际区号 +81”），AI 将自动生成配置代码并添加到正确位置。
-- **翻译应用界面**：向 AI 说明目标语言（例如：“把应用界面翻译成日语”），AI 将自动完成语言文件初始化、逐条翻译、处理变量占位符和 fuzzy 标记，并编译生成 `.mo` 文件。
-
-#### 手动添加号码格式
-
-如需添加新的国家/地区号码格式，请按以下步骤操作：
-
-1. **编辑配置文件**：打开 `src/vcf_generator_lite/configs/phone_formats.py`。
-2. **添加格式条目**：在 `PHONE_FORMATS` 列表末尾追加一条 `CountryPhoneFormat` 实例，格式如下：
-   ```python
-   CountryPhoneFormat(
-       id="builtin.国家.地区",                      # 唯一标识符，使用小写 + 点分隔
-       locale_territories={"XX"},                   # ISO 3166-1 二位地区代码
-       name=LazyPgettext("phone_format.国家.地区", "英文名称"),    # 可翻译的国家名称
-       rules=[
-           PhoneRule(
-               length=11,                           # 或 [11, 14]、range(10, 16)、None
-               regex=re.compile(r"^正则表达式$"),
-           ),
-       ],
-   ),
-   ```
-   - `id` 格式为 `builtin.<国家>.<地区>`，全部小写。
-   - `locale_territories` 是一个集合，包含该格式适用的地区代码。
-   - `length` 字段说明：
-     - `int`：固定长度。
-     - `list[int]`：允许多个可选长度（如 `[11, 14]` 匹配带/不带国际区号）。
-     - `range(min, max+1)`：长度范围。注意 `range` 上限是开区间，`range(10, 16)` 匹配 10~15 位。
-     - 省略该字段：不限制长度，仅用正则匹配。
-   - `regex` 中如有反斜杠，请使用原始字符串 `r"..."`。
-3. **运行检查**：提交前请确保代码通过 Ruff 和 Pyright 检查：
-   ```bash
-   uv run poe check
-   ```
-
-#### 手动翻译应用界面
-
-如需为应用贡献翻译，请按以下步骤操作：
-
-1. **初始化语言文件**：若语言文件不存在，执行以下命令：
-   ```bash
-   uv run poe l10n-init -l <语言[_地区]>
-   ```
-   - `<语言[_地区]>` 遵循 [POSIX 规范][opengroup-pubs-posix-env]，例如 `zh_CN`、`en`、`zh_TW`。
-   - `语言` 为 [ISO 639][iso-639] 代码，例如 `zh`、`en`。
-   - `地区` 为 [ISO 3166][iso-3166] 代码，例如 `CN`、`US`。
-2. **编辑翻译文件**：打开生成的 `.po` 文件，路径为：
-   ```txt
-   src/vcf_generator_lite/resources/locales/<语言代码>/LC_MESSAGES/vcf-generator-lite.po
-   ```
-   根据 `msgid` 填写对应的 `msgstr` 翻译内容。
-   - 若自动标记了 `#, fuzzy`，更新翻译后请**同步删除该标记**，否则编译时将忽略对应的翻译。
-   - 保持所有变量占位符原样不动（如 `%s`、`{url}`）。百分号格式的数量和顺序不可调整，否则会导致运行时替换错位。
-3. **编译语言文件** ：翻译完成后，执行以下命令生成 `.mo` 文件：  
-   ```bash
-   uv run poe l10n-compile -l <语言代码>
-   ```
+- [添加号码检测器](./docs/dev/globalization/phone-detector.md)
+- [翻译应用](./docs/dev/globalization/translation.md)
 
 ### 参与开发
 
@@ -132,6 +81,8 @@
 
 遵守 [中文技术文档写作风格指南][zh-style-guide]。
 
+文档按 [Diátaxis][diataxis] 框架组织为四类：入门教程、操作指南、技术参考、原理解析。
+
 ### Git 提交规范
 
 遵循 [约定式提交][conventionalcommits-homepage]。
@@ -150,6 +101,4 @@
 [zh-style-guide]: https://zh-style-guide.readthedocs.io/zh-cn/latest/index.html
 
 [pep-0008]: https://peps.python.org/pep-0008/
-[opengroup-pubs-posix-env]: https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap08.html
-[iso-639]: https://www.iso.org/iso-639-language-code
-[iso-3166]: https://www.iso.org/iso-3166-country-codes.html
+[diataxis]: https://diataxis.fr/

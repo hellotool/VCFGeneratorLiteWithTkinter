@@ -1,23 +1,14 @@
-# 在旧版本 Windows 中运行
+# 在旧版 Windows 中运行
 
-## 免责声明
+VCF 生成器 Lite 支持的最低 Windows 版本为 Windows 8.1。如果您需要在 Windows 8 或更低版本中运行，可以尝试以下方案。
 
-> [!WARNING]
+> [!CAUTION]
 >
-> **请注意，我们强烈不推荐普通用户进行以下操作，并在此明确相关风险：**
->
-> - **无官方支持**：开发团队**无法**为此类修改后的运行环境提供任何技术支持。若遇到问题，请自行解决。
-> - **安全风险**：第三方补丁可能包含恶意代码、病毒或后门。您必须从**可信的来源**获取补丁，并在安装前**使用杀毒软件进行扫描**。我们对因使用第三方补丁而导致的任何安全漏洞或数据丢失**不承担责任**。
-> - **稳定性风险**：修补后的环境可能发生崩溃、性能下降或兼容性问题。本应用在此类环境下**未经充分测试，无法保证稳定运行**。
-> - **系统风险**：操作不当可能导致 Python 环境损坏或影响系统功能，届时可能需要重装 Python 或操作系统。
->
-> **如果您选择继续，即表示您已充分了解并自愿承担所有相关风险。** 本项目的开发者及贡献者不对由此引发的任何直接或间接损失负责。
+> 通过以下方式运行应用可能**存在安全和稳定性风险**。如果您选择继续，请注意从可信来源获取资源，并在安装前进行病毒扫描。
 
-## 方案一：使用 [PythonVista][pythonvista_repository_github] ![Windows 7、Windows 8](https://img.shields.io/badge/Windows_7、Windows_8-0078D4)
+## 方案一：使用 PythonVista ![Windows 7][badge_windows_7] ![Windows 8][badge_windows_8]
 
-**对于安装程序、便携包用户：**
-
-您需要使用 PythonVista 内的文件替换本应用的文件。
+PythonVista 是一个使旧版 Python 应用能在 Windows Vista、7、8 上运行的兼容层。
 
 1. **获取 Python 嵌入包**：从 [PythonVista][pythonvista_repository_github] 仓库下载：
    - `python-3.14.x-embed-amd64.zip`
@@ -26,7 +17,7 @@
    - `api-ms-win-core-path-l1-1-0.dll`
 3. **修补程序**：
    1. 对于安装版类型：完成应用安装。
-   2. 打开本软件目录下的 `_internal` 文件夹。
+   2. 打开本应用安装目录下的 `_internal` 文件夹。
    3. 将下载的两个 DLL 文件覆盖到该目录。
 
 **对于 Python ZIP 应用用户：**
@@ -38,14 +29,16 @@
    - 32 位系统：`python-3.14.x-full.exe`
 2. **安装 Python**：运行安装程序，按照提示进行安装。
 
-## 方案二：使用 VxKex NEXT 兼容层 ![Windows 7](https://img.shields.io/badge/Windows_7-0078D4)
+## 方案二：使用 VxKex NEXT ![Windows 7][badge_windows_7]
+
+VxKex NEXT 是一个 Windows API 兼容层，可使新版 Windows 应用在旧版系统上运行。
 
 **对于安装程序、便携包用户：**
 
 1. **安装 VxKex NEXT**：从 [VxKex NEXT Release][vxkex-next_release_github] 下载最新版本并安装。
 2. **配置应用**：
    1. 打开 **VxKex NEXT 全局设置**（可在开始菜单中找到）。
-   2. 将本软件目录下的 `vcf_generator_lite.exe` 添加到应用程序列表中。
+   2. 将本应用目录下的 `vcf_generator_lite.exe` 添加到应用程序列表中。
 
 **对于 Python ZIP 应用用户：**
 
@@ -62,9 +55,8 @@
 >
 > 您可能无法使用 Python 启动器来启动本应用，因为 Python 启动器找不到任何 Python 版本。
 
-<!-- ## 方案三：使用 One-Core-API ![Windows XP](https://img.shields.io/badge/Windows_Server_2003、Windows_XP-0078D4)
-
-该方法适用于 Windows Server 2003 RTM、SP1 和 SP2、Windows XP RTM、SP1、SP2 和 SP3 以及 Windows XP x64 SP1/SP2。 -->
-
 [pythonvista_repository_github]: https://github.com/adang1345/PythonVista
 [vxkex-next_release_github]: https://github.com/YuZhouRen86/VxKex-NEXT/releases/latest
+
+[badge_windows_7]: https://img.shields.io/badge/Windows-7-0078D4?logo=windows
+[badge_windows_8]: https://img.shields.io/badge/Windows-8-7200AC?logo=windows

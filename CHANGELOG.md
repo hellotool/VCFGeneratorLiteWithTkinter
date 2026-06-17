@@ -13,6 +13,26 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 ## [Unreleased]
 
+### Added
+
+- Translated all CLI content.
+- Added more log output in verbose mode.
+- Added multi-region phone number format support.
+- Added support for phone number formats in China mainland, Hong Kong, Macau, and Taiwan.
+- Automatically save error logs on uncaught exceptions and guide users to report to developers.
+
+### Fixed
+
+- Fixed incorrect behavior of the quote-cleaning feature when input contains newlines.
+- Fixed progress bar display issue present since `v4.3.0`.
+
+### Changed
+
+- Migrated translation framework to gettext.
+- Raised `LANGUAGE` environment variable priority.
+- Refactored the project with AI guidance for clearer responsibilities, better modularity, and improved maintainability.
+- Reorganized user documentation following the Diátaxis framework and restructured developer documentation by development lifecycle.
+
 ## [5.0.4] - 2026-05-07
 
 ### Added

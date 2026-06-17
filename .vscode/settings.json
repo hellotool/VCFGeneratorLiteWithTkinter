@@ -1,6 +1,6 @@
 {
   "explorer.fileNesting.patterns": {
-    "pyproject.toml": "uv.lock, .editorconfig, .markdownlint.json, .python-version",
+    "pyproject.toml": "uv.lock, .editorconfig, .markdownlint.*, .python-version",
     "README.md": "README_*.md",
     "*": "${basename}.*.${extname}"
   },

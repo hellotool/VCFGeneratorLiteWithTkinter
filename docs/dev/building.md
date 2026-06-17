@@ -1,9 +1,6 @@
 # 构建指南
 
-## 前置要求
-
-1. 完成[开发指南](./index.md)中的环境搭建。
-2. 根据目标软件包类型，安装对应的额外工具。
+所有构建产物输出到 `dist/` 目录。
 
 ## 构建命令
 
@@ -16,11 +13,6 @@
 - **构建 ZIP 应用**：`uv run poe build-zipapp`
   - `--force`：强制重建上游输出（Wheel）。
 - **构建 Wheel**：`uv run poe build-wheel`
-
-### 额外工具
-
-- [InnoSetup 6.6+][innosetup-homepage]：构建 Windows 安装程序
-- [UPX][upx-homepage]（可选）：构建 Windows 安装程序、Windows 便携包
 
 ```bash
 # 强制重建 PyInstaller 分发包后打包便携版
@@ -39,20 +31,12 @@ uv run poe build-installer --force-download
 uv run poe build-installer --no-verify-ssl
 ```
 
-## 版本管理
+## 构建依赖
 
-```bash
-# 设置指定版本
-uv version 1.2.3
-
-# 更新补丁版本并标记为开发版本
-uv version --bump patch --bump dev
-
-# 标记为稳定版本
-uv version --bump stable
-```
-
-详细的版本命名规范请参阅[版本管理规范](./versioning.md)。
+| 依赖                            | 适用类型         | 说明                        |
+| ------------------------------- | ---------------- | --------------------------- |
+| PyInstaller                     | 安装程序、便携包 | 通过 `uv sync` 自动安装     |
+| [InnoSetup][innosetup-homepage] | 安装程序         | 需手动安装并添加到系统 PATH |
+| zipapp                          | ZIP 应用         | Python 标准库，无需额外安装 |
 
 [innosetup-homepage]: https://jrsoftware.org/isinfo.php
-[upx-homepage]: https://upx.github.io/

@@ -67,10 +67,17 @@ VCFGeneratorLiteWithTkinter/
 
 ## 代码风格
 
-- Python 3.12+
-- Ruff 检查器，严格类型检查
+- 使用 Python 3.12 及以下语法。
+- Ruff 检查器，严格类型检查。
 - 行长度：120 字符
-- 无返回值的函数不添加不必要的类型注解
+- 无返回值的函数不添加不必要的类型注解。
+- 文档字符串使用 reStructuredText 规范。
+
+## 文档风格
+
+- 所有外部链接都要使用放置到底部引用。
+- 用户文档（`docs/`）按 [Diátaxis](https://diataxis.fr/) 框架组织为四类：入门教程（Tutorials）、操作指南（How-to guides）、技术参考（Reference）、原理解析（Explanation）。
+- 开发者文档（`docs/dev/`）按开发生命周期组织：开始 → 开发 → 架构与设计 → 发布。
 
 ## 更多信息
 
@@ -82,3 +89,4 @@ VCFGeneratorLiteWithTkinter/
 - 代码生成后必须使用 `uv run poe format` 格式化代码。
 - 代码生成后必须使用 `uv run poe check` 检查代码。
 - 每个文件结尾必须添加空行。
+- 可翻译字符串必须使用带上下文的 `pgettext`（或 `pgettext_menu_label` / `LazyPgettext`），禁止使用 `_` / `gettext` 等无上下文的调用。
