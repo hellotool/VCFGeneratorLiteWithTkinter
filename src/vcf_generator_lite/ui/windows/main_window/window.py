@@ -17,6 +17,7 @@ from vcf_generator_lite.ui.windows.main_window.layout import MainLayout
 from vcf_generator_lite.ui.windows.main_window.menu_bar import MainMenuBar
 from vcf_generator_lite.ui.windows.main_window.message_boxes import (
     show_generation_success_dialog,
+    show_no_phone_formats_selected_dialog,
     show_save_file_os_error_dialog,
     show_save_file_permission_denied_dialog,
 )
@@ -70,9 +71,9 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
         self.wm_size_pt(450, 450)
         self.layout = MainLayout(self, self)
         self.menu_bar = MainMenuBar(self, self.phone_detectors_list, self)
-        self.menu_bar.set_phone_detectors_selection(
-            self.is_all_phone_detectors_selected(),
-            {id_: self.is_phone_detector_selected(id_) for id_ in self.phone_detectors_ids},
+        self.menu_bar.set_phone_formats_selection(
+            self.is_all_phone_formats_selected(),
+            {id_: self.is_phone_format_selected(id_) for id_ in self.phone_detectors_ids},
         )
         self.configure(menu=self.menu_bar)
 
@@ -105,11 +106,11 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
         self._stop_generation()
 
     @override
-    def on_generate_or_stop(self, _event: Event | None = None):
+    def on_generate_or_stop(self, event: Event | None = None):
         if self.current_generation:
             self.on_stop_generation()
         else:
-            self.on_generate()
+            self.on_generate(event)
 
     @override
     def on_exit(self, _event: Event | None = None):
@@ -125,25 +126,28 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
         self.layout.generate_or_stop_button.invoke()
 
     @override
-    def on_toggle_phone_detector(self, detector_id: str):
-        new_state = not self.is_phone_detector_selected(detector_id)
+    def on_toggle_phone_format(self, detector_id: str):
+        new_state = not self.is_phone_format_selected(detector_id)
         if new_state:
             self.selected_phone_detectors_ids.add(detector_id)
         else:
             self.selected_phone_detectors_ids.discard(detector_id)
-        self.menu_bar.set_phone_detectors_selection(self.is_all_phone_detectors_selected(), {detector_id: new_state})
+        self.menu_bar.set_phone_formats_selection(self.is_all_phone_formats_selected(), {detector_id: new_state})
 
     @override
-    def on_toggle_all_phone_detectors(self):
-        new_state = not self.is_all_phone_detectors_selected()
+    def on_toggle_all_phone_formats(self):
+        new_state = not self.is_all_phone_formats_selected()
         if new_state:
             self.selected_phone_detectors_ids.update(self.phone_detectors_ids)
         else:
             self.selected_phone_detectors_ids.clear()
-        self.menu_bar.set_phone_detectors_selection(new_state, dict.fromkeys(self.phone_detectors_ids, new_state))
+        self.menu_bar.set_phone_formats_selection(new_state, dict.fromkeys(self.phone_detectors_ids, new_state))
 
     def _generate_file(self):
         if self.current_generation:
+            return
+        if not self.selected_phone_detectors_ids:
+            show_no_phone_formats_selected_dialog(self)
             return
         pick_result = self._pick_and_open_file()
         if not pick_result:
@@ -269,10 +273,10 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
 
         self.after_idle(self.on_generation_done, result)
 
-    def is_all_phone_detectors_selected(self):
+    def is_all_phone_formats_selected(self):
         return (self.selected_phone_detectors_ids & self.phone_detectors_ids) == self.phone_detectors_ids
 
-    def is_phone_detector_selected(self, detector_id: str):
+    def is_phone_format_selected(self, detector_id: str):
         if detector_id not in self.phone_detectors_dict:
             raise ValueError(f"Unknown phone detector: {detector_id}")
         return detector_id in self.selected_phone_detectors_ids

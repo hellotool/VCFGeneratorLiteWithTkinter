@@ -40,10 +40,10 @@ class MainMenuBar(Menu):
         def on_clean_quotes(self): ...
 
         @abstractmethod
-        def on_toggle_all_phone_detectors(self): ...
+        def on_toggle_all_phone_formats(self): ...
 
         @abstractmethod
-        def on_toggle_phone_detector(self, detector_id: str): ...
+        def on_toggle_phone_format(self, detector_id: str): ...
 
         @abstractmethod
         def on_about(self): ...
@@ -52,10 +52,8 @@ class MainMenuBar(Menu):
         super().__init__(parent, tearoff=False, name="menubar")
         self.phone_detectors = phone_detectors
         self.listener = listener
-        self.phone_detectors_select_all_var = BooleanVar(value=False)
-        self.phone_detector_vars = {
-            phone_detector.id: BooleanVar(value=False) for phone_detector in self.phone_detectors
-        }
+        self.phone_formats_select_all_var = BooleanVar(value=False)
+        self.phone_format_vars = {phone_detector.id: BooleanVar(value=False) for phone_detector in self.phone_detectors}
 
         self.add_cascade(
             **pgettext_menu_label("window_main.menu_file", "&File"),
@@ -146,24 +144,22 @@ class MainMenuBar(Menu):
 
     def _create_options_menu(self, master: Misc):
         options_menu = Menu(master, tearoff=False)
-        phone_detectors_menu = Menu(options_menu, tearoff=False)
-        # Use Phone Format instead of Phone Detectors for visibility
+        phone_formats_menu = Menu(options_menu, tearoff=False)
         options_menu.add_cascade(
-            **pgettext_menu_label("window_main.menu_phone_detectors", "&Phone Format"),
-            menu=phone_detectors_menu,
+            **pgettext_menu_label("window_main.menu_phone_formats", "&Phone Format"),
+            menu=phone_formats_menu,
         )
-        phone_detectors_menu.add_checkbutton(
-            **pgettext_menu_label("window_main.menu_select_all_phone_detectors", "Select &All"),
-            variable=self.phone_detectors_select_all_var,
-            command=self.listener.on_toggle_all_phone_detectors,
+        phone_formats_menu.add_checkbutton(
+            **pgettext_menu_label("window_main.menu_select_all_phone_formats", "Select &All"),
+            variable=self.phone_formats_select_all_var,
+            command=self.listener.on_toggle_all_phone_formats,
         )
-        phone_detectors_menu.add_separator()
-
+        phone_formats_menu.add_separator()
         for phone_detector in self.phone_detectors:
-            phone_detectors_menu.add_checkbutton(
+            phone_formats_menu.add_checkbutton(
                 label=pgettext(phone_detector.name.context, phone_detector.name.message),
-                variable=self.phone_detector_vars[phone_detector.id],
-                command=partial(self.listener.on_toggle_phone_detector, detector_id=phone_detector.id),
+                variable=self.phone_format_vars[phone_detector.id],
+                command=partial(self.listener.on_toggle_phone_format, detector_id=phone_detector.id),
             )
 
         return options_menu
@@ -232,7 +228,7 @@ class MainMenuBar(Menu):
             state="normal" if state is GenerationState.GENERATING else "disabled",
         )
 
-    def set_phone_detectors_selection(self, all_selected: bool, selection: dict[str, bool]):
-        self.phone_detectors_select_all_var.set(all_selected)
+    def set_phone_formats_selection(self, all_selected: bool, selection: dict[str, bool]):
+        self.phone_formats_select_all_var.set(all_selected)
         for detector_id, selected in selection.items():
-            self.phone_detector_vars[detector_id].set(selected)
+            self.phone_format_vars[detector_id].set(selected)

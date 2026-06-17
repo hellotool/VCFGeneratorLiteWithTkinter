@@ -36,3 +36,11 @@ Time elapsed: {time:.3f}s""",
             time=generate_result.time_elapsed,
         ),
     )
+
+
+def show_no_phone_formats_selected_dialog(parent: Misc):
+    messagebox.showinfo(
+        parent=parent,
+        title=pgettext("dialog_no_phone_formats_selected.title", "No Phone Formats Selected"),
+        message=pgettext("dialog_no_phone_formats_selected.message", "Please select at least one phone format."),
+    )
