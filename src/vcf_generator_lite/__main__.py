@@ -1,3 +1,4 @@
+import sys
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -63,4 +64,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except SystemExit:
+        sys.exit(1)
