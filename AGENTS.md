@@ -90,3 +90,4 @@ VCFGeneratorLiteWithTkinter/
 - 代码生成后必须使用 `uv run poe check` 检查代码。
 - 每个文件结尾必须添加空行。
 - 可翻译字符串必须使用带上下文的 `pgettext`（或 `pgettext_menu_label` / `LazyPgettext`），禁止使用 `_` / `gettext` 等无上下文的调用。
+- 创建 Agent Skill 时，必须放在 `.agents/skills/` 目录下，禁止使用 `.trae/skills/` 目录。

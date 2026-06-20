@@ -13,6 +13,13 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 ## [Unreleased]
 
+## [6.0.1] - 2026-06-20
+
+### Changed
+
+- Optimized memory usage during generation.
+- Optimized performance during generation.
+
 ## [6.0.0] - 2026-06-17
 
 ### Added
@@ -383,7 +390,8 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 - Initial release.
 
-[Unreleased]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v6.0.0...HEAD
+[Unreleased]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v6.0.1...HEAD
+[6.0.1]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.1
 [6.0.0]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.0
 [5.0.4]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.4
 [5.0.3]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.3

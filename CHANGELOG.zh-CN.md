@@ -13,6 +13,13 @@
 
 ## [未发布]
 
+## [6.0.1] - 2026-06-20
+
+### 变更
+
+1. 优化生成时内存占用。
+2. 优化生成时性能。
+
 ## [6.0.0] - 2026-06-17
 
 ### 新增
@@ -383,7 +390,8 @@
 
 - 初始版本发布。
 
-[未发布]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v6.0.0...HEAD
+[未发布]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v6.0.1...HEAD
+[6.0.1]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.1
 [6.0.0]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.0
 [5.0.4]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.4
 [5.0.3]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.3

@@ -1,6 +1,6 @@
 [project]
 name = "vcf-generator-lite"
-version = "6.0.0"
+version = "6.0.1"
 description = "A lightweight VCF creation tool written in Python."
 authors = [{ name = "Jesse205", email = "jesse205@qq.com" }]
 license = "Apache-2.0"
