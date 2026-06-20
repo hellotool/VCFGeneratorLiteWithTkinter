@@ -63,18 +63,12 @@ DEV: list[Dependency] = [
         url="https://github.com/pytest-dev/pytest/blob/main/LICENSE",
         copyrights=["Copyright (c) 2004 Holger Krekel and others"],
     ),
-]
-
-L10N: list[Dependency] = [
     Dependency(
         name="babel",
         license="BSD 3-Clause License",
         url="https://github.com/python-babel/babel/blob/master/LICENSE",
         copyrights=["Copyright (c) 2013-2026 by the Babel Team"],
     ),
-]
-
-DOCS: list[Dependency] = [
     Dependency(
         name="jinja2",
         license="BSD 3-Clause License",

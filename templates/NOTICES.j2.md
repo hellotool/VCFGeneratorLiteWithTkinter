@@ -43,39 +43,9 @@ Dependencies used only in specific scenarios.
 
 ## Development Dependencies
 
-Dependencies required for development.
+Dependencies required for development, testing, documentation, and internationalization tooling.
 
 {% for dep in dev -%}
-
-### {{ dep.name }}
-
-[{{ dep.license }}]({{ dep.url }})
-
-{% for cr in dep.copyrights -%}
-
-{{ cr }}
-
-{% endfor -%}
-{% endfor -%}
-
-## Internationalization Dependencies
-
-{% for dep in l10n -%}
-
-### {{ dep.name }}
-
-[{{ dep.license }}]({{ dep.url }})
-
-{% for cr in dep.copyrights -%}
-
-{{ cr }}
-
-{% endfor -%}
-{% endfor -%}
-
-## Documentation Dependencies
-
-{% for dep in docs -%}
 
 ### {{ dep.name }}
 

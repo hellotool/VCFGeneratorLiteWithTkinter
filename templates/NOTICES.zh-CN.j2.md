@@ -43,39 +43,9 @@
 
 ## 开发时依赖
 
-开发所必需的依赖。
+开发、测试、文档生成、国际化工具等所需依赖。
 
 {% for dep in dev -%}
-
-### {{ dep.name }}
-
-[{{ dep.license }}]({{ dep.url }})
-
-{% for cr in dep.copyrights -%}
-
-{{ cr }}
-
-{% endfor -%}
-{% endfor -%}
-
-## 国际化依赖
-
-{% for dep in l10n -%}
-
-### {{ dep.name }}
-
-[{{ dep.license }}]({{ dep.url }})
-
-{% for cr in dep.copyrights -%}
-
-{{ cr }}
-
-{% endfor -%}
-{% endfor -%}
-
-## 文档生成依赖
-
-{% for dep in docs -%}
 
 ### {{ dep.name }}
 
