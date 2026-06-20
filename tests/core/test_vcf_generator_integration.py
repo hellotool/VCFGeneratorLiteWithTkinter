@@ -1,5 +1,6 @@
 import re
 from io import StringIO
+from typing import NamedTuple
 
 from vcf_generator_lite.core.vcf_generator import VCFGeneratorTask
 from vcf_generator_lite.models.phone_detector import PhoneRule
@@ -8,6 +9,12 @@ from vcf_generator_lite.models.phone_detector import PhoneRule
 TEST_PHONE_RULES = [
     PhoneRule(length=11, regex=re.compile(r"^(?:\+86)?1[3456789]\d{9}$")),
 ]
+
+
+class Progress(NamedTuple):
+    processed: int
+    total: int
+    determinate: bool
 
 
 class TestVCFGeneratorIntegration:
@@ -48,21 +55,24 @@ class TestVCFGeneratorIntegration:
 
     def test_vcard_file_generator_full_integration(self):
         """完整的 VCF 生成器集成测试"""
-        progress_history: list[tuple[float, bool]] = []
+        progress_history: list[Progress] = []
         result_io = StringIO()
 
         generator = VCFGeneratorTask(
-            input_text=self.input_content,
+            input_io=self.input_content,
             output_io=result_io,
             phone_rules=TEST_PHONE_RULES,
-            progress_listener=lambda progress, determinate: progress_history.append((progress, determinate)),
+            progress_listener=lambda processed, total, determinate: progress_history.append(
+                Progress(processed=processed, total=total, determinate=determinate)
+            ),
         )
         generator.start()
-        generator.join()
+        generator.join(timeout=10.0)
 
+        assert not generator.is_alive()
         assert len(progress_history) > 0
-        assert progress_history[-1][0] == 1.0
-        assert progress_history[-1][1] is True
+        assert progress_history[-1].processed == progress_history[-1].total == self.valid_count + self.invalid_count
+        assert progress_history[-1].determinate is True
 
         assert generator.result is not None
         assert generator.result.exception is None
@@ -84,20 +94,23 @@ class TestVCFGeneratorIntegration:
 
     def test_empty_input(self):
         """测试空输入"""
-        progress_history: list[tuple[float, bool]] = []
+        progress_history: list[Progress] = []
         result_io = StringIO()
 
         generator = VCFGeneratorTask(
-            input_text="",
+            input_io="",
             output_io=result_io,
             phone_rules=TEST_PHONE_RULES,
-            progress_listener=lambda progress, determinate: progress_history.append((progress, determinate)),
+            progress_listener=lambda processed, total, determinate: progress_history.append(
+                Progress(processed=processed, total=total, determinate=determinate)
+            ),
         )
         generator.start()
-        generator.join()
+        generator.join(timeout=10.0)
 
-        assert progress_history[-1][0] == 0.0
-        assert progress_history[-1][1] is True
+        assert not generator.is_alive()
+        assert progress_history[-1].processed == progress_history[-1].total == 0
+        assert progress_history[-1].determinate is True
 
         assert generator.result is not None
         assert generator.result.exception is None
@@ -105,23 +118,51 @@ class TestVCFGeneratorIntegration:
         assert len(generator.result.invalid_items) == 0
         assert result_io.getvalue() == ""
 
+    def test__new_line_end_input(self):
+        """测试末尾为换行符的输入"""
+        progress_history: list[Progress] = []
+        result_io = StringIO()
+
+        generator = VCFGeneratorTask(
+            input_io="\n".join(self.VALID_INPUT_LIST) + "\n",
+            output_io=result_io,
+            phone_rules=TEST_PHONE_RULES,
+            progress_listener=lambda processed, total, determinate: progress_history.append(
+                Progress(processed=processed, total=total, determinate=determinate)
+            ),
+        )
+        generator.start()
+        generator.join(timeout=10.0)
+
+        assert not generator.is_alive()
+        assert progress_history[-1].processed == progress_history[-1].total == self.valid_count
+        assert progress_history[-1].determinate is True
+
+        assert generator.result is not None
+        assert generator.result.exception is None
+        assert generator.result.saved_count == self.valid_count
+        assert len(generator.result.invalid_items) == 0
+
     def test_only_invalid_input(self):
         """测试只有无效输入的情况"""
-        progress_history: list[tuple[float, bool]] = []
+        progress_history: list[Progress] = []
         result_io = StringIO()
         invalid_content = "\n".join(self.INVALID_INPUT_LIST)
 
         generator = VCFGeneratorTask(
-            input_text=invalid_content,
+            input_io=invalid_content,
             output_io=result_io,
             phone_rules=TEST_PHONE_RULES,
-            progress_listener=lambda progress, determinate: progress_history.append((progress, determinate)),
+            progress_listener=lambda processed, total, determinate: progress_history.append(
+                Progress(processed=processed, total=total, determinate=determinate)
+            ),
         )
         generator.start()
-        generator.join()
+        generator.join(timeout=10.0)
 
-        assert progress_history[-1][0] == 1.0
-        assert progress_history[-1][1] is True
+        assert not generator.is_alive()
+        assert progress_history[-1].processed == progress_history[-1].total == self.invalid_count
+        assert progress_history[-1].determinate is True
 
         assert generator.result is not None
         assert generator.result.exception is None

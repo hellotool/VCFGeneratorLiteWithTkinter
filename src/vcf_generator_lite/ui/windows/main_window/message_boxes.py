@@ -1,6 +1,6 @@
 from tkinter import Misc, messagebox
 
-from vcf_generator_lite.core.vcf_generator import GenerateResult
+from vcf_generator_lite.core.vcf_generator import GenerationResult
 from vcf_generator_lite.ui.actions.external_app import pgettext
 
 
@@ -22,7 +22,7 @@ def show_save_file_permission_denied_dialog(parent: Misc):
     )
 
 
-def show_generation_success_dialog(parent: Misc, display_path: str, generate_result: GenerateResult):
+def show_generation_success_dialog(parent: Misc, display_path: str, generate_result: GenerationResult):
     messagebox.showinfo(
         parent=parent,
         title=pgettext("dialog_generate_success.title", "Generation Successful"),

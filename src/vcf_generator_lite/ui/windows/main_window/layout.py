@@ -114,8 +114,8 @@ Xie Lingyun\t13666666666
         self.progress_bar.pack_forget()
         self.progress_label.pack_forget()
 
-    def set_progress(self, progress: float):
-        self.progress_bar.configure(value=progress)
+    def set_progress(self, value: float, maximum: float):
+        self.progress_bar.configure(value=value, maximum=maximum)
 
     def set_progress_determinate(self, value: bool):
         # 需要添加 str()，因为 https://github.com/python/cpython/issues/126008
@@ -123,7 +123,7 @@ Xie Lingyun\t13666666666
         if value == previous_value:
             return
         if value:
-            self.progress_bar.configure(mode="determinate", maximum=1)
+            self.progress_bar.configure(mode="determinate")
             self.progress_bar.stop()
         else:
             self.progress_bar.configure(mode="indeterminate", maximum=10)

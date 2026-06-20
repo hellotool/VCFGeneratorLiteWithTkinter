@@ -3,9 +3,11 @@ import logging
 import time
 from collections.abc import Callable
 from concurrent.futures import FIRST_EXCEPTION, ThreadPoolExecutor, wait
+from contextlib import suppress
 from dataclasses import dataclass
-from threading import RLock, Thread
-from typing import IO, NamedTuple, override
+from io import StringIO
+from threading import Event, RLock, Thread
+from typing import IO, override
 
 from vcf_generator_lite.core.contact_parser import parse_contact
 from vcf_generator_lite.models.contact import Contact, MissingNumberError
@@ -23,17 +25,19 @@ class InvalidItem:
 
 
 @dataclass(frozen=True)
-class GenerateResult:
+class GenerationResult:
     invalid_items: list[InvalidItem]
     exception: BaseException | None
     time_elapsed: float
     saved_count: int
 
 
-class _WriteQueueItem(NamedTuple):
-    row_position: int
-    raw_content: str
-    vcard: str
+@dataclass(frozen=False)
+class _GenerationProgress:
+    total: int = 0
+    processed: int = 0
+    saved_count: int = 0
+    determinate: bool = False
 
 
 def utf8_to_qp(text: str) -> str:
@@ -56,63 +60,39 @@ def serialize_to_vcard(contact: Contact):
 class VCFGeneratorTask(Thread):
     """在两个工作线程中并发地解析输入并写入 vCard。
 
-    工作流程：
-
-    1. 主线程调用 :meth:`start` 后，:meth:`run` 会启动一个最多 2 个工作线程的线程池。
-    2. :meth:`_parse_input` 在 Worker 1 中逐行解析输入文本，把生成的 vCard 放入有界队列。
-    3. :meth:`_write_output` 在 Worker 2 中从队列取出 vCard 写入输出 IO。
-    4. 主线程等待两个工作线程结束；若任一线程抛出异常，则调用 :meth:`stop` 关闭队列，
-       让另一个线程快速退出。
-    5. 结束后通过 ``result_listener`` 回调或读取 :attr:`result` 获取 :class:`GenerateResult`。
-
-    线程安全：
-
-    - ``_total``、``_processed``、``_progress``、``_saved_count`` 各自由独立 ``RLock`` 保护。
-    - ``_invalid_items`` 列表的 ``append`` 是原子操作（CPython 解释器级别），
-      因此无需额外加锁。
-    - ``_write_queue`` 是线程安全的（内部使用 ``Condition``）。
-
-    取消机制：
-
-    - 调用 :meth:`stop` 会将内部停止标志置位并关闭写入队列。
-    - 解析线程会在下一轮循环检查停止标志后退出。
-    - 写入线程在下一次 ``get()`` 时会因为队列关闭而抛出 :class:`ShutDownError`。
+    详情请参考 docs/dev/architecture/core.md
     """
 
     def __init__(
         self,
-        input_text: str,
+        input_io: IO[str] | str,
         output_io: IO[str],
         *,
         phone_rules: list[PhoneRule],
-        progress_listener: Callable[[float, bool], None] | None = None,
-        result_listener: Callable[[GenerateResult], None] | None = None,
+        progress_listener: Callable[[int, int, bool], None] | None = None,
+        result_listener: Callable[[GenerationResult], None] | None = None,
         part_delimiter: str | None = None,
     ):
         super().__init__()
         self._progress_listener = progress_listener
         self._result_listener = result_listener
-        self._input_text = input_text
+        self._input_io = input_io
         self._output_io = output_io
         self._phone_rules = phone_rules
         self._part_delimiter = part_delimiter
 
-        self._total: int = 0
-        self._processed: int = 0
-        self._progress: float = 0
-        self._saved_count: int = 0
+        self._progress = _GenerationProgress()
 
         self._invalid_items: list[InvalidItem] = []
 
-        self._total_lock = RLock()
-        self._processed_lock = RLock()
         self._progress_lock = RLock()
-        self._saved_count_lock = RLock()
+        self._progress_event = Event()
 
         self.__stopping: bool = False
+        self.__all_done: bool = False
         # 使用 deque 会比原生的 queue 性能高
-        self._write_queue: DequeQueue[_WriteQueueItem | None] = DequeQueue(10)
-        self.result: GenerateResult | None = None
+        self._write_queue: DequeQueue[str | None] = DequeQueue(10)
+        self.result: GenerationResult | None = None
 
     @property
     def is_stopping(self) -> bool:
@@ -121,24 +101,25 @@ class VCFGeneratorTask(Thread):
     def stop(self):
         self.__stopping = True
         self._write_queue.shutdown()
+        self._progress_event.set()
 
     @override
     def run(self):
         _logger.info("Starting vcf generate task.")
         start_time = time.time()
-        with ThreadPoolExecutor(max_workers=2, thread_name_prefix="VCFGenerator") as pipeline_executor:
+        with ThreadPoolExecutor(max_workers=3, thread_name_prefix="VCFGenerator") as pipeline_executor:
             write_future = pipeline_executor.submit(self._write_output)
             parse_future = pipeline_executor.submit(self._parse_input)
-            done, not_done = wait([parse_future, write_future], return_when=FIRST_EXCEPTION)
-            if not_done:
-                # 在线程未结束的情况下，executor 会等待线程执行完成，因此需要退出所有线程。
-                self.stop()
+            notify_future = pipeline_executor.submit(self._notify_progress)
+
+            done, _ = wait([parse_future, write_future, notify_future], return_when=FIRST_EXCEPTION)
+            self.stop()
         end_time = time.time()
         time_elapsed = end_time - start_time
         _logger.info(
             "Finished vcf generate task, processed %s items, saved %s items, time elapsed: %ss",
-            self._processed,
-            self._saved_count,
+            self._progress.processed,
+            self._progress.saved_count,
             time_elapsed,
         )
 
@@ -148,89 +129,105 @@ class VCFGeneratorTask(Thread):
                 exception = future_exception
                 _logger.exception("An error occurred during VCF generation.", exc_info=exception)
 
-        self.result = result = GenerateResult(
+        self.result = result = GenerationResult(
             invalid_items=self._invalid_items,
             exception=exception,
             time_elapsed=time_elapsed,
-            saved_count=self._saved_count,
+            saved_count=self._progress.saved_count,
         )
         if self._result_listener:
-            self._result_listener(result)
+            try:
+                self._result_listener(result)
+            except Exception:
+                _logger.exception("Result listener callback failed.")
 
     def _parse_input(self) -> None:
-        lines = self._input_text.strip().split("\n")
-        self._total = len(lines)
-        self._notify_progress()
-        for position, line in enumerate((line.strip() for line in lines), 1):
-            if self.__stopping:
-                break
-            if not line:
-                self._skip_item()
-                continue
-
-            try:
-                contact = parse_contact(
-                    contact_text=line,
-                    rules=self._phone_rules,
-                    delimiter=self._part_delimiter,
-                )
-                vcard = serialize_to_vcard(contact)
-                queue_item = _WriteQueueItem(row_position=position, raw_content=line, vcard=vcard)
-            except MissingNumberError as e:
-                _logger.info("Phone not found at line %s.", position)
-
-                # list 的 append 方法是原子的，因此不需要加锁
-                # https://docs.python.org/zh-cn/3/library/threadsafety.html#thread-safety-list
-                self._invalid_items.append(
-                    InvalidItem(
-                        row_position=position,
-                        raw_content=line,
-                        exception=e.with_traceback(None),
-                    )
-                )
-                self._finish_item(success=False)
+        try:
+            if isinstance(self._input_io, str):
+                text = self._input_io
+                total_lines = (text.count("\n") + (0 if text.endswith("\n") else 1)) if text else 0
+                self._update_total(total_lines)
+                input_io = StringIO(self._input_io)
             else:
-                self._write_queue.put(queue_item)
+                input_io = self._input_io
 
-        self._write_queue.put(None)  # 结束信号
+            for position, line in enumerate((line.strip() for line in input_io), 1):
+                if self.__stopping:
+                    break
+
+                if not line:
+                    # 当前总数是基于换行计算来的，但空行不计入总数，因此需要减少总数。
+                    self._skip_item()
+                    continue
+
+                try:
+                    contact = parse_contact(
+                        contact_text=line,
+                        rules=self._phone_rules,
+                        delimiter=self._part_delimiter,
+                    )
+                    vcard = serialize_to_vcard(contact)
+                except MissingNumberError as e:
+                    _logger.debug("Phone not found at line %s.", position)
+
+                    # list 的 append 方法是原子的，因此不需要加锁
+                    # https://docs.python.org/zh-cn/3/library/threadsafety.html#thread-safety-list
+                    self._invalid_items.append(
+                        InvalidItem(
+                            row_position=position,
+                            raw_content=line,
+                            exception=e.with_traceback(None),
+                        )
+                    )
+                    self._finish_item(success=False)
+                else:
+                    self._write_queue.put(vcard)
+        finally:
+            with suppress(ShutDownError):
+                self._write_queue.put(None)  # 结束信号
 
     def _write_output(self):
-        while (item := self._write_queue.get()) is not None:
-            try:
-                self._output_io.write(item.vcard)
-                self._output_io.write("\n\n")
-            except BaseException:
-                self._finish_item(success=False)
-                raise
-            else:
-                self._finish_item(success=True)
+        try:
+            while (item := self._write_queue.get()) is not None:
+                try:
+                    self._output_io.write(item)
+                    self._output_io.write("\n\n")
+                except BaseException:
+                    self._finish_item(success=False)
+                    raise
+                else:
+                    self._finish_item(success=True)
+        finally:
+            self.__all_done = True
+            self._progress_event.set()
+            self._output_io.flush()
 
     def _notify_progress(self):
         if self._progress_listener is None:
             return
-        _logger.debug("Notifying progress: %s/%s.", self._processed, self._total)
-        self._progress_listener(self._progress, self._total > 0)
-
-    def _update_progress(self):
-        total = self._total
-        if total == 0:
-            return
-        new_progress = round(min(self._processed / total, 1.0), 1)
-        if self._progress != new_progress:
-            with self._progress_lock:
-                if self._progress != new_progress:
-                    self._progress = new_progress
-                    self._notify_progress()
+        while not self.__all_done or self._progress_event.is_set():
+            self._progress_event.wait()
+            self._progress_event.clear()
+            processed, total, determinate = self._progress.processed, self._progress.total, self._progress.determinate
+            _logger.debug("Notifying progress: processed %s, total %s, determinate %s", processed, total, determinate)
+            self._progress_listener(processed, total, determinate)
 
     def _skip_item(self):
-        with self._total_lock:
-            self._total -= 1
-        self._update_progress()
+        if not self._progress.determinate:
+            return
+        with self._progress_lock:
+            self._progress.total -= 1
+        self._progress_event.set()
 
     def _finish_item(self, *, success: bool = True):
-        with self._processed_lock:
-            self._processed += 1
-        if success:
-            with self._saved_count_lock:
-                self._saved_count += 1
-        self._update_progress()
+        with self._progress_lock:
+            self._progress.processed += 1
+            if success:
+                self._progress.saved_count += 1
+        self._progress_event.set()
+
+    def _update_total(self, total: int):
+        with self._progress_lock:
+            self._progress.total = total
+            self._progress.determinate = True
+        self._progress_event.set()

@@ -9,7 +9,7 @@ from types import FrameType
 from typing import TYPE_CHECKING, NamedTuple, TextIO, override
 
 from vcf_generator_lite.core.phone_detector_loader import load_country_phone_detectors
-from vcf_generator_lite.core.vcf_generator import GenerateResult, InvalidItem, PhoneRule, VCFGeneratorTask
+from vcf_generator_lite.core.vcf_generator import GenerationResult, InvalidItem, PhoneRule, VCFGeneratorTask
 from vcf_generator_lite.ui.app_text import app_name
 from vcf_generator_lite.ui.windows.base_window import EnhancedTk
 from vcf_generator_lite.ui.windows.base_window.constants import EVENT_EXIT
@@ -190,7 +190,6 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
 
     def _prepare_ui_for_generation(self):
         self.layout.content_text.edit_modified(False)
-        self.layout.set_progress(progress=0)
         self.layout.set_progress_determinate(False)
         self.layout.set_generating(GenerationState.GENERATING)
         self.menu_bar.set_generating_state(GenerationState.GENERATING)
@@ -198,7 +197,7 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
 
     def _start_generation_task(self, input_text: str, rules: list[PhoneRule], file: Path, file_io: TextIO):
         generator = VCFGeneratorTask(
-            input_text=input_text,
+            input_io=input_text,
             output_io=file_io,
             progress_listener=self.on_generation_update_progress,
             result_listener=self.on_generation_result,
@@ -217,7 +216,7 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
     def _clean_quotes(self):
         self.layout.set_text_content(clean_quotes(self.layout.get_text_content()))
 
-    def _show_generation_done_dialog(self, display_path: str, generate_result: GenerateResult):
+    def _show_generation_done_dialog(self, display_path: str, generate_result: GenerationResult):
         if generate_result.exception:
             if isinstance(generate_result.exception, OSError):
                 show_save_file_os_error_dialog(self, generate_result.exception)
@@ -238,16 +237,16 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
             line_enter_listener=self._on_select_invalid_line,
         )
 
-    def on_generation_update_progress(self, progress: float, determinate: bool):
+    def on_generation_update_progress(self, processed: int, total: int, determinate: bool):
         generation = self._require_generation()
         if generation.generator.is_stopping:
             return
 
         self.layout.set_progress_determinate(determinate)
         if determinate:
-            self.layout.set_progress(progress)
+            self.layout.set_progress(processed, total)
 
-    def on_generation_done(self, result: GenerateResult):
+    def on_generation_done(self, result: GenerationResult):
         generation = self._require_generation()
         self.current_generation = None
         self.layout.set_generating(GenerationState.IDLE)
@@ -262,7 +261,7 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
         else:
             self.destroy()
 
-    def on_generation_result(self, result: GenerateResult):
+    def on_generation_result(self, result: GenerationResult):
         generation = self._require_generation()
         try:
             generation.file_io.close()
