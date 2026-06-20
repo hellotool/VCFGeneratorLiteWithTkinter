@@ -21,13 +21,11 @@ flowchart TD
     OTH_LC --> OTH_PO["vcf-generator-lite.po"]
     OTH_LC --> OTH_MO["vcf-generator-lite.mo"]
 
-    classDef others fill:#9E9E9E10,stroke:#9E9E9E
-    classDef lang fill:#79554822,stroke:#795548
-    classDef pot fill:#3F51B522,stroke:#3F51B5
-    classDef po fill:#2196F322,stroke:#2196F3
-    classDef mo fill:#00BCD422,stroke:#00BCD4
+    classDef lang fill:#79554822,stroke:#4e342e
+    classDef pot fill:#3F51B522,stroke:#283593
+    classDef po fill:#2196F322,stroke:#1565c0
+    classDef mo fill:#00BCD422,stroke:#00838f
 
-    class ROOT,TEMPLATES,ZH_LC,OTH_LC others
     class ZH,OTH lang
     class ZH_PO,OTH_PO po
     class ZH_MO,OTH_MO mo
