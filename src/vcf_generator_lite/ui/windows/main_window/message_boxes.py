@@ -1,7 +1,7 @@
+from gettext import pgettext
 from tkinter import Misc, messagebox
 
 from vcf_generator_lite.core.vcf_generator import GenerationResult
-from vcf_generator_lite.ui.actions.external_app import pgettext
 
 
 def show_save_file_os_error_dialog(parent: Misc, error: OSError):

@@ -1,10 +1,10 @@
 import platform
 import tkinter
+from gettext import pgettext
 from tkinter import Misc, messagebox
 
 from vcf_generator_lite.__version__ import __version__
 from vcf_generator_lite.constants import APP_COPYRIGHT
-from vcf_generator_lite.ui.actions.external_app import pgettext
 from vcf_generator_lite.ui.app_text import app_name
 
 

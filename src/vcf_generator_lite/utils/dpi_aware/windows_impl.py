@@ -1,7 +1,7 @@
 import logging
 from ctypes import FormatError, get_last_error, windll
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 # ProcessDpiAwareness
 # https://learn.microsoft.com/zh-cn/windows/win32/api/shellscalingapi/ne-shellscalingapi-process_dpi_awareness
@@ -18,7 +18,7 @@ def _try_set_process_dpi_awareness() -> bool:
         return False
     result: int = windll.shcore.SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE)
     if result != 0:
-        logger.warning("Failed to call SetProcessDpiAwareness: %s", FormatError(result))
+        _logger.warning("Failed to call SetProcessDpiAwareness: %s", FormatError(result))
     return result == 0
 
 
@@ -32,7 +32,7 @@ def _try_set_process_dpi_aware() -> bool:
         return False
     result = bool(windll.user32.SetProcessDPIAware())
     if not result:
-        logger.warning("Failed to call SetProcessDPIAware: %s", FormatError(get_last_error()))
+        _logger.warning("Failed to call SetProcessDPIAware: %s", FormatError(get_last_error()))
     return result
 
 

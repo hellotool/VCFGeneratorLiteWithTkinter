@@ -5,7 +5,7 @@ from scripts.app_metadata import app_version_variants
 from scripts.build_app.utils import PATH_DIST
 from scripts.utils import require_uv
 
-PATH_DIST_WHEE = PATH_DIST.joinpath(f"vcf_generator_lite-{app_version_variants.wheel}-py3-none-any.whl")
+PATH_DIST_WHEEL = PATH_DIST.joinpath(f"vcf_generator_lite-{app_version_variants.wheel}-py3-none-any.whl")
 
 
 def build_wheel():

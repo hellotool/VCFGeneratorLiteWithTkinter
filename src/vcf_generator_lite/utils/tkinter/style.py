@@ -11,7 +11,7 @@ def lookup_font(
     state: Iterable[str] | None = None,
     default: Any | None = None,  # noqa: ANN401
 ) -> Font:
-    """Lookup font from style object and return Font object"""
+    """Lookup font from style object and return Font object."""
     treeview_font_lookup = style_obj.lookup(
         style=style_name,
         option=option,

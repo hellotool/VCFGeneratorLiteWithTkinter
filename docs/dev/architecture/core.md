@@ -67,6 +67,6 @@ graph LR
 `VCFGeneratorTask` 通过回调向 UI 层报告状态，自身不依赖 UI：
 
 - `progress_listener(processed: int, total: int, determinate: bool)` — 进度变化时调用
-- `result_listener(result: GenerateResult)` — 完成时调用
+- `result_listener(result: GenerationResult)` — 完成时调用
 
 这种控制反转使得核心逻辑可以在无 UI 环境下独立运行和测试。
