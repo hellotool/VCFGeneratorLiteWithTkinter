@@ -13,12 +13,13 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 ## [Unreleased]
 
-## [6.0.1] - 2026-06-20
+## [6.0.1] - 2026-06-21
 
 ### Changed
 
 - Optimized memory usage during generation.
 - Optimized performance during generation.
+- Restructured installation documentation into separate pages by package type, added Python installation guide, pip install warning, and InnoSetup silent install docs.
 
 ## [6.0.0] - 2026-06-17
 
