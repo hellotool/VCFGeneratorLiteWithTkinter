@@ -43,21 +43,21 @@ VCF Generator Lite is a simple and efficient tool that converts contact lists in
 <img src="./assets/images/screenshots/main_window.zh-CN.webp" width="451" alt="Main window" />
 <img src="./assets/images/screenshots/invalid_lines_window.zh-CN.webp" width="362" alt="Invalid Lines Window" />
 
-## Getting the App
+## Download & Installation
 
 Download packages from the following channels:
 
 - [Gitee Releases][release-gitee]
 - [GitHub Releases][release-github]
 
-Please select the appropriate software package for your platform:
+Select a package for your platform and click the guide for detailed installation instructions:
 
-| Platform       | Package Type           | Installation Required | File                                                      |
-| -------------- | ---------------------- | --------------------- | --------------------------------------------------------- |
-| Windows        | Installer              | Yes                   | VCFGeneratorLite-\<version\>-**win-amd64**-*setup.exe*    |
-| Windows        | Portable Package       | No                    | VCFGeneratorLite-\<version\>-**win-amd64**-*portable.zip* |
-| Cross-platform | Python Wheel           | Optional              | vcf_generator_lite-\<version\>-**py3-none-any**.*whl*     |
-| Cross-platform | Python ZIP Application | No                    | VCFGeneratorLite-\<version\>-**py3**.*pyzw*               |
+| Platform       | Package Type           | Installation Required | File                                                      | Guide                                                                |
+| -------------- | ---------------------- | --------------------- | --------------------------------------------------------- | -------------------------------------------------------------------- |
+| Windows        | Installer              | Yes                   | VCFGeneratorLite-\<version\>-**win-amd64**-*setup.exe*    | [Windows Installer](./docs/guides/installation/windows-installer.md) |
+| Windows        | Portable Package       | No                    | VCFGeneratorLite-\<version\>-**win-amd64**-*portable.zip* | [Windows Portable](./docs/guides/installation/windows-portable.md)   |
+| Cross-platform | Python Wheel           | Optional              | vcf_generator_lite-\<version\>-**py3-none-any**.*whl*     | [Python Wheel](./docs/guides/installation/wheel.md)                  |
+| Cross-platform | Python ZIP Application | No                    | VCFGeneratorLite-\<version\>-**py3**.*pyzw*               | [Python ZIP App](./docs/guides/installation/zipapp.md)               |
 
 ## Usage
 
@@ -71,7 +71,7 @@ Please select the appropriate software package for your platform:
 2. Click **Generate**, select a path to save the file.
 3. You can use the generated vCard file wherever you need it. See [Using vCard Files](./docs/guides/vcard-usage.md) for details.
 
-For more information, see [Quick Start](./docs/getting-started.md).
+For more information, see [User Documentation](./docs/index.md).
 
 For system requirements, vCard compatibility, and known issues, see [Compatibility](./docs/reference/compatibility.md).
 

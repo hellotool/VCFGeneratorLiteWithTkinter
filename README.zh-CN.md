@@ -45,21 +45,21 @@ VCF 生成器 Lite 是一个简单高效的工具，可以将联系人列表转�
 <img src="./assets/images/screenshots/main_window.zh-CN.webp" width="451" alt="主窗口" />
 <img src="./assets/images/screenshots/invalid_lines_window.zh-CN.webp" width="362" alt="错误行展示窗口" />
 
-## 应用获取
+## 下载与安装
 
 通过以下渠道下载软件包：
 
 - [Gitee 发行版][release-gitee]（推荐中国大陆地区用户使用）
 - [GitHub Releases][release-github]
 
-根据您的使用平台选择相应的软件包：
+根据您的平台选择软件包，点击指南查看详细的安装和启动方法：
 
-| 平台    | 软件包类型      | 需要安装 | 文件                                                        |
-| ------- | --------------- | -------- | ----------------------------------------------------------- |
-| Windows | 安装程序        | 是       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**--*setup.exe*   |
-| Windows | 便携包          | 否       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**-*portable.zip* |
-| 跨平台  | Python Wheel    | 可选     | vcf_generator_lite-\<应用版本\>-**py3-none-any**.*whl*      |
-| 跨平台  | Python ZIP 应用 | 否       | VCFGeneratorLite-v\<应用版本\>-**py3**.*pyzw*               |
+| 平台    | 软件包类型      | 需要安装 | 文件                                                        | 指南                                                                |
+| ------- | --------------- | -------- | ----------------------------------------------------------- | ------------------------------------------------------------------- |
+| Windows | 安装程序        | 是       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**--*setup.exe*   | [Windows 安装程序](./docs/guides/installation/windows-installer.md) |
+| Windows | 便携包          | 否       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**-*portable.zip* | [Windows 便携包](./docs/guides/installation/windows-portable.md)    |
+| 跨平台  | Python Wheel    | 可选     | vcf_generator_lite-\<应用版本\>-**py3-none-any**.*whl*      | [Python Wheel](./docs/guides/installation/wheel.md)                 |
+| 跨平台  | Python ZIP 应用 | 否       | VCFGeneratorLite-v\<应用版本\>-**py3**.*pyzw*               | [Python ZIP 应用](./docs/guides/installation/zipapp.md)             |
 
 ## 使用方法
 
@@ -73,7 +73,7 @@ VCF 生成器 Lite 是一个简单高效的工具，可以将联系人列表转�
 2. 点击 **开始生成**，选择一个路径保存文件。
 3. 然后就可以在需要的地方使用生成的 vCard 文件。详情请参考 [使用 vCard 文件](./docs/guides/vcard-usage.md)。
 
-有关更多内容请参考 [快速开始](./docs/getting-started.md)。
+有关更多内容请参考 [用户文档](./docs/index.md)。
 
 有关系统要求、vCard 兼容性、已知问题等请参考 [兼容性说明](./docs/reference/compatibility.md)。
 

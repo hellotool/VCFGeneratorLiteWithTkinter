@@ -1,72 +1,28 @@
 # 快速开始
 
-本文介绍如何获取、安装 VCF 生成器 Lite，并生成您的第一个 vCard 文件。
+本文介绍如何下载、安装 VCF 生成器 Lite，并生成您的第一个 vCard 文件。
 
-## 获取应用
+## 下载与安装
 
 通过以下渠道下载软件包：
 
 - [Gitee 发行版][release-gitee] — 推荐中国大陆用户使用
 - [GitHub Releases][release-github]
 
-### 选择软件包
+根据您的系统环境和需求选择合适的软件包，点击对应指南查看详细的安装和启动方法：
 
-根据您的系统环境和需求选择合适的软件包：
-
-| 平台    | 软件包类型      | 需要安装 | 文件                                                        |
-| ------- | --------------- | -------- | ----------------------------------------------------------- |
-| Windows | 安装程序        | 是       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**--*setup.exe*   |
-| Windows | 便携包          | 否       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**-*portable.zip* |
-| 跨平台  | Python Wheel    | 可选     | vcf_generator_lite-\<应用版本\>-**py3-none-any**.*whl*      |
-| 跨平台  | Python ZIP 应用 | 否       | VCFGeneratorLite-v\<应用版本\>-**py3**.*pyzw*               |
-
-如果您是普通用户，可以直接选择 **Windows 安装程序（setup.exe）**，安装程序将引导您完成安装过程。
+| 平台    | 软件包类型       | 需要安装 | 文件                                                        | 指南                                                           |
+| ------- | ---------------- | -------- | ----------------------------------------------------------- | -------------------------------------------------------------- |
+| Windows | 安装程序（推荐） | 是       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**--*setup.exe*   | [Windows 安装程序](./guides/installation/windows-installer.md) |
+| Windows | 便携包           | 否       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**-*portable.zip* | [Windows 便携包](./guides/installation/windows-portable.md)    |
+| 跨平台  | Python Wheel     | 可选     | vcf_generator_lite-\<应用版本\>-**py3-none-any**.*whl*      | [Python Wheel](./guides/installation/wheel.md)                 |
+| 跨平台  | Python ZIP 应用  | 否       | VCFGeneratorLite-v\<应用版本\>-**py3**.*pyzw*               | [Python ZIP 应用](./guides/installation/zipapp.md)             |
 
 > [!TIP]
 >
 > 请查阅 [兼容性](./reference/compatibility.md) 了解系统要求。
 
-## 安装与启动
-
-### Windows 安装程序（推荐）
-
-双击 `.exe` 文件，按提示完成安装后，从开始菜单或桌面启动应用。
-
-### Windows 便携包
-
-解压 `.zip` 文件后，双击 `vcf_generator_lite.exe` 即可运行。
-
-### Python Wheel
-
-您可以直接使用以下命令运行应用：
-
-```bash
-uvx <whl 文件路径>
-```
-
-> [!NOTE]
->
-> `uvx` 是 [uv][uv-website] 工具提供的命令，会自动创建临时环境并运行程序。
-
-您也可以选择安装应用到系统环境：
-
-```bash
-# 使用 pipx
-pipx install <whl 文件路径>
-
-# 或使用 uv
-uv tool install <whl 文件路径>
-```
-
-安装完成后，在终端执行 `vcf-generator-lite` 启动应用。
-
-### Python ZIP 应用
-
-双击 `.pyzw` 文件即可运行（需要 Python 3.12 及以上版本）。
-
-在 Windows 中双击启动需要安装 [Python 安装管理器][pymanager-docs]（推荐）或 [Python 启动器][pylauncher-docs]。
-
-## 生成第一个 vCard
+## 生成第一个 vCard 文件
 
 1. 启动应用，进入主窗口。
 2. 按 `姓名 电话 备注` 的格式，将联系人复制到文本框中（每行一个联系人）。详见 [输入格式规范](./reference/input-format.md)：
@@ -91,8 +47,3 @@ uv tool install <whl 文件路径>
 
 [release-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/latest
 [release-github]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/latest
-
-[uv-website]: https://docs.astral.sh/uv/
-
-[pymanager-docs]: https://docs.python.org/zh-cn/3.14/using/windows.html#python-install-manager
-[pylauncher-docs]: https://docs.python.org/zh-cn/3.14/using/windows.html#python-launcher-for-windows-deprecated
