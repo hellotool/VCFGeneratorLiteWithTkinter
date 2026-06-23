@@ -4,8 +4,6 @@
 
 本项目使用 uv 进行管理，使用 Poe the Poet 进行任务管理。
 
-任何操作都不应修改系统环境。例如，不应安装全局包。
-
 ## 技术栈
 
 - 开发语言：Python 3.12+
@@ -67,16 +65,18 @@ VCFGeneratorLiteWithTkinter/
 
 ## 代码风格
 
-- 使用 Python 3.12 及以下语法。
+- 使用兼容 Python 3.12 的语法以及 API。
 - Ruff 检查器，严格类型检查。
 - 行长度：120 字符
 - 无返回值的函数不添加不必要的类型注解。
-- 文档字符串使用 reStructuredText 规范。
+- 文档字符串使用 reStructuredText 格式。
 
 ## 文档风格
 
-- 所有外部链接都要使用放置到底部引用。
-- 用户文档（`docs/`）按 [Diátaxis](https://diataxis.fr/) 框架组织为四类：入门教程（Tutorials）、操作指南（How-to guides）、技术参考（Reference）、原理解析（Explanation）。
+- 所有外部链接应在文档末尾以参考链接的形式定义，格式为 `[标识]: URL`。示例：
+  - 文档结尾：`[release-github]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/latest`
+  - 正文中引用：`[GitHub Releases][release-github]`
+- 用户文档（`docs/`）按 [Diátaxis](https://diataxis.fr/) 框架组织为四类：入门教程、操作指南、技术参考、原理解析。
 - 开发者文档（`docs/dev/`）按开发生命周期组织：开始 → 开发 → 架构与设计 → 发布。
 
 ## 更多信息
@@ -85,9 +85,10 @@ VCFGeneratorLiteWithTkinter/
 
 ## 规则
 
-- 在完成代码修改后，**请勿提交到版本控制**！
-- 代码生成后必须使用 `uv run poe format` 格式化代码。
-- 代码生成后必须使用 `uv run poe check` 检查代码。
-- 每个文件结尾必须添加空行。
-- 可翻译字符串必须使用带上下文的 `pgettext`（或 `pgettext_menu_label` / `LazyPgettext`），禁止使用 `_` / `gettext` 等无上下文的调用。
-- 创建 Agent Skill 时，必须放在 `.agents/skills/` 目录下，禁止使用 `.trae/skills/` 目录。
+- 在完成代码修改后，**请勿**提交到版本控制。
+- 任何操作都**不应**修改系统环境。例如，不应安装全局包。
+- 在完成代码修改任务后**必须**使用 `uv run poe format` 格式化代码。
+- 在完成代码修改任务后**必须**使用 `uv run poe check` 检查代码。
+- 每个文件结尾**必须**添加空行，使用 UTF-8 编码，特殊情况（例如 PowerShell 脚本）除外。
+- 可翻译字符串**必须**使用带上下文的 `pgettext`（或 `pgettext_menu_label` / `LazyPgettext`），**禁止**使用 `_` / `gettext` 等无上下文的调用。
+- 创建 Agent Skill 时，**必须**放在 `.agents/skills/` 目录下，**禁止**使用 `.trae/skills/` 目录。
