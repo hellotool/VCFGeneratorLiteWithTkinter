@@ -18,7 +18,9 @@
 
 </div>
 
-VCF Generator Lite is a simple and efficient tool that converts contact lists into a single vCard (`.vcf`) file. Generated files can be batch-imported into mobile phone contacts or used for various other purposes. Built with Python and Tkinter for a native desktop experience.
+VCF Generator Lite is a simple and efficient tool that converts contact lists into a single vCard (`.vcf`) file. Generated files can be batch-imported into mobile phone contacts or used for various other purposes.
+
+Built with Python and Tkinter for a native desktop experience.
 
 [![License](https://img.shields.io/github/license/hellotool/VCFGeneratorLiteWithTkinter)](./LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](./CODE_OF_CONDUCT.md)
@@ -30,13 +32,15 @@ VCF Generator Lite is a simple and efficient tool that converts contact lists in
 
 ## Features
 
-- **Smart Parsing**: Recognizes contacts in the `Name Phone Notes` format, with automatic merging of tabs and spaces.
-- **Batch Generation**: Combines all contacts into a single `.vcf` file.
-- **Number Validation**: Automatically skips invalid numbers and quickly locates erroneous lines.
-- **Editing Assistance**: Displays line numbers in the text area, supports one-click quote removal.
-- **Localization**: Supports Simplified Chinese and English, with phone number recognition for China (including Hong Kong, Macau, and Taiwan regions).
-- **Lightweight**: Provided as a Python ZIP application package.
-- **Free and Open Source**: Licensed under Apache License 2.0, ad-free, no payment required.
+- **Smart Parsing**: Intelligently recognizes the `Name Phone Note` format and automatically merges delimiters.
+- **Batch Export**: Exports all contacts to a single `.vcf` file.
+- **Phone Validation**: Skips invalid numbers and locates erroneous lines with one click.
+- **Editing Assistance**: Displays line numbers in the text area and supports one-click quote removal.
+- **Localization**: Features a multilingual interface with phone number recognition for China (including Hong Kong, Macao, and Taiwan).
+- **Lightweight & Portable**: Offers a no-installation ZIP application package (`.pyzw`).
+- **Cross-Platform**: Compatible with Windows, macOS, and Linux.
+- **High Performance**: Handles millions of contacts smoothly with rapid response.
+- **Free & Open Source**: Licensed under Apache License 2.0, no ads, no fees.
 
 ## Screenshots
 
