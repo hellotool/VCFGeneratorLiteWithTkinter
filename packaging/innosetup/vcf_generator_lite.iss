@@ -47,7 +47,7 @@ en_us.MyAppPublisher=Jesse205
 en_us.MyAppPublisherURL=https://github.com/Jesse205
 en_us.MyAppReadmeFile=https://github.com/hellotool/VCFGeneratorLiteWithTkinter/blob/master/README.md
 en_us.MyAppUpdatesURL=https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases
-en_us.SetupAppRunningOnWin7=Note: You are using Windows 7. You need to replace program files with compatible version. For details, please visit https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/blob/master/docs/compatibility/runs-on-older-windows.md
+en_us.OSNotSupportedMessage=The version of Windows you are currently using is too old, and this application cannot run on this system.%n%nWe provide compatibility solutions for older versions of Windows. Please refer to the following guide:%n%nhttps://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/blob/master/docs/troubleshooting/runs-on-older-windows.md
 en_us.UninstallFailed=Uninstall failed
 
 zh_cn.MyAppName=VCF 生成器 Lite
@@ -55,7 +55,7 @@ zh_cn.MyAppPublisher=Jesse205
 zh_cn.MyAppPublisherURL=https://gitee.com/Jesse205
 zh_cn.MyAppReadmeFile=https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/blob/master/README.md
 zh_cn.MyAppUpdatesURL=https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases
-zh_cn.SetupAppRunningOnWin7=注意: 您正在使用 Windows 7，您需要使用兼容的版本替换掉程序文件。详情请见 https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/blob/master/docs/compatibility/runs-on-older-windows.md
+zh_cn.OSNotSupportedMessage=您当前使用的 Windows 版本过旧，本应用无法在此系统上运行。%n%n我们提供了针对旧版 Windows 的兼容运行方案，请参阅以下指南：%n%nhttps://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/blob/master/docs/troubleshooting/runs-on-older-windows.md
 zh_cn.UninstallFailed=自动卸载失败
 
 [Code]
@@ -101,11 +101,11 @@ begin
 end;
 
 var
-  Win7MessageShown: Boolean;
+  OSNotSupportedMessageShown: Boolean;
 
 procedure InitializeWizard();
 begin
-  Win7MessageShown := False;
+  OSNotSupportedMessageShown := False;
 end;
 
 procedure CurInstallProgressChanged(CurProgress, MaxProgress: Integer);
@@ -113,10 +113,10 @@ var
   WinVersion: TWindowsVersion;
 begin
   GetWindowsVersionEx(WinVersion);
-  if (CurProgress=MaxProgress) and (WinVersion.Major = 6) and (WinVersion.Minor = 1) and (not Win7MessageShown) then
+  if (CurProgress=MaxProgress) and (WinVersion.Major = 6) and (WinVersion.Minor = 1) and (not OSNotSupportedMessageShown) then
   begin
-    MsgBox(CustomMessage('SetupAppRunningOnWin7'), mbInformation, MB_OK);
-    Win7MessageShown := True;
+    MsgBox(CustomMessage('OSNotSupportedMessage'), mbInformation, MB_OK);
+    OSNotSupportedMessageShown := True;
   end;
 end;
 
