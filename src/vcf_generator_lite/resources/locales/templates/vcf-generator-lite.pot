@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: VCF Generator Lite 6.0.0\n"
-"Report-Msgid-Bugs-To: jesse205@qq.com\n"
-"POT-Creation-Date: 2026-06-17 09:05+0800\n"
+"Project-Id-Version: VCF Generator Lite 6.0.1\n"
+"Report-Msgid-Bugs-To: Jesse205 <jesse205@qq.com>\n"
+"POT-Creation-Date: 2026-07-05 02:32+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -172,12 +172,12 @@ msgstr ""
 msgid "%(prog)s: warning: %(message)s\n"
 msgstr ""
 
-#: src/vcf_generator_lite/__main__.py:25
+#: src/vcf_generator_lite/__main__.py:26
 msgctxt "cli.help_option_verbose"
 msgid "increase output (use -vv for debug level)"
 msgstr ""
 
-#: src/vcf_generator_lite/__main__.py:32
+#: src/vcf_generator_lite/__main__.py:33
 msgctxt "cli.help_option_quiet"
 msgid "decrease output (use -qq for errors only)"
 msgstr ""
@@ -246,17 +246,35 @@ msgstr ""
 
 #: src/vcf_generator_lite/ui/app_text.py:19
 #, python-brace-format
-msgctxt "app.url_documentation"
-msgid "{repository}/tree/{version}/docs"
+msgctxt "app.url_releases"
+msgid "{repository}/releases"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/app_text.py:26
+#: src/vcf_generator_lite/ui/app_text.py:25
+#, python-brace-format
+msgctxt "app.url_report"
+msgid "{repository}/issues/new/choose"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/app_text.py:31
+#, python-brace-format
+msgctxt "app.url_license"
+msgid "{repository}/blob/{reference}/LICENSE"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/app_text.py:38
+#, python-brace-format
+msgctxt "app.url_documentation"
+msgid "{repository}/tree/{reference}/docs"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/app_text.py:45
 #, python-brace-format
 msgctxt "app.url_third_party_notices"
-msgid "{repository}/blob/{version}/NOTICES.md"
+msgid "{repository}/blob/{reference}/NOTICES.md"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/app_text.py:36
+#: src/vcf_generator_lite/ui/app_text.py:55
 msgctxt "error_missing_number"
 msgid "Missing number or number is incorrect"
 msgstr ""
@@ -384,122 +402,122 @@ msgctxt "window_main.label_stopping"
 msgid "Stopping..."
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:59
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:61
 msgctxt "window_main.menu_file"
 msgid "&File"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:63
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:65
 msgctxt "window_main.menu_edit"
 msgid "&Edit"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:67
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:69
 msgctxt "window_main.menu_options"
 msgid "&Options"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:71
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:73
 msgctxt "window_main.menu_help"
 msgid "&Help"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:78
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:80
 msgctxt "window_main.menu_file_generate"
 msgid "&Generate file..."
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:86
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:88
 msgctxt "window_main.menu_file_stop_generation"
 msgid "&Stop generation"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:98
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:100
 msgctxt "window_main.menu_file_exit"
 msgid "E&xit"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:108
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:110
 msgctxt "window_main.menu_edit_undo"
 msgid "&Undo"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:113
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:115
 msgctxt "window_main.menu_edit_redo"
 msgid "&Redo"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:119
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:121
 msgctxt "window_main.menu_edit_cut"
 msgid "Cu&t"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:124
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:126
 msgctxt "window_main.menu_edit_copy"
 msgid "&Copy"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:129
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:131
 msgctxt "window_main.menu_edit_paste"
 msgid "&Paste"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:134
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:136
 msgctxt "window_main.menu_edit_select_all"
 msgid "Select &All"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:140
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:142
 msgctxt "window_main.menu_edit_clean_quotes"
 msgid "Remove &Quotes"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:149
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:151
 msgctxt "window_main.menu_phone_formats"
 msgid "&Phone Format"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:153
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:155
 msgctxt "window_main.menu_select_all_phone_formats"
 msgid "Select &All"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:170
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:172
 msgctxt "window_main.menu_help_repository"
 msgid "Rep&ository"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:174
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:176
 msgctxt "window_main.menu_help_release"
 msgid "&Releases"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:178
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:180
 msgctxt "window_main.menu_help_documentation"
 msgid "&Documentation"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:183
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:185
 msgctxt "window_main.menu_help_feedback"
 msgid "&Feedback"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:187
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:189
 msgctxt "window_main.menu_help_contact"
 msgid "&Contact Author"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:201
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:203
 msgctxt "window_main.menu_help_license"
 msgid "&License"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:205
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:207
 msgctxt "window_main.menu_help_os_notices"
 msgid "Open Source &Notices"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:211
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:213
 #, python-brace-format
 msgctxt "window_main.menu_help_about"
 msgid "&About {app_name}"

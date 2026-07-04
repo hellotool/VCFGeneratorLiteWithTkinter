@@ -108,13 +108,13 @@ def redirect_stdio_to_messagebox_if_needed(app_name: str):
 def launch(*, quiet: int, verbose: int):
     from gettext import pgettext
 
-    from vcf_generator_lite.constants import URL_REPOSITORY
+    from vcf_generator_lite.ui.app_text import repository_url
     from vcf_generator_lite.ui.windows.main_window import VCFGeneratorLiteApp
 
     setup_logging(quiet=quiet, verbose=verbose)
     fix_home_env()
     if not quiet:
-        print(pgettext("startup.source_tip", "💡Tip: Source code is hosted at {url}").format(url=URL_REPOSITORY))
+        print(pgettext("startup.source_tip", "💡Tip: Source code is hosted at {url}").format(url=repository_url()))
 
     app = VCFGeneratorLiteApp()
     app.mainloop()

@@ -4,16 +4,18 @@ from functools import partial
 from gettext import pgettext
 from tkinter import BooleanVar, Menu, Misc
 
-from vcf_generator_lite.constants import (
-    EMAIL_AUTHOR,
-    URL_LICENSE,
-    URL_RELEASES,
-    URL_REPORT,
-    URL_REPOSITORY,
-)
+from vcf_generator_lite.constants import EMAIL_AUTHOR
 from vcf_generator_lite.core.phone_detector_loader import PhoneDetector
 from vcf_generator_lite.ui.actions.external_app import open_url
-from vcf_generator_lite.ui.app_text import app_name, documentation_url, third_party_notices_url
+from vcf_generator_lite.ui.app_text import (
+    app_name,
+    documentation_url,
+    license_url,
+    releases_url,
+    report_url,
+    repository_url,
+    third_party_notices_url,
+)
 from vcf_generator_lite.ui.windows.main_window.constants import (
     ACCELERATOR_GENERATE,
     ACCELERATOR_GENERATE_AQUA,
@@ -168,11 +170,11 @@ class MainMenuBar(Menu):
         help_menu = Menu(master, tearoff=False, name="help")
         help_menu.add_command(
             **pgettext_menu_label("window_main.menu_help_repository", "Rep&ository"),
-            command=lambda: open_url(self, URL_REPOSITORY),
+            command=lambda: open_url(self, repository_url()),
         )
         help_menu.add_command(
             **pgettext_menu_label("window_main.menu_help_release", "&Releases"),
-            command=lambda: open_url(self, URL_RELEASES),
+            command=lambda: open_url(self, releases_url()),
         )
         help_menu.add_command(
             **pgettext_menu_label("window_main.menu_help_documentation", "&Documentation"),
@@ -181,7 +183,7 @@ class MainMenuBar(Menu):
         help_menu.add_separator()
         help_menu.add_command(
             **pgettext_menu_label("window_main.menu_help_feedback", "&Feedback"),
-            command=lambda: open_url(self, URL_REPORT),
+            command=lambda: open_url(self, report_url()),
         )
         help_menu.add_command(
             **pgettext_menu_label("window_main.menu_help_contact", "&Contact Author"),
@@ -199,7 +201,7 @@ class MainMenuBar(Menu):
         help_menu.add_separator()
         help_menu.add_command(
             **pgettext_menu_label("window_main.menu_help_license", "&License"),
-            command=lambda: open_url(self, URL_LICENSE),
+            command=lambda: open_url(self, license_url()),
         )
         help_menu.add_command(
             **pgettext_menu_label("window_main.menu_help_os_notices", "Open Source &Notices"),

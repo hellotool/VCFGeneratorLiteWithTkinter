@@ -15,17 +15,36 @@ def repository_url() -> str:
     return pgettext("app.url_repository", "https://github.com/hellotool/VCFGeneratorLiteWithTkinter")
 
 
-def documentation_url() -> str:
-    return pgettext("app.url_documentation", "{repository}/tree/{version}/docs").format(
+def releases_url() -> str:
+    return pgettext("app.url_releases", "{repository}/releases").format(
         repository=repository_url(),
-        version=f"v{__version__}",
+    )
+
+
+def report_url() -> str:
+    return pgettext("app.url_report", "{repository}/issues/new/choose").format(
+        repository=repository_url(),
+    )
+
+
+def license_url() -> str:
+    return pgettext("app.url_license", "{repository}/blob/{reference}/LICENSE").format(
+        repository=repository_url(),
+        reference=f"v{__version__}",
+    )
+
+
+def documentation_url() -> str:
+    return pgettext("app.url_documentation", "{repository}/tree/{reference}/docs").format(
+        repository=repository_url(),
+        reference=f"v{__version__}",
     )
 
 
 def third_party_notices_url() -> str:
-    return pgettext("app.url_third_party_notices", "{repository}/blob/{version}/NOTICES.md").format(
+    return pgettext("app.url_third_party_notices", "{repository}/blob/{reference}/NOTICES.md").format(
         repository=repository_url(),
-        version=f"v{__version__}",
+        reference=f"v{__version__}",
     )
 
 
