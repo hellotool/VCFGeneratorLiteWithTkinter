@@ -13,6 +13,10 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 ## [Unreleased]
 
+### Changed
+
+- Help menu links are now localizable, allowing translation into different languages.
+
 ## [6.0.1] - 2026-06-21
 
 ### Changed
