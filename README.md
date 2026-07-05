@@ -42,6 +42,14 @@ Built with Python and Tkinter for a native desktop experience.
 - **High Performance**: Handles millions of contacts smoothly with rapid response.
 - **Free & Open Source**: Licensed under Apache License 2.0, no ads, no fees.
 
+## Use Cases
+
+- **Corporate Directory Distribution**: HR or admin staff batch import company contacts into employee phones.
+- **Event Networking**: Conference, training, or team-building organizers quickly distribute participant contact information.
+- **Client Resource Management**: Sales and customer service staff batch migrate client contacts when switching phones or devices.
+- **Data Migration**: Export contacts from Excel, legacy systems, or other formats to a new phone.
+- **Educational Institutions**: Teachers or administrators distribute class student and parent contact information.
+
 ## Screenshots
 
 <img src="./assets/images/screenshots/main_window.zh-CN.webp" width="451" alt="Main window" />

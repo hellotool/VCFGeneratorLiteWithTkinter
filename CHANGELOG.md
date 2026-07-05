@@ -15,7 +15,11 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 ### Changed
 
-- Help menu links are now localizable, allowing translation into different languages.
+- Help menu links follow language settings.
+
+### Fixed
+
+- Fixed incorrect link reference for legacy Windows runtime solution in Windows installer.
 
 ## [6.0.1] - 2026-06-21
 
