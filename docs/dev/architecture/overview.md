@@ -18,10 +18,10 @@ VCFGeneratorLiteWithTkinter/
 │   ├── configs/                    # 配置（如号码检测器）
 │   ├── resources/                  # 静态资源（图片、翻译文件）
 │   ├── ui/                         # 用户界面
-│   └── utils/                      # 工具函数
+│   └── utils/                      # 通用工具
 ├── tests/                          # 测试文件
 ├── docs/                           # 用户文档
-├── docs/dev/                       # 开发者文档
+│   └── dev/                        # 开发者文档
 └── pyproject.toml                  # 项目配置
 ```
 
@@ -31,8 +31,7 @@ VCFGeneratorLiteWithTkinter/
 graph TD
     UI["ui（表现层）"] --> Core["core（业务逻辑）"]
     Core --> Models["models（数据模型）"]
-    Bootstrap["bootstrap"] -.->|补丁 gettext| Utils["utils（工具）"]
-    UI --> Utils
+    UI --> Utils["utils（通用工具）"]
     Core --> Utils
 ```
 
@@ -52,11 +51,12 @@ graph TD
 
 ### 可分发
 
-- 支持四种发布形态：
-  - Wheel 包（pip 安装）
-  - ZIP 应用（Python 标准库 zipapp）
-  - PyInstaller 便携包
-  - InnoSetup 安装程序（Windows）
+支持四种软件包形态分发：
+
+- 单文件：Python ZIP 应用
+- 便携包：Windows 便携包
+- 安装包：Python Wheel 包
+- 安装程序：Windows 安装程序
 
 ### 可扩展
 
