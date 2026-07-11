@@ -22,7 +22,9 @@
 - 检查代码：`uv run poe check`
 - 修复代码：`uv run poe fix`
 
-## 项目结构
+通过 `uv run poe --help` 查看所有可用命令。
+
+## 文件组织
 
 ```txt
 VCFGeneratorLiteWithTkinter/
@@ -51,7 +53,16 @@ VCFGeneratorLiteWithTkinter/
 └── pyproject.toml                  # 项目配置
 ```
 
-## 代码风格
+- 用户文档（`docs/`）**推荐**按 [Diátaxis](https://diataxis.fr/) 框架组织为四类：入门教程、操作指南、技术参考、原理解析。
+- 开发者文档（`docs/dev/`）**推荐**按开发生命周期组织：开始 → 开发 → 架构与设计 → 发布。
+
+## 代码编写
+
+- **禁止**安装全局包等修改系统环境的操作。
+- 文件结尾**必须**以换行符结尾。
+- 文件**应该**使用 UTF-8 编码，但特殊情况（例如 PowerShell 脚本）除外。
+
+### Python 代码风格
 
 - **必须**使用 Python 3.12 兼容的语法，**推荐**使用 Python 3.12 兼容的 API。
 - **应该**通过 Ruff 的全部约束规则。
@@ -60,30 +71,21 @@ VCFGeneratorLiteWithTkinter/
 - 文档字符串**必须**使用 reStructuredText 格式。
 - 可翻译字符串**必须**使用带上下文的 `pgettext`（或 `pgettext_menu_label` / `LazyPgettext`），**禁止**使用 `_` / `gettext` 等无上下文的调用。
 
-## 文档风格
+### Markdown 文档风格
 
 - 所有外部链接**必须**在文档末尾以参考链接的形式定义，格式为 `[标识]: URL`。示例：
   - 文档结尾：`[example-homepage]: https://example.com/`
   - 正文中引用：`[Example Homepage][example-homepage]`
-- 用户文档（`docs/`）**推荐**按 [Diátaxis](https://diataxis.fr/) 框架组织为四类：入门教程、操作指南、技术参考、原理解析。
-- 开发者文档（`docs/dev/`）**推荐**按开发生命周期组织：开始 → 开发 → 架构与设计 → 发布。
 
-## 进行任务中
+## 创建 Agent Skill
 
-- **禁止**安装全局包等修改系统环境的操作。
-- 文件结尾**必须**以换行符结尾。
-- 文件**应该**使用 UTF-8 编码，但特殊情况（例如 PowerShell 脚本）除外。
+- **必须**放在 `.agents/skills/` 目录下，**禁止**使用 `.trae/skills/` 目录。
 
 ## 任务完成后
 
 - 无用户明确要求时，**请勿**将任何修改提交到版本控制。
-- 在完成代码修改任务后**必须**使用 `uv run poe format` 格式化代码。
-- 在完成代码修改任务后**必须**使用 `uv run poe check` 检查代码。
-
-## 其他规则
-
-- 创建 Agent Skill 时，**必须**放在 `.agents/skills/` 目录下，**禁止**使用 `.trae/skills/` 目录。
+- 完成代码修改任务后，**必须**使用命令格式化与检查代码。
 
 ## 更多信息
 
-有关视觉设计、版本管理和构建指南的信息，请参阅 `docs/dev` 目录。
+有关视觉设计、版本管理和构建指南的信息，请参阅 `docs/dev` 目录。如果涉及到这些内容，**必须**先阅读相关文档后再做决定。
