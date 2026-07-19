@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VCF Generator Lite 6.0.1\n"
 "Report-Msgid-Bugs-To: Jesse205 <jesse205@qq.com>\n"
-"POT-Creation-Date: 2026-07-05 02:32+0800\n"
+"POT-Creation-Date: 2026-07-19 21:56+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -240,41 +240,46 @@ msgid "Generate VCF files from contacts"
 msgstr ""
 
 #: src/vcf_generator_lite/ui/app_text.py:15
+msgctxt "app.copyright"
+msgid "Copyright © 2023-2026 Jesse205"
+msgstr ""
+
+#: src/vcf_generator_lite/ui/app_text.py:19
 msgctxt "app.url_repository"
 msgid "https://github.com/hellotool/VCFGeneratorLiteWithTkinter"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/app_text.py:19
+#: src/vcf_generator_lite/ui/app_text.py:23
 #, python-brace-format
 msgctxt "app.url_releases"
 msgid "{repository}/releases"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/app_text.py:25
+#: src/vcf_generator_lite/ui/app_text.py:29
 #, python-brace-format
 msgctxt "app.url_report"
 msgid "{repository}/issues/new/choose"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/app_text.py:31
+#: src/vcf_generator_lite/ui/app_text.py:35
 #, python-brace-format
 msgctxt "app.url_license"
 msgid "{repository}/blob/{reference}/LICENSE"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/app_text.py:38
+#: src/vcf_generator_lite/ui/app_text.py:42
 #, python-brace-format
 msgctxt "app.url_documentation"
 msgid "{repository}/tree/{reference}/docs"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/app_text.py:45
+#: src/vcf_generator_lite/ui/app_text.py:49
 #, python-brace-format
 msgctxt "app.url_third_party_notices"
 msgid "{repository}/blob/{reference}/NOTICES.md"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/app_text.py:55
+#: src/vcf_generator_lite/ui/app_text.py:59
 msgctxt "error_missing_number"
 msgid "Missing number or number is incorrect"
 msgstr ""
@@ -582,19 +587,19 @@ msgctxt "window_save_vcf.label_type_vcf"
 msgid "vCard File (*.vcf)"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:14
+#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:13
 #, python-brace-format
 msgctxt "dialog_about.title"
 msgid "About {app_name}"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:15
+#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:14
 #, python-brace-format
 msgctxt "dialog_about.message"
 msgid "{app_name} v{version}"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:20
+#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:19
 #, python-brace-format
 msgctxt "dialog_about.detail"
 msgid ""

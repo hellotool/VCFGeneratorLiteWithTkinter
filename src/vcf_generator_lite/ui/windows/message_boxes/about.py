@@ -4,8 +4,7 @@ from gettext import pgettext
 from tkinter import Misc, messagebox
 
 from vcf_generator_lite.__version__ import __version__
-from vcf_generator_lite.constants import APP_COPYRIGHT
-from vcf_generator_lite.ui.app_text import app_name
+from vcf_generator_lite.ui.app_text import app_copyright, app_name
 
 
 def show_about_message_box(parent: Misc):
@@ -25,7 +24,7 @@ Python: {python_info}
 Tcl: {tcl_info}
 Tk: {tk_info}""",
         ).format(
-            copyright=APP_COPYRIGHT,
+            copyright=app_copyright(),
             python_info=f"{platform.python_implementation()} v{platform.python_version()}",
             tcl_info=f"v{tkinter.TclVersion}",
             tk_info=f"v{tkinter.TkVersion}",

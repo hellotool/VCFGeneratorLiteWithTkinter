@@ -3,7 +3,7 @@ from pathlib import Path
 
 import requests
 
-from scripts.app_metadata import app_version_variants
+from scripts.app_metadata import app_metadata, app_version_variants
 from scripts.build_app.pyinstaller import (
     build_with_pyinstaller,
     ensure_pyinstaller_dist,
@@ -14,7 +14,6 @@ from scripts.build_app.utils import (
     PLATFORM_NATIVE,
 )
 from scripts.utils import require_external_tool
-from vcf_generator_lite.constants import APP_COPYRIGHT
 
 DISTRIBUTION_INSTALLER_BASE_NAME = f"VCFGeneratorLite-v{app_version_variants.wheel}-{PLATFORM_NATIVE}-setup"
 
@@ -86,7 +85,7 @@ def build_installer(*, no_verify_ssl: bool = False, force: bool = False, force_d
         [
             iscc_path,
             "/D" + f"OutputBaseFilename={DISTRIBUTION_INSTALLER_BASE_NAME}",
-            "/D" + f"MyAppCopyright={APP_COPYRIGHT}",
+            "/D" + f"MyAppCopyright={app_metadata.copyright}",
             "/D" + f"MyAppVersion={app_version_variants.wheel}",
             "/D" + f"VersionInfoVersion={app_version_variants.windows}",
             "/D" + f"ArchitecturesAllowed={architectures_allowed}",

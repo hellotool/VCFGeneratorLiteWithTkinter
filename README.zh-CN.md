@@ -117,7 +117,7 @@ VCF 生成器 Lite 是一个简单高效的工具，可以将联系人列表转�
 ---
 
 <div align="center">
-Copyright © 2023-2026 Jesse205
+版权所有 © 2023-2026 杰西 205
 </div>
 
 [repository-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/

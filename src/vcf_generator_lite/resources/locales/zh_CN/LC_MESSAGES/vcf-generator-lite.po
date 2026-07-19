@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VCF Generator Lite 6.0.0\n"
 "Report-Msgid-Bugs-To: jesse205@qq.com\n"
-"POT-Creation-Date: 2026-07-05 02:32+0800\n"
+"POT-Creation-Date: 2026-07-19 21:56+0800\n"
 "PO-Revision-Date: 2026-06-15 08:15+0800\n"
 "Last-Translator: Jesse205 <jesse205@qq.com>\n"
 "Language: zh_Hans_CN\n"
@@ -239,41 +239,46 @@ msgid "Generate VCF files from contacts"
 msgstr "将联系人列表转换为单个 vCard 文件"
 
 #: src/vcf_generator_lite/ui/app_text.py:15
+msgctxt "app.copyright"
+msgid "Copyright © 2023-2026 Jesse205"
+msgstr "版权所有 © 2023-2026 杰西 205"
+
+#: src/vcf_generator_lite/ui/app_text.py:19
 msgctxt "app.url_repository"
 msgid "https://github.com/hellotool/VCFGeneratorLiteWithTkinter"
 msgstr "https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter"
 
-#: src/vcf_generator_lite/ui/app_text.py:19
+#: src/vcf_generator_lite/ui/app_text.py:23
 #, python-brace-format
 msgctxt "app.url_releases"
 msgid "{repository}/releases"
 msgstr "{repository}/releases"
 
-#: src/vcf_generator_lite/ui/app_text.py:25
+#: src/vcf_generator_lite/ui/app_text.py:29
 #, python-brace-format
 msgctxt "app.url_report"
 msgid "{repository}/issues/new/choose"
 msgstr "{repository}/issues/new/choose"
 
-#: src/vcf_generator_lite/ui/app_text.py:31
+#: src/vcf_generator_lite/ui/app_text.py:35
 #, python-brace-format
 msgctxt "app.url_license"
 msgid "{repository}/blob/{reference}/LICENSE"
 msgstr "{repository}/blob/{reference}/LICENSE"
 
-#: src/vcf_generator_lite/ui/app_text.py:38
+#: src/vcf_generator_lite/ui/app_text.py:42
 #, python-brace-format
 msgctxt "app.url_documentation"
 msgid "{repository}/tree/{reference}/docs"
 msgstr "{repository}/tree/{reference}/docs"
 
-#: src/vcf_generator_lite/ui/app_text.py:45
+#: src/vcf_generator_lite/ui/app_text.py:49
 #, python-brace-format
 msgctxt "app.url_third_party_notices"
 msgid "{repository}/blob/{reference}/NOTICES.md"
 msgstr "{repository}/blob/{reference}/NOTICES.zh-CN.md"
 
-#: src/vcf_generator_lite/ui/app_text.py:55
+#: src/vcf_generator_lite/ui/app_text.py:59
 msgctxt "error_missing_number"
 msgid "Missing number or number is incorrect"
 msgstr "缺失号码或号码不正确"
@@ -591,19 +596,19 @@ msgctxt "window_save_vcf.label_type_vcf"
 msgid "vCard File (*.vcf)"
 msgstr "vCard 文件 (*.vcf)"
 
-#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:14
+#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:13
 #, python-brace-format
 msgctxt "dialog_about.title"
 msgid "About {app_name}"
 msgstr "关于 {app_name}"
 
-#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:15
+#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:14
 #, python-brace-format
 msgctxt "dialog_about.message"
 msgid "{app_name} v{version}"
 msgstr "{app_name} v{version}"
 
-#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:20
+#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:19
 #, python-brace-format
 msgctxt "dialog_about.detail"
 msgid ""

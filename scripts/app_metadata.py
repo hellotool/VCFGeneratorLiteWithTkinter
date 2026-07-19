@@ -6,8 +6,6 @@ from packaging.metadata import Metadata
 from packaging.version import Version
 from packaging.version import parse as parse_version
 
-from vcf_generator_lite.constants import APP_COPYRIGHT
-
 __all__ = ["app_metadata", "app_version_variants"]
 
 
@@ -104,7 +102,7 @@ app_metadata = AppMetadata(
     author_email=app_pkg_metadata.author_email,
     summary=app_pkg_metadata.summary,
     description=app_pkg_metadata.description,
-    copyright=APP_COPYRIGHT,
+    copyright="Copyright © 2023-2026 Jesse205",
     release_notes=f"{app_pkg_metadata.project_urls['Repository']}/releases"
     if app_pkg_metadata.project_urls and "Repository" in app_pkg_metadata.project_urls
     else None,

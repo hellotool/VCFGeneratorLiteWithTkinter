@@ -11,6 +11,10 @@ def app_description() -> str:
     return pgettext("app.description", "Generate VCF files from contacts")
 
 
+def app_copyright() -> str:
+    return pgettext("app.copyright", "Copyright © 2023-2026 Jesse205")
+
+
 def repository_url() -> str:
     return pgettext("app.url_repository", "https://github.com/hellotool/VCFGeneratorLiteWithTkinter")
 
