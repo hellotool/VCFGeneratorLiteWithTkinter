@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VCF Generator Lite 6.0.1\n"
 "Report-Msgid-Bugs-To: Jesse205 <jesse205@qq.com>\n"
-"POT-Creation-Date: 2026-07-19 21:56+0800\n"
+"POT-Creation-Date: 2026-07-20 01:27+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -236,7 +236,7 @@ msgstr ""
 
 #: src/vcf_generator_lite/ui/app_text.py:11
 msgctxt "app.description"
-msgid "Generate VCF files from contacts"
+msgid "Merge contacts into a vCard file"
 msgstr ""
 
 #: src/vcf_generator_lite/ui/app_text.py:15
@@ -603,6 +603,8 @@ msgstr ""
 #, python-brace-format
 msgctxt "dialog_about.detail"
 msgid ""
+"{description}\n"
+"\n"
 "{copyright}\n"
 "\n"
 "Environment Information:\n"

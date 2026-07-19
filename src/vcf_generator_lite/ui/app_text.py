@@ -8,7 +8,7 @@ def app_name() -> str:
 
 
 def app_description() -> str:
-    return pgettext("app.description", "Generate VCF files from contacts")
+    return pgettext("app.description", "Merge contacts into a vCard file")
 
 
 def app_copyright() -> str:
