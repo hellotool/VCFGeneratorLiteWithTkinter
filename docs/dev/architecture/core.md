@@ -10,7 +10,7 @@
 | `vcf_generator`         | 编排生成管线，管理线程和 I/O | 集成点，协调所有模块   |
 | `phone_detector_loader` | 从静态配置加载号码检测器     | 无状态加载，返回字典   |
 
-模块间依赖关系：
+依赖方向单向：`vcf_generator` 是唯一对外入口，其余模块互不耦合，便于单独测试：
 
 ```mermaid
 graph TD
@@ -24,7 +24,7 @@ graph TD
 
 ## 两阶段管线
 
-`VCFGeneratorTask` 使用两阶段管线处理联系人：
+`VCFGeneratorTask` 采用两阶段管线，让解析与写入并发执行，并用固定容量队列约束内存：
 
 ```mermaid
 graph LR
@@ -39,12 +39,6 @@ graph LR
 
 - **资源利用**：解析是 CPU 密集型（正则匹配），写入是 I/O 密集型（磁盘），管线让两者并发运行。
 - **内存效率**：有界队列防止一次性加载全部输出。即使处理 10 万条联系人，内存中也只缓冲少量 vCard。
-
-**解析阶段**（Worker 1）逐行读取输入，调用 `parse_contact` 解析文本，再调用 `serialize_to_vcard` 序列化为 vCard 字符串，推入队列。解析失败的行收集到 `InvalidItem` 列表，管线不中断。
-
-**写入阶段**（Worker 2）从队列消费 vCard，写入目标文件。收到 `None` 哨兵时退出循环。
-
-**哨兵终止**：Worker 1 完成所有行后向队列推送 `None`，作为流结束信号。Worker 2 以 `while (item := queue.get()) is not None` 驱动，遇到 `None` 自然退出。
 
 ## 取消机制
 

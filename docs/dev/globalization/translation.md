@@ -4,6 +4,13 @@
 
 ## 文件结构
 
+本地化资源位于 `src/vcf_generator_lite/resources/locales/`，按语言组织为以下结构：
+
+- `templates/` — 由 `pybabel extract` 生成的 `.pot` 模板（`vcf-generator-lite.pot`）。
+- `<语言>/LC_MESSAGES/` — 每种语言一个目录（如 `zh_CN`），包含：
+  - `vcf-generator-lite.po` — 可编辑的翻译源文件。
+  - `vcf-generator-lite.mo` — 编译后的二进制文件，运行时由 gettext 加载。
+
 ```mermaid
 flowchart TD
     ROOT["src/vcf_generator_lite/resources/locales/"]
@@ -115,9 +122,9 @@ msgstr "已生成 {count} 个联系人"
 
 > [!IMPORTANT]
 >
-> - 保留花括号 `{}` 及其中的变量名
-> - 可以调整占位符在句子中的位置
-> - 不要修改变量名
+> - 保留花括号 `{}` 及其中的变量名。
+> - 可以调整占位符在句子中的位置。
+> - 不要修改变量名。
 
 ### 处理 fuzzy 标记
 
@@ -138,6 +145,6 @@ msgstr "已生成 {count} 个联系人"
 
 翻译完成后，提交 Pull Request：
 
-1. 确保 MO 文件已编译
-2. 测试翻译效果
-3. 创建 PR，说明翻译的语言
+1. 确保 MO 文件已编译。
+2. 测试翻译效果。
+3. 创建 PR，说明翻译的语言。

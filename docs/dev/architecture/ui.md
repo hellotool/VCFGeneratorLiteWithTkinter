@@ -4,7 +4,7 @@
 
 ## 三层组织
 
-UI 部分按 **窗口 → 布局 → 控件** 的三层组织：
+UI 按 **窗口 → 布局 → 控件** 三层组织，每层只向下依赖，替换主题或布局时不影响业务逻辑：
 
 ```mermaid
 graph TD
@@ -36,10 +36,10 @@ graph TD
 
 **职责：**
 
-- 管理窗口生命周期（创建、显示、销毁）
-- 处理用户交互事件
-- 维护业务状态
-- 执行业务逻辑
+- 管理窗口生命周期（创建、显示、销毁）。
+- 处理用户交互事件。
+- 维护业务状态。
+- 执行业务逻辑。
 
 ## 布局层
 
@@ -49,11 +49,11 @@ graph TD
 
 **基类：**
 
-- `VerticalDialogLayout` — 垂直对话框布局抽象基类，将窗口分为 header/content/footer 三个区域
+- `VerticalDialogLayout` — 垂直对话框布局抽象基类，将窗口分为 header/content/footer 三个区域。
 
 **职责：**
 
-- 创建和排列控件
+- 创建和排列控件。
 
 **示例：**
 
@@ -94,12 +94,12 @@ class MainLayout(VerticalDialogLayout):
 
 **功能：**
 
-- 提供内置主题补丁（`DefaultThemePatcher`）
-- 处理高分屏适配（按钮/树视图/滚动条 padding）
-- 修复系统主题在 Tkinter 上的显示问题
-- 支持自定义主题扩展
+- 提供内置主题补丁（`DefaultThemePatcher`）。
+- 处理高分屏适配（按钮/树视图/滚动条 padding）。
+- 修复系统主题在 Tkinter 上的显示问题。
+- 支持自定义主题扩展。
 
 **抽象接口：**
 
-- `ThemePatcher(ABC)` — 定义 `patch()` 方法
-- `BaseThemePatcher` — 持有 `app: Tk` 和 `style: Style` 引用
+- `ThemePatcher(ABC)` — 定义 `patch()` 方法。
+- `BaseThemePatcher` — 持有 `app: Tk` 和 `style: Style` 引用。

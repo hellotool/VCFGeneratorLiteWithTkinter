@@ -40,7 +40,9 @@
 
 创建 `release/<version>` 分支，合并上述更改到该分支，在推送到 GitHub 后，CI 会自动进行测试。
 
-实践中，为了极致地节省 Runner 资源，您可以直接将提交推送到 `master` 分支。
+> [!NOTE]
+>
+> 常规发布请走 `release/<version>` 分支流程并由 CI 自动测试。若你已在本地通过 `uv run poe test`，也可直接将提交推送到 `master` 分支以节省 Runner 资源；此举会跳过 CI 自动测试，需自行确保质量。
 
 ### 3. 触发 Prepare Release 工作流
 

@@ -14,13 +14,13 @@ This skill prepares a new release for the project.
 2. **Update version**: Run `uv version <VERSION>` or `uv version --bump <BUMP_TYPE>` to update `pyproject.toml`.
 
 3. **Read CHANGELOG files**:
-   - Read `CHANGELOG.md` (English)
-   - Read `CHANGELOG.zh-CN.md` (Chinese)
+   - Read `CHANGELOG.md` (English).
+   - Read `CHANGELOG.zh-CN.md` (Chinese).
    - If either file is missing or malformed, abort with an error.
 
 4. **Find Unreleased section**:
-   - In `CHANGELOG.md`, look for `## [Unreleased]`
-   - In `CHANGELOG.zh-CN.md`, look for `## [未发布]`
+   - In `CHANGELOG.md`, look for `## [Unreleased]`.
+   - In `CHANGELOG.zh-CN.md`, look for `## [未发布]`.
    - If either section is missing, abort with an error.
 
 5. **Extract Unreleased content**:
@@ -58,5 +58,5 @@ This skill prepares a new release for the project.
 
 ## Notes
 
-- Version format follows PEP 440 (e.g., `6.0.0`, `6.0.1`, `6.1.0`)
-- Do NOT commit changes after running this skill (per project rules)
+- Version format follows PEP 440 (e.g., `6.0.0`, `6.0.1`, `6.1.0`).
+- Do NOT commit changes after running this skill (per project rules).

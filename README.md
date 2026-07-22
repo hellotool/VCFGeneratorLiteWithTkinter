@@ -18,9 +18,9 @@
 
 </div>
 
-VCF Generator Lite is a simple and efficient tool that converts contact lists into a single vCard (`.vcf`) file. Generated files can be batch-imported into mobile phone contacts or used for various other purposes.
+VCF Generator Lite is a simple and efficient application that converts contact lists into a single vCard (`.vcf`) file. Generated files can be batch-imported into mobile phone contacts or used for various other purposes.
 
-Built with Python and Tkinter for a native desktop experience.
+Built with Python and Tkinter for a native desktop application.
 
 [![License](https://img.shields.io/github/license/hellotool/VCFGeneratorLiteWithTkinter)](./LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](./CODE_OF_CONDUCT.md)
@@ -32,15 +32,15 @@ Built with Python and Tkinter for a native desktop experience.
 
 ## Features
 
-- **Smart Parsing**: Intelligently recognizes the `Name Phone Note` format and automatically merges delimiters.
+- **Flexible Parsing**: Recognizes the `Name Phone Note` format and merges delimiters automatically.
 - **Batch Export**: Exports all contacts to a single `.vcf` file.
-- **Phone Validation**: Skips invalid numbers and locates erroneous lines with one click.
-- **Editing Assistance**: Displays line numbers in the text area and supports one-click quote removal.
-- **Localization**: Features a multilingual interface with phone number recognition for China (including Hong Kong, Macao, and Taiwan).
-- **Lightweight & Portable**: Offers a no-installation ZIP application package (`.pyzw`).
-- **Cross-Platform**: Compatible with Windows, macOS, and Linux.
-- **High Performance**: Handles millions of contacts smoothly with rapid response.
-- **Free & Open Source**: Licensed under Apache License 2.0, no ads, no fees.
+- **Phone Validation**: Skips invalid numbers and jumps to erroneous lines with one click.
+- **Editing Assistance**: Shows line numbers in the text box and removes quotes with one click.
+- **Localization**: Multilingual interface with phone-number recognition for China (including Hong Kong, Macao, and Taiwan).
+- **Lightweight**: Minimal dependencies and a small footprint.
+- **Multiple Distributions**: Windows installer and portable package, plus cross-platform Wheel and `.pyzw`.
+- **Efficient Generation**: Processes millions of contacts per run, limited only by available memory.
+- **Free and Open Source**: Licensed under Apache License 2.0, with no ads or fees.
 
 ## Use Cases
 
@@ -55,7 +55,7 @@ Built with Python and Tkinter for a native desktop experience.
 <img src="./assets/images/screenshots/main_window.zh-CN.webp" width="451" alt="Main window" />
 <img src="./assets/images/screenshots/invalid_lines_window.zh-CN.webp" width="362" alt="Invalid Lines Window" />
 
-## Download & Installation
+## Download and Installation
 
 Download packages from the following channels:
 
@@ -73,7 +73,7 @@ Select a package for your platform and click the guide for detailed installation
 
 ## Usage
 
-1. Paste your contacts in the format `Name Phone Note` into the text field. The note is optional.
+1. Paste your contacts in the format `Name Phone Note` into the text box. The note is optional.
    ```text
    Qu Yuan		13333333333	Poet of the Warring States period
    Cao Cao		13444444444
@@ -93,12 +93,12 @@ For system requirements, vCard compatibility, and known issues, see [Compatibili
 
 Parts of this project were generated with AI assistance:
 
-- **Trae**: Code generation, document optimization, code optimization, language translation.  
-- **Qoder**: Code completion, document optimization, coding guidance.  
-- **DeepSeek**: Coding guidance, code generation, document optimization, language translation.  
-- **Yuanbao**: Coding guidance, code generation, language translation.  
-- **WorkBuddy**: Code review, document optimization.  
-- **OpenCode**: Document optimization.
+- **Trae**: Code generation, document optimization, code optimization, language translation  
+- **Qoder**: Code completion, document optimization, coding guidance  
+- **DeepSeek**: Coding guidance, code generation, document optimization, language translation  
+- **Yuanbao**: Coding guidance, code generation, language translation  
+- **WorkBuddy**: Code review, document optimization  
+- **OpenCode**: Document optimization
 
 ## License
 

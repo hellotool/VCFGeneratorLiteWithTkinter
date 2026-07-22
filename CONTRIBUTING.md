@@ -11,8 +11,8 @@ We welcome contributions of any kind, whether it's reporting issues, suggesting 
 >
 > If you're new to open source contributions, these resources might help you:
 >
-> - GitHub Community's [Open Source Guide][how-to-contribute-github-opensource-guide].
-> - Gitee Community's [Open Source Guide][participating-gitee-opensource-guide].
+> - GitHub Community's [Open Source Guide][how-to-contribute-github-opensource-guide]
+> - Gitee Community's [Open Source Guide][participating-gitee-opensource-guide]
 
 ## Code of Conduct
 
@@ -71,7 +71,7 @@ Detailed guides for each task:
 
 #### Markdown Documents (`.md`)
 
-- No maximum line length restriction.
+- No maximum line length restriction
 - Refer to `.markdownlint.json` for specific rules.
 - For all other cases, follow [Markdownlint][markdownlint-repository-github].
 

@@ -218,8 +218,8 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 ### Added
 
-- Support for notes field.
-- Brand new app icon.
+- Added support for the notes field.
+- Added a brand new app icon.
 - Invalid window warning icon uses Emoji icons.
 - Automatically focuses the text box after launch.
 - Access key provided for the Remove Quotes feature.

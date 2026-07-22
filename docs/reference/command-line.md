@@ -43,7 +43,7 @@ vcf-generator-lite -qq
 vcf-generator-lite -V
 ```
 
-输出当前版本号，例如：`VCF 生成器 Lite 5.0.4`
+输出当前版本号，例如：`VCF 生成器 Lite 5.0.4`。
 
 ### 查看帮助
 

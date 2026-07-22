@@ -1,10 +1,10 @@
-# Agent 指引
+# 智能体指引
 
 ## 技术栈
 
 本项目使用 uv 进行管理，使用 Poe the Poet 进行任务管理。
 
-- 开发语言：Python 3.12+
+- 语言环境：Python 3.12+
 - UI 框架：Tkinter
 - 包管理器：uv
 - 任务运行器：Poe the Poet

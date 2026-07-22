@@ -11,8 +11,8 @@
 >
 > 如果您是开源贡献的新手，这些资源或许能帮到您：
 >
-> - GitHub 社区的 [开源软件指南][how-to-contribute-github-opensource-guide]。
-> - Gitee 社区的 [开源指北][participating-gitee-opensource-guide]。
+> - GitHub 社区的 [开源软件指南][how-to-contribute-github-opensource-guide]
+> - Gitee 社区的 [开源指北][participating-gitee-opensource-guide]
 
 ## 行为准则
 
@@ -66,7 +66,7 @@
 #### Python 代码（`.py`）
 
 - 函数参数必须声明类型注解。
-- 单行最大 120 字符。
+- 单行最大 120 字符
 - 其他情况以 [PEP 8][pep-0008] 为准。
 
 #### Markdown 文档（`.md`）

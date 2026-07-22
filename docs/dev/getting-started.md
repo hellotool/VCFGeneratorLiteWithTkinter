@@ -6,7 +6,7 @@
 
 | 类别       | 技术                                       | 版本要求                        |
 | ---------- | ------------------------------------------ | ------------------------------- |
-| 开发语言   | Python                                     | 3.12+                           |
+| 语言环境   | Python                                     | 3.12+                           |
 | UI 框架    | Tkinter                                    | Python 标准库                   |
 | 包管理     | uv                                         | 0.10.1+                         |
 | 版本控制   | Git                                        | 任意版本                        |
@@ -27,7 +27,7 @@
 
 | 类别     | 工具                          |
 | -------- | ----------------------------- |
-| 开发语言 | Python                        |
+| 语言环境 | Python                        |
 | 版本控制 | Git                           |
 | 包管理   | uv                            |
 | IDE      | Visual Studio Code 或 PyCharm |
@@ -91,4 +91,4 @@ uv run python -m vcf_generator_lite -vv
 
 ## 下一步
 
-- 阅读 [项目概览](./architecture/overview.md) 了解项目架构
+- 阅读 [项目概览](./architecture/overview.md) 了解项目架构。

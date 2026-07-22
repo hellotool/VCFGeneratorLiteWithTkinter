@@ -2,15 +2,15 @@
 
 ## 开始
 
-- [快速上手](./getting-started.md) — 搭建开发环境，运行第一个命令
+- [快速上手](./getting-started.md) — 搭建开发环境，运行第一个命令。
 
 ## 开发
 
-- [构建项目](./building.md) — 构建各类发布包
-- [翻译界面](./globalization/translation.md) — 翻译应用界面
-- [开发号码检测器](./globalization/phone-detector.md) — 添加新的号码格式支持
-- [国际化机制](./globalization/i18n-mechanism.md) — gettext 集成和关键字约定
-- [贡献指南](../../CONTRIBUTING.zh-CN.md) — 代码规范、提交约定和文档风格
+- [构建项目](./building.md) — 构建各类发布包。
+- [翻译界面](./globalization/translation.md) — 翻译应用界面。
+- [开发号码检测器](./globalization/phone-detector.md) — 添加新的号码格式支持。
+- [国际化机制](./globalization/i18n-mechanism.md) — gettext 集成和关键字约定。
+- [贡献指南](../../CONTRIBUTING.zh-CN.md) — 代码规范、提交约定和文档风格。
 
 ## 架构与设计
 
