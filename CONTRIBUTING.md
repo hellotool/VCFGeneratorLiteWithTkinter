@@ -79,7 +79,7 @@ For more details, refer to `.editorconfig`.
 
 ### Documentation Standards
 
-Follow the [Chinese Technical Documentation Style Guide][zh-style-guide].
+Documentation follows the [Google Developer Style Guide][google-style-guide] and the [Google Technical Writing][google-technical-writing] courses for clarity, voice, accessibility, and inclusive language. The [Chinese Technical Documentation Style Guide][zh-style-guide] supplements these as a reference for Chinese-language writing.
 
 Documentation is organized using the [Diátaxis][diataxis] framework into four categories: Tutorials, How-to guides, Reference, and Explanation.
 
@@ -99,6 +99,9 @@ Follow [Conventional Commits][conventionalcommits-homepage].
 [how-to-contribute-github-opensource-guide]: https://opensource.guide/how-to-contribute/
 [participating-gitee-opensource-guide]: https://gitee.com/opensource-guide/guide/participating/roles.html
 [zh-style-guide]: https://zh-style-guide.readthedocs.io/zh-cn/latest/index.html
+
+[google-style-guide]: https://developers.google.com/style
+[google-technical-writing]: https://developers.google.com/tech-writing
 
 [pep-0008]: https://peps.python.org/pep-0008/
 [diataxis]: https://diataxis.fr/

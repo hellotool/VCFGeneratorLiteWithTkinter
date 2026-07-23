@@ -79,7 +79,7 @@
 
 ### 文档规范
 
-遵守 [中文技术文档写作风格指南][zh-style-guide]。
+文档写作以 [Google 开发者风格指南][google-style-guide] 与 [Google 技术写作课程][google-technical-writing] 为准，关注清晰、语气、无障碍与包容性用语；针对中文写作，[中文技术文档写作风格指南][zh-style-guide] 作为补充参考。
 
 文档按 [Diátaxis][diataxis] 框架组织为四类：入门教程、操作指南、技术参考、原理解析。
 
@@ -99,6 +99,9 @@
 [how-to-contribute-github-opensource-guide]: https://opensource.guide/zh-hans/how-to-contribute/
 [participating-gitee-opensource-guide]: https://gitee.com/opensource-guide/guide/participating/roles.html
 [zh-style-guide]: https://zh-style-guide.readthedocs.io/zh-cn/latest/index.html
+
+[google-style-guide]: https://developers.google.com/style
+[google-technical-writing]: https://developers.google.com/tech-writing
 
 [pep-0008]: https://peps.python.org/pep-0008/
 [diataxis]: https://diataxis.fr/
