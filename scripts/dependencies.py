@@ -58,6 +58,12 @@ DEV: list[Dependency] = [
         copyrights=["Copyright (c) 2022 Charles Marsh"],
     ),
     Dependency(
+        name="rumdl",
+        license="MIT License",
+        url="https://github.com/rvben/rumdl/blob/main/LICENSE",
+        copyrights=["Copyright (c) 2024-2025 Ruben J. Jongejan"],
+    ),
+    Dependency(
         name="pytest",
         license="MIT License",
         url="https://github.com/pytest-dev/pytest/blob/main/LICENSE",
