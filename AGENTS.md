@@ -61,7 +61,7 @@ VCFGeneratorLiteWithTkinter/
 ## 准备工作
 
 - 涉及结构性或工具选型改动前，**必须**先阅读 `docs/dev/architecture/decisions/` 了解决策来由，避免重拾已淘汰方案。
-- 架构决策记录（ADR）采用 **Nygard 轻量风格**（规则与模板见 `docs/dev/architecture/decisions/index.md`）。若改动引入了新的带权衡的决策，或推翻了既有的已采纳 ADR，**必须**新增对应 ADR；变更既有决策时写新 ADR 将其标记为「已取代」，不改写旧文件。
+- 架构决策记录（ADR）采用 **Nygard 轻量风格**（规则与模板见 `docs/dev/architecture/decisions/index.md`）。若改动引入了新的带权衡的决策，或推翻了既有的已采纳 ADR，**必须**新增对应 ADR；变更既有决策时写新 ADR 将其标记为「已取代」，不改写旧文件。新增或推翻 ADR 后，**必须**在 `docs/dev/architecture/decisions/index.md` 的「决策清单」中同步添加或更新一条记录（编号、标题、状态、日期、摘要）。
 
 ## 执行任务
 

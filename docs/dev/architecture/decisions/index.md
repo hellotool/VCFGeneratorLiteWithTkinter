@@ -2,6 +2,15 @@
 
 本目录记录本项目的架构与工具选型决策，供人类与 AI 协作时了解「为什么这么做」，避免改动时重拾已淘汰方案。
 
+## 决策清单
+
+全部已记录决策，按编号排列。**新增或推翻决策时，必须同步更新本表**（约束见 `AGENTS.md`）。
+
+| 编号 | 标题 | 状态 | 日期 | 摘要 |
+| --- | --- | --- | --- | --- |
+| [0001](./0001-markdown-lint-with-rumdl.md) | 使用 rumdl 做 Markdown 风格门禁 | 已采纳 | 2026-07-23 | 采用 rumdl，配置源 = 根目录 `rumdl.toml`，删除 `.markdownlint.yml`，链接检查不纳入 |
+| [0002](./0002-local-precommit-as-verification-contract.md) | 本地 precommit 作为验证契约 | 已采纳 | 2026-07-23 | `precommit` = `format → check → test` 为验证契约，`check` 内含 rumdl，CI 仅跑 test 为已知缺口 |
+
 ## 风格
 
 采用 **Nygard 轻量风格**：每篇 ADR 含元数据（状态、日期）与三个段落——背景、决策、后果。模板见 `_template.md`。
