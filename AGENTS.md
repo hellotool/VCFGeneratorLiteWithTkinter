@@ -13,14 +13,16 @@
   - 测试工具：pytest
   - 格式化工具：Ruff
   - 代码检查：Ruff、Pyright
+- 文档质量：rumdl
 
 ## 设置命令
 
 - 安装依赖：`uv sync`
 - 运行测试：`uv run poe test`
-- 格式化代码：`uv run poe format`
-- 检查代码：`uv run poe check`
+- 格式化代码与文档：`uv run poe format`（代码 `ruff format` + 文档 `rumdl fmt .`）
+- 检查代码与文档：`uv run poe check`（`ruff check` + `pyright` + `rumdl check`，规则见根目录 `rumdl.toml`）
 - 修复代码：`uv run poe fix`
+- 本地校验：`uv run poe precommit`（`format` + `check` + `test`）
 
 通过 `uv run poe --help` 查看所有可用命令。
 
@@ -56,7 +58,12 @@ VCFGeneratorLiteWithTkinter/
 - 用户文档（`docs/`）**推荐**按 [Diátaxis](https://diataxis.fr/) 框架组织为四类：入门教程、操作指南、技术参考、原理解析。
 - 开发者文档（`docs/dev/`）**推荐**按开发生命周期组织：开始 → 开发 → 架构与设计 → 发布。
 
-## 代码编写
+## 准备工作
+
+- 涉及结构性或工具选型改动前，**必须**先阅读 `docs/dev/architecture/decisions/` 了解决策来由，避免重拾已淘汰方案。
+- 架构决策记录（ADR）采用 **Nygard 轻量风格**（规则与模板见 `docs/dev/architecture/decisions/index.md`）。若改动引入了新的带权衡的决策，或推翻了既有的已采纳 ADR，**必须**新增对应 ADR；变更既有决策时写新 ADR 将其标记为「已取代」，不改写旧文件。
+
+## 执行任务
 
 - **禁止**安装全局包等修改系统环境的操作。
 - 文件结尾**必须**以换行符结尾。
@@ -77,14 +84,11 @@ VCFGeneratorLiteWithTkinter/
   - 文档结尾：`[example-homepage]: https://example.com/`
   - 正文中引用：`[Example Homepage][example-homepage]`
 
-## 创建 Agent Skill
-
-- **必须**放在 `.agents/skills/` 目录下，**禁止**使用 `.trae/skills/` 目录。
-
-## 任务完成后
+## 完成任务
 
 - 无用户明确要求时，**请勿**将任何修改提交到版本控制。
-- 完成代码修改任务后，**必须**使用命令格式化与检查代码。
+- 改动（含文档）完成后，**必须**使用命令格式化与检查代码。
+- 改动（含文档）完成后，**必须**本地跑通 `uv run poe precommit` 才算改完。
 
 ## 更多信息
 

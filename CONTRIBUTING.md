@@ -72,7 +72,7 @@ Detailed guides for each task:
 #### Markdown Documents (`.md`)
 
 - No maximum line length restriction
-- Refer to `.markdownlint.json` for specific rules.
+- Refer to the root `rumdl.toml` for specific rules.
 - For all other cases, follow [Markdownlint][markdownlint-repository-github].
 
 For more details, refer to `.editorconfig`.

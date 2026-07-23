@@ -19,6 +19,7 @@
 - [表现层](./architecture/ui.md) — 窗口、布局、控件三层架构和主题系统
 - [界面设计](./design/ui.md) — DPI 单位、布局间距规范
 - [图标设计](./design/icon.md) — 图标文件路径和 ICO 规格
+- [架构决策记录](./architecture/decisions/index.md) — 工具选型与架构决策的来由及演进
 
 ## 发布
 

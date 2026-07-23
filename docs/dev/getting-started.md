@@ -16,6 +16,7 @@
 | 测试       | pytest                                     | 9.0.3+                          |
 | 代码质量   | Ruff（格式化 + 检查）、Pyright（类型检查） | Ruff 0.15.13+、Pyright 1.1.409+ |
 | 构建       | PyInstaller、InnoSetup、zipapp             | PyInstaller 6.20.0+             |
+| 文档质量   | rumdl（格式化 + 检查）                    | rumdl 0.2.40+                     |
 
 ## 项目结构
 

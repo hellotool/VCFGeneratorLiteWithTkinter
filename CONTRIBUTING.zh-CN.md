@@ -72,7 +72,7 @@
 #### Markdown 文档（`.md`）
 
 - 不限制单行最大长度。
-- 具体规则参考 `.markdownlint.json`。
+- 具体规则参考根目录 `rumdl.toml`。
 - 其他情况遵循 [Markdownlint][markdownlint-repository-github]。
 
 更多细节请参考 `.editorconfig`。

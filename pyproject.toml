@@ -15,10 +15,10 @@ console = ["colorlog>=6.9.0"]
 
 [dependency-groups]
 basic = ["poethepoet>=0.46.0"]
-lint = ["pyright>=1.1.409", "ruff>=0.15.13"]
+lint = ["pyright>=1.1.411", "ruff>=0.15.13"]
 test = ["pytest>=9.0.3"]
 build = ["packaging>=26.2", "pyinstaller>=6.20.0", "requests>=2.34.2"]
-docs = ["jinja2>=3.1.6"]
+docs = ["jinja2>=3.1.6", "rumdl>=0.2.40"]
 l10n = ["babel>=2.18.0"]
 dev = [
     "colorlog>=6.9.0",
@@ -52,18 +52,22 @@ help = "Run tests"
 cmd = "pytest"
 
 [tool.poe.tasks.format]
-help = "Format code"
-cmd = "ruff format"
+help = "Format code and docs"
+parallel = ["ruff format", "rumdl fmt"]
+default_item_type = "cmd"
 
 [tool.poe.tasks.check]
-help = "Check code"
-parallel = ["ruff check", "pyright"]
-ignore_fail = "return_non_zero"
+help = "Check code and docs"
+parallel = ["ruff check", "pyright", "rumdl check"]
 default_item_type = "cmd"
 
 [tool.poe.tasks.fix]
 help = "Fix code"
 cmd = "ruff check --fix"
+
+[tool.poe.tasks.precommit]
+help = "Run local checks"
+parallel = ["format", "check", "test"]
 
 [tool.poe.tasks.build-installer]
 help = "Build installer (*-setup.exe)"
@@ -157,8 +161,6 @@ source-exclude = ["*.pot", "*.po"]
 line-length = 120
 include = [
     "pyproject.toml",
-    # "*.md",
-    # "docs/**/*.md",
     "src/**/*.py",
     "tests/**/*.py",
     "scripts/**/*.py",
