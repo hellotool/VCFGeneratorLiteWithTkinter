@@ -61,15 +61,17 @@ VCFGeneratorLiteWithTkinter/
 ## 准备工作
 
 - 涉及结构性或工具选型改动前，**必须**先阅读 `docs/dev/architecture/decisions/` 了解决策来由，避免重拾已淘汰方案。
-- 架构决策记录（ADR）采用 **Nygard 轻量风格**（规则与模板见 `docs/dev/architecture/decisions/index.md`）。若改动引入了新的带权衡的决策，或推翻了既有的已采纳 ADR，**必须**新增对应 ADR；变更既有决策时写新 ADR 将其标记为「已取代」，不改写旧文件。新增或推翻 ADR 后，**必须**在 `docs/dev/architecture/decisions/index.md` 的「决策清单」中同步添加或更新一条记录（编号、标题、状态、日期、摘要）。
+- 若改动引入了新的带权衡的决策，或推翻了既有的已采纳 ADR，**必须**新增对应 ADR；变更既有决策时写新 ADR 将其标记为“已取代”，不改写旧文件。
+- 新增或推翻 ADR 后，**必须**在 `docs/dev/architecture/decisions/index.md` 的“决策清单”中同步添加或更新一条记录。
 
 ## 执行任务
 
 - **禁止**安装全局包等修改系统环境的操作。
 - 文件结尾**必须**以换行符结尾。
 - 文件**应该**使用 UTF-8 编码，但特殊情况（例如 PowerShell 脚本）除外。
+- 编写 UI 代码时，**必须**阅读相关设计与架构文档。
 
-### Python 代码风格
+### Python 代码规范
 
 - **必须**使用 Python 3.12 兼容的语法，**推荐**使用 Python 3.12 兼容的 API。
 - **应该**通过 Ruff 的全部约束规则。
@@ -78,7 +80,7 @@ VCFGeneratorLiteWithTkinter/
 - 文档字符串**必须**使用 reStructuredText 格式。
 - 可翻译字符串**必须**使用带上下文的 `pgettext`（或 `pgettext_menu_label` / `LazyPgettext`），**禁止**使用 `_` / `gettext` 等无上下文的调用。
 
-### Markdown 文档风格
+### Markdown 文档规范
 
 - 所有外部链接**必须**在文档末尾以参考链接的形式定义，格式为 `[标识]: URL`。示例：
   - 文档结尾：`[example-homepage]: https://example.com/`
@@ -87,9 +89,4 @@ VCFGeneratorLiteWithTkinter/
 ## 完成任务
 
 - 无用户明确要求时，**请勿**将任何修改提交到版本控制。
-- 改动（含文档）完成后，**必须**使用命令格式化与检查代码。
-- 改动（含文档）完成后，**必须**本地跑通 `uv run poe precommit` 才算改完。
-
-## 更多信息
-
-有关视觉设计、版本管理和构建指南的信息，请参阅 `docs/dev` 目录。如果涉及到这些内容，**必须**先阅读相关文档后再做决定。
+- **必须**本地跑通 `uv run poe precommit`。
