@@ -66,7 +66,7 @@ VCF 生成器 Lite 是一个简单高效的应用，可以将联系人列表转�
 
 | 平台    | 软件包类型      | 需要安装 | 文件                                                        | 指南                                                                |
 | ------- | --------------- | -------- | ----------------------------------------------------------- | ------------------------------------------------------------------- |
-| Windows | 安装程序        | 是       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**--*setup.exe*   | [Windows 安装程序](./docs/guides/installation/windows-installer.md) |
+| Windows | 安装程序        | 是       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**-*setup.exe*    | [Windows 安装程序](./docs/guides/installation/windows-installer.md) |
 | Windows | 便携包          | 否       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**-*portable.zip* | [Windows 便携包](./docs/guides/installation/windows-portable.md)    |
 | 跨平台  | Python Wheel    | 可选     | vcf_generator_lite-\<应用版本\>-**py3-none-any**.*whl*      | [Python Wheel](./docs/guides/installation/wheel.md)                 |
 | 跨平台  | Python ZIP 应用 | 否       | VCFGeneratorLite-v\<应用版本\>-**py3**.*pyzw*               | [Python ZIP 应用](./docs/guides/installation/zipapp.md)             |
