@@ -1,7 +1,7 @@
+import sys
 from typing import override
 
 from vcf_generator_lite.ui.themes.base import BaseThemePatcher
-from vcf_generator_lite.utils.environment import is_windows
 from vcf_generator_lite.utils.tkinter.style import lookup_font
 
 
@@ -31,7 +31,7 @@ class DefaultThemePatcher(BaseThemePatcher):
         self.app.option_add("*Menu.activeForeground", select_foreground, "startupFile")
         self.app.option_add("*Toplevel.background", background, "startupFile")
 
-        if is_windows:
+        if sys.platform == "win32":
             # Windows 7 中菜单默认不使用 TkMenuFont，因此需要手动设置字体。
             self.app.option_add("*Menu.font", "TkMenuFont", "startupFile")
 

@@ -67,9 +67,7 @@ def setup_logging(quiet: int, verbose: int):
 
 def fix_home_env():
     """Fix HOME environment variable on Windows if it's not set."""
-    from vcf_generator_lite.utils.environment import is_windows
-
-    if is_windows:
+    if sys.platform == "win32":
         with suppress(RuntimeError):
             os.environ["HOME"] = str(Path.home())
 
