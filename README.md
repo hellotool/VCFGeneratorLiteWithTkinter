@@ -32,23 +32,37 @@ Built with Python and Tkinter for a native desktop application.
 
 ## Features
 
-- **Flexible Parsing**: Recognizes the `Name Phone Note` format and merges delimiters automatically.
-- **Batch Export**: Exports all contacts to a single `.vcf` file.
-- **Phone Validation**: Skips invalid numbers and jumps to erroneous lines with one click.
-- **Editing Assistance**: Shows line numbers in the text box and removes quotes with one click.
-- **Localization**: Multilingual interface with phone-number recognition for China (including Hong Kong, Macao, and Taiwan).
-- **Lightweight**: Minimal dependencies and a small footprint.
-- **Multiple Distributions**: Windows installer and portable package, plus cross-platform Wheel and `.pyzw`.
-- **Efficient Generation**: Processes millions of contacts per run, limited only by available memory.
-- **Free and Open Source**: Licensed under Apache License 2.0, with no ads or fees.
+### Core Features
+
+- **Smart Parsing**: Auto-recognizes and parses `Name Phone Notes` format; multiple spaces merged automatically.
+- **Regional Support**: Covers phone number rules for Mainland China, Hong Kong, Macau, and Taiwan.
+- **Editing Aids**: Built-in line numbers; one-click removal of cell quotes.
+- **Number Validation**: Filters invalid numbers and jumps to the offending line for quick fixes.
+- **Batch Export**: Merges all contacts into a single `.vcf` file.
+- **Massive Scale**: Handles millions of contacts per run, limited only by available memory.
+
+### UI & Interaction
+
+- **Native Look**: Layout follows Windows 7 design guidelines, styled by the OS.
+- **UI Scaling**: Auto-adapts to high DPI and system scaling, crisp on high-res displays.
+- **Multi-Monitor Ready**: Child windows follow the parent and stay fully within the current display.
+- **Multilingual**: Built-in Chinese and English UI, switching automatically with system language.
+
+### Distribution, Licensing & Privacy
+
+- **Extremely Lightweight**: Minimal dependencies, the Python ZIP app is under 100KB, download and run.
+- **Completely Free**: All features free forever, no registration or payment.
+- **Clean and Distraction-Free**: No ads, no bundles, no promotions.
+- **No Disk Logs**: Logs go to stdout only, nothing is written to disk.
+- **Open Source**: Licensed under Apache License 2.0, free to modify, distribute, and use commercially.
 
 ## Use Cases
 
-- **Corporate Directory Distribution**: HR or admin staff batch import company contacts into employee phones.
-- **Event Networking**: Conference, training, or team-building organizers quickly distribute participant contact information.
-- **Client Resource Management**: Sales and customer service staff batch migrate client contacts when switching phones or devices.
+- **Corporate Directory Distribution**: HR or admin staff bulk-import the company directory into employees' phones.
+- **Event Participant Contacts**: Organizers of meetings, training, or team-building events quickly share attendee contacts.
+- **Client Data Migration**: Sales and support staff bulk-migrate client contacts when switching phones or devices.
 - **Data Migration**: Export contacts from Excel, legacy systems, or other formats to a new phone.
-- **Educational Institutions**: Teachers or administrators distribute class student and parent contact information.
+- **School-Home Contact Distribution**: Teachers or administrators share student and parent contacts for a class.
 
 ## Screenshots
 
