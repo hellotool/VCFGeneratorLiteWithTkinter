@@ -1,6 +1,8 @@
 import logging
 from ctypes import FormatError, get_last_error, windll
 
+__all__ = ["enable_dpi_aware"]
+
 _logger = logging.getLogger(__name__)
 
 # ProcessDpiAwareness

@@ -51,11 +51,14 @@ def main():
 
     # 因为要替换所有 gettext 方法，所以必须在导入主要内容（包括 argparse）之前执行。
     setup_l10n()
-    from vcf_generator_lite.ui.app_text import app_name
-    from vcf_generator_lite.utils.dpi_aware import enable_dpi_aware
-
-    enable_dpi_aware()
     setup_excepthook()
+
+    from vcf_generator_lite.ui.app_text import app_name
+
+    if sys.platform == "win32":
+        from vcf_generator_lite.utils.platform.windows.dpi_aware import enable_dpi_aware
+
+        enable_dpi_aware()
 
     with redirect_stdio_to_messagebox_if_needed(app_name=app_name()):
         args = get_args_parser().parse_args()
