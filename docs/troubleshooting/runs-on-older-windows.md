@@ -1,6 +1,6 @@
 # 在旧版 Windows 中运行
 
-VCF 生成器 Lite 支持的最低 Windows 版本为 Windows 8.1。如果您需要在 Windows 8 或更低版本中运行，可以尝试以下方案。
+VCF 生成器 轻量版 支持的最低 Windows 版本为 Windows 8.1。如果您需要在 Windows 8 或更低版本中运行，可以尝试以下方案。
 
 > [!CAUTION]
 >

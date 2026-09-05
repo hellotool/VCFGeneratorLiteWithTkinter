@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "VCF 生成器 Lite",
+      "name": "VCF 生成器 轻量版",
       "type": "debugpy",
       "request": "launch",
       "module": "vcf_generator_lite",

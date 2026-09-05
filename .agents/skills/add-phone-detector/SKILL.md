@@ -5,7 +5,7 @@ description: Adds new phone number detectors to the VCF Generator Lite applicati
 
 # 添加号码检测器
 
-为 VCF 生成器 Lite 应用添加新的号码检测器配置。
+为 VCF 生成器 轻量版 应用添加新的号码检测器配置。
 
 ## 前置要求
 

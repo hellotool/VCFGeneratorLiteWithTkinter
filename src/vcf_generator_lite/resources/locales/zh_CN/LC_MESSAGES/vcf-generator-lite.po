@@ -231,7 +231,7 @@ msgstr "链接：{url}"
 #: src/vcf_generator_lite/ui/app_text.py:7
 msgctxt "app.name"
 msgid "VCF Generator Lite"
-msgstr "VCF 生成器 Lite"
+msgstr "VCF 生成器 轻量版"
 
 #: src/vcf_generator_lite/ui/app_text.py:11
 msgctxt "app.description"

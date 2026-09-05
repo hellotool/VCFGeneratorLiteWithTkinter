@@ -4,7 +4,7 @@
 
 ```mermaid
 graph LR
-    A[Excel] --> D[VCF 生成器 Lite]
+    A[Excel] --> D[VCF 生成器 轻量版]
     B[微信/邮件] --> D
     C[网页/其他] --> D
 ```
@@ -12,7 +12,7 @@ graph LR
 ## 通用操作步骤
 
 1. 从任意来源复制联系人数据（<kbd>Ctrl</kbd>+<kbd>C</kbd>）。
-2. 打开 VCF 生成器 Lite。
+2. 打开 VCF 生成器 轻量版。
 3. 在文本框中粘贴（<kbd>Ctrl</kbd>+<kbd>V</kbd>）。
 
 数据格式为 `姓名 电话 备注`。详细规则请参阅 [输入格式规范](../reference/input-format.md)。
@@ -23,7 +23,7 @@ graph LR
 
 1. 调整 Excel 中的字段顺序，使其与 `姓名 电话 备注` 一致。
 2. 选中需要导入的联系人数据并复制（<kbd>Ctrl</kbd>+<kbd>C</kbd>）。
-3. 打开 VCF 生成器 Lite。
+3. 打开 VCF 生成器 轻量版。
 4. 在文本框中粘贴（<kbd>Ctrl</kbd>+<kbd>V</kbd>）。
 
 > [!IMPORTANT]

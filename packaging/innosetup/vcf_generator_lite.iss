@@ -50,7 +50,7 @@ en_us.MyAppUpdatesURL=https://github.com/hellotool/VCFGeneratorLiteWithTkinter/r
 en_us.OSNotSupportedMessage=The version of Windows you are currently using is too old, and this application cannot run on this system.%n%nWe provide compatibility solutions for older versions of Windows. Please refer to the following guide:%n%nhttps://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/blob/master/docs/troubleshooting/runs-on-older-windows.md
 en_us.UninstallFailed=Uninstall failed
 
-zh_cn.MyAppName=VCF 生成器 Lite
+zh_cn.MyAppName=VCF 生成器 轻量版
 zh_cn.MyAppPublisher=Jesse205
 zh_cn.MyAppPublisherURL=https://gitee.com/Jesse205
 zh_cn.MyAppReadmeFile=https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/blob/master/README.md

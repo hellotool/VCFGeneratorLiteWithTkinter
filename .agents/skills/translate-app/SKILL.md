@@ -5,7 +5,7 @@ description: Translates the VCF Generator Lite application interface to new lang
 
 # 翻译应用界面
 
-为 VCF 生成器 Lite 应用添加或更新界面翻译。
+为 VCF 生成器 轻量版 应用添加或更新界面翻译。
 
 ## 前置要求
 

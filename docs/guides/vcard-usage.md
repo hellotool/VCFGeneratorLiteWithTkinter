@@ -4,7 +4,7 @@
 
 ```mermaid
 graph LR
-    D[VCF 生成器 Lite] --> E[.vcf 文件]
+    D[VCF 生成器 轻量版] --> E[.vcf 文件]
     E --> F[手机通讯录]
     E --> G[QQ 邮箱/Outlook]
     E --> H[飞书/其他]
