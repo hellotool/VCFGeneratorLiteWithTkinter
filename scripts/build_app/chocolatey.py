@@ -7,8 +7,9 @@ from pathlib import Path
 from string import Template
 
 from scripts.app_metadata import app_metadata, app_version_variants
-from scripts.build_app.common import PATH_DIST, PATH_PACKAGING, require_external_tool
 from scripts.build_app.innosetup import PATH_DIST_INSTALLER, ensure_installer_dist
+from scripts.build_app.utils import PATH_DIST, PATH_PACKAGING
+from scripts.utils import require_external_tool
 
 PATH_PACKAGING_CHOCOLATEY = PATH_PACKAGING.joinpath("choco")
 
