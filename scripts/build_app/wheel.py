@@ -15,7 +15,7 @@ def build_wheel():
 
 def require_wheel_dist() -> Path:
     try:
-        return next(PATH_DIST.glob("*.whl"))
+        return next(PATH_DIST.glob(f"*-{app_version_variants.wheel}-*.whl"))
     except StopIteration:
         pass
     raise RuntimeError("Wheel build not found.")
@@ -23,7 +23,7 @@ def require_wheel_dist() -> Path:
 
 def ensure_wheel_dist() -> Path:
     try:
-        return next(PATH_DIST.glob("*.whl"))
+        return next(PATH_DIST.glob(f"*-{app_version_variants.wheel}-*.whl"))
     except StopIteration:
         build_wheel()
 
