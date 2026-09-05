@@ -1,0 +1,30 @@
+{
+  "$schema": "https://cdn.jsdelivr.net/gh/microsoft/pyright@main/packages/vscode-pyright/schemas/pyrightconfig.schema.json",
+  "strictListInference": true,
+  "strictDictionaryInference": true,
+  "strictSetInference": true,
+  "deprecateTypingAliases": true,
+  "typeCheckingMode": "strict",
+  "reportUnknownMemberType": "none",
+  "reportUnknownParameterType": "none",
+  "reportUnknownArgumentType": "none",
+  "reportIncompatibleVariableOverride": "none",
+  "reportMissingParameterType": "none",
+  "reportUnknownVariableType": "none",
+  "reportUnnecessaryIsInstance": "none",
+  "reportImplicitOverride": "error",
+  "include": [
+    "src/**/*.py",
+    "tests/**/*.py",
+    "scripts/**/*.py",
+    "packaging/**/*.py",
+    "packaging/pyinstaller/*.spec"
+  ],
+  "pythonVersion": "3.12",
+  "executionEnvironments": [
+    {
+      "root": "tests",
+      "reportPrivateUsage": "none"
+    }
+  ]
+}

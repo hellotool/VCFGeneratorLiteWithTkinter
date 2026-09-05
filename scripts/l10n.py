@@ -45,7 +45,7 @@ def extract():
                 babel_path,
                 "extract",
                 "--mapping-file",
-                Path("pyproject.toml"),
+                Path("babel.toml"),
                 "--output-file",
                 PATH_MSG_POT_RELATIVE,
                 "--no-wrap",

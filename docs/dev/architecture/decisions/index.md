@@ -8,6 +8,7 @@
 | --- | --- | --- | --- | --- |
 | [0001](./0001-markdown-lint-with-rumdl.md) | 使用 rumdl 做 Markdown 风格门禁 | 已采纳 | 2026-07-23 | 采用 rumdl，配置源 = 根目录 `rumdl.toml`，删除 `.markdownlint.yml`，链接检查不纳入 |
 | [0002](./0002-local-precommit-as-verification-contract.md) | 本地 precommit 作为验证契约 | 已采纳 | 2026-07-23 | `precommit` = `format → check → test` 为验证契约，`check` 内含 rumdl，CI 仅跑 test 为已知缺口 |
+| [0003](./0003-poe-tasks-in-dedicated-file.md) | Poe 任务定义置于独立文件 | 已采纳 | 2026-09-06 | 任务定义迁至根目录 `poe_tasks.toml`，`pyproject.toml` 仅留 `executor` + `include` 指针；弃用 packaged tasks |
 
 ## 风格
 

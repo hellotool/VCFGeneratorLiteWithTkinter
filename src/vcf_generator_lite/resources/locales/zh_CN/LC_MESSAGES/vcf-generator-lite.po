@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VCF Generator Lite 6.0.0\n"
 "Report-Msgid-Bugs-To: jesse205@qq.com\n"
-"POT-Creation-Date: 2026-07-20 01:27+0800\n"
+"POT-Creation-Date: 2026-09-06 05:33+0800\n"
 "PO-Revision-Date: 2026-06-15 08:15+0800\n"
 "Last-Translator: Jesse205 <jesse205@qq.com>\n"
 "Language: zh_Hans_CN\n"
@@ -186,7 +186,7 @@ msgctxt "startup.colorlog_not_available_warning"
 msgid "⚠️WARNING: Colorlog is not available, using plain text instead. Please install colorlog to enable colored logging."
 msgstr "⚠️警告：Colorlog 不可用，将使用纯文本替代。请安装 colorlog 以启用彩色日志记录。"
 
-#: src/vcf_generator_lite/bootstrap.py:117
+#: src/vcf_generator_lite/bootstrap.py:115
 #, python-brace-format
 msgctxt "startup.source_tip"
 msgid "💡Tip: Source code is hosted at {url}"
@@ -645,3 +645,4 @@ msgstr "发生意外错误，请向维护者报告此问题。"
 msgctxt "dialog_unexpected_error.detail"
 msgid "Error message: {error}"
 msgstr "错误信息：{error}"
+

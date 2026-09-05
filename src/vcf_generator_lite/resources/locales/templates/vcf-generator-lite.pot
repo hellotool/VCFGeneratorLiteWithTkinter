@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VCF Generator Lite 6.0.1\n"
 "Report-Msgid-Bugs-To: Jesse205 <jesse205@qq.com>\n"
-"POT-Creation-Date: 2026-07-20 01:27+0800\n"
+"POT-Creation-Date: 2026-09-06 05:33+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -187,7 +187,7 @@ msgctxt "startup.colorlog_not_available_warning"
 msgid "⚠️WARNING: Colorlog is not available, using plain text instead. Please install colorlog to enable colored logging."
 msgstr ""
 
-#: src/vcf_generator_lite/bootstrap.py:117
+#: src/vcf_generator_lite/bootstrap.py:115
 #, python-brace-format
 msgctxt "startup.source_tip"
 msgid "💡Tip: Source code is hosted at {url}"

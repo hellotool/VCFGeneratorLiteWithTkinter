@@ -1,0 +1,13 @@
+# $schema: https://json.schemastore.org/pytest.json
+
+[pytest]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+strict_config = true
+strict_markers = true
+strict_xfail = true
+filterwarnings = ["error", "ignore::DeprecationWarning"]
+log_cli = true
+log_cli_level = "INFO"

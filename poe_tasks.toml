@@ -1,0 +1,100 @@
+[tasks.test]
+help = "Run tests"
+cmd = "pytest"
+
+[tasks.format]
+help = "Format code and docs"
+parallel = ["ruff format", "rumdl fmt"]
+default_item_type = "cmd"
+
+[tasks.check]
+help = "Check code and docs"
+parallel = ["ruff check", "pyright", "rumdl check"]
+default_item_type = "cmd"
+
+[tasks.fix]
+help = "Fix code"
+cmd = "ruff check --fix"
+
+[tasks.precommit]
+help = "Run local checks"
+parallel = ["format", "check", "test"]
+
+[tasks.build-installer]
+help = "Build installer (*-setup.exe)"
+script = "scripts.build_app:build_installer"
+
+[[tasks.build-installer.args]]
+help = "Don't verify SSL"
+name = "no_verify_ssl"
+options = ["--no-verify-ssl"]
+type = "boolean"
+
+[[tasks.build-installer.args]]
+help = "Force rebuild upstream outputs (PyInstaller dist)"
+name = "force"
+options = ["--force"]
+type = "boolean"
+
+[[tasks.build-installer.args]]
+help = "Force online download InnoSetup extensions"
+name = "force_download"
+options = ["--force-download"]
+type = "boolean"
+
+[tasks.build-portable]
+help = "Build portable package (*-portable.zip)"
+script = "scripts.build_app:build_portable"
+
+[[tasks.build-portable.args]]
+help = "Force rebuild upstream outputs (PyInstaller dist)"
+name = "force"
+options = ["--force"]
+type = "boolean"
+
+[tasks.build-zipapp]
+help = "Build zipapp (*.pyzw)"
+script = "scripts.build_app:build_zipapp"
+
+[[tasks.build-zipapp.args]]
+help = "Force rebuild upstream outputs (wheel)"
+name = "force"
+options = ["--force"]
+type = "boolean"
+
+[tasks.build-wheel]
+help = "Build wheel (*.whl)"
+cmd = "uv build --wheel"
+
+[tasks.l10n-extract]
+help = "Extract localization files"
+script = "scripts.l10n:extract"
+
+[tasks.l10n-init]
+help = "Initialize localization files"
+script = "scripts.l10n:initialize"
+
+[[tasks.l10n-init.args]]
+help = "Locale"
+name = "locale"
+options = ["-l", "--locale"]
+type = "string"
+required = true
+
+[tasks.l10n-update]
+help = "Update localization files"
+script = "scripts.l10n:update"
+
+[tasks.l10n-compile]
+help = "Compile localization files"
+script = "scripts.l10n:compile_"
+
+[[tasks.l10n-compile.args]]
+help = "Locale"
+name = "locale"
+options = ["-l", "--locale"]
+type = "string"
+
+[tasks.gen-notices]
+help = "Generate NOTICES files"
+script = "scripts.gen_notices:render"
