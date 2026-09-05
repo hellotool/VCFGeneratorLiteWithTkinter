@@ -1,0 +1,12 @@
+# Created using wingetcreate 1.12.13.0
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.installer.1.12.0.schema.json
+
+PackageIdentifier: Jesse205.VCFGeneratorLite
+PackageVersion: 6.0.1.40000
+InstallerType: inno
+Installers:
+- Architecture: x64
+  InstallerUrl: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/download/v6.0.1/VCFGeneratorLite-v6.0.1-win-amd64-setup.exe
+  InstallerSha256: 3D873613D828E4847451629E69E20AF1375A9DDD7249A39DEECCA704163862EE
+ManifestType: installer
+ManifestVersion: 1.12.0

@@ -1,0 +1,33 @@
+# Created using wingetcreate 1.12.13.0
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.12.0.schema.json
+
+PackageIdentifier: Jesse205.VCFGeneratorLite
+PackageVersion: 6.0.1.40000
+PackageLocale: en-US
+Publisher: Jesse205
+PublisherUrl: https://github.com/Jesse205
+Author: Jesse205
+PackageName: VCF Generator Lite
+PackageUrl: https://github.com/hellotool/VCFGeneratorLiteWithTkinter
+License: Apache 2.0 License
+LicenseUrl: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/blob/master/LICENSE
+Copyright: Copyright © 2023-2026 Jesse205
+ShortDescription: Merge contacts into a vCard file
+Description: VCF 生成器 轻量版 是一个简单高效的应用，可以将联系人列表转换为单个 vCard (.vcf) 文件。生成的文件可以批量导入到手机通讯录或用于其他各种用途。
+Moniker: vCard
+Tags:
+- vCard
+- VCF
+- sheet to vcf
+- excel to vcf
+- contacts
+ReleaseNotes: n
+ReleaseNotesUrl: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.1
+Documentations:
+- DocumentUrl: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/blob/master/docs/index.md
+Icons:
+- IconUrl: https://cdn.jsdelivr.net/gh/hellotool/VCFGeneratorLiteWithTkinter@master/assets/images/icon.ico
+  IconFileType: ico
+  IconTheme: default
+ManifestType: defaultLocale
+ManifestVersion: 1.12.0
