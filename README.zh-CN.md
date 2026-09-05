@@ -1,7 +1,7 @@
 <div align="center">
-<img src="./assets/images/icon.svg" width="192" height="192" alt="App icon" />
+<img src="./assets/images/icon.svg" width="192" height="192" alt="应用图标" />
 
-# VCF 生成器 Lite ![使用 Tkinter](https://img.shields.io/badge/使用-Tkinter-00319C)
+# VCF 生成器 轻量版 ![使用 Tkinter](https://img.shields.io/badge/使用-Tkinter-00319C)
 
 **仓库**：
 [![Gitee 主仓库](https://img.shields.io/badge/Gitee-主仓库-C71D23?logo=gitee)][repository-gitee]
@@ -18,211 +18,126 @@
 
 </div>
 
-VCF 生成器 Lite 可以将联系人列表转换为单个 vCard 文件，可批量导入到手机通讯录，或者用作其它用途。
+VCF 生成器 轻量版 是一个简单高效的应用，可以将联系人列表转换为单个 vCard (`.vcf`) 文件。生成的文件可以批量导入到手机通讯录或用于其他各种用途。
+
+基于 Python 与 Tkinter 构建，提供原生桌面应用体验。
 
 [![许可证](https://img.shields.io/github/license/hellotool/VCFGeneratorLiteWithTkinter?label=许可证)](./LICENSE)
 [![贡献者公约](https://img.shields.io/badge/贡献者公约-2.1-4baaaa.svg)](./CODE_OF_CONDUCT.zh-CN.md)
 
-[![GitHub - 测试](https://github.com/hellotool/VCFGeneratorLiteWithTkinter/actions/workflows/test.yml/badge.svg)](https://github.com/hellotool/VCFGeneratorLiteWithTkinter/actions/workflows/test.yml)
-![GitHub - Release](https://img.shields.io/github/v/release/hellotool/VCFGeneratorLiteWithTkinter?logo=github)
+[![GitHub - 测试](https://github.com/hellotool/VCFGeneratorLiteWithTkinter/actions/workflows/test.yml/badge.svg)][workflow-test]
+[![GitHub - Release](https://img.shields.io/github/v/release/hellotool/VCFGeneratorLiteWithTkinter?logo=github)][release-github]
 ![GitHub - Stars](https://img.shields.io/github/stars/hellotool/VCFGeneratorLiteWithTkinter?style=flat&logo=github)
-[![Gitee - Stars](https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/badge/star.svg?theme=dark)](https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/stargazers)
+[![Gitee - Stars](https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/badge/star.svg?theme=dark)][stargazers-gitee]
 
-## 功能
+## 特性
 
-- **智能解析**：按 `姓名 电话 备注` 格式批量识别联系人（备注可选），自动处理制表符和空格。
-- **批量生成**：将所有联系人合并生成单个 `.vcf` 文件。
-- **号码校验**：自动跳过无效号码，并快速定位错误行。
-- **辅助编辑**：文本区显示行号，支持一键删除引号。
+### 核心功能
+
+- **智能解析**：自动识别并以 `姓名 电话 备注` 格式解析，多空格自动合并。
+- **区域号码支持**：覆盖中国大陆及港澳台地区的电话号码规则。
+- **辅助编辑**：文本框内置行号，支持一键去除单元格引号。
+- **号码校验**：自动过滤无效号码，并定位到出错行，便于快速修正。
+- **批量导出**：将所有联系人合并导出为单个 `.vcf` 文件。
+- **海量处理**：单次可处理百万级联系人，上限仅取决于可用内存。
+
+### 界面与交互
+
+- **原生界面风格**：布局遵循 Windows 7 设计规范，样式跟随操作系统。
+- **界面缩放**：自动适配高 DPI 与系统缩放设置，在高分屏上清晰不模糊。
+- **多屏优化**：子窗口自动跟随父窗口位置，并确保在当前显示屏内完整显示。
+- **多语言**：内置中英双语界面，跟随系统语言自动切换。
+
+### 分发、授权与隐私
+
+- **极致轻量**：依赖极少，Python ZIP 应用体积不足 100KB，下载即用。
+- **完全免费**：所有功能永久免费，无需注册或付费。
+- **纯净无扰**：无广告、无捆绑、无推广。
+- **无磁盘日志**：日志仅输出至标准输出，不写入磁盘。
+- **开源授权**：基于 Apache License 2.0 开源协议，允许自由修改、分发及商用。
+
+## 使用场景
+
+- **企业通讯录分发**：HR 或行政人员将公司通讯录批量导入员工手机。
+- **活动参与者联络**：会议、培训、团建等活动组织者快速分发参与者联系方式。
+- **客户资料迁移**：销售、客服人员在换手机或设备时批量迁移客户联系方式。
+- **数据迁移**：从 Excel、旧系统或其他格式导出联系人到新手机。
+- **家校联系分发**：教师或管理员分发班级学生及家长联系方式。
 
 ## 软件截图
 
 <img src="./assets/images/screenshots/main_window.zh-CN.webp" width="451" alt="主窗口" />
-<img src="./assets/images/screenshots/invalid_lines_window.zh-CN.webp" width="376" alt="错误行展示窗口" />
+<img src="./assets/images/screenshots/invalid_lines_window.zh-CN.webp" width="362" alt="错误行展示窗口" />
 
-## 获取应用
+## 下载与安装
 
-### 下载软件包
+通过以下渠道下载软件包：
 
-您可以通过以下渠道下载软件包：
-
-- [Gitee 发行版][release-gitee]
+- [Gitee 发行版][release-gitee]（推荐中国大陆地区用户使用）
 - [GitHub Releases][release-github]
 
-请根据您的使用平台选择相应的软件包：
+根据您的平台选择软件包，点击指南查看详细的安装和启动方法：
 
-| 平台    | 软件包类型      | 需要安装 | 文件                                                       |
-| ------- | --------------- | -------- | ---------------------------------------------------------- |
-| Windows | 安装程序        | 是       | VCFGeneratorLite-\<应用版本\>-**win-amd64**-*setup.exe*    |
-| Windows | 便携包          | 否       | VCFGeneratorLite-\<应用版本\>-**win-amd64**-*portable.zip* |
-| 跨平台  | Python Wheel    | 可选     | vcf_generator_lite-\<应用版本\>-**py3-none-any**.*whl*     |
-| 跨平台  | Python ZIP 应用 | 否       | VCFGeneratorLite-\<应用版本\>-**py3**.*pyzw*               |
-
-### 使用 Python Wheel
-
-Python Wheel (`.whl`) 文件适合熟悉命令行的用户。推荐使用隔离环境运行，避免依赖冲突。
-
-#### 方式一：临时运行（最简单，无需安装）
-
-使用 `uvx`，命令执行后会自动创建临时环境并运行程序。
-
-```bash
-uvx <whl文件路径>
-```
-
-> [!NOTE]
->
-> `uvx` 是 `uv tool run` 的简写形式，由 [uv][uv-homepage] 工具提供。
-
-#### 方式二：安装后使用（适合长期使用）
-
-使用以下工具之一安装，会自动创建独立虚拟环境，不影响系统 Python。
-
-```bash
-# 使用 pipx
-pipx install <whl文件路径>
-
-# 或使用 uv
-uv tool install <whl文件路径>
-```
-
-安装完成后，以后只需在终端中输入以下命令即可运行：
-
-```bash
-vcf-generator-lite
-```
-
-> [!TIP]
->
-> 如果尚未安装 `uv` / `pipx`，请先运行 `pip install uv` 或 `pip install pipx`。
+| 平台    | 软件包类型      | 需要安装 | 文件                                                        | 指南                                                                |
+| ------- | --------------- | -------- | ----------------------------------------------------------- | ------------------------------------------------------------------- |
+| Windows | 安装程序        | 是       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**-*setup.exe*    | [Windows 安装程序](./docs/guides/installation/windows-installer.md) |
+| Windows | 便携包          | 否       | VCFGeneratorLite-v\<应用版本\>-**win-amd64**-*portable.zip* | [Windows 便携包](./docs/guides/installation/windows-portable.md)    |
+| 跨平台  | Python Wheel    | 可选     | vcf_generator_lite-\<应用版本\>-**py3-none-any**.*whl*      | [Python Wheel](./docs/guides/installation/wheel.md)                 |
+| 跨平台  | Python ZIP 应用 | 否       | VCFGeneratorLite-v\<应用版本\>-**py3**.*pyzw*               | [Python ZIP 应用](./docs/guides/installation/zipapp.md)             |
 
 ## 使用方法
 
 1. 把名字和电话以每行 `姓名 电话 备注` 的格式复制到主界面的文本框中，其中备注可忽略。例如：
    ```text
-   张三	13345367789	网络名人
-   李四	13445467890
-   王五	13554678907
-   赵六	13645436748
+   屈原	13333333333	战国时期诗人
+   曹操	13444444444
+   陶渊明	13555555555
+   谢灵运	13666666666
    ```
 2. 点击 **开始生成**，选择一个路径保存文件。
-3. 您可以将生成后的 vCard 文件用在您需要的地方，详情请参阅下文 [使用 vCard 文件](#使用-vcard-文件)。
+3. 然后就可以在需要的地方使用生成的 vCard 文件。详情请参考 [使用 vCard 文件](./docs/guides/vcard-usage.md)。
 
-> [!NOTE]
->
-> - 您可以同时使用制表符和空格分割姓名与电话号码。
-> - 程序会自动去除文本框内多余的空格。
->
-> 例如 `东坡居士 苏轼   13333333333  眉州眉山人` 将会被识别为
->
-> > - 姓名：东坡居士 苏轼
-> > - 电话：13333333333
-> > - 备注：眉州眉山人
->
+有关更多内容请参考 [用户文档](./docs/index.md)。
 
-### 使用 vCard 文件
-
-<details>
-<summary>导入到手机通讯录</summary>
-
-1. 传输 vCard 文件到手机内。
-2. 打开 vCard 文件，选择 **通讯录**，然后根据提示操作。
-3. 等待导入完成。
-
-</details>
-
-<details>
-<summary>导入到 QQ 邮箱</summary>
-
-1. 打开新版 QQ 邮箱网站。
-2. 在侧边栏中选择 **应用 > 联系人**，然后选择 **管理 > 导入联系人**。
-3. 在弹出的对话框中，点击 **选择文件** 选择框，选择您的 vCard 文件。
-4. 点击 **开始导入**。
-
-</details>
-
-<details>
-<summary>导入到飞书</summary>
-
-1. 打开飞书客户端。
-2. 在侧边栏中选择 **通讯录 > 邮箱通讯录**，然后选择 **添加 > 导入联系人** 按钮。
-3. 在弹出的对话框中，选择或拖入您的 vCard 文件。
-4. 点击 **导入**。
-
-</details>
-
-## 兼容性
-
-### 系统要求
-
-| 软件包类型               | 系统环境                        |
-| ------------------------ | ------------------------------- |
-| Windows 安装程序、便携包 | Windows 8.1 或更高版本          |
-| Python ZIP 应用          | Python 3.12 或更高版本、Tkinter |
-
-如果您需要在 Windows 8 及以下版本中使用本应用，请参阅 [在旧版本 Windows 中运行](./docs/compatibility/runs-on-older-windows.md)。
-
-如果您需要在 Windows 中直接双击启动 Python ZIP 应用，请安装 [Python 安装管理器][pymanager]（推荐）或者 [Python 启动器][pylauncher]。
-
-### vCard 兼容性
-
-- **支持 vCard 版本**：2.1
-- **支持字段**：姓名、电话号码、备注
-- **已知问题**：
-  - **Windows 联系人**：在非 UTF-8 环境下可能出现乱码。
-
-### 其他兼容性
-
-| 系统环境                          | 问题                       | 说明                                                                                            | 规避方法                                                                                                         |
-| --------------------------------- | -------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Windows 10 或更高版本             | 不支持深色模式             | Tkinter 没有内置深色主题。                                                                      | 使用[高对比度主题][windows-high-contrast-support]，或者使用第三方工具（如 [Rectify11][rectify11]）修改系统主题。 |
-| Windows 10 或更高版本             | DPI 变化时界面变模糊       | 应用不支持启动后调节 DPI。                                                                      | 请尽量保持 DPI 相同以避免模糊。                                                                                  |
-| Python 安装管理器 26.0 或更低版本 | 双击启动后会显示命令行窗口 | Python 安装管理器 26.0 或更低版本不支持自动升级为窗口化的 Python 解释器。([python/cpython#261]) | 将 Python 安装管理器 升级到 26.1 或更高版本，或使用 [Python 启动器][pylauncher]。                                |
+有关系统要求、vCard 兼容性、已知问题等请参考 [兼容性说明](./docs/reference/compatibility.md)。
 
 ## 致谢
 
-- **AI**：本项目部分内容由 AI 生成。
-  - **DeepSeek**：指导编码、生成代码。
-  - **元宝**：指导编码、生成代码。
-  - **通义灵码**：补全代码、指导编码。
-  - **WorkBuddy**：审查代码。
-  - **Trae**：生成代码。
-- **开源代码**：本项目使用了一些开源代码，详情请见 [开源声明](./docs/legal/os-notices.md)。
+### AI 辅助
+
+本项目的部分内容通过 AI 辅助生成：
+
+- **Trae**：生成代码、文档优化、代码优化、语言翻译
+- **Qoder**：补全代码、文档优化、指导编码
+- **DeepSeek**：指导编码、生成代码、文档优化、语言翻译
+- **元宝**：指导编码、生成代码、语言翻译
+- **WorkBuddy**：审查代码、文档优化
+- **OpenCode**：文档优化
 
 ## 许可证
 
-本项目以 Apache 2.0 许可证授权，详情请参阅 [LICENSE 文件](./LICENSE)。
+本项目以 Apache 2.0 许可证授权，详情请参阅 [许可证文件](./LICENSE)。
 
-```txt
-Copyright 2023-2026 Jesse205
+## 第三方声明
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
+本项目使用了第三方开源代码，您可以在 [声明文件](./NOTICES.zh-CN.md) 中查看详细信息。
 
 ## 更多文档
 
-- [开发指南](./docs/dev/index.md)
-- [贡献指南](./CONTRIBUTING.md)
-- [常见问题](./docs/faq.md)
+- [贡献指南](./CONTRIBUTING.zh-CN.md)
+- [开发文档](./docs/dev/index.md)
+- [用户文档](./docs/index.md)
+
+---
+
+<div align="center">
+版权所有 © 2023-2026 杰西 205
+</div>
 
 [repository-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/
 [repository-github]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/
 [release-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/latest
 [release-github]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/latest
-[pylauncher]: https://docs.python.org/zh-cn/3.15/using/windows.html#python-launcher-for-windows-deprecated
-[pymanager]: https://docs.python.org/zh-cn/3.15/using/windows.html#python-install-manager
-[windows-high-contrast-support]: https://support.microsoft.com/zh-cn/windows/%E5%9C%A8-windows-%E4%B8%AD%E6%9B%B4%E6%94%B9%E9%A2%9C%E8%89%B2%E5%AF%B9%E6%AF%94%E5%BA%A6-fedc744c-90ac-69df-aed5-c8a90125e696
-[rectify11]: https://www.rectify11.com/
-[uv-homepage]: https://docs.astral.sh/uv/
+[stargazers-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/stargazers
 
-[python/cpython#261]: https://github.com/python/pymanager/issues/216
+[workflow-test]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/actions/workflows/test.yml

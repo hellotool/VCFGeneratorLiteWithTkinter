@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
 from pathlib import Path, PurePath
 
 from PyInstaller.building.api import COLLECT, EXE, PYZ
@@ -13,7 +14,6 @@ from PyInstaller.utils.win32.versioninfo import (
 )
 
 from scripts.app_metadata import app_metadata, app_version_variants
-from vcf_generator_lite.constants import APP_COPYRIGHT
 
 PATH_PROJECT = Path.cwd()
 PATH_SOURCE_MODULE = PATH_PROJECT / "src" / "vcf_generator_lite"
@@ -87,7 +87,7 @@ exe = EXE(
                             StringStruct("CompanyName", app_metadata.author),
                             StringStruct("FileVersion", app_version_variants.wheel),
                             StringStruct("InternalName", app_metadata.display_name),
-                            StringStruct("LegalCopyright", APP_COPYRIGHT),
+                            StringStruct("LegalCopyright", app_metadata.copyright),
                             StringStruct("OriginalFilename", "vcf-generator-lite.exe"),
                             StringStruct("ProductName", app_metadata.display_name),
                             StringStruct("ProductVersion", app_version_variants.wheel),

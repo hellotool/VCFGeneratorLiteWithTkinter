@@ -1,0 +1,71 @@
+name: "Add Phone Detector"
+description: Submit a request to add a new country/region phone number detector.
+title: "[Add Phone Detector]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve phone detector coverage! Please provide the following information about the country/region.
+  - type: input
+    id: country-name
+    attributes:
+      label: Country/Region Name
+      description: The official name of the country or region (e.g., "China", "United States")
+      placeholder: "e.g., China"
+    validations:
+      required: true
+  - type: input
+    id: iso-code
+    attributes:
+      label: ISO 3166-1 Alpha-2 Code
+      description: Two-letter country code defined in ISO 3166-1
+      placeholder: "e.g., CN"
+    validations:
+      required: true
+  - type: input
+    id: calling-code
+    attributes:
+      label: Country Calling Code
+      description: The international dialing code (e.g., "+86" for China)
+      placeholder: "e.g., +86"
+    validations:
+      required: true
+  - type: textarea
+    id: mobile-rules
+    attributes:
+      label: Mobile Number Rules
+      description: |
+        Describe the rules for mobile phone numbers, including:
+        - Number length (total digits)
+        - Common prefixes
+        - Typical formats (with separators)
+    validations:
+      required: false
+  - type: textarea
+    id: landline-rules
+    attributes:
+      label: Landline Number Rules
+      description: |
+        Describe the rules for landline phone numbers, including:
+        - Number length (total digits)
+        - Area codes
+        - Typical formats
+    validations:
+      required: false
+  - type: textarea
+    id: other-rules
+    attributes:
+      label: Other Rules
+      description: Any additional phone number rules (e.g., emergency numbers, special services)
+    validations:
+      required: false
+  - type: input
+    id: reference-links
+    attributes:
+      label: Reference Links
+      description: Links to official documentation or reliable sources for phone number rules
+      placeholder: "e.g., https://nac.miit.gov.cn/"
+    validations:
+      required: false

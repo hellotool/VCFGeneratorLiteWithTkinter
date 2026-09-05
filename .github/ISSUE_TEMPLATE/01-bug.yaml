@@ -1,0 +1,79 @@
+name: "Bug Report"
+description: When you find a bug in the code that causes the application to crash or throw an exception, or when a component has an issue, or something doesn't look right.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for your support and interest in the project.
+  - type: checkboxes
+    attributes:
+      label: Does this issue already exist?
+      options:
+        - label: I have searched the existing issues
+          required: true
+  - type: textarea
+    attributes:
+      label: Reproduction Steps
+      description: Please provide detailed steps to reproduce the issue. If code is involved, provide a minimal code example enclosed in triple backticks ```.
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected Result
+      description: Please tell us what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Actual Result
+      description: Please tell us what actually happened.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Screenshots or Videos
+      description: If possible, upload any screenshots related to the bug.
+      placeholder: "[Upload images here]"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: |
+        If you can obtain logs, please post them here (run with `-vv` for more detailed logs).
+        Must be enclosed in triple backticks ```txt ```. Please remember to sanitize sensitive information.
+      placeholder: |
+        ```txt
+        [Paste logs here]
+        ```
+    validations:
+      required: false
+  - type: textarea
+    id: environments
+    attributes:
+      label: Environment
+      description: What is the runtime environment of the application?
+      placeholder: |
+        Example:
+        - Operating System: Windows 11 Pro 24H2 26100.6725
+        - Python: CPython 3.13.0 (Python ZIP App only)
+    validations:
+      required: false
+  - type: dropdown
+    id: package-types
+    attributes:
+      label: Package Type
+      description: Which package type are you using?
+      multiple: true
+      options:
+        - Windows Installer (*_win-amd64_setup.exe)
+        - Windows Portable (*_win-amd64_portable.zip)
+        - Python ZIP App (*_zipapp.pyzw)
+        - I don't know
+    validations:
+      required: true

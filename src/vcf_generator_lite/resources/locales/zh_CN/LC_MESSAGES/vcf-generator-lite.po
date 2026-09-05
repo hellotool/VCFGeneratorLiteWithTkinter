@@ -1,0 +1,647 @@
+# Chinese (Simplified, China) translations for VCF Generator Lite.
+# Copyright (C) 2026 Jesse205
+# This file is distributed under the same license as the VCF Generator Lite project.
+# Jesse205 <jesse205@qq.com>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: VCF Generator Lite 6.0.0\n"
+"Report-Msgid-Bugs-To: jesse205@qq.com\n"
+"POT-Creation-Date: 2026-07-20 01:27+0800\n"
+"PO-Revision-Date: 2026-06-15 08:15+0800\n"
+"Last-Translator: Jesse205 <jesse205@qq.com>\n"
+"Language: zh_Hans_CN\n"
+"Language-Team: zh_Hans_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: .stdlib_symbol/argparse.py:246
+#, python-format
+msgid "%(heading)s:"
+msgstr "%(heading)s："
+
+#: .stdlib_symbol/argparse.py:325
+msgid "usage: "
+msgstr "用法："
+
+#: .stdlib_symbol/argparse.py:753
+#, python-format
+msgid " (default: %(default)s)"
+msgstr "（默认：%(default)s）"
+
+#: .stdlib_symbol/argparse.py:815
+#, python-format
+msgid "argument %(argument_name)s: %(message)s"
+msgstr "参数 %(argument_name)s：%(message)s"
+
+#: .stdlib_symbol/argparse.py:1190
+msgid "show program's version number and exit"
+msgstr "显示程序版本号并退出"
+
+#: .stdlib_symbol/argparse.py:1304
+#, python-format
+msgid "unknown parser %(parser_name)r (choices: %(choices)s)"
+msgstr "未知解析器 %(parser_name)r (可选值: %(choices)s)"
+
+#: .stdlib_symbol/argparse.py:1308
+#, python-format
+msgid "command '%(parser_name)s' is deprecated"
+msgstr "命令 '%(parser_name)s' 已弃用"
+
+#: .stdlib_symbol/argparse.py:1375
+#, python-format
+msgid "argument \"-\" with mode %r"
+msgstr "参数 \"-\" 的模式为 %r"
+
+#: .stdlib_symbol/argparse.py:1384
+#, python-format
+msgid "can't open '%(filename)s': %(error)s"
+msgstr "无法打开文件 '%(filename)s': %(error)s"
+
+#: .stdlib_symbol/argparse.py:1722
+#, python-format
+msgid "conflicting option string: %s"
+msgid_plural "conflicting option strings: %s"
+msgstr[0] "冲突的选项字符串: %s"
+
+#: .stdlib_symbol/argparse.py:1905
+msgid "positional arguments"
+msgstr "位置参数"
+
+#: .stdlib_symbol/argparse.py:1906
+msgid "options"
+msgstr "选项"
+
+#: .stdlib_symbol/argparse.py:1919
+msgid "show this help message and exit"
+msgstr "显示此帮助信息并退出"
+
+#: .stdlib_symbol/argparse.py:1956
+msgid "subcommands"
+msgstr "子命令"
+
+#: .stdlib_symbol/argparse.py:2007 .stdlib_symbol/argparse.py:2570
+#, python-format
+msgid "unrecognized arguments: %s"
+msgstr "无法识别的参数：%s"
+
+#: .stdlib_symbol/argparse.py:2113
+#, python-format
+msgid "not allowed with argument %s"
+msgstr "不允许与参数 %s 共用"
+
+#: .stdlib_symbol/argparse.py:2132
+#, python-format
+msgid "ambiguous option: %(option)s could match %(matches)s"
+msgstr "模糊选项：%(option)s 可能匹配 %(matches)s"
+
+#: .stdlib_symbol/argparse.py:2164 .stdlib_symbol/argparse.py:2196
+#, python-format
+msgid "ignored explicit argument %r"
+msgstr "忽略了显式参数 %r"
+
+#: .stdlib_symbol/argparse.py:2216
+#, python-format
+msgid "option '%(option)s' is deprecated"
+msgstr "选项“%(option)s”已弃用"
+
+#: .stdlib_symbol/argparse.py:2248
+#, python-format
+msgid "argument '%(argument_name)s' is deprecated"
+msgstr "参数“%(argument_name)s”已弃用"
+
+#: .stdlib_symbol/argparse.py:2341
+#, python-format
+msgid "the following arguments are required: %s"
+msgstr "以下参数是必需的：%s"
+
+#: .stdlib_symbol/argparse.py:2356
+#, python-format
+msgid "one of the arguments %s is required"
+msgstr "参数 %s 是必需的"
+
+#: .stdlib_symbol/argparse.py:2400
+msgid "expected one argument"
+msgstr "需要一个参数"
+
+#: .stdlib_symbol/argparse.py:2401
+msgid "expected at most one argument"
+msgstr "最多只能有一个参数"
+
+#: .stdlib_symbol/argparse.py:2402
+msgid "expected at least one argument"
+msgstr "至少需要一个参数"
+
+#: .stdlib_symbol/argparse.py:2406
+#, python-format
+msgid "expected %s argument"
+msgid_plural "expected %s arguments"
+msgstr[0] "预期参数 %s"
+
+#: .stdlib_symbol/argparse.py:2516
+#, python-format
+msgid "unexpected option string: %s"
+msgstr "意外的选项字符串：%s"
+
+#: .stdlib_symbol/argparse.py:2664
+#, python-format
+msgid "invalid %(type)s value: %(value)r"
+msgstr "无效的 %(type)s 值：%(value)r"
+
+#: .stdlib_symbol/argparse.py:2682
+#, python-format
+msgid "invalid choice: %(value)r (choose from %(choices)s)"
+msgstr "无效选择：%(value)r（请从 %(choices)s 中选择）"
+
+#: .stdlib_symbol/argparse.py:2690
+#, python-format
+msgid "invalid choice: %(value)r, maybe you meant %(closest)r? (choose from %(choices)s)"
+msgstr "无效选择：%(value)r，您的意思可能是%(closest)r？（可选范围：%(choices)s）"
+
+#: .stdlib_symbol/argparse.py:2782
+#, python-format
+msgid "%(prog)s: error: %(message)s\n"
+msgstr "%(prog)s：错误：%(message)s\n"
+
+#: .stdlib_symbol/argparse.py:2786
+#, python-format
+msgid "%(prog)s: warning: %(message)s\n"
+msgstr "%(prog)s：警告：%(message)s\n"
+
+#: src/vcf_generator_lite/__main__.py:26
+msgctxt "cli.help_option_verbose"
+msgid "increase output (use -vv for debug level)"
+msgstr "增加输出（使用 -vv 显示调试信息）"
+
+#: src/vcf_generator_lite/__main__.py:33
+msgctxt "cli.help_option_quiet"
+msgid "decrease output (use -qq for errors only)"
+msgstr "减少输出（使用 -qq 仅显示错误）"
+
+#: src/vcf_generator_lite/bootstrap.py:60
+msgctxt "startup.colorlog_not_available_warning"
+msgid "⚠️WARNING: Colorlog is not available, using plain text instead. Please install colorlog to enable colored logging."
+msgstr "⚠️警告：Colorlog 不可用，将使用纯文本替代。请安装 colorlog 以启用彩色日志记录。"
+
+#: src/vcf_generator_lite/bootstrap.py:117
+#, python-brace-format
+msgctxt "startup.source_tip"
+msgid "💡Tip: Source code is hosted at {url}"
+msgstr "💡提示：源码已托管到 {url}"
+
+#: src/vcf_generator_lite/configs/phone_detectors.py:10
+msgctxt "phone_detector.china.mainland"
+msgid "Chinese mainland"
+msgstr "中国内地"
+
+#: src/vcf_generator_lite/configs/phone_detectors.py:19
+msgctxt "phone_detector.china.hongkong"
+msgid "Hong Kong, China"
+msgstr "中国香港"
+
+#: src/vcf_generator_lite/configs/phone_detectors.py:28
+msgctxt "phone_detector.china.macau"
+msgid "Macau, China"
+msgstr "中国澳门"
+
+#: src/vcf_generator_lite/configs/phone_detectors.py:37
+msgctxt "phone_detector.china.taiwan"
+msgid "Taiwan, China"
+msgstr "中国台湾"
+
+#: src/vcf_generator_lite/ui/actions/external_app.py:9
+msgctxt "dialog_open_url_failure.title"
+msgid "Failed to Open External Application"
+msgstr "打开外部应用失败"
+
+#: src/vcf_generator_lite/ui/actions/external_app.py:11
+msgctxt "dialog_open_url_failure.message"
+msgid "Failed to open external application. Please check your default application settings."
+msgstr "无法打开外部应用，请检查默认应用设置。"
+
+#: src/vcf_generator_lite/ui/actions/external_app.py:14
+#, python-brace-format
+msgctxt "dialog_open_url_failure.detail"
+msgid "Link: {url}"
+msgstr "链接：{url}"
+
+#: src/vcf_generator_lite/ui/app_text.py:7
+msgctxt "app.name"
+msgid "VCF Generator Lite"
+msgstr "VCF 生成器 轻量版"
+
+#: src/vcf_generator_lite/ui/app_text.py:11
+msgctxt "app.description"
+msgid "Merge contacts into a vCard file"
+msgstr "将联系人合并为 vCard 文件"
+
+#: src/vcf_generator_lite/ui/app_text.py:15
+msgctxt "app.copyright"
+msgid "Copyright © 2023-2026 Jesse205"
+msgstr "版权所有 © 2023-2026 杰西 205"
+
+#: src/vcf_generator_lite/ui/app_text.py:19
+msgctxt "app.url_repository"
+msgid "https://github.com/hellotool/VCFGeneratorLiteWithTkinter"
+msgstr "https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter"
+
+#: src/vcf_generator_lite/ui/app_text.py:23
+#, python-brace-format
+msgctxt "app.url_releases"
+msgid "{repository}/releases"
+msgstr "{repository}/releases"
+
+#: src/vcf_generator_lite/ui/app_text.py:29
+#, python-brace-format
+msgctxt "app.url_report"
+msgid "{repository}/issues/new/choose"
+msgstr "{repository}/issues/new/choose"
+
+#: src/vcf_generator_lite/ui/app_text.py:35
+#, python-brace-format
+msgctxt "app.url_license"
+msgid "{repository}/blob/{reference}/LICENSE"
+msgstr "{repository}/blob/{reference}/LICENSE"
+
+#: src/vcf_generator_lite/ui/app_text.py:42
+#, python-brace-format
+msgctxt "app.url_documentation"
+msgid "{repository}/tree/{reference}/docs"
+msgstr "{repository}/tree/{reference}/docs"
+
+#: src/vcf_generator_lite/ui/app_text.py:49
+#, python-brace-format
+msgctxt "app.url_third_party_notices"
+msgid "{repository}/blob/{reference}/NOTICES.md"
+msgstr "{repository}/blob/{reference}/NOTICES.zh-CN.md"
+
+#: src/vcf_generator_lite/ui/app_text.py:59
+msgctxt "error_missing_number"
+msgid "Missing number or number is incorrect"
+msgstr "缺失号码或号码不正确"
+
+#: src/vcf_generator_lite/ui/widgets/text_menu.py:36
+msgctxt "widget_entry.menu_undo"
+msgid "&Undo"
+msgstr "撤销(&U)"
+
+#: src/vcf_generator_lite/ui/widgets/text_menu.py:40
+msgctxt "widget_entry.menu_redo"
+msgid "&Redo"
+msgstr "重做(&R)"
+
+#: src/vcf_generator_lite/ui/widgets/text_menu.py:45
+msgctxt "widget_entry.menu_cut"
+msgid "Cu&t"
+msgstr "剪切(&T)"
+
+#: src/vcf_generator_lite/ui/widgets/text_menu.py:50
+msgctxt "widget_entry.menu_copy"
+msgid "&Copy"
+msgstr "复制(&C)"
+
+#: src/vcf_generator_lite/ui/widgets/text_menu.py:56
+msgctxt "widget_entry.menu_paste"
+msgid "&Paste"
+msgstr "粘贴(&P)"
+
+#: src/vcf_generator_lite/ui/widgets/text_menu.py:60
+msgctxt "widget_entry.menu_delete"
+msgid "&Delete"
+msgstr "删除(&D)"
+
+#: src/vcf_generator_lite/ui/widgets/text_menu.py:66
+msgctxt "widget_entry.menu_select_all"
+msgid "Select &All"
+msgstr "全选(&A)"
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/dialog.py:29
+msgctxt "dialog_invalid_items.title"
+msgid "vCard File Generation Complete"
+msgstr "生成 vCard 文件完成"
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:48
+#, python-brace-format
+msgctxt "dialog_invalid_items.message"
+msgid "File exported to {path}, invalid numbers have been ignored."
+msgstr "已导出文件到 {path}，异常的号码已被忽略。"
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:59
+msgctxt "dialog_invalid_items.label_invalid_numbers"
+msgid "Invalid numbers: "
+msgstr "异常的号码："
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:84
+msgctxt "dialog_invalid_items.heading_row"
+msgid "Position"
+msgstr "位置"
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:89
+msgctxt "dialog_invalid_items.heading_original"
+msgid "Original Content"
+msgstr "原始内容"
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:94
+msgctxt "dialog_invalid_items.heading_reason"
+msgid "Reason"
+msgstr "原因"
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:102
+msgctxt "dialog_invalid_items.cell_loading"
+msgid "Loading..."
+msgstr "加载中……"
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:118
+msgctxt "common.button_ok"
+msgid "OK"
+msgstr "确定"
+
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:133
+#, python-brace-format
+msgctxt "dialog_invalid_items.cell_row"
+msgid "Row {row}"
+msgstr "第 {row} 行"
+
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:33
+msgctxt "window_main.label_usage"
+msgid ""
+"Instructions:\n"
+"1. Copy names and phone numbers in the format \"Name Phone Notes\" (notes optional) into the edit box below.\n"
+"2. Click \"Generate\" and select a path to save the file.\n"
+"3. You can use the generated vCard file wherever you need it, such as importing it into your phone or email."
+msgstr ""
+"使用说明：\n"
+"1. 把名字和电话以每行“姓名 电话 备注”（备注可忽略）的格式复制到下面的编辑框内。\n"
+"2. 点击“生成”，选择一个路径保存文件。\n"
+"3. 您可以将生成后的 vCard 文件用在您需要的地方，例如导入到手机或者邮箱。"
+
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:59
+msgctxt "window_main.entry_content"
+msgid ""
+"Qu Yuan\t13333333333\tPoet of the Warring States period\n"
+"Cao Cao\t13444444444\n"
+"Tao Y.M.\t13555555555\n"
+"Xie Lingyun\t13666666666\n"
+msgstr ""
+"屈原\t13333333333\t战国时期诗人\n"
+"曹操\t13444444444\n"
+"陶渊明\t13555555555\n"
+"谢灵运\t13666666666\n"
+
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:92
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:140
+msgctxt "window_main.label_generating"
+msgid "Generating..."
+msgstr "正在生成……"
+
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:96
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:135
+msgctxt "window_main.button_generate"
+msgid "Generate"
+msgstr "开始生成"
+
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:139
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:143
+msgctxt "window_main.button_stop"
+msgid "Stop"
+msgstr "停止"
+
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:144
+msgctxt "window_main.label_stopping"
+msgid "Stopping..."
+msgstr "正在停止……"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:61
+msgctxt "window_main.menu_file"
+msgid "&File"
+msgstr "文件(&F)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:65
+msgctxt "window_main.menu_edit"
+msgid "&Edit"
+msgstr "编辑(&E)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:69
+msgctxt "window_main.menu_options"
+msgid "&Options"
+msgstr "选项(&O)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:73
+msgctxt "window_main.menu_help"
+msgid "&Help"
+msgstr "帮助(&H)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:80
+msgctxt "window_main.menu_file_generate"
+msgid "&Generate file..."
+msgstr "生成文件(&G)…"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:88
+msgctxt "window_main.menu_file_stop_generation"
+msgid "&Stop generation"
+msgstr "停止生成(&S)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:100
+msgctxt "window_main.menu_file_exit"
+msgid "E&xit"
+msgstr "退出(&X)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:110
+msgctxt "window_main.menu_edit_undo"
+msgid "&Undo"
+msgstr "撤销(&U)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:115
+msgctxt "window_main.menu_edit_redo"
+msgid "&Redo"
+msgstr "重做(&R)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:121
+msgctxt "window_main.menu_edit_cut"
+msgid "Cu&t"
+msgstr "剪切(&T)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:126
+msgctxt "window_main.menu_edit_copy"
+msgid "&Copy"
+msgstr "复制(&C)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:131
+msgctxt "window_main.menu_edit_paste"
+msgid "&Paste"
+msgstr "粘贴(&P)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:136
+msgctxt "window_main.menu_edit_select_all"
+msgid "Select &All"
+msgstr "全选(&A)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:142
+msgctxt "window_main.menu_edit_clean_quotes"
+msgid "Remove &Quotes"
+msgstr "清除引号(&Q)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:151
+msgctxt "window_main.menu_phone_formats"
+msgid "&Phone Format"
+msgstr "号码格式(&P)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:155
+msgctxt "window_main.menu_select_all_phone_formats"
+msgid "Select &All"
+msgstr "全选(&A)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:172
+msgctxt "window_main.menu_help_repository"
+msgid "Rep&ository"
+msgstr "项目仓库(&O)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:176
+msgctxt "window_main.menu_help_release"
+msgid "&Releases"
+msgstr "版本发布(&R)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:180
+msgctxt "window_main.menu_help_documentation"
+msgid "&Documentation"
+msgstr "文档(&D)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:185
+msgctxt "window_main.menu_help_feedback"
+msgid "&Feedback"
+msgstr "提交反馈(&F)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:189
+msgctxt "window_main.menu_help_contact"
+msgid "&Contact Author"
+msgstr "联系作者(&C)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:203
+msgctxt "window_main.menu_help_license"
+msgid "&License"
+msgstr "许可协议(&L)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:207
+msgctxt "window_main.menu_help_os_notices"
+msgid "Open Source &Notices"
+msgstr "开源声明(&N)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/menu_bar.py:213
+#, python-brace-format
+msgctxt "window_main.menu_help_about"
+msgid "&About {app_name}"
+msgstr "关于 {app_name}(&A)"
+
+#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:10
+msgctxt "dialog_save_file_os_error.title"
+msgid "Save Failed"
+msgstr "保存失败"
+
+#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:18
+msgctxt "dialog_save_file_permission_denied.title"
+msgid "Save Failed"
+msgstr "保存失败"
+
+#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:20
+msgctxt "dialog_save_file_permission_denied.message"
+msgid "Permission denied, please grant permission again."
+msgstr "权限被拒，请授予权限后再试。"
+
+#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:28
+msgctxt "dialog_generate_success.title"
+msgid "Generation Successful"
+msgstr "生成成功"
+
+#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:29
+#, python-brace-format
+msgctxt "dialog_generate_success.message"
+msgid "File exported to {path}."
+msgstr "已导出文件到 {path}。"
+
+#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:31
+#, python-brace-format
+msgctxt "dialog_generate_success.detail"
+msgid ""
+"Count: {count:n}\n"
+"Time elapsed: {time:.3f}s"
+msgstr ""
+"数量：{count:n} 个\n"
+"耗时：{time:.3f} 秒"
+
+#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:44
+msgctxt "dialog_no_phone_formats_selected.title"
+msgid "No Phone Formats Selected"
+msgstr "未选择号码格式"
+
+#: src/vcf_generator_lite/ui/windows/main_window/message_boxes.py:45
+msgctxt "dialog_no_phone_formats_selected.message"
+msgid "Please select at least one phone format."
+msgstr "请至少选择一种电话号码格式。"
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:47
+msgctxt "window_save_vcf.default_file_name"
+msgid "My Contacts.vcf"
+msgstr "我的联系人.vcf"
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:163
+msgctxt "window_save_vcf.title"
+msgid "Select File Save Location"
+msgstr "选择文件保存位置"
+
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:166
+msgctxt "window_save_vcf.label_type_vcf"
+msgid "vCard File (*.vcf)"
+msgstr "vCard 文件 (*.vcf)"
+
+#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:13
+#, python-brace-format
+msgctxt "dialog_about.title"
+msgid "About {app_name}"
+msgstr "关于 {app_name}"
+
+#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:14
+#, python-brace-format
+msgctxt "dialog_about.message"
+msgid "{app_name} v{version}"
+msgstr "{app_name} v{version}"
+
+#: src/vcf_generator_lite/ui/windows/message_boxes/about.py:19
+#, python-brace-format
+msgctxt "dialog_about.detail"
+msgid ""
+"{description}\n"
+"\n"
+"{copyright}\n"
+"\n"
+"Environment Information:\n"
+"Python: {python_info}\n"
+"Tcl: {tcl_info}\n"
+"Tk: {tk_info}"
+msgstr ""
+"{description}\n"
+"\n"
+"{copyright}\n"
+"\n"
+"环境信息：\n"
+"Python：{python_info}\n"
+"Tcl：{tcl_info}\n"
+"Tk：{tk_info}"
+
+#: src/vcf_generator_lite/ui/windows/message_boxes/unexpected_error.py:7
+msgctxt "dialog_unexpected_error.title"
+msgid "Unexpected Error"
+msgstr "意外错误"
+
+#: src/vcf_generator_lite/ui/windows/message_boxes/unexpected_error.py:9
+msgctxt "dialog_unexpected_error.message"
+msgid "An unexpected error occurred, please report this error to the maintainer."
+msgstr "发生意外错误，请向维护者报告此问题。"
+
+#: src/vcf_generator_lite/ui/windows/message_boxes/unexpected_error.py:12
+#, python-brace-format
+msgctxt "dialog_unexpected_error.detail"
+msgid "Error message: {error}"
+msgstr "错误信息：{error}"

@@ -1,7 +1,9 @@
-from tkinter import Label, Misc
+from tkinter import Label, Misc, Tk
 from tkinter.ttk import Label as TtkLabel
 
-from vcf_generator_lite.utils.tkinter.misc import get_root
+
+def get_root(misc: Misc) -> Tk:
+    return misc.nametowidget(".")
 
 
 def enable_auto_wrap(widget: Label | TtkLabel):
@@ -24,7 +26,7 @@ def needs_sizegrip(parent: Misc) -> bool:
 
     详见 `平台特定说明 <https://docs.python.org/zh-cn/3.14/library/tkinter.ttk.html#platform-specific-notes>`_。
     """
-    if get_root(parent)._windowingsystem != "win32":  # noqa: SLF001
+    if parent._windowingsystem != "win32":  # noqa: SLF001
         return False
 
     return any(parent.winfo_toplevel().resizable())

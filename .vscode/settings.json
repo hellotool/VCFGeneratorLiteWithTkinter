@@ -1,6 +1,6 @@
 {
   "explorer.fileNesting.patterns": {
-    "pyproject.toml": "uv.lock, .editorconfig, .markdownlint.json, .python-version",
+    "pyproject.toml": "uv.lock, .editorconfig, rumdl.toml, .python-version",
     "README.md": "README_*.md",
     "*": "${basename}.*.${extname}"
   },
@@ -8,10 +8,16 @@
     "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnSave": true
   },
+  "[markdown]": {
+    "editor.defaultFormatter": "rvben.rumdl",
+    "editor.formatOnSave": true
+  },
   "python.testing.unittestEnabled": false,
   "python.testing.pytestEnabled": true,
   "files.eol": "\n",
   "files.associations": {
     "*.spec": "python"
-  }
+  },
+  "rumdl.enable": true,
+  "rumdl.configPath": "rumdl.toml",
 }

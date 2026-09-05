@@ -47,7 +47,7 @@ class ScrolledTreeview(Treeview):
     def _get_current_padding(self) -> FPixelPadding:
         padding = self.cget("padding")
         if not padding:
-            padding = Style(self).lookup(self.cget("style") or "Treeview", "padding")
+            padding = self._style.lookup(str(self.cget("style")) or "Treeview", "padding")
         if not padding:
             padding = 0
         return parse_ttk_padding(self, padding)

@@ -1,25 +1,34 @@
 [project]
 name = "vcf-generator-lite"
-version = "5.0.3"
+version = "6.0.1"
 description = "A lightweight VCF creation tool written in Python."
 authors = [{ name = "Jesse205", email = "jesse205@qq.com" }]
 license = "Apache-2.0"
 license-files = ["LICENSE"]
 readme = "README_pypi.md"
 requires-python = ">=3.12"
-dependencies = ["ttk-text==0.3.3"]
+dependencies = ["ttk-text==0.3.4"]
 import-names = ["vcf_generator_lite"]
 
 [project.optional-dependencies]
 console = ["colorlog>=6.9.0"]
 
 [dependency-groups]
-basic = ["poethepoet>=0.44.0"]
+basic = ["poethepoet>=0.46.0"]
+lint = ["pyright>=1.1.411", "ruff>=0.15.13"]
 test = ["pytest>=9.0.3"]
-lint = ["pyright>=1.1.409", "ruff>=0.15.12"]
-build = ["packaging>=26.2", "pyinstaller>=6.20.0", "requests>=2.33.1"]
-dev = ["colorlog>=6.9.0"]
-
+build = ["packaging>=26.2", "pyinstaller>=6.20.0", "requests>=2.34.2"]
+docs = ["jinja2>=3.1.6", "rumdl>=0.2.40"]
+l10n = ["babel>=2.18.0"]
+dev = [
+    "colorlog>=6.9.0",
+    { include-group = "basic" },
+    { include-group = "lint" },
+    { include-group = "test" },
+    { include-group = "build" },
+    { include-group = "docs" },
+    { include-group = "l10n" },
+]
 
 [project.urls]
 Repository = "https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter"
@@ -37,32 +46,123 @@ build-backend = "uv_build"
 executor = "uv"
 
 [tool.poe.tasks]
-test = "pytest"
-check.parallel = ["ruff check", "pyright"]
-check.ignore_fail = "return_non_zero"
-check.default_item_type = "cmd"
-format = "ruff format"
 
-build-installer.script = "scripts.build_app:build_installer"
-build-portable.script = "scripts.build_app:build_portable"
-build-zipapp.script = "scripts.build_app:build_zipapp"
-build-chocopkgs.script = "scripts.build_app:build_chocolatey_packages"
-build-wheel = "uv build --wheel"
+[tool.poe.tasks.test]
+help = "Run tests"
+cmd = "pytest"
+
+[tool.poe.tasks.format]
+help = "Format code and docs"
+parallel = ["ruff format", "rumdl fmt"]
+default_item_type = "cmd"
+
+[tool.poe.tasks.check]
+help = "Check code and docs"
+parallel = ["ruff check", "pyright", "rumdl check"]
+default_item_type = "cmd"
+
+[tool.poe.tasks.fix]
+help = "Fix code"
+cmd = "ruff check --fix"
+
+[tool.poe.tasks.precommit]
+help = "Run local checks"
+parallel = ["format", "check", "test"]
+
+[tool.poe.tasks.build-installer]
+help = "Build installer (*-setup.exe)"
+script = "scripts.build_app:build_installer"
+
+[[tool.poe.tasks.build-installer.args]]
+help = "Don't verify SSL"
+name = "no_verify_ssl"
+options = ["--no-verify-ssl"]
+type = "boolean"
+
+[[tool.poe.tasks.build-installer.args]]
+help = "Force rebuild upstream outputs (PyInstaller dist)"
+name = "force"
+options = ["--force"]
+type = "boolean"
+
+[[tool.poe.tasks.build-installer.args]]
+help = "Force online download InnoSetup extensions"
+name = "force_download"
+options = ["--force-download"]
+type = "boolean"
+
+[tool.poe.tasks.build-portable]
+help = "Build portable package (*-portable.zip)"
+script = "scripts.build_app:build_portable"
+
+[[tool.poe.tasks.build-portable.args]]
+help = "Force rebuild upstream outputs (PyInstaller dist)"
+name = "force"
+options = ["--force"]
+type = "boolean"
+
+[tool.poe.tasks.build-zipapp]
+help = "Build zipapp (*.pyzw)"
+script = "scripts.build_app:build_zipapp"
+
+[[tool.poe.tasks.build-zipapp.args]]
+help = "Force rebuild upstream outputs (wheel)"
+name = "force"
+options = ["--force"]
+type = "boolean"
+
+[tool.poe.tasks.build-wheel]
+help = "Build wheel (*.whl)"
+cmd = "uv build --wheel"
+
+[tool.poe.tasks.l10n-extract]
+help = "Extract localization files"
+script = "scripts.l10n:extract"
+
+[tool.poe.tasks.l10n-init]
+help = "Initialize localization files"
+script = "scripts.l10n:initialize"
+
+[[tool.poe.tasks.l10n-init.args]]
+help = "Locale"
+name = "locale"
+options = ["-l", "--locale"]
+type = "string"
+required = true
+
+[tool.poe.tasks.l10n-update]
+help = "Update localization files"
+script = "scripts.l10n:update"
+
+[tool.poe.tasks.l10n-compile]
+help = "Compile localization files"
+script = "scripts.l10n:compile_"
+
+[[tool.poe.tasks.l10n-compile.args]]
+help = "Locale"
+name = "locale"
+options = ["-l", "--locale"]
+type = "string"
+
+[tool.poe.tasks.gen-notices]
+help = "Generate NOTICES files"
+script = "scripts.gen_notices:render"
 
 [tool.uv]
 required-version = ">=0.10.1"
-default-groups = "all"
 
 [tool.uv.pip]
 universal = true
+
+[tool.uv.build-backend]
+source-exclude = ["*.pot", "*.po"]
 
 [tool.ruff]
 line-length = 120
 include = [
     "pyproject.toml",
-    # "*.md",
-    # "docs/**/*.md",
     "src/**/*.py",
+    "tests/**/*.py",
     "scripts/**/*.py",
     "packaging/**/*.py",
     "packaging/pyinstaller/*.spec",
@@ -70,32 +170,33 @@ include = [
 
 [tool.ruff.lint]
 ignore = [
-    "D100", # 有时候文档不是必须的
+    "D100",    # 有时候文档不是必须的
     "D101",
     "D102",
     "D103",
     "D104",
     "D107",
-    "D400", # 不支持中文标点
+    "D400",    # 不支持中文标点
     "PLC0415", # 为了防止兼容性问题或者不必要的代码运行，需要将导入放到函数内。
-    "FBT001", # 在设置单个值时不需要命名参数
+    "FBT001",  # 在设置单个值时不需要命名参数
     "FBT003",
-    "ICN001", # 很多情况下简写语义不明，要尽量避免简写
-    "T201", # 有 CLI 需求
+    "ICN001",  # 很多情况下简写语义不明，要尽量避免简写
+    "T201",    # 有 CLI 需求
     "PLR0913", # 参数多不是问题，问题是参数多且没使用命名参数
     "PLR2004", # 有时候，一些长度判断、常见状态码不需要常量
-    "S113", # 万一就是要等很长时间
-    "ANN003", # 无法做到
-    "ANN201", # 为了保持简洁，None 类型不写返回类型
+    "S113",    # 万一就是要等很长时间
+    "ANN003",  # 无法做到
+    "ANN201",  # 为了保持简洁，None 类型不写返回类型
     "ANN202",
     "ANN204",
-    "COM812", # 可能与 Formatter 冲突
-    "TRY003", # 没有必要
+    "COM812",  # 可能与 Formatter 冲突
+    "TRY003",  # 没有必要
     "EM101",
     "EM102",
 ]
 select = ["ALL"]
 allowed-confusables = ["，", "：", "（", "）", "；"] # 允许中文符号
+exclude = ["tests/**"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"
@@ -120,10 +221,16 @@ reportUnnecessaryIsInstance = "none"
 reportImplicitOverride = "error"
 include = [
     "src/**/*.py",
+    "tests/**/*.py",
     "scripts/**/*.py",
     "packaging/**/*.py",
     "packaging/pyinstaller/*.spec",
 ]
+pythonVersion = "3.12"
+
+[[tool.pyright.executionEnvironments]]
+root = "tests"
+reportPrivateUsage = "none"
 
 [tool.pytest]
 testpaths = ["tests"]
@@ -136,3 +243,11 @@ strict_xfail = true
 filterwarnings = ["error", "ignore::DeprecationWarning"]
 log_cli = true
 log_cli_level = "INFO"
+
+[tool.babel]
+
+[[tool.babel.mappings]]
+encoding = "utf-8"
+method = "python"
+pattern = "**.py"
+keywords = ["pgettext_menu_label:1c,2", "LazyPgettext:1c,2"]

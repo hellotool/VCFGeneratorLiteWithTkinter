@@ -1,88 +1,107 @@
-# 贡献指南
+# Contribution Guidelines
 
-本项目欢迎任何形式的贡献！
+[简体中文](./CONTRIBUTING.zh-CN.md) |
+**English**
 
-如果您不了解如何参与开源贡献，您可以参考以下资源：
+First and foremost, thank you for considering contributing to **VCF Generator Lite**!
 
-- GitHub 社区的 [开源软件指南][how-to-contribute-github-opensource-guide]
-- Gitee 社区的 [开源指北][participating-gitee-opensource-guide]
+We welcome contributions of any kind, whether it's reporting issues, suggesting improvements, fixing bugs, or adding new features.
 
-在提交贡献时，您需要遵守 [贡献者公约](./CODE_OF_CONDUCT.zh-CN.md)、当前平台的规则以及当地法律法规。
+> [!TIP]
+>
+> If you're new to open source contributions, these resources might help you:
+>
+> - GitHub Community's [Open Source Guide][how-to-contribute-github-opensource-guide]
+> - Gitee Community's [Open Source Guide][participating-gitee-opensource-guide]
 
-## 本地化应用
+## Code of Conduct
 
-本地化分为 *功能本地化* 和 *语言本地化* 两部分。
+When participating in this project, please abide by our [Contributor Covenant](./CODE_OF_CONDUCT.md). We are committed to providing a friendly and inclusive community environment for everyone.
 
-### 功能本地化
+## How to Contribute
 
-当前应用仅支持识别 11 位中国大陆手机号，暂不支持其他类型的号码。如果同时支持识别多种号码可能造成不可预料的结果。
+### Submitting Issues or Suggestions
 
-### 语言本地化
-
-若想为应用添加新的语言支持，请按以下步骤操作：
-
-1. 定位到 `src/vcf_generator_lite/resources/locales` 目录。
-2. 创建一个新的语言文件，格式为 `<语言代码>[_区域代码].toml`（例如：`es.toml` 或 `pt_BR.toml`）。
-3. 参照已有的 `en.toml`（英文）或 `zh_CN.toml`（简体中文）文件的结构和键名，翻译对应的值。
-
-## 提交反馈
-
-如果您在使用中遇到问题或有改进建议，欢迎通过以下任一渠道提交反馈：
+If you encounter problems or have improvement suggestions while using the application, feel free to submit feedback through any of the following channels:
 
 - [Gitee Issues][issues-gitee]
 - [GitHub Issues][issues-github]
 
-## 参与开发
+### Localizing the Application
 
-1. 确保 [Gitee][repository-gitee] 或 [GitHub][repository-github] 中没有相关的拉取请求（PR）。
-2. Fork 本仓库。
-3. 使用 [Git][git-homepage] 克隆仓库到本地。
-4. 阅读[开发指南](./docs/dev/index.md)，熟悉项目开发方法。
-5. 创建分支，如 `feature/xxx` 或 `bugfix/xxx`。
-6. 编写并提交代码。
-7. 向本仓库提交 PR。
+Localization work includes adding **phone detectors** to support more number types, and translating **application interface** texts (including phone detector names).
 
-此外，有一些规范规则，请遵守：
+> [!TIP]  
+>
+> **Using AI-Assisted Localization**  
+>
+> If you're unfamiliar with code or translation file formats, you can leverage modern AI tools like GitHub Copilot or Trae. Simply describe your needs in natural language, and the AI will automatically generate compliant code or complete translations.
 
-## 代码规范
+Detailed guides for each task:
 
-**Python (`.py`)：**
+- [Add Phone Detector](./docs/dev/globalization/phone-detector.md)
+- [Translate App](./docs/dev/globalization/translation.md)
 
-- 函数参数必须声明类型
-- 单行最大 120 字符
-- 其他情况以 [PEP8][pep-0008] 为准
+### Participating in Development
 
-**Markdown (`.md`)：**
+1. Ensure there are no related pull requests (PRs) in the [Gitee repository][repository-gitee] or [GitHub repository][repository-github].
+2. Fork this repository.
+3. Clone the repository locally using [Git][git-homepage].
+4. Read the [Development Guide](./docs/dev/index.md) to familiarize yourself with the project's development practices.
+5. Create a branch, such as `feature/xxx` or `bugfix/xxx`.
+6. Write your code.
+7. Run the following commands to ensure the code complies with standards and introduces no errors:
+   ```bash
+   uv run poe format
+   uv run poe check
+   uv run poe test
+   ```
+8. Commit your code.
+9. Submit a PR to this repository.
 
-- 不限制单行最大字符数
-- 详情请参考 `.markdownlint.json`
-- 其他情况以 [Markdownlint][markdownlint-repository-github] 为准
+## Standards
 
-详情请参考 `.editorconfig`。
+### Code Standards
 
-## 文档规范
+#### Python Code (`.py`)
 
-遵守 [中文技术文档写作风格指南][zh-style-guide]。
+- Function parameters must have type annotations.
+- Maximum line length is 120 characters.
+- For all other cases, follow [PEP 8][pep-0008].
 
-## Git 提交规范
+#### Markdown Documents (`.md`)
 
-遵循 [约定式提交][conventionalcommits-homepage]。
+- No maximum line length restriction
+- Refer to the root `rumdl.toml` for specific rules.
+- For all other cases, follow [Markdownlint][markdownlint-repository-github].
 
-## 视觉设计
+For more details, refer to `.editorconfig`.
 
-详见 [视觉设计](./docs/dev/visual.md)
+### Documentation Standards
+
+Documentation follows the [Google Developer Style Guide][google-style-guide] and the [Google Technical Writing][google-technical-writing] courses for clarity, voice, accessibility, and inclusive language. The [Chinese Technical Documentation Style Guide][zh-style-guide] supplements these as a reference for Chinese-language writing.
+
+Documentation is organized using the [Diátaxis][diataxis] framework into four categories: Tutorials, How-to guides, Reference, and Explanation.
+
+### Git Commit Standards
+
+Follow [Conventional Commits][conventionalcommits-homepage].
 
 [repository-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/
 [repository-github]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/
 [issues-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/issues
 [issues-github]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/issues
 
-[markdownlint-repository-github]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/
+[markdownlint-repository-github]: https://github.com/DavidAnson/markdownlint
 [git-homepage]: https://git-scm.com/
-[conventionalcommits-homepage]: https://www.conventionalcommits.org/zh-hans/v1.0.0/
+[conventionalcommits-homepage]: https://www.conventionalcommits.org/en/v1.0.0/
 
-[how-to-contribute-github-opensource-guide]: https://opensource.guide/zh-hans/how-to-contribute/
+[how-to-contribute-github-opensource-guide]: https://opensource.guide/how-to-contribute/
 [participating-gitee-opensource-guide]: https://gitee.com/opensource-guide/guide/participating/roles.html
 [zh-style-guide]: https://zh-style-guide.readthedocs.io/zh-cn/latest/index.html
 
+[google-style-guide]: https://developers.google.com/style
+[google-technical-writing]: https://developers.google.com/tech-writing
+
 [pep-0008]: https://peps.python.org/pep-0008/
+[diataxis]: https://diataxis.fr/

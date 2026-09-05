@@ -1,6 +1,20 @@
+import re
 from io import StringIO
+from typing import NamedTuple
 
 from vcf_generator_lite.core.vcf_generator import VCFGeneratorTask
+from vcf_generator_lite.models.phone_detector import PhoneRule
+
+
+TEST_PHONE_RULES = [
+    PhoneRule(length=11, regex=re.compile(r"^(?:\+86)?1[3456789]\d{9}$")),
+]
+
+
+class Progress(NamedTuple):
+    processed: int
+    total: int
+    determinate: bool
 
 
 class TestVCFGeneratorIntegration:
@@ -28,113 +42,131 @@ class TestVCFGeneratorIntegration:
 
     @property
     def input_content(self):
-        """构建测试输入内容"""
-        input_list = (
-            self.IGNORED_INPUT_LIST
-            + self.INVALID_INPUT_LIST
-            + self.IGNORED_INPUT_LIST
-            + self.VALID_INPUT_LIST
-            + self.INVALID_INPUT_LIST
-            + self.IGNORED_INPUT_LIST
-        )
+        input_list = self.IGNORED_INPUT_LIST + self.INVALID_INPUT_LIST + self.IGNORED_INPUT_LIST + self.VALID_INPUT_LIST
         return "\n".join(input_list)
 
     @property
     def valid_count(self):
-        """有效行数"""
         return len(self.VALID_INPUT_LIST)
 
     @property
     def invalid_count(self):
-        """无效行数（出现两次）"""
-        return len(self.INVALID_INPUT_LIST) * 2
+        return len(self.INVALID_INPUT_LIST)
 
     def test_vcard_file_generator_full_integration(self):
         """完整的 VCF 生成器集成测试"""
-        progress_history = []
+        progress_history: list[Progress] = []
         result_io = StringIO()
 
         generator = VCFGeneratorTask(
-            input_text=self.input_content,
+            input_io=self.input_content,
             output_io=result_io,
-            progress_listener=lambda progress, determinate: progress_history.append((progress, determinate)),
+            phone_rules=TEST_PHONE_RULES,
+            progress_listener=lambda processed, total, determinate: progress_history.append(
+                Progress(processed=processed, total=total, determinate=determinate)
+            ),
         )
         generator.start()
-        generator.join()
+        generator.join(timeout=10.0)
 
-        assert generator.result is not None, "结果监听器未被调用"
+        assert not generator.is_alive()
+        assert len(progress_history) > 0
+        assert progress_history[-1].processed == progress_history[-1].total == self.valid_count + self.invalid_count
+        assert progress_history[-1].determinate is True
 
-        # 验证没有异常
-        assert generator.result.exception is None, "不应有意外的异常"
+        assert generator.result is not None
+        assert generator.result.exception is None
 
-        # 验证进度报告
-        assert len(progress_history) > 0, "应该有进度报告"
-        assert progress_history[-1][0] == 1.0, "末尾进度应为 1.0"
-        assert progress_history[-1][1] is True, "进度应该是确定性的"
+        assert generator.result.saved_count == self.valid_count
+        assert len(generator.result.invalid_items) == self.invalid_count
 
-        assert generator.result.saved_count == self.valid_count, f"应有 {self.valid_count} 个联系人保存成功"
+        invalid_items_raw = [item.raw_content for item in generator.result.invalid_items]
+        assert invalid_items_raw == self.INVALID_INPUT_LIST
 
-        # 验证无效行
-        assert len(generator.result.invalid_items) == self.invalid_count, f"应有 {self.invalid_count} 个无效行"
-        for item in generator.result.invalid_items:
-            assert item.raw_content in self.INVALID_INPUT_LIST, f"第 {item.row_position} 行数据不应为无效行"
-
-        # 验证生成的 VCard 内容
-        result_content = result_io.getvalue()
-        result_list = [item for item in result_content.split("\n\n") if item.strip() != ""]
-        assert len(result_list) == self.valid_count, f"应有 {self.valid_count} 个有效联系人"
+        result_list = [item for item in result_io.getvalue().split("\n\n") if item.strip() != ""]
+        assert len(result_list) == self.valid_count
 
         for result_item in result_list:
-            assert result_item.startswith("BEGIN:VCARD\n"), "VCard 应以 BEGIN:VCARD 开头"
-            assert result_item.endswith("\nEND:VCARD"), "VCard 应以 END:VCARD 结尾"
-            assert "TEL;CELL:" in result_item, "VCard 应包含电话号码"
-            assert "FN;" in result_item, "VCard 应包含姓名字段（带分号参数）"
+            assert result_item.startswith("BEGIN:VCARD\n")
+            assert result_item.endswith("\nEND:VCARD")
+            assert "TEL;CELL:" in result_item
+            assert "FN;" in result_item
 
     def test_empty_input(self):
         """测试空输入"""
-        progress_history = []
+        progress_history: list[Progress] = []
         result_io = StringIO()
 
         generator = VCFGeneratorTask(
-            input_text="",
+            input_io="",
             output_io=result_io,
-            progress_listener=lambda progress, determinate: progress_history.append((progress, determinate)),
+            phone_rules=TEST_PHONE_RULES,
+            progress_listener=lambda processed, total, determinate: progress_history.append(
+                Progress(processed=processed, total=total, determinate=determinate)
+            ),
         )
         generator.start()
-        generator.join()  # 等待线程完成
+        generator.join(timeout=10.0)
 
-        assert generator.result is not None, "结果监听器未被调用"
+        assert not generator.is_alive()
+        assert progress_history[-1].processed == progress_history[-1].total == 0
+        assert progress_history[-1].determinate is True
 
+        assert generator.result is not None
         assert generator.result.exception is None
-        assert len(generator.result.invalid_items) == 0
         assert generator.result.saved_count == 0
+        assert len(generator.result.invalid_items) == 0
         assert result_io.getvalue() == ""
-        # 对于空输入，可能没有进度报告，或者进度为 0（因为 total 变为 0）
-        # 这是当前实现的行为，我们接受它
-        if progress_history:
-            # 如果有进度报告，最后一个进度应该是 0（因为 total=0）
-            assert progress_history[-1][0] == 0.0
+
+    def test__new_line_end_input(self):
+        """测试末尾为换行符的输入"""
+        progress_history: list[Progress] = []
+        result_io = StringIO()
+
+        generator = VCFGeneratorTask(
+            input_io="\n".join(self.VALID_INPUT_LIST) + "\n",
+            output_io=result_io,
+            phone_rules=TEST_PHONE_RULES,
+            progress_listener=lambda processed, total, determinate: progress_history.append(
+                Progress(processed=processed, total=total, determinate=determinate)
+            ),
+        )
+        generator.start()
+        generator.join(timeout=10.0)
+
+        assert not generator.is_alive()
+        assert progress_history[-1].processed == progress_history[-1].total == self.valid_count
+        assert progress_history[-1].determinate is True
+
+        assert generator.result is not None
+        assert generator.result.exception is None
+        assert generator.result.saved_count == self.valid_count
+        assert len(generator.result.invalid_items) == 0
 
     def test_only_invalid_input(self):
         """测试只有无效输入的情况"""
-        progress_history = []
+        progress_history: list[Progress] = []
         result_io = StringIO()
         invalid_content = "\n".join(self.INVALID_INPUT_LIST)
 
         generator = VCFGeneratorTask(
-            input_text=invalid_content,
+            input_io=invalid_content,
             output_io=result_io,
-            progress_listener=lambda progress, determinate: progress_history.append((progress, determinate)),
+            phone_rules=TEST_PHONE_RULES,
+            progress_listener=lambda processed, total, determinate: progress_history.append(
+                Progress(processed=processed, total=total, determinate=determinate)
+            ),
         )
         generator.start()
-        generator.join()  # 等待线程完成
+        generator.join(timeout=10.0)
 
-        assert generator.result is not None, "结果监听器未被调用"
+        assert not generator.is_alive()
+        assert progress_history[-1].processed == progress_history[-1].total == self.invalid_count
+        assert progress_history[-1].determinate is True
 
+        assert generator.result is not None
         assert generator.result.exception is None
-        assert len(generator.result.invalid_items) == len(self.INVALID_INPUT_LIST)
         assert generator.result.saved_count == 0
+        assert len(generator.result.invalid_items) == self.invalid_count
+
         assert result_io.getvalue() == ""
-        # 应该有进度报告且最终为 1.0
-        if progress_history:
-            assert progress_history[-1][0] == 1.0

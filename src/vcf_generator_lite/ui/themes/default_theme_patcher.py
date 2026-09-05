@@ -1,20 +1,21 @@
+import sys
 from typing import override
 
 from vcf_generator_lite.ui.themes.base import BaseThemePatcher
-from vcf_generator_lite.utils.environment import is_windows
 from vcf_generator_lite.utils.tkinter.style import lookup_font
 
 
 class DefaultThemePatcher(BaseThemePatcher):
     @override
     def patch(self):
-        super().patch()
+        self._patch_builtin_theme_common()
+
         theme_name = self.style.theme_use()
-        self._patch_legacy_widgets()
         if theme_name in ("vista", "winnative", "xpnative"):
             self._patch_vista_theme()
         elif theme_name in ("clam", "alt", "default", "classic"):
-            self._patch_builtin_platform_independence_theme()
+            self._patch_builtin_cross_platform_theme()
+        self._patch_legacy_widgets()
 
     def _patch_legacy_widgets(self) -> None:
         background = self.style.lookup(".", "background")
@@ -30,7 +31,7 @@ class DefaultThemePatcher(BaseThemePatcher):
         self.app.option_add("*Menu.activeForeground", select_foreground, "startupFile")
         self.app.option_add("*Toplevel.background", background, "startupFile")
 
-        if is_windows:
+        if sys.platform == "win32":
             # Windows 7 中菜单默认不使用 TkMenuFont，因此需要手动设置字体。
             self.app.option_add("*Menu.font", "TkMenuFont", "startupFile")
 
@@ -45,9 +46,6 @@ class DefaultThemePatcher(BaseThemePatcher):
         self.style.configure("Heading", padding="1.5p")
 
     def _patch_vista_theme(self) -> None:
-        self._patch_builtin_theme_common()
-
-        # 使输入框边框始终具有 1.5p 的边框
         self.style.configure(
             "ThemedText.TEntry",
             padding=0,
@@ -61,7 +59,6 @@ class DefaultThemePatcher(BaseThemePatcher):
         self.style.configure("DialogHeaderContent.TFrame", background="systemWindow")
         self.style.configure("DialogHeaderContent.TLabel", background="systemWindow")
 
-    def _patch_builtin_platform_independence_theme(self) -> None:
-        self._patch_builtin_theme_common()
+    def _patch_builtin_cross_platform_theme(self) -> None:
         self.style.configure("Vertical.TScrollbar", arrowsize="9p")
         self.style.configure("Horizontal.TScrollbar", arrowsize="9p")  # 选择文件时使用

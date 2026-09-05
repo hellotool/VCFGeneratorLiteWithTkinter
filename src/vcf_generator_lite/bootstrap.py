@@ -1,0 +1,118 @@
+import logging
+import os
+import sys
+import tkinter.messagebox
+from contextlib import contextmanager, nullcontext, redirect_stderr, redirect_stdout, suppress
+from io import StringIO
+from pathlib import Path
+from tkinter.messagebox import Message
+from types import TracebackType
+
+# 由于需要打猴子补丁，因此请勿全局导入任何依赖 gettext 的模块。
+
+_logger = logging.getLogger(__name__)
+
+
+def setup_l10n():
+    import gettext as gettextlib
+
+    from vcf_generator_lite.utils.i18n.zipapp_gettext import translation
+    from vcf_generator_lite.utils.resources import resources_traversable
+
+    app_translation = translation(domain="vcf-generator-lite", localedir=resources_traversable.joinpath("locales"))
+
+    gettextlib.gettext = app_translation.gettext
+    gettextlib.ngettext = app_translation.ngettext
+    gettextlib.pgettext = app_translation.pgettext
+    gettextlib.npgettext = app_translation.npgettext
+
+
+def setup_logging(quiet: int, verbose: int):
+    from gettext import pgettext
+
+    try:
+        import colorlog
+    except ImportError:
+        colorlog = None
+
+    handler = logging.StreamHandler()
+    handler.setStream(sys.stdout)
+    log_format = "{asctime} {levelname:8} {name:50.50} {message}"
+    if colorlog:
+        handler.setFormatter(colorlog.ColoredFormatter("{log_color}" + log_format, style="{"))
+    else:
+        handler.setFormatter(logging.Formatter(log_format, style="{"))
+
+    if quiet >= 2:
+        level = logging.ERROR
+    elif verbose == 1:
+        level = logging.INFO
+    elif verbose >= 2:
+        level = logging.DEBUG
+    else:
+        level = logging.WARNING
+
+    logging.basicConfig(level=level, handlers=[handler])
+
+    if verbose >= 1 and not colorlog:
+        print(
+            pgettext(
+                "startup.colorlog_not_available_warning",
+                "⚠️WARNING: Colorlog is not available, using plain text instead. "
+                "Please install colorlog to enable colored logging.",
+            ),
+            file=sys.stderr,
+        )
+
+
+def fix_home_env():
+    """Fix HOME environment variable on Windows if it's not set."""
+    if sys.platform == "win32":
+        with suppress(RuntimeError):
+            os.environ["HOME"] = str(Path.home())
+
+
+def setup_excepthook():
+
+    def excepthook(_type: type[BaseException], value: BaseException, _tb: TracebackType | None):
+        from vcf_generator_lite.ui.windows.message_boxes.unexpected_error import show_unexpected_error_dialog
+
+        _logger.error("Unexpected error: %s", value, exc_info=value)
+        show_unexpected_error_dialog(value)
+
+    sys.excepthook = excepthook
+
+
+@contextmanager
+def redirect_stdio_to_messagebox_if_needed(app_name: str):
+    with (
+        redirect_stderr(StringIO()) if not sys.stderr else nullcontext() as err_io,
+        redirect_stdout(StringIO()) if not sys.stdout else nullcontext() as out_io,
+    ):
+        try:
+            yield
+        finally:
+            err_msg = err_io and err_io.getvalue()
+            out_msg = out_io and out_io.getvalue()
+            if err_msg or out_msg:
+                Message(
+                    title=app_name,
+                    message=err_msg or out_msg,
+                    icon="error" if err_msg else "info",
+                    type=tkinter.messagebox.OK,
+                ).show()
+
+
+def launch(*, quiet: int, verbose: int):
+    from gettext import pgettext
+
+    from vcf_generator_lite.ui.app_text import repository_url
+    from vcf_generator_lite.ui.windows.main_window import VCFGeneratorLiteApp
+
+    setup_logging(quiet=quiet, verbose=verbose)
+    fix_home_env()
+    if not quiet:
+        print(pgettext("startup.source_tip", "💡Tip: Source code is hosted at {url}").format(url=repository_url()))
+
+    app = VCFGeneratorLiteApp()
+    app.mainloop()

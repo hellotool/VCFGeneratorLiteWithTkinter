@@ -2,17 +2,14 @@ from tkinter import Entry, Menu, TclError, Text
 from tkinter.constants import SEL_FIRST
 from typing import Literal
 
-from vcf_generator_lite.utils.locales import scope
-from vcf_generator_lite.utils.tkinter.menu import parse_underline_label
-
-st = scope("entry_widget")
+from vcf_generator_lite.utils.tkinter.menu import pgettext_menu_label
 
 
 def boolean_to_state(state: bool) -> Literal["normal", "disabled"]:
     return "normal" if state else "disabled"
 
 
-def state_to_boolean(state: Literal["normal", "disabled"]) -> bool:
+def state_to_boolean(state: str) -> bool:
     return state == "normal"
 
 
@@ -33,40 +30,40 @@ class TextContextMenu(Menu):
         self.master.focus()
         self.delete(0, "end")
         state_by_selected = boolean_to_state(self.is_selected())
-        is_master_editable = state_to_boolean(self.master.cget("state"))
+        is_master_editable = state_to_boolean(str(self.master.cget("state")))
         if is_master_editable:
             self.add_command(
-                **parse_underline_label(st("menu_undo")),
+                **pgettext_menu_label("widget_entry.menu_undo", "&Undo"),
                 command=lambda: self.master.event_generate("<<Undo>>"),
             )
             self.add_command(
-                **parse_underline_label(st("menu_redo")),
+                **pgettext_menu_label("widget_entry.menu_redo", "&Redo"),
                 command=lambda: self.master.event_generate("<<Redo>>"),
             )
             self.add_separator()
             self.add_command(
-                **parse_underline_label(st("menu_cut")),
+                **pgettext_menu_label("widget_entry.menu_cut", "Cu&t"),
                 command=lambda: self.master.event_generate("<<Cut>>"),
                 state=state_by_selected,
             )
         self.add_command(
-            **parse_underline_label(st("menu_copy")),
+            **pgettext_menu_label("widget_entry.menu_copy", "&Copy"),
             command=lambda: self.master.event_generate("<<Copy>>"),
             state=state_by_selected,
         )
         if is_master_editable:
             self.add_command(
-                **parse_underline_label(st("menu_paste")),
+                **pgettext_menu_label("widget_entry.menu_paste", "&Paste"),
                 command=lambda: self.master.event_generate("<<Paste>>"),
             )
             self.add_command(
-                **parse_underline_label(st("menu_delete")),
+                **pgettext_menu_label("widget_entry.menu_delete", "&Delete"),
                 command=lambda: self.master.event_generate("<<Clear>>"),
                 state=state_by_selected,
             )
         self.add_separator()
         self.add_command(
-            **parse_underline_label(st("menu_select_all")),
+            **pgettext_menu_label("widget_entry.menu_select_all", "Select &All"),
             command=lambda: self.master.event_generate("<<SelectAll>>"),
         )
         self.tk_popup(x, y)

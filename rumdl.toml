@@ -1,0 +1,36 @@
+# https://rumdl.dev/global-settings/
+exclude = ["build", "dist", ".venv", ".pytest_cache"]
+flavor = "gfm"
+
+[line-length]
+enabled = false
+
+[no-inline-html]
+enabled = false
+
+[first-line-heading]
+enabled = false
+
+[no-space-in-code]
+enabled = false
+
+[link-image-reference-definitions]
+enabled = false
+
+[no-emphasis-as-heading]
+punctuation = ".,;:!?。，；：！？"
+
+[ul-style]
+style = "dash"
+
+[ol-prefix]
+style = "ordered"
+
+[blanks-around-fences]
+list_items = false
+
+[code-block-style]
+style = "fenced"
+
+[code-fence-style]
+style = "backtick"

@@ -1,11 +1,11 @@
 {
-  "recommendations": [
-    "chouzz.vscode-innosetup",
-    "davidanson.vscode-markdownlint",
-    "ms-python.debugpy",
-    "ms-python.python",
-    "ms-python.vscode-pylance",
-    "charliermarsh.ruff",
-    "ms-vscode.powershell"
-  ]
+    "recommendations": [
+        "chouzz.vscode-innosetup",
+        "ms-python.debugpy",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "redhat.vscode-xml",
+        "rvben.rumdl"
+    ]
 }
