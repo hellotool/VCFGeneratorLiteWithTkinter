@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter
+enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+    <metadata>
+        <!-- == PACKAGE SPECIFIC SECTION == -->
+        <id>vcf-generator-lite.install</id>
+        <version>$dynamic:{version_windows}</version>
+        <packageSourceUrl>$dynamic:{repository_url}</packageSourceUrl>
+        <owners>$dynamic:{author}</owners>
+        <!-- ============================== -->
+
+        <!-- == SOFTWARE SPECIFIC SECTION == -->
+        <title>$dynamic:{display_name} (Install)</title>
+        <authors>$dynamic:{author}</authors>
+        <projectUrl>$dynamic:{repository_url}</projectUrl>
+        <iconUrl>$dynamic:{icon_url_cdn}</iconUrl>
+        <copyright>$dynamic:{copyright}</copyright>
+        <licenseUrl>$dynamic:{license_url}</licenseUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <projectSourceUrl>$dynamic:{repository_url}</projectSourceUrl>
+        <bugTrackerUrl>$dynamic:{bug_tracker_url}</bugTrackerUrl>
+        <tags>vcf-generator make-vcf vcf vcard-generator make-vcard vcard contacts</tags>
+        <summary>$dynamic:{summary}</summary>
+        <description>$dynamic:{description}</description>
+        <!-- =============================== -->
+    </metadata>
+    <files>
+        <file src="tools\**" target="tools" />
+        <file src="tools-generated\**" target="tools" />
+
+        <!-- Include the setup executable -->
+        <file src="..\..\..\dist\$dynamic:{installer_filename}" target="tools" />
+    </files>
+</package>
