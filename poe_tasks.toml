@@ -16,8 +16,8 @@ default_item_type = "cmd"
 help = "Fix code"
 cmd = "ruff check --fix"
 
-[tasks.precommit]
-help = "Run local checks"
+[tasks.ensure-quality]
+help = "Ensure overall quality (format + check + test)"
 parallel = ["format", "check", "test"]
 
 [tasks.build-installer]

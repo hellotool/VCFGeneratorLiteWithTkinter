@@ -31,9 +31,7 @@
    ```
 4. **本地自检**：
    ```bash
-   uv run poe format
-   uv run poe check
-   uv run poe test
+   uv run poe ensure-quality
    ```
 
 ### 2. 提交与合并

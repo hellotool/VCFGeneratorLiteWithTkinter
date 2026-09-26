@@ -1,6 +1,6 @@
 # 0002 本地 precommit 作为验证契约
 
-- 状态: 已采纳
+- 状态: 已取代（由 [0004](./0004-rename-precommit-to-ensure-quality.md) 取代）
 - 日期: 2026-07-23
 
 ## 背景

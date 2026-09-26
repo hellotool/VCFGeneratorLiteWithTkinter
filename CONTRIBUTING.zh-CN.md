@@ -52,9 +52,7 @@
 6. 编写代码。
 7. 运行以下命令，确保代码符合规范且未引入错误：
    ```bash
-   uv run poe format
-   uv run poe check
-   uv run poe test
+   uv run poe ensure-quality
    ```
 8. 提交代码。
 9. 向本仓库提交 PR。
