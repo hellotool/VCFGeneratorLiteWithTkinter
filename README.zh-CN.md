@@ -22,6 +22,7 @@ VCF 生成器 轻量版 是一个简单高效的应用，可以将联系人列�
 
 基于 Python 与 Tkinter 构建，提供原生桌面应用体验。
 
+![哈兔工具 - 实验性项目](https://img.shields.io/badge/哈兔工具-实验性项目-00897b)
 [![Apache 2.0 许可证](https://img.shields.io/github/license/hellotool/VCFGeneratorLiteWithTkinter?label=许可证)](./LICENSE)
 [![贡献者公约 2.1](https://img.shields.io/badge/贡献者公约-2.1-4baaaa.svg)](./CODE_OF_CONDUCT.zh-CN.md)
 

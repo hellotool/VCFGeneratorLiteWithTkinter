@@ -22,6 +22,7 @@ VCF Generator Lite is a simple and efficient application that converts contact l
 
 Built with Python and Tkinter for a native desktop application.
 
+![Hello Tool - Experimental](https://img.shields.io/badge/Hello_Tool-Experimental-00897b)
 [![Apache 2.0 License](https://img.shields.io/github/license/hellotool/VCFGeneratorLiteWithTkinter)](./LICENSE)
 [![Contributor Covenant 2.1](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](./CODE_OF_CONDUCT.md)
 
