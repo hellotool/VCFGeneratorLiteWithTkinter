@@ -9,7 +9,7 @@ def lookup_font(
     style_name: str,
     option: str,
     state: Iterable[str] | None = None,
-    default: Any | None = None,  # noqa: ANN401
+    default: Any | None = None,  # ruff: ignore[any-type]
 ) -> Font:
     """Lookup font from style object and return Font object."""
     treeview_font_lookup = style_obj.lookup(

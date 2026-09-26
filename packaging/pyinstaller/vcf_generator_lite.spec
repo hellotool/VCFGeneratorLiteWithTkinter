@@ -78,7 +78,7 @@ exe = EXE(
             date=(0, 0),
         ),
         kids=[
-            # TODO @Jesse205: 本地化  # noqa: FIX002, TD003
+            # TODO @Jesse205: 本地化  # ruff: ignore[line-contains-todo, missing-todo-link]
             StringFileInfo(
                 [
                     StringTable(

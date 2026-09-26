@@ -35,7 +35,7 @@ def center_reference_rect(window: Tk | Toplevel, rect_x: int, rect_y: int, rect_
     client_x_max = client_x_min + window.winfo_vrootwidth() - window.winfo_width()
     client_y_min = window.winfo_vrooty()
     client_y_max = client_y_min + window.winfo_vrootheight() - window.winfo_height()
-    if window._windowingsystem == "aqua":  # noqa: SLF001
+    if window._windowingsystem == "aqua":  # ruff: ignore[private-member-access]
         client_y_min = max(client_y_min, 22)
 
     client_x = rect_x + (rect_width - window.winfo_width()) // 2
@@ -77,5 +77,7 @@ def withdraw_cm(wm: Wm):
     所有属性配置完成后再显示窗口，避免窗口在左上角短暂闪现的异常现象。
     """
     wm.wm_withdraw()
-    yield
-    wm.wm_deiconify()
+    try:
+        yield
+    finally:
+        wm.wm_deiconify()

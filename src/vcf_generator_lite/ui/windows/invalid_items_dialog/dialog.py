@@ -4,8 +4,8 @@ from tkinter import Event, Tk, Toplevel
 from typing import override
 
 from vcf_generator_lite.core.vcf_generator import InvalidItem
-from vcf_generator_lite.ui.windows.base_window import EnhancedDialog
 from vcf_generator_lite.ui.windows.base_window.constants import EVENT_EXIT
+from vcf_generator_lite.ui.windows.base_window.windows import EnhancedDialog
 from vcf_generator_lite.ui.windows.invalid_items_dialog.layout import InvalidItemsLayout
 
 

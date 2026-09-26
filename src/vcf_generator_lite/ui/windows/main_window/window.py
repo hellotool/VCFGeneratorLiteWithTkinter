@@ -11,8 +11,8 @@ from typing import TYPE_CHECKING, NamedTuple, TextIO, override
 from vcf_generator_lite.core.phone_detector_loader import load_country_phone_detectors
 from vcf_generator_lite.core.vcf_generator import GenerationResult, InvalidItem, PhoneRule, VCFGeneratorTask
 from vcf_generator_lite.ui.app_text import app_name
-from vcf_generator_lite.ui.windows.base_window import EnhancedTk
 from vcf_generator_lite.ui.windows.base_window.constants import EVENT_EXIT
+from vcf_generator_lite.ui.windows.base_window.windows import EnhancedTk
 from vcf_generator_lite.ui.windows.main_window.layout import MainLayout
 from vcf_generator_lite.ui.windows.main_window.menu_bar import MainMenuBar
 from vcf_generator_lite.ui.windows.main_window.message_boxes import (
@@ -158,7 +158,7 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
         self._prepare_ui_for_generation()
         self._start_generation_task(input_text, selected_rules, file, file_io)
 
-    def _pick_and_open_file(self) -> None | tuple[Path, TextIO]:
+    def _pick_and_open_file(self) -> tuple[Path, TextIO] | None:
         file_path_str = filedialog.asksaveasfilename(
             title=pgettext("window_save_vcf.title", "Select File Save Location"),
             parent=self,
@@ -250,7 +250,7 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
         generation = self._require_generation()
         self.current_generation = None
         self.layout.set_generating(GenerationState.IDLE)
-        self.menu_bar.set_generating_state(GenerationState.IDLE)
+        self.menu_bar.set_generating_state(state=GenerationState.IDLE)
         self.update()
 
         if not self.is_exiting:

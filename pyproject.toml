@@ -15,10 +15,10 @@ console = ["colorlog>=6.12.0"]
 
 [dependency-groups]
 basic = ["poethepoet>=0.48.0"]
-lint = ["pyright>=1.1.411", "ruff>=0.16.6"]
+lint = ["pyright>=1.1.414", "ruff>=0.16.9"]
 test = ["pytest>=9.0.3"]
-build = ["packaging>=26.3", "pyinstaller>=6.22.2", "requests>=2.34.2"]
-docs = ["jinja2>=3.1.6", "rumdl>=0.2.66"]
+build = ["packaging>=26.3", "pyinstaller>=6.22.3", "requests>=2.34.2"]
+docs = ["jinja2>=3.1.6", "rumdl>=0.2.77"]
 l10n = ["babel>=2.18.0"]
 dev = [
     "colorlog>=6.9.0",
@@ -39,7 +39,7 @@ Issues = "https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/issues/new/cho
 vcf-generator-lite = "vcf_generator_lite.__main__:main"
 
 [build-system]
-requires = ["uv_build>=0.11.3,<0.12"]
+requires = ["uv_build>=0.12.19,<0.13"]
 build-backend = "uv_build"
 
 [tool.poe]

@@ -2,6 +2,7 @@
 
 line-length = 120
 include = [
+    "ruff.toml",
     "pyproject.toml",
     "src/**/*.py",
     "tests/**/*.py",
@@ -11,32 +12,48 @@ include = [
 ]
 
 [lint]
+preview = true
 ignore = [
-    "D100",    # 有时候文档不是必须的
-    "D101",
-    "D102",
-    "D103",
-    "D104",
-    "D107",
-    "D400",    # 不支持中文标点
-    "PLC0415", # 为了防止兼容性问题或者不必要的代码运行，需要将导入放到函数内。
-    "FBT001",  # 在设置单个值时不需要命名参数
-    "FBT003",
-    "ICN001",  # 很多情况下简写语义不明，要尽量避免简写
-    "T201",    # 有 CLI 需求
-    "PLR0913", # 参数多不是问题，问题是参数多且没使用命名参数
-    "PLR2004", # 有时候，一些长度判断、常见状态码不需要常量
-    "S113",    # 万一就是要等很长时间
-    "ANN003",  # 无法做到
-    "ANN201",  # 为了保持简洁，None 类型不写返回类型
-    "ANN202",
-    "ANN204",
-    "COM812",  # 可能与 Formatter 冲突
-    "TRY003",  # 没有必要
-    "EM101",
-    "EM102",
+    "undocumented-public-module",    # 有时候文档不是必须的
+    "undocumented-public-class",
+    "undocumented-public-method",
+    "undocumented-public-function",
+    "undocumented-public-package",
+    "undocumented-public-init",
+    "missing-trailing-period",    # 不支持中文标点
+    "import-outside-top-level", # 为了防止兼容性问题或者不必要的代码运行，需要将导入放到函数内。
+    "boolean-type-hint-positional-argument",  # 在设置单个值时不需要命名参数
+    "boolean-positional-value-in-call",
+    "unconventional-import-alias",  # 很多情况下简写语义不明，要尽量避免简写
+    "print",    # 有 CLI 需求
+    "too-many-arguments", # 参数多不是问题，问题是参数多且没使用命名参数
+    "magic-value-comparison", # 一些长度判断、常见状态码不需要常量
+    "request-without-timeout",    # 万一就是要等很长时间
+    "missing-type-kwargs",  # 无法做到
+    "missing-return-type-undocumented-public-function",  # 为了保持简洁，None 类型不写返回类型
+    "missing-return-type-private-function",
+    "missing-return-type-special-method",
+    "missing-trailing-comma",  # 可能与 Formatter 冲突
+    "raise-vanilla-args",  # 没有必要嵌套业务错误类
+    "raw-string-in-exception",
+    "f-string-in-exception",
+    "missing-copyright-notice", # 有例外版权再加
+    "docstring-missing-returns", #有时这些文档说明不是必须的
+    "docstring-missing-yields",
+    "docstring-missing-exception",
+    "suspicious-subprocess-import",
 ]
-select = ["ALL"]
+select = [
+    "correctness",
+    "suspicious",
+    "complexity",
+    "performance",
+    "style",
+    "security",
+    "formatting",
+    "pedantic",
+    "restriction",
+]
 allowed-confusables = ["，", "：", "（", "）", "；"] # 允许中文符号
 exclude = ["tests/**"]
 

@@ -11,9 +11,9 @@ class DefaultThemePatcher(BaseThemePatcher):
         self._patch_builtin_theme_common()
 
         theme_name = self.style.theme_use()
-        if theme_name in ("vista", "winnative", "xpnative"):
+        if theme_name in {"vista", "winnative", "xpnative"}:
             self._patch_vista_theme()
-        elif theme_name in ("clam", "alt", "default", "classic"):
+        elif theme_name in {"clam", "alt", "default", "classic"}:
             self._patch_builtin_cross_platform_theme()
         self._patch_legacy_widgets()
 

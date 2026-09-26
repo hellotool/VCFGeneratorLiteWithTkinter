@@ -35,12 +35,10 @@ def extract():
         env["PYTHONPATH"] = scripts_root + (os.pathsep + existing_pythonpath if existing_pythonpath else "")
         dynamic_args = []
         if app_metadata.copyright:
-            dynamic_args.append("--copyright-holder")
-            dynamic_args.append(app_metadata.author)
+            dynamic_args.extend(("--copyright-holder", app_metadata.author))
         if app_metadata.author_email:
-            dynamic_args.append("--msgid-bugs-address")
-            dynamic_args.append(app_metadata.author_email)
-        subprocess.run(  # noqa: S603
+            dynamic_args.extend(("--msgid-bugs-address", app_metadata.author_email))
+        subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
             [
                 babel_path,
                 "extract",
@@ -68,7 +66,7 @@ def extract():
 
 def initialize(locale: str):
     babel_path = require_babel()
-    subprocess.run(  # noqa: S603
+    subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [
             babel_path,
             "init",
@@ -88,7 +86,7 @@ def initialize(locale: str):
 
 def update():
     babel_path = require_babel()
-    subprocess.run(  # noqa: S603
+    subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [
             babel_path,
             "update",
@@ -108,9 +106,8 @@ def compile_(locale: str | None):
     babel_path = require_babel()
     dynamic_args = []
     if locale is not None:
-        dynamic_args.append("--locale")
-        dynamic_args.append(locale)
-    subprocess.run(  # noqa: S603
+        dynamic_args.extend(("--locale", locale))
+    subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [
             babel_path,
             "compile",

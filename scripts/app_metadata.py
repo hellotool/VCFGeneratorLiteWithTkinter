@@ -87,10 +87,10 @@ class AppMetadata:
 
 
 def get_pkg_metadata(name: str) -> Metadata:
-    _metadata_raw = Distribution.from_name(name).read_text("METADATA")
-    if _metadata_raw is None:
+    metadata_raw = Distribution.from_name(name).read_text("METADATA")
+    if metadata_raw is None:
         raise RuntimeError("Failed to read metadata")
-    return Metadata.from_email(_metadata_raw)
+    return Metadata.from_email(metadata_raw)
 
 
 app_pkg_metadata = get_pkg_metadata("vcf_generator_lite")

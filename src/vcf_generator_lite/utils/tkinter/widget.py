@@ -26,7 +26,7 @@ def needs_sizegrip(parent: Misc) -> bool:
 
     详见 `平台特定说明 <https://docs.python.org/zh-cn/3.14/library/tkinter.ttk.html#platform-specific-notes>`_。
     """
-    if parent._windowingsystem != "win32":  # noqa: SLF001
+    if parent._windowingsystem != "win32":  # ruff: ignore[private-member-access]
         return False
 
     return any(parent.winfo_toplevel().resizable())

@@ -20,4 +20,9 @@
   },
   "rumdl.enable": true,
   "rumdl.configPath": "rumdl.toml",
+  "evenBetterToml.schema.associations": {
+    ".*/ruff.toml": "https://json.schemastore.org/ruff.json",
+    ".*/rumdl.toml": "https://json.schemastore.org/rumdl.json",
+    ".*/uv.toml": "https://json.schemastore.org/uv.json",
+  },
 }

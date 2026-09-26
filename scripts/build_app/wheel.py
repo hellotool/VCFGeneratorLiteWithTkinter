@@ -10,7 +10,7 @@ PATH_DIST_WHEEL = PATH_DIST.joinpath(f"vcf_generator_lite-{app_version_variants.
 
 def build_wheel():
     uv_path = require_uv()
-    subprocess.run([uv_path, "build", "--wheel"], text=True, check=True)  # noqa: S603
+    subprocess.run([uv_path, "build", "--wheel"], text=True, check=True)  # ruff: ignore[subprocess-without-shell-equals-true]
 
 
 def require_wheel_dist() -> Path:

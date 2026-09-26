@@ -30,7 +30,7 @@ def _get_render_targets() -> Iterator[tuple[str, str]]:
 
 
 def render() -> None:
-    env = Environment(loader=FileSystemLoader(PATH_TEMPLATES), autoescape=False)  # noqa: S701
+    env = Environment(loader=FileSystemLoader(PATH_TEMPLATES), autoescape=False)  # ruff: ignore[jinja2-autoescape-false]
     ctx = {
         "runtime": RUNTIME,
         "optional": OPTIONAL,

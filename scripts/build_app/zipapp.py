@@ -28,7 +28,7 @@ def build_zipapp(*, force: bool = False):
         zipapp_build_path = Path(zipapp_build_path_str)
         site_packages_path = zipapp_build_path / "site-packages"
 
-        subprocess.run(  # noqa: S603
+        subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
             [
                 uv_path,
                 "pip",
@@ -49,7 +49,7 @@ def build_zipapp(*, force: bool = False):
 
         for info_dir_paths in site_packages_path.glob("*.dist-info"):
             for file in info_dir_paths.iterdir():
-                if file.name not in ("METADATA", "licenses"):
+                if file.name not in {"METADATA", "licenses"}:
                     if file.is_file():
                         file.unlink()
                     else:

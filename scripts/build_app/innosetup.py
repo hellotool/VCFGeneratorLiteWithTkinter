@@ -81,7 +81,7 @@ def build_installer(*, no_verify_ssl: bool = False, force: bool = False, force_d
             architectures_allowed = "x86compatible"
             architectures_install_in64_bit_mode = ""
 
-    subprocess.run(  # noqa: S603
+    subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [
             iscc_path,
             "/D" + f"OutputBaseFilename={DISTRIBUTION_INSTALLER_BASE_NAME}",

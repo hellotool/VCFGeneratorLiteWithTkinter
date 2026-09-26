@@ -127,7 +127,7 @@ class VCFGeneratorTask(Thread):
         for future in done:
             if (future_exception := future.exception()) and not isinstance(future_exception, ShutDownError):
                 exception = future_exception
-                _logger.exception("An error occurred during VCF generation.", exc_info=exception)
+                _logger.error("An error occurred during VCF generation.", exc_info=exception)
 
         self.result = result = GenerationResult(
             invalid_items=self._invalid_items,

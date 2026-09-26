@@ -16,7 +16,7 @@ class DefaultAccelerators(NamedTuple):
 
 
 def _create_default_accelerators(root: Tk) -> DefaultAccelerators:
-    match root._windowingsystem:  # noqa: SLF001
+    match root._windowingsystem:  # ruff: ignore[private-member-access]
         case "win32":
             return DefaultAccelerators(
                 undo="Ctrl+Z",
