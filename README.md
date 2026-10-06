@@ -8,8 +8,8 @@
 [![GitHub secondary repository](https://img.shields.io/badge/GitHub-secondary_repo-0969da?logo=github)][repository-github]
 
 **Platforms**:
-[![Windows 8.1+](https://img.shields.io/badge/Windows_8.1+-0078D4?logo=windows)][release-gitee]
-[![Python 3.12+](https://img.shields.io/badge/Python_3.12+-3776AB?logo=python&logoColor=f5f5f5)][release-gitee]
+[![Windows 8.1+](https://img.shields.io/badge/Windows-8.1+-0078D4?logo=windows)][release-gitee]
+[![Python® 3.12+](https://img.shields.io/badge/Python®-3.12+-ffdf76?logo=python&logoColor=f5f5f5&labelColor=3776ab)][release-gitee]
 
 **Languages**:
 [简体中文](./README.zh-CN.md) |

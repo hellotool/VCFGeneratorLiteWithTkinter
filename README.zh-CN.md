@@ -8,8 +8,8 @@
 [![GitHub 副仓库](https://img.shields.io/badge/GitHub-副仓库-0969da?logo=github)][repository-github]
 
 **平台**：
-[![Windows 8.1+](https://img.shields.io/badge/Windows_8.1+-0078D4?logo=windows)][release-gitee]
-[![Python 3.12+](https://img.shields.io/badge/Python_3.12+-3776AB?logo=python&logoColor=f5f5f5)][release-gitee]
+[![Windows 8.1+](https://img.shields.io/badge/Windows-8.1+-0078D4?logo=windows)][release-gitee]
+[![Python® 3.12+](https://img.shields.io/badge/Python®-3.12+-ffdf76?logo=python&logoColor=f5f5f5&labelColor=3776ab)][release-gitee]
 
 **语言**：
 **简体中文** |
