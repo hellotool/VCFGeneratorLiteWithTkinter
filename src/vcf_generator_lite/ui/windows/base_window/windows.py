@@ -2,7 +2,6 @@ import logging
 from abc import ABC
 from tkinter import Event, PhotoImage, Tk, Toplevel, Wm
 from tkinter.ttk import Style
-from types import TracebackType
 from typing import TYPE_CHECKING, override
 
 from vcf_generator_lite.ui.themes.default_theme_patcher import DefaultThemePatcher
@@ -17,6 +16,8 @@ from vcf_generator_lite.utils.tkinter.window import (
 )
 
 if TYPE_CHECKING:
+    from types import TracebackType
+
     from vcf_generator_lite.ui.themes.abstract import ThemePatcher
 
 __all__ = ["EnhancedDialog", "EnhancedTk", "EnhancedToplevel"]
@@ -42,7 +43,7 @@ class AppWindowExtension(GeometryWindowExtension, WindowExtension, ABC):
         self.bind(EVENT_EXIT, lambda _: self.destroy())
 
 
-def raise_callback_exception(_exc: type[BaseException], val: BaseException, _tb: TracebackType | None = None):
+def raise_callback_exception(_exc: type[BaseException], val: BaseException, _tb: "TracebackType | None" = None):
     raise val
 
 
