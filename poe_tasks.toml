@@ -19,7 +19,8 @@ default_item_type = "cmd"
 
 [tasks.lint-fix]
 help = "Apply autofixable lint fixes without formatting"
-cmd = "ruff check --fix"
+parallel = ["ruff check --fix", "rumdl check --fix"]
+default_item_type = "cmd"
 
 [tasks.check]
 help = "Run all read-only checks (format-check + lint)"

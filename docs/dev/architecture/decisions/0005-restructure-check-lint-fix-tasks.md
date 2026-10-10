@@ -18,7 +18,7 @@
 按"裸动词等于工具自身的默认行为"重组 `poe_tasks.toml`：
 
 - `lint` = `ruff check` + `pyright` + `rumdl check`，承接原 `check` 的职责（只读，因为 `ruff check` 默认只读）。
-- `lint-fix` = `ruff check --fix`，即原 `fix` 的窄能力。
+- `lint-fix` = `ruff check --fix` + `rumdl check --fix`，即原 `fix` 的窄能力，覆盖范围与 `lint` 对齐（`pyright` 无自动修复能力，故不在列）。
 - `format` = `ruff format` + `rumdl fmt`，名称与写文件行为均不变（因为 `ruff format` 默认就写）。
 - `format-check` = `ruff format --check` + `rumdl fmt --check`，补上此前缺失的只读格式检查。
 - `check` = `format-check` + `lint`，全部只读，可安全用于 CI 与钩子。
