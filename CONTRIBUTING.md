@@ -50,9 +50,10 @@ Detailed guides for each task:
 4. Read the [Development Guide](./docs/dev/index.md) to familiarize yourself with the project's development practices.
 5. Create a branch, such as `feature/xxx` or `bugfix/xxx`.
 6. Write your code.
-7. Run the following command to ensure the code complies with standards and introduces no errors:
+7. Run the following commands to ensure the code complies with standards and introduces no errors:
    ```bash
-   uv run poe ensure-quality
+   uv run poe fix
+   uv run poe test
    ```
 8. Commit your code.
 9. Submit a PR to this repository.

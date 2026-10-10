@@ -1,6 +1,6 @@
 # 0004 将 precommit 任务更名为 ensure-quality
 
-- 状态: 已采纳，取代 [0002](./0002-local-precommit-as-verification-contract.md)
+- 状态: 已取代（由 [0005](./0005-restructure-check-lint-fix-tasks.md) 取代），曾取代 [0002](./0002-local-precommit-as-verification-contract.md)
 - 日期: 2026-09-26
 
 ## 背景

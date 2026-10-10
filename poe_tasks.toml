@@ -7,18 +7,27 @@ help = "Format code and docs"
 parallel = ["ruff format", "rumdl fmt"]
 default_item_type = "cmd"
 
-[tasks.check]
-help = "Check code and docs"
+[tasks.format-check]
+help = "Check formatting without modifying files"
+parallel = ["ruff format --check", "rumdl fmt --check"]
+default_item_type = "cmd"
+
+[tasks.lint]
+help = "Lint and type-check code and docs"
 parallel = ["ruff check", "pyright", "rumdl check"]
 default_item_type = "cmd"
 
-[tasks.fix]
-help = "Fix code"
+[tasks.lint-fix]
+help = "Apply autofixable lint fixes without formatting"
 cmd = "ruff check --fix"
 
-[tasks.ensure-quality]
-help = "Ensure overall quality (format + check + test)"
-parallel = ["format", "check", "test"]
+[tasks.check]
+help = "Run all read-only checks (format-check + lint)"
+parallel = ["format-check", "lint"]
+
+[tasks.fix]
+help = "Fix code and docs, then verify (lint-fix -> format -> check)"
+sequence = ["lint-fix", "format", "check"]
 
 [tasks.build-installer]
 help = "Build installer (*-setup.exe)"

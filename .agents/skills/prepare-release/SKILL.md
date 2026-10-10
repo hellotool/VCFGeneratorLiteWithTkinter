@@ -41,8 +41,7 @@ This skill prepares a new release for the project.
 
 8. **Validate**: Run the following commands:
    ```bash
-   uv run poe format
-   uv run poe check
+   uv run poe fix
    uv run poe test
    ```
    - If any command fails, abort and report the failure.

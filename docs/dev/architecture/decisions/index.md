@@ -9,7 +9,8 @@
 | [0001](./0001-markdown-lint-with-rumdl.md) | 使用 rumdl 做 Markdown 风格门禁 | 已采纳 | 2026-07-23 | 采用 rumdl，配置源 = 根目录 `rumdl.toml`，删除 `.markdownlint.yml`，链接检查不纳入 |
 | [0002](./0002-local-precommit-as-verification-contract.md) | 本地 precommit 作为验证契约 | 已取代（由 [0004](./0004-rename-precommit-to-ensure-quality.md) 取代） | 2026-07-23 | `precommit`（后更名 `ensure-quality`）= `format → check → test` 为验证契约，`check` 内含 rumdl，CI 仅跑 test 为已知缺口 |
 | [0003](./0003-poe-tasks-in-dedicated-file.md) | Poe 任务定义置于独立文件 | 已采纳 | 2026-09-06 | 任务定义迁至根目录 `poe_tasks.toml`，`pyproject.toml` 仅留 `executor` + `include` 指针；弃用 packaged tasks |
-| [0004](./0004-rename-precommit-to-ensure-quality.md) | 将 precommit 任务更名为 ensure-quality | 已采纳 | 2026-09-26 | `precommit` 更名为 `ensure-quality`，仍等于 `format → check → test`；散落的 `format + check + test` 序列统一为单个 `poe ensure-quality`；CI 不受影响 |
+| [0004](./0004-rename-precommit-to-ensure-quality.md) | 将 precommit 任务更名为 ensure-quality | 已取代（由 [0005](./0005-restructure-check-lint-fix-tasks.md) 取代） | 2026-09-26 | `precommit` 更名为 `ensure-quality`，仍等于 `format → check → test`；散落的 `format + check + test` 序列统一为单个 `poe ensure-quality`；CI 不受影响 |
+| [0005](./0005-restructure-check-lint-fix-tasks.md) | 按 lint / check / fix 语义重组校验任务 | 已采纳 | 2026-10-07 | 裸动词等于工具默认行为（`lint` 只读、`format` 写文件），后缀标出反面（`lint-fix`、`format-check`）；`check` = `format-check` + `lint` 全只读，`fix` = `lint-fix → format → check` 用 `sequence` 保序且不含 `test`，本地校验为 `fix` + `test` 两条 |
 
 ## 风格
 

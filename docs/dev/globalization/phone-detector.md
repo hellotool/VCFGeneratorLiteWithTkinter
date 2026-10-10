@@ -66,7 +66,7 @@ PhoneDetector(
 提交前请确保代码通过 Ruff 和 Pyright 检查：
 
 ```bash
-uv run poe check
+uv run poe lint
 ```
 
 同时运行格式化：

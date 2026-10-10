@@ -23,10 +23,12 @@ VCF 生成器 轻量版 是一个轻量级 vCard 文件生成器，用户提供�
 
 - 安装依赖：`uv sync`
 - 运行测试：`uv run poe test`
-- 格式化代码与文档：`uv run poe format`（代码 `ruff format` + 文档 `rumdl fmt .`）
-- 检查代码与文档：`uv run poe check`（`ruff check` + `pyright` + `rumdl check`，规则见根目录 `rumdl.toml`）
-- 修复代码：`uv run poe fix`
-- 本地校验：`uv run poe ensure-quality`（`format` + `check` + `test`）
+- 格式化代码与文档：`uv run poe format`（代码 `ruff format` + 文档 `rumdl fmt`，**会改写文件**）
+- 检查格式：`uv run poe format-check`（`ruff format --check` + `rumdl fmt --check`，只读）
+- 静态检查：`uv run poe lint`（`ruff check` + `pyright` + `rumdl check`，规则见根目录 `rumdl.toml`，只读）
+- 修复 lint 问题：`uv run poe lint-fix`（`ruff check --fix`，不改格式）
+- 全量只读检查：`uv run poe check`（`format-check` + `lint`）
+- 修复并验证：`uv run poe fix`（`lint-fix` → `format` → `check`，按序执行）
 
 ## 文件组织
 
@@ -97,7 +99,7 @@ VCF 生成器 轻量版 是一个轻量级 vCard 文件生成器，用户提供�
 
 ### 工具验证
 
-- **必须**本地跑通 `uv run poe ensure-quality`。
+- **必须**本地跑通 `uv run poe fix` 与 `uv run poe test`。
 
 ### 其他
 

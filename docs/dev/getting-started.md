@@ -69,12 +69,15 @@ uv sync
 
 项目使用 Poe the Poet 作为任务运行器，常用命令如下：
 
-| 命令                | 说明                       |
-| ------------------- | -------------------------- |
-| `uv run poe test`   | 运行测试                   |
-| `uv run poe format` | 格式化代码（Ruff）         |
-| `uv run poe check`  | 检查代码（Ruff + Pyright） |
-| `uv run poe fix`    | 自动修复代码问题           |
+| 命令                      | 说明                                    |
+| ------------------------- | --------------------------------------- |
+| `uv run poe test`         | 运行测试                                |
+| `uv run poe format`       | 格式化代码与文档（改写文件）            |
+| `uv run poe format-check` | 检查格式（只读）                        |
+| `uv run poe lint`         | 静态检查（Ruff + Pyright + rumdl）      |
+| `uv run poe lint-fix`     | 修复可自动修复的 lint 问题（不改格式）  |
+| `uv run poe check`        | 全量只读检查（`format-check` + `lint`） |
+| `uv run poe fix`          | 修复并验证（`lint-fix` → `format` → `check`） |
 
 ## 运行应用
 

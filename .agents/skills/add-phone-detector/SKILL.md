@@ -41,7 +41,7 @@ PhoneDetector(
 5. 设置 `length`，覆盖带/不带国际区号的所有情况。
 6. 将新条目追加到 `PHONE_DETECTORS` 列表末尾。
 7. 在 `test_phone_detectors.py` 中新增测试类。
-8. 运行 `uv run poe check` 确保代码通过 Ruff 和 Pyright 检查。
+8. 运行 `uv run poe lint` 确保代码通过 Ruff 和 Pyright 检查。
 9. 运行 `uv run poe test` 确保新增测试通过且现有测试不受影响。
 
 ## 翻译名称
