@@ -13,19 +13,21 @@
 
 ## [未发布]
 
+## [6.0.2] - 2026-10-11
+
 ### 新增
 
 - 启动时校验 Python 与 Tcl/Tk 版本，版本过低或缺失时提示并退出。
+
+### 修复
+
+- 修复 Windows 安装程序中针对旧版 Windows 的运行方案链接引用错误。
 
 ### 变更
 
 - 帮助菜单链接跟随语言设置。
 - 关于对话框的环境信息给出更精确的 Tcl/Tk 版本，并将 Tcl 与 Tk 合并为一行。
 - 打开外部浏览器失败的提示改为指明浏览器，不再表述为外部应用。
-
-### 修复
-
-- 修复 Windows 安装程序中针对旧版 Windows 的运行方案链接引用错误。
 
 ### 移除
 
@@ -409,7 +411,8 @@
 
 - 初始版本发布。
 
-[未发布]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v6.0.1...HEAD
+[未发布]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v6.0.2...HEAD
+[6.0.2]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.2
 [6.0.1]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.1
 [6.0.0]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.0
 [5.0.4]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.4

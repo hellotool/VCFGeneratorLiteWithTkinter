@@ -13,19 +13,21 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 ## [Unreleased]
 
+## [6.0.2] - 2026-10-11
+
 ### Added
 
 - Added startup checks for Python and Tcl/Tk versions, printing an error and exiting when Tcl/Tk is unavailable or outdated.
+
+### Fixed
+
+- Fixed incorrect link reference for legacy Windows runtime solution in Windows installer.
 
 ### Changed
 
 - Help menu links follow language settings.
 - The About dialog reports a more precise Tcl/Tk version and merges the Tcl and Tk lines into one.
 - Reworded the failure message to refer to the web browser instead of an external application.
-
-### Fixed
-
-- Fixed incorrect link reference for legacy Windows runtime solution in Windows installer.
 
 ### Removed
 
@@ -409,7 +411,8 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 - Initial release.
 
-[Unreleased]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v6.0.1...HEAD
+[Unreleased]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v6.0.2...HEAD
+[6.0.2]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.2
 [6.0.1]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.1
 [6.0.0]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.0
 [5.0.4]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v5.0.4
