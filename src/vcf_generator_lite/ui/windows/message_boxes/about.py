@@ -1,5 +1,4 @@
 import platform
-import tkinter
 from gettext import pgettext
 from tkinter import Misc, messagebox
 
@@ -8,6 +7,7 @@ from vcf_generator_lite.ui.app_text import app_copyright, app_description, app_n
 
 
 def show_about_message_box(parent: Misc):
+
     messagebox.showinfo(
         parent=parent,
         title=pgettext("dialog_about.title", "About {app_name}").format(app_name=app_name()),
@@ -23,13 +23,11 @@ def show_about_message_box(parent: Misc):
 
 Environment Information:
 Python: {python_info}
-Tcl: {tcl_info}
-Tk: {tk_info}""",
+Tcl/Tk: {tcltk_info}""",
         ).format(
             description=app_description(),
             copyright=app_copyright(),
-            python_info=f"{platform.python_implementation()} v{platform.python_version()}",
-            tcl_info=f"v{tkinter.TclVersion}",
-            tk_info=f"v{tkinter.TkVersion}",
+            python_info=f"{platform.python_implementation()} {platform.python_version()}",
+            tcltk_info=parent.info_patchlevel(),
         ),
     )
