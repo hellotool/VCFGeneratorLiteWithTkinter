@@ -28,7 +28,9 @@
 
 - 收益：解释器与 Tcl/Tk 的问题在启动最早期收敛为一行可读提示；`bootstrap.py` 不再因顶层导入第三方 GUI 模块而把校验点挤到异常之后；Tcl/Tk 的两条提示可翻译并已入 `zh_CN` 目录。
 - 代价：新增校验自身受 `i18n-mechanism.md` 的导入时序约束。启动路径上共四处 `print`（`bootstrap.py:61`、`115`、`135`、`148`），只有 `115` 这条 Python 版本提示不翻译，因为它是唯一排在补丁之前的用户可见输出；代码里没有把这层时序关系写成注释，容易被后人"顺手补上 pgettext"而重新引入未打补丁时的调用。
-- 缺口（已知，未修）：`console=False` 的产物里 `sys.stdout` / `sys.stderr` 均为 `None`，实测 `print(..., file=sys.stderr)` 不抛异常、内容静默丢弃，因此三条版本提示在打包产物上都不可见，用户只会看到应用没有启动。现有兜底 `stdio_msgbox_if_needed`（`bootstrap.py:90`）只包住 `__main__.py:67` 的参数解析，未覆盖 `require_*`。修复方向是把校验提示改走消息框，或将其纳入该上下文，属于后续独立改动。
+- 缺口（已知，未修）：`console=False` 的产物里 `sys.stdout` / `sys.stderr` 均为 `None`，实测 `print(..., file=sys.stderr)` 不抛异常、内容静默丢弃，因此三条版本提示在打包产物上都不可见，用户只会看到应用没有启动。
+- 该缺口不能靠 `stdio_msgbox_if_needed` 兜住：这个上下文自身依赖它要验证的前提——函数体第一句即 `from tkinter.messagebox import OK, Message`（`bootstrap.py:91`），tkinter 缺失时连上下文都进不去；其 `app_name` 入参来自 `app_text.py:1` 顶部 `from gettext import pgettext` 与 `app_text.py:7` 的调用，要求补丁已经生效。换言之 `require_*` 的职责正是判定这两个前提是否成立，把判定放进依赖前提的通道里构成循环。可用通道只剩不依赖 tkinter 与 gettext 的两类：Windows 下纯标准库的 `ctypes.windll.user32.MessageBoxW`（代价是提示无法翻译），以及项目既有的错误日志文件路径。属后续独立改动，实施时另写一篇决策。
 - 限制：`math.modf` 的拆分假设次版本小于 10（代码注释已记录）；`TK_VERSION_MINIMUM = (8, 6)` 的具体取值依据在项目内没有文档留痕，本 ADR 也不代为论证，后续如需调整应另写一篇说明。
+- 隐性依赖：`require_python()` 能否在低版本解释器上跑到，取决于它之前的导入链是否兼容。按代码走读，`__main__.py:1-2` 与 `bootstrap.py:1-9` 只导入标准库且不含 3.12 专属语法，故判断成立；此处未在旧解释器上实测。若今后有人把带新版本语法的模块提到 `bootstrap.py` 顶层，`require_python()` 会在导入阶段就被绕过，这条保护静默失效且没有任何测试能发现。
 
 [ref-i18n-mechanism]: ../../globalization/i18n-mechanism.md
