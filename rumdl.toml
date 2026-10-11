@@ -19,6 +19,11 @@ enabled = false
 [link-image-reference-definitions]
 enabled = false
 
+[reference-links-images]
+enabled = true
+shortcut-syntax = true
+ignore = ["{{ dep.license }}"]
+
 [no-emphasis-as-heading]
 punctuation = ".,;:!?。，；：！？"
 
