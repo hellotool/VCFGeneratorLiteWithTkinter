@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VCF Generator Lite 6.0.0\n"
 "Report-Msgid-Bugs-To: jesse205@qq.com\n"
-"POT-Creation-Date: 2026-09-06 05:33+0800\n"
-"PO-Revision-Date: 2026-06-15 08:15+0800\n"
+"POT-Creation-Date: 2026-10-11 22:21+0800\n"
+"PO-Revision-Date: 2026-10-11 22:10+0800\n"
 "Last-Translator: Jesse205 <jesse205@qq.com>\n"
 "Language: zh_Hans_CN\n"
 "Language-Team: zh_Hans_CN <LL@li.org>\n"
@@ -181,16 +181,21 @@ msgctxt "cli.help_option_quiet"
 msgid "decrease output (use -qq for errors only)"
 msgstr "减少输出（使用 -qq 仅显示错误）"
 
-#: src/vcf_generator_lite/bootstrap.py:60
+#: src/vcf_generator_lite/bootstrap.py:63
 msgctxt "startup.colorlog_not_available_warning"
 msgid "⚠️WARNING: Colorlog is not available, using plain text instead. Please install colorlog to enable colored logging."
 msgstr "⚠️警告：Colorlog 不可用，将使用纯文本替代。请安装 colorlog 以启用彩色日志记录。"
 
-#: src/vcf_generator_lite/bootstrap.py:115
+#: src/vcf_generator_lite/bootstrap.py:137
 #, python-brace-format
-msgctxt "startup.source_tip"
-msgid "💡Tip: Source code is hosted at {url}"
-msgstr "💡提示：源码已托管到 {url}"
+msgctxt "startup.tcltk_unsupported_error"
+msgid "⚠️ERROR: Tcl/Tk {current_version} is not supported. Please upgrade to Tcl/Tk {minimum_version} or later."
+msgstr "⚠️错误：不支持 Tcl/Tk {current_version}，请升级到 Tcl/Tk {minimum_version} 或更高版本。"
+
+#: src/vcf_generator_lite/bootstrap.py:150
+msgctxt "startup.tcltk_not_available_error"
+msgid "⚠️ERROR: Tcl/Tk is not available. Please install Tcl/Tk."
+msgstr "⚠️错误：Tcl/Tk 不可用，请安装 Tcl/Tk。"
 
 #: src/vcf_generator_lite/configs/phone_detectors.py:10
 msgctxt "phone_detector.china.mainland"
@@ -214,13 +219,13 @@ msgstr "中国台湾"
 
 #: src/vcf_generator_lite/ui/actions/external_app.py:9
 msgctxt "dialog_open_url_failure.title"
-msgid "Failed to Open External Application"
-msgstr "打开外部应用失败"
+msgid "Failed to Open External Browser"
+msgstr "打开外部浏览器失败"
 
 #: src/vcf_generator_lite/ui/actions/external_app.py:11
 msgctxt "dialog_open_url_failure.message"
-msgid "Failed to open external application. Please check your default application settings."
-msgstr "无法打开外部应用，请检查默认应用设置。"
+msgid "Failed to open external browser. Please check your default application settings."
+msgstr "无法打开外部浏览器，请检查默认应用设置。"
 
 #: src/vcf_generator_lite/ui/actions/external_app.py:14
 #, python-brace-format
@@ -618,8 +623,7 @@ msgid ""
 "\n"
 "Environment Information:\n"
 "Python: {python_info}\n"
-"Tcl: {tcl_info}\n"
-"Tk: {tk_info}"
+"Tcl/Tk: {tcltk_info}"
 msgstr ""
 "{description}\n"
 "\n"
@@ -627,8 +631,7 @@ msgstr ""
 "\n"
 "环境信息：\n"
 "Python：{python_info}\n"
-"Tcl：{tcl_info}\n"
-"Tk：{tk_info}"
+"Tcl/Tk：{tcltk_info}"
 
 #: src/vcf_generator_lite/ui/windows/message_boxes/unexpected_error.py:7
 msgctxt "dialog_unexpected_error.title"
@@ -645,4 +648,8 @@ msgstr "发生意外错误，请向维护者报告此问题。"
 msgctxt "dialog_unexpected_error.detail"
 msgid "Error message: {error}"
 msgstr "错误信息：{error}"
+
+#~ msgctxt "startup.source_tip"
+#~ msgid "💡Tip: Source code is hosted at {url}"
+#~ msgstr "💡提示：源码已托管到 {url}"
 
