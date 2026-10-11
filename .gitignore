@@ -11,6 +11,9 @@
 # Caches
 __pycache__
 
+# 本机 Python 安装器写入仓库的运行时副本（约 53 MB，仓库内无任何引用）
+/Python/
+
 # 设计资源输出
 /assets/design/output/**
 
