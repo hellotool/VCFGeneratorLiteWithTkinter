@@ -11,6 +11,8 @@
 | [0003](./0003-poe-tasks-in-dedicated-file.md) | Poe 任务定义置于独立文件 | 已采纳 | 2026-09-06 | 任务定义迁至根目录 `poe_tasks.toml`，`pyproject.toml` 仅留 `executor` + `include` 指针；弃用 packaged tasks |
 | [0004](./0004-rename-precommit-to-ensure-quality.md) | 将 precommit 任务更名为 ensure-quality | 已取代（由 [0005](./0005-restructure-check-lint-fix-tasks.md) 取代） | 2026-09-26 | `precommit` 更名为 `ensure-quality`，仍等于 `format → check → test`；散落的 `format + check + test` 序列统一为单个 `poe ensure-quality`；CI 不受影响 |
 | [0005](./0005-restructure-check-lint-fix-tasks.md) | 按 lint / check / fix 语义重组校验任务 | 已采纳 | 2026-10-07 | 裸动词等于工具默认行为（`lint` 只读、`format` 写文件），后缀标出反面（`lint-fix`、`format-check`）；`check` = `format-check` + `lint` 全只读，`fix` = `lint-fix → format → check` 用 `sequence` 保序且不含 `test`，本地校验为 `fix` + `test` 两条 |
+| [0006](./0006-preflight-runtime-version-checks.md) | 启动阶段前置校验运行时版本 | 已采纳 | 2026-10-11 | `require_python` / `require_tkinter` 按 `setup_l10n` 前后分工（前者提示不翻译、后者可翻译），阈值集中到 `constants.py`，失败即 `sys.exit(1)`；已知缺口是 `console=False` 产物中提示被静默丢弃 |
+| [0007](./0007-register-import-alias-instead-of-ignoring-rule.md) | 用显式别名登记替代整条导入别名规则豁免 | 已采纳 | 2026-10-11 | 不再 `ignore` `unconventional-import-alias`，改为 `aliases` 只登记 `gettext` → `gettextlib`；刻意取其替换语义以放弃 `pd` 一类简写约定，代价是不再约束其他模块的别名 |
 
 ## 风格
 
