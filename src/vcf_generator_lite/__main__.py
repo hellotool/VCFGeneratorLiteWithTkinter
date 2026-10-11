@@ -44,13 +44,17 @@ def get_args_parser() -> "ArgumentParser":
 def main():
     from vcf_generator_lite.bootstrap import (
         launch,
-        redirect_stdio_to_messagebox_if_needed,
+        require_python,
+        require_tkinter,
         setup_excepthook,
         setup_l10n,
+        stdio_msgbox_if_needed,
     )
 
+    require_python()
     # 因为要替换所有 gettext 方法，所以必须在导入主要内容（包括 argparse）之前执行。
     setup_l10n()
+    require_tkinter()
     setup_excepthook()
 
     from vcf_generator_lite.ui.app_text import app_name
@@ -60,7 +64,7 @@ def main():
 
         enable_dpi_aware()
 
-    with redirect_stdio_to_messagebox_if_needed(app_name=app_name()):
+    with stdio_msgbox_if_needed(app_name=app_name()):
         args = get_args_parser().parse_args()
 
     launch(quiet=args.quiet, verbose=args.verbose)
