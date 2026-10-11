@@ -13,13 +13,23 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 ## [Unreleased]
 
+### Added
+
+- Added startup checks for Python and Tcl/Tk versions, printing an error and exiting when Tcl/Tk is unavailable or outdated.
+
 ### Changed
 
 - Help menu links follow language settings.
+- The About dialog reports a more precise Tcl/Tk version and merges the Tcl and Tk lines into one.
+- Reworded the failure message to refer to the web browser instead of an external application.
 
 ### Fixed
 
 - Fixed incorrect link reference for legacy Windows runtime solution in Windows installer.
+
+### Removed
+
+- Removed the startup tip showing where the source code is hosted.
 
 ## [6.0.1] - 2026-06-21
 
