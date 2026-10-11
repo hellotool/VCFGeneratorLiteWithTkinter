@@ -61,14 +61,39 @@ menu_label = pgettext("menu_file", "File")
 
 ### 菜单标签（带助记符）
 
-使用 `pgettext_menu_label`，在原文中用 `&` 标记快捷键字母：
+`pgettext_menu_label` 是 `parse_menu_label` 和 `pgettext` 的组合函数，在原文中用 `&` 标记快捷键字母：
 
 ```python
 from vcf_generator_lite.utils.tkinter.menu import pgettext_menu_label
 
-parsed_label = pgettext_menu_label("window_main.menu_help_about", "&About {app_name}")
-# 返回 ParsedLabel(label="About {app_name}", underline=0)
+parsed_label = pgettext_menu_label("window_main.menu_edit_copy", "&Copy")
+# 返回 ParsedLabel(label="Copy", underline=0)
 ```
+
+`label` 是去掉 `&` 后的显示文本，`underline` 是助记符字符在 `label` 中的索引（从 0 开始），例如 `"Cu&t"` 返回 `ParsedLabel(label="Cut", underline=2)`。两者解包后一起传给 Tkinter：
+
+```python
+menu.add_command(**parsed_label)
+```
+
+> [!IMPORTANT]
+>
+> `underline` 按下标定位，格式化会改变字符串长度，因此**不要在解析之后再格式化**，否则下标会落到错误的字符上。
+>
+> 菜单标签含占位符时不要使用 `pgettext_menu_label`，按**先翻译 → 再格式化 → 最后解析**的顺序手动组合 `pgettext` 与 `parse_menu_label`：
+>
+> ```python
+> from gettext import pgettext
+>
+> from vcf_generator_lite.ui.app_text import app_name
+> from vcf_generator_lite.utils.tkinter.menu import parse_menu_label
+>
+> help_menu.add_command(
+>     **parse_menu_label(
+>         pgettext("window_main.menu_help_about", "&About {app_name}").format(app_name=app_name())
+>     ),
+> )
+> ```
 
 ### 延迟翻译
 
