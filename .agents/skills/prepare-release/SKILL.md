@@ -35,18 +35,24 @@ This skill prepares a new release for the project.
    - Translate the merged content into Chinese for `CHANGELOG.zh-CN.md`.
    - Insert `## [VERSION] - YYYY-MM-DD` followed by the translated content in both files.
 
-7. **Clear Unreleased section**:
+7. **Update link reference definitions**: Both changelogs render version numbers as reference-style links defined at the bottom of the file, so inserting a heading is only half of the work.
+   - Add `[VERSION]: <release tag URL>` directly above the previously newest version definition.
+   - Move the `[Unreleased]` / `[未发布]` compare URL onto the new tag, e.g. `compare/v6.0.1...HEAD` becomes `compare/v6.0.2...HEAD`.
+   - The two files point at different hosts: `CHANGELOG.md` uses `https://github.com/hellotool/VCFGeneratorLiteWithTkinter/...`, `CHANGELOG.zh-CN.md` uses `https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/...`.
+   - Check these definitions by eye. rumdl's MD052 does not recognize reference labels that contain dots, so a missing `[6.0.2]` definition is not reported by `poe check`; only `[Unreleased]` and `[未发布]` are covered by the linter.
+
+8. **Clear Unreleased section**:
    - In `CHANGELOG.md`, remove the Unreleased section's content (the content extracted in step 5), keeping only the header `## [Unreleased]`.
    - In `CHANGELOG.zh-CN.md`, remove the Unreleased section's content (the content extracted in step 5), keeping only the header `## [未发布]`.
 
-8. **Validate**: Run the following commands:
+9. **Validate**: Run the following commands:
    ```bash
    uv run poe fix
    uv run poe test
    ```
    - If any command fails, abort and report the failure.
 
-9. **Check for existing version**: If a section for the target version already exists, abort with an error.
+10. **Check for existing version**: If a section for the target version already exists, abort with an error.
 
 ## Usage
 
