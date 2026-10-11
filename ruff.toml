@@ -24,7 +24,6 @@ ignore = [
     "import-outside-top-level", # 为了防止兼容性问题或者不必要的代码运行，需要将导入放到函数内。
     "boolean-type-hint-positional-argument",  # 在设置单个值时不需要命名参数
     "boolean-positional-value-in-call",
-    "unconventional-import-alias",  # 很多情况下简写语义不明，要尽量避免简写
     "print",    # 有 CLI 需求
     "too-many-arguments", # 参数多不是问题，问题是参数多且没使用命名参数
     "magic-value-comparison", # 一些长度判断、常见状态码不需要常量
@@ -57,9 +56,13 @@ select = [
 allowed-confusables = ["，", "：", "（", "）", "；"] # 允许中文符号
 exclude = ["tests/**"]
 
+[lint.flake8-import-conventions.aliases]
+"gettext"="gettextlib"
+
 [lint.pydocstyle]
 convention = "pep257"
 
 [format]
 docstring-code-format = true
 line-ending = "lf"
+
