@@ -86,6 +86,12 @@ Select a package for your platform and click the guide for detailed installation
 | Cross-platform | Python Wheel           | Optional              | vcf_generator_lite-\<version\>-**py3-none-any**.*whl*     | [Python Wheel](./docs/guides/installation/wheel.md)                  |
 | Cross-platform | Python ZIP Application | No                    | VCFGeneratorLite-\<version\>-**py3**.*pyzw*               | [Python ZIP App](./docs/guides/installation/zipapp.md)               |
 
+From v6.0.2 onward, all release artifacts have build provenance attestations issued on GitHub. No matter where you download them from, you can use the GitHub CLI to verify a file's build provenance (requires access to GitHub):
+
+```bash
+gh attestation verify -o hellotool --signer-workflow hellotool/VCFGeneratorLiteWithTkinter/.github/workflows/build.yml <downloaded-file>
+```
+
 ## Usage
 
 1. Paste your contacts in the format `Name Phone Note` into the text box. The note is optional.

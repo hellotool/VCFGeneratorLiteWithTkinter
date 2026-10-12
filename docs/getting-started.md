@@ -22,6 +22,18 @@
 >
 > 请查阅 [兼容性](./reference/compatibility.md) 了解系统要求。
 
+### 校验文件来源
+
+自 v6.0.2 起，所有发布产物都在 GitHub 上签发构建溯源声明。无论您从何处下载，都可以使用 [GitHub CLI][github-cli] 核验该文件是否出自本项目的构建（核验时需要访问 GitHub）：
+
+```bash
+gh attestation verify -o hellotool \
+  --signer-workflow hellotool/VCFGeneratorLiteWithTkinter/.github/workflows/build.yml \
+  VCFGeneratorLite-v<应用版本>-win-amd64-setup.exe
+```
+
+校验通过说明文件与 GitHub 上记录的构建一致。若提示找不到声明，通常是两种情况之一：该文件属于 v6.0.2 之前的版本，或它的字节与发布时的产物不一致（例如被改写或下载中断）。
+
 ## 生成第一个 vCard 文件
 
 1. 启动应用，进入主窗口。
@@ -47,3 +59,4 @@
 
 [release-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/latest
 [release-github]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/latest
+[github-cli]: https://cli.github.com/

@@ -76,6 +76,11 @@ jobs:
       build-windows-portable: true
       build-python3-zipapp: true
       build-python3-wheel: true
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+      artifact-metadata: write
 
   release:
     name: Upload Release

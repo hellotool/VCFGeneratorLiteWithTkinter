@@ -20,7 +20,7 @@
 | Windows 安装程序 | `VCFGeneratorLite-v{version}-{platform}-setup.exe`    | Windows  |
 | Windows 便携包   | `VCFGeneratorLite-v{version}-{platform}-portable.zip` | Windows  |
 | Python Wheel     | `vcf_generator_lite-{version}-py3-none-any.whl`       | 跨平台   |
-| Python ZIP 应用  | `VCFGeneratorLite.pyzw`                               | 跨平台   |
+| Python ZIP 应用  | `VCFGeneratorLite-v{version}-py3.pyzw`                | 跨平台   |
 
 其中 `{version}` 为项目当前版本号，`{platform}` 为构建平台标识（如 `win-amd64`、`win-arm64`）。
 
@@ -112,9 +112,9 @@ uv run poe build-zipapp --force
 
 构建流程集成了 GitHub Actions（`.github/workflows/`）：
 
-- **`build.yml`**：构建四种产物，可手动触发或在发布流程中被调用。
+- **`build.yml`**：构建四种产物，可手动触发或在发布流程中被调用，并为每种产物生成溯源声明。
 - **`prepare-release.yml`**：自动执行测试、构建、上传产物并创建草稿 Release。
 
-本地构建与 CI 使用相同的 Poe 命令，构建行为一致。详细的发布步骤参见 [发布流程](./release/release-process.md)。
+本地构建与 CI 使用相同的 Poe 命令，产出的文件内容一致；差别在于溯源声明只能由 GitHub Actions 用作业身份签发，本地构建不产生声明。详细的发布步骤参见 [发布流程](./release/release-process.md)。
 
 [innosetup-homepage]: https://jrsoftware.org/isinfo.php

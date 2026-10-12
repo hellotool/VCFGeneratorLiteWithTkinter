@@ -40,6 +40,9 @@ on:
 
 permissions:
   contents: read
+  id-token: write
+  attestations: write
+  artifact-metadata: write
 
 jobs:
   # 合并相似的构建以加快速度、节约成本。
@@ -60,9 +63,21 @@ jobs:
         if: ${{ inputs.build-windows-portable }}
         run: uv run --group build --group basic poe build-portable
 
+      - name: Attest Portable Package
+        if: ${{ inputs.build-windows-portable }}
+        uses: actions/attest@v4
+        with:
+          subject-path: dist/*-portable.zip
+
       - name: Build Installer
         if: ${{ inputs.build-windows-installer }}
         run: uv run --group build --group basic poe build-installer
+
+      - name: Attest Installer
+        if: ${{ inputs.build-windows-installer }}
+        uses: actions/attest@v4
+        with:
+          subject-path: dist/*-setup.exe
 
       - name: Upload Portable Package
         id: upload-portable
@@ -99,9 +114,21 @@ jobs:
         if: ${{ inputs.build-python3-wheel }}
         run: uv run --group build --group basic poe build-wheel
 
+      - name: Attest Wheel
+        if: ${{ inputs.build-python3-wheel }}
+        uses: actions/attest@v4
+        with:
+          subject-path: dist/*.whl
+
       - name: Build Zip Application
         if: ${{ inputs.build-python3-zipapp }}
         run: uv run  --group build --group basic poe build-zipapp
+
+      - name: Attest Zip Application
+        if: ${{ inputs.build-python3-zipapp }}
+        uses: actions/attest@v4
+        with:
+          subject-path: dist/*.pyzw
 
       - name: Upload Wheel
         id: upload-wheel

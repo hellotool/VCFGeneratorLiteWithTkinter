@@ -5,7 +5,7 @@
 发布流程主要在 GitHub Actions 中执行（`.github/workflows/`）：
 
 - **`test.yml`**：在 push 与 PR 时运行测试与代码检查。
-- **`build.yml`**：手动触发（`workflow_dispatch`）或在发布流程中被调用，构建四种产物。
+- **`build.yml`**：手动触发（`workflow_dispatch`）或在发布流程中被调用，构建四种产物并为每种生成溯源声明。
 - **`prepare-release.yml`**：手动触发，自动构建、上传产物并创建/更新草稿 Release。
 
 发布产物共有四种：
@@ -57,6 +57,7 @@
 
 - 读取 `uv version --short` 作为目标版本。
 - 运行测试与四种产物的构建。
+- 在每种产物构建完成后为其签发溯源声明。
 - 若是新版本，创建草稿 Release 并上传产物。
 - 若是已存在的草稿 Release，将产物覆盖上传。
 - 若是已发布的 Release，则报错并退出。
@@ -68,7 +69,22 @@
 3. 如果是 `a` / `b` / `rc` / `dev` 版本，勾选 **Set as a pre-release**。
 4. 点击 **Publish release**。
 
-### 5. 同步发布
+### 5. 校验产物溯源
+
+发布后抽查任一产物，确认它确实由本仓库的 `build.yml` 构建（需已安装 [GitHub CLI][ref-gh-cli]）：
+
+```bash
+gh attestation verify -o hellotool \
+  --signer-workflow hellotool/VCFGeneratorLiteWithTkinter/.github/workflows/build.yml \
+  VCFGeneratorLite-v<version>-win-amd64-setup.exe
+```
+
+要点：
+
+- 签名发生在被调用的 `build.yml` 里，必须带 `--signer-workflow` 才钉得住真正的签名者。
+- 构建溯源声明可在仓库的 **Actions → Attestations** 面板查看与下载；删除后已分发产物永久无法通过验证，属不可逆动作。
+
+### 6. 同步发布
 
 在发布到 GitHub 后，需要同步发布到 Gitee：
 
@@ -91,3 +107,4 @@
 3. 在旧 Release 中追加说明，引导用户升级。
 
 [semver-spec]: https://semver.org/spec/v2.0.0.html
+[ref-gh-cli]: https://cli.github.com/

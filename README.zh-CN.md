@@ -86,6 +86,12 @@ VCF 生成器 轻量版 是一个简单高效的应用，可以将联系人列�
 | 跨平台  | Python Wheel    | 可选     | vcf_generator_lite-\<应用版本\>-**py3-none-any**.*whl*      | [Python Wheel](./docs/guides/installation/wheel.md)                 |
 | 跨平台  | Python ZIP 应用 | 否       | VCFGeneratorLite-v\<应用版本\>-**py3**.*pyzw*               | [Python ZIP 应用](./docs/guides/installation/zipapp.md)             |
 
+自 v6.0.2 起，所有发布产物都在 GitHub 上签发构建溯源声明。无论您从何处下载，都可以用 GitHub CLI 核验该文件的构建来源（核验时需要访问 GitHub）：
+
+```bash
+gh attestation verify -o hellotool --signer-workflow hellotool/VCFGeneratorLiteWithTkinter/.github/workflows/build.yml <下载文件>
+```
+
 ## 使用方法
 
 1. 把名字和电话以每行 `姓名 电话 备注` 的格式复制到主界面的文本框中，其中备注可忽略。例如：

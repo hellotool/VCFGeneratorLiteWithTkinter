@@ -13,11 +13,12 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 ## [Unreleased]
 
-## [6.0.2] - 2026-10-11
+## [6.0.2] - 2026-10-12
 
 ### Added
 
 - Added startup checks for Python and Tcl/Tk versions, printing an error and exiting when Tcl/Tk is unavailable or outdated.
+- Published a build provenance attestation on GitHub for every release package.
 
 ### Fixed
 
