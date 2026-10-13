@@ -147,11 +147,21 @@ def require_tkinter():
     except ImportError:
         print(
             pgettext(
-                "startup.tcltk_not_available_error",
-                "⚠️ERROR: Tcl/Tk is not available. Please install Tcl/Tk.",
+                "startup.tkinter_not_available_error",
+                "⚠️ERROR: Tkinter is not available in the current Python environment. "
+                "Please reinstall Python with its Tcl/Tk component, "
+                "or install the Tkinter package provided by your distribution.",
             ),
             file=sys.stderr,
         )
+        if sys.platform == "win32":
+            print(
+                pgettext(
+                    "startup.tkinter_missing_hint_windows",
+                    "On Windows, the component is named 'tcl/tk and IDLE' in the Python installer.",
+                ),
+                file=sys.stderr,
+            )
         sys.exit(1)
 
 

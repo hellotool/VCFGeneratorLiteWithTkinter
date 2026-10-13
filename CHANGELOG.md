@@ -13,6 +13,10 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 ## [Unreleased]
 
+### Changed
+
+- Reworded the startup message shown when the Tkinter binding is missing to name Tkinter instead of Tcl/Tk, and to point at the Python component or the distribution package to install.
+
 ## [6.0.2] - 2026-10-12
 
 ### Added

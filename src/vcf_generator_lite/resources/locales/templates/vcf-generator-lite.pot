@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VCF Generator Lite 6.0.2\n"
 "Report-Msgid-Bugs-To: Jesse205 <jesse205@qq.com>\n"
-"POT-Creation-Date: 2026-10-11 22:54+0800\n"
+"POT-Creation-Date: 2026-10-13 20:29+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -193,9 +193,14 @@ msgctxt "startup.tcltk_unsupported_error"
 msgid "⚠️ERROR: Tcl/Tk {current_version} is not supported. Please upgrade to Tcl/Tk {minimum_version} or later."
 msgstr ""
 
-#: src/vcf_generator_lite/bootstrap.py:150
-msgctxt "startup.tcltk_not_available_error"
-msgid "⚠️ERROR: Tcl/Tk is not available. Please install Tcl/Tk."
+#: src/vcf_generator_lite/bootstrap.py:151
+msgctxt "startup.tkinter_not_available_error"
+msgid "⚠️ERROR: Tkinter is not available in the current Python environment. Please reinstall Python with its Tcl/Tk component, or install the Tkinter package provided by your distribution."
+msgstr ""
+
+#: src/vcf_generator_lite/bootstrap.py:161
+msgctxt "startup.tkinter_missing_hint_windows"
+msgid "On Windows, the component is named 'tcl/tk and IDLE' in the Python installer."
 msgstr ""
 
 #: src/vcf_generator_lite/configs/phone_detectors.py:10

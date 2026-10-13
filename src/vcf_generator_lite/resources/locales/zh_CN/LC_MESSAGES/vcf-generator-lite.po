@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VCF Generator Lite 6.0.0\n"
 "Report-Msgid-Bugs-To: jesse205@qq.com\n"
-"POT-Creation-Date: 2026-10-11 22:54+0800\n"
+"POT-Creation-Date: 2026-10-13 20:29+0800\n"
 "PO-Revision-Date: 2026-10-11 22:10+0800\n"
 "Last-Translator: Jesse205 <jesse205@qq.com>\n"
 "Language: zh_Hans_CN\n"
@@ -192,10 +192,15 @@ msgctxt "startup.tcltk_unsupported_error"
 msgid "⚠️ERROR: Tcl/Tk {current_version} is not supported. Please upgrade to Tcl/Tk {minimum_version} or later."
 msgstr "⚠️错误：不支持 Tcl/Tk {current_version}，请升级到 Tcl/Tk {minimum_version} 或更高版本。"
 
-#: src/vcf_generator_lite/bootstrap.py:150
-msgctxt "startup.tcltk_not_available_error"
-msgid "⚠️ERROR: Tcl/Tk is not available. Please install Tcl/Tk."
-msgstr "⚠️错误：Tcl/Tk 不可用，请安装 Tcl/Tk。"
+#: src/vcf_generator_lite/bootstrap.py:151
+msgctxt "startup.tkinter_not_available_error"
+msgid "⚠️ERROR: Tkinter is not available in the current Python environment. Please reinstall Python with its Tcl/Tk component, or install the Tkinter package provided by your distribution."
+msgstr "⚠️错误：当前 Python 环境不含 Tkinter。请重新安装 Python 并启用其 Tcl/Tk 组件，或安装发行版提供的 Tkinter 软件包。"
+
+#: src/vcf_generator_lite/bootstrap.py:161
+msgctxt "startup.tkinter_missing_hint_windows"
+msgid "On Windows, the component is named 'tcl/tk and IDLE' in the Python installer."
+msgstr "在 Windows 中，该组件在 Python 安装程序里名为 “tcl/tk and IDLE”。"
 
 #: src/vcf_generator_lite/configs/phone_detectors.py:10
 msgctxt "phone_detector.china.mainland"
@@ -648,8 +653,4 @@ msgstr "发生意外错误，请向维护者报告此问题。"
 msgctxt "dialog_unexpected_error.detail"
 msgid "Error message: {error}"
 msgstr "错误信息：{error}"
-
-#~ msgctxt "startup.source_tip"
-#~ msgid "💡Tip: Source code is hosted at {url}"
-#~ msgstr "💡提示：源码已托管到 {url}"
 
