@@ -29,6 +29,8 @@ class InvalidItemsLayout(VerticalDialogLayout):
         self.listener = listener
         self._create_widgets(parent)
 
+        parent.bind("<Return>", self.on_return)
+
     @override
     def _create_header(self, parent: Misc):
         header_frame = Frame(parent, style="DialogHeader.TFrame")
@@ -147,3 +149,8 @@ class InvalidItemsLayout(VerticalDialogLayout):
                 # ignore invalid id
                 return
             self.listener.on_tree_view_enter(id_)
+
+    def on_return(self, event: Event):
+        if event.widget is self.content_tree:
+            return
+        self.listener.on_ok()

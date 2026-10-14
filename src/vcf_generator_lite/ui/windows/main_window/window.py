@@ -77,9 +77,6 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
         )
         self.configure(menu=self.menu_bar)
 
-        self.bind("<Control-Lock-G>", self.on_generate)
-        self.bind("<Control-g>", self.on_generate)
-        self.bind("<Return>", self.on_return)
         self.bind(EVENT_EXIT, self.on_exit)
 
         signal.signal(signal.SIGINT, self._handle_sigint)
@@ -98,19 +95,12 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
         self._clean_quotes()
 
     @override
-    def on_generate(self, _event: Event | None = None):
+    def on_generate(self, event: Event | None = None):
         self._generate_file()
 
     @override
-    def on_stop_generation(self):
+    def on_stop_generation(self, event: Event | None = None):
         self._stop_generation()
-
-    @override
-    def on_generate_or_stop(self, event: Event | None = None):
-        if self.current_generation:
-            self.on_stop_generation()
-        else:
-            self.on_generate(event)
 
     @override
     def on_exit(self, _event: Event | None = None):
@@ -119,11 +109,6 @@ class VCFGeneratorLiteApp(EnhancedTk, MainMenuBar.Listener, MainLayout.Listener)
             self._stop_generation()
         else:
             self.destroy()
-
-    def on_return(self, event: Event):
-        if str(self.layout.content_text.frame).startswith(str(event.widget)):
-            return
-        self.layout.generate_or_stop_button.invoke()
 
     @override
     def on_toggle_phone_format(self, detector_id: str):

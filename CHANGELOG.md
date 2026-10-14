@@ -13,6 +13,10 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 ## [Unreleased]
 
+### Added
+
+- Added `Ctrl+Enter` (`⌘+Enter` on macOS) to start or stop generation while the caret is inside the input box, where `Enter` keeps inserting a newline.
+
 ### Changed
 
 - Reworded the startup message shown when the Tkinter binding is missing to name Tkinter instead of Tcl/Tk, and to point at the Python component or the distribution package to install.

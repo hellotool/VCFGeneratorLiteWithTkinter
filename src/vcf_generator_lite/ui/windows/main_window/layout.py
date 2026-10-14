@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
+from collections.abc import Callable
 from gettext import pgettext
-from tkinter import Misc
+from tkinter import Event, Misc
 from tkinter.ttk import Button, Frame, Label, Progressbar, Sizegrip
 from typing import override
 
@@ -10,20 +11,30 @@ from vcf_generator_lite.ui.layouts.vertical_dialog_layout import VerticalDialogL
 from vcf_generator_lite.ui.widgets.line_number_bar import LineNumberBar
 from vcf_generator_lite.ui.widgets.text_menu import TextContextMenu
 from vcf_generator_lite.ui.windows.main_window.states import GenerationState
-from vcf_generator_lite.utils.tkinter.widget import enable_auto_wrap, needs_sizegrip
+from vcf_generator_lite.utils.tkinter.widget import enable_auto_wrap, get_root, needs_sizegrip
 
 
 class MainLayout(VerticalDialogLayout):
+    _submit_listener: Callable[[Event | None], None]
+
     class Listener(ABC):
         """Main layout listener interface."""
 
         @abstractmethod
-        def on_generate_or_stop(self): ...
+        def on_generate(self, event: Event | None): ...
+
+        @abstractmethod
+        def on_stop_generation(self, event: Event | None): ...
 
     def __init__(self, parent: Misc, listener: Listener):
         super().__init__()
         self.listener = listener
         self._create_widgets(parent)
+        self.set_generating(GenerationState.IDLE)
+
+        parent.bind("<Control-Lock-G>", listener.on_generate)
+        parent.bind("<Control-g>", listener.on_generate)
+        parent.bind("<Return>", self.on_return)
 
     @override
     def _create_header(self, parent: Misc):
@@ -73,7 +84,11 @@ Xie Lingyun\t13666666666
         self.__update_line_numbers_padding()
         self.content_text.frame.bind_widget(self.line_numbers, penetration_state=True)
         self.content_text.bind("<<ThemeChanged>>", lambda _: self.__update_line_numbers_padding(), "+")
-
+        self.content_text.bind(
+            "<Command-Return>" if get_root(parent)._windowingsystem == "aqua" else "<Control-Return>",  # ruff: ignore[private-member-access]
+            self._on_text_submit,
+            "+",
+        )
         text_context_menu = TextContextMenu(self.content_text)
         text_context_menu.bind_to_widget()
         return self.content_text
@@ -89,16 +104,25 @@ Xie Lingyun\t13666666666
             sizegrip.place(relx=1, rely=1, anchor="se")
 
         self.progress_bar = Progressbar(footer_frame, orient="horizontal", length=200, mode="determinate", maximum=1)
-        self.progress_label = Label(master=footer_frame, text=pgettext("window_main.label_generating", "Generating..."))
+        self.progress_label = Label(master=footer_frame)
 
-        self.generate_or_stop_button = Button(
-            footer_frame,
-            text=pgettext("window_main.button_generate", "Generate"),
-            default="active",
-            command=self.listener.on_generate_or_stop,
-        )
+        self.generate_or_stop_button = Button(footer_frame, default="active", command=self.on_submit)
         self.generate_or_stop_button.pack(side="right", padx="8.25p", pady="8.25p")
         return footer_frame
+
+    def on_submit(self, event: Event | None = None):
+        self._submit_listener(event)
+
+    def _on_text_submit(self, event: Event) -> str:
+        self.on_submit(event)
+        return "break"
+
+    def on_return(self, event: Event):
+        widget_path = str(event.widget)
+        frame_path = str(self.content_text.frame)
+        if widget_path == frame_path or widget_path.startswith(frame_path + "."):
+            return
+        self.on_submit(event)
 
     def set_text_content(self, content: str):
         self.content_text.replace(1.0, "end", content)
@@ -131,15 +155,19 @@ Xie Lingyun\t13666666666
 
     def set_generating(self, state: GenerationState):
         if state is GenerationState.IDLE:
+            self._submit_listener = self.listener.on_generate
             self.generate_or_stop_button.configure(
-                text=pgettext("window_main.button_generate", "Generate"), state="normal"
+                text=pgettext("window_main.button_generate", "Generate"),
+                state="normal",
             )
             self.hide_progress()
         elif state is GenerationState.GENERATING:
+            self._submit_listener = self.listener.on_stop_generation
             self.generate_or_stop_button.configure(text=pgettext("window_main.button_stop", "Stop"), state="normal")
             self.progress_label.configure(text=pgettext("window_main.label_generating", "Generating..."))
             self.show_progress()
         elif state is GenerationState.STOPPING:
+            self._submit_listener = self.listener.on_stop_generation
             self.generate_or_stop_button.configure(text=pgettext("window_main.button_stop", "Stop"), state="disabled")
             self.progress_label.configure(text=pgettext("window_main.label_stopping", "Stopping..."))
             self.show_progress()

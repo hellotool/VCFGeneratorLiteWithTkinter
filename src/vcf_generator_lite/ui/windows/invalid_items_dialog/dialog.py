@@ -1,6 +1,6 @@
 from collections.abc import Callable
 from gettext import pgettext
-from tkinter import Event, Tk, Toplevel
+from tkinter import Tk, Toplevel
 from typing import override
 
 from vcf_generator_lite.core.vcf_generator import InvalidItem
@@ -34,18 +34,11 @@ class InvalidItemsDialog(EnhancedDialog, InvalidItemsLayout.Listener):
         self.layout = InvalidItemsLayout(self, self.display_path, self)
         self.layout.set_invalid_items(self.invalid_items)
 
-        self.bind("<Return>", self.on_return)
-
     @override
     def _configure_ui(self):
         super()._configure_ui()
         self.bell()
         self.update()
-
-    def on_return(self, event: Event):
-        if event.widget is self.layout.content_tree:
-            return
-        self.layout.ok_button.invoke()
 
     @override
     def on_ok(self):
