@@ -23,10 +23,17 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
+        os: ["ubuntu-latest", "windows-latest", "macos-latest"]
         python-version: ["3.12", "3.13", "3.14t"]
+        exclude:
+          - os: "windows-latest"
+            python-version: "3.13"
+          - os: "macos-latest"
+            python-version: "3.13"
     env:
       UV_NO_DEFAULT_GROUPS: true
     steps:
@@ -38,5 +45,13 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      # GUI 测试需要真实图形环境：按键事件只有在窗口已映射时才会派发。
       - name: Test with pytest
-        run: uv run --group test --group basic poe test
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Linux" ]; then
+            command -v Xvfb >/dev/null 2>&1 || { sudo apt-get update && sudo apt-get install -y xvfb; }
+            xvfb-run -a uv run --group test --group basic poe test
+          else
+            uv run --group test --group basic poe test
+          fi

@@ -14,6 +14,7 @@
 | [0006](./0006-preflight-runtime-version-checks.md) | 启动阶段前置校验运行时版本 | 已采纳 | 2026-10-11 | `require_python` / `require_tkinter` 按 `setup_l10n` 前后分工（前者提示不翻译、后者可翻译），阈值集中到 `constants.py`，失败即 `sys.exit(1)`；已知缺口是 `console=False` 产物中提示被静默丢弃 |
 | [0007](./0007-register-import-alias-instead-of-ignoring-rule.md) | 用显式别名登记替代整条导入别名规则豁免 | 已采纳 | 2026-10-11 | 不再 `ignore` `unconventional-import-alias`，改为 `aliases` 只登记 `gettext` → `gettextlib`；刻意取其替换语义以放弃 `pd` 一类简写约定，代价是不再约束其他模块的别名 |
 | [0008](./0008-attest-build-provenance-for-release-artifacts.md) | 发布产物生成 GitHub 溯源声明 | 已采纳 | 2026-10-12 | 四种产物在 `build.yml` 各自构建步骤后加一步 `actions/attest@v4`，权限在 callee 与 caller 两侧各写一份且内容相同；同时开启仓库的不可变发布；不做 SBOM 与校验和文件 |
+| [0009](./0009-platform-tiered-test-matrix-with-xvfb.md) | 测试矩阵按平台分层并在 Linux 上启用 Xvfb | 已采纳 | 2026-10-17 | `test.yml` 改为 `os × python-version`：Linux 全测 `3.12/3.13/3.14t`，Windows 与 macOS 只测最老与最新（排除 `3.13`），`fail-fast: false`；Linux 用 `xvfb-run -a` 包裹 `poe test`（缺 `Xvfb` 才安装）；不改 pytest 全局捕获模式，GUI 测试保持会话级单根窗口以避开 `每用例建根窗口 × --capture=fd` 的偶发 `TclError` |
 
 ## 风格
 
