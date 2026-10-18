@@ -1,6 +1,6 @@
 # $schema: https://json.schemastore.org/uv.json
 
-required-version = ">=0.10.1"
+required-version = ">=0.13.1"
 
 [pip]
 universal = true

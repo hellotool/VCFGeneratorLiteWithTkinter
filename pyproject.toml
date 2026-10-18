@@ -39,7 +39,7 @@ Issues = "https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/issues/new/cho
 vcf-generator-lite = "vcf_generator_lite.__main__:main"
 
 [build-system]
-requires = ["uv_build>=0.12.19,<0.13"]
+requires = ["uv_build>=0.13.1,<0.14"]
 build-backend = "uv_build"
 
 [tool.poe]
