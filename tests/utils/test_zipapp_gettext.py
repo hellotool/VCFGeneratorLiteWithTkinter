@@ -109,63 +109,48 @@ class TestExpandedLangs:
 
 
 class TestGetDefaultLocales:
+    """覆盖 ``get_default_locales()`` 对各环境变量的读取顺序"""
+
+    @pytest.fixture(autouse=True)
+    def clear_locale_env(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """逐个用例清空相关环境变量，避免运行环境自带的变量污染断言。"""
+        for env_var in ("LANGUAGE", "LC_ALL", "LC_MESSAGES", "LC_CTYPE", "LANG"):
+            monkeypatch.delenv(env_var, raising=False)
+
     def test_language_env_var(self, monkeypatch: pytest.MonkeyPatch):
         monkeypatch.setenv("LANGUAGE", "xx_XX:yy_YY:zz")
-        monkeypatch.delenv("LC_ALL", raising=False)
-        monkeypatch.delenv("LC_MESSAGES", raising=False)
-        monkeypatch.delenv("LANG", raising=False)
         with patch("locale.getdefaultlocale", return_value=(None, None)):
             result = list(get_default_locales())
         assert result == ["xx_XX", "yy_YY", "zz"]
 
     def test_lc_all_env_var(self, monkeypatch: pytest.MonkeyPatch):
-        monkeypatch.delenv("LANGUAGE", raising=False)
         monkeypatch.setenv("LC_ALL", "xx_XX.UTF-8")
-        monkeypatch.delenv("LC_MESSAGES", raising=False)
-        monkeypatch.delenv("LANG", raising=False)
         result = list(get_default_locales())
         assert result == ["xx_XX.UTF-8"]
 
     def test_lc_messages_env_var(self, monkeypatch: pytest.MonkeyPatch):
-        monkeypatch.delenv("LANGUAGE", raising=False)
-        monkeypatch.delenv("LC_ALL", raising=False)
         monkeypatch.setenv("LC_MESSAGES", "xx_XX.UTF-8")
-        monkeypatch.delenv("LANG", raising=False)
         result = list(get_default_locales())
         assert result == ["xx_XX.UTF-8"]
 
     def test_lc_ctype_env_var(self, monkeypatch: pytest.MonkeyPatch):
-        monkeypatch.delenv("LANGUAGE", raising=False)
-        monkeypatch.delenv("LC_ALL", raising=False)
-        monkeypatch.delenv("LC_MESSAGES", raising=False)
         monkeypatch.setenv("LC_CTYPE", "xx_XX.UTF-8")
-        monkeypatch.delenv("LANG", raising=False)
         result = list(get_default_locales())
         assert result == ["xx_XX.UTF-8"]
 
     def test_lc_vars_priority(self, monkeypatch: pytest.MonkeyPatch):
-        monkeypatch.delenv("LANGUAGE", raising=False)
         monkeypatch.setenv("LC_ALL", "aa_AA.UTF-8")
         monkeypatch.setenv("LC_MESSAGES", "xx_XX.UTF-8")
-        monkeypatch.delenv("LANG", raising=False)
         result = list(get_default_locales())
         assert result == ["aa_AA.UTF-8"]
 
-    def test_no_env_vars(self, monkeypatch: pytest.MonkeyPatch):
-        monkeypatch.delenv("LANGUAGE", raising=False)
-        monkeypatch.delenv("LC_ALL", raising=False)
-        monkeypatch.delenv("LC_MESSAGES", raising=False)
-        monkeypatch.delenv("LC_CTYPE", raising=False)
-        monkeypatch.delenv("LANG", raising=False)
+    def test_no_env_vars(self):
         with patch("locale.getdefaultlocale", return_value=(None, None)):
             result = list(get_default_locales())
         assert result == []
 
     def test_language_env_with_empty_parts(self, monkeypatch: pytest.MonkeyPatch):
         monkeypatch.setenv("LANGUAGE", "xx_XX::yy_YY")
-        monkeypatch.delenv("LC_ALL", raising=False)
-        monkeypatch.delenv("LC_MESSAGES", raising=False)
-        monkeypatch.delenv("LANG", raising=False)
         with patch("locale.getdefaultlocale", return_value=(None, None)):
             result = list(get_default_locales())
         assert result == ["xx_XX", "yy_YY"]
