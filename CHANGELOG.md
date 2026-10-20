@@ -19,6 +19,7 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 ### Changed
 
+- Switched the build and test runtime to Python 3.15t (the free-threaded build); the Python ZIP application and wheel still run on Python 3.12 or later.
 - Reworded the startup message shown when the Tkinter binding is missing to name Tkinter instead of Tcl/Tk, and to point at the Python component or the distribution package to install.
 
 ## [6.0.2] - 2026-10-12

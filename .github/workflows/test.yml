@@ -28,7 +28,7 @@ jobs:
       fail-fast: false
       matrix:
         os: ["ubuntu-latest", "windows-latest", "macos-latest"]
-        python-version: ["3.12", "3.13", "3.14t"]
+        python-version: ["3.12", "3.13", "3.15t"]
         exclude:
           - os: "windows-latest"
             python-version: "3.13"

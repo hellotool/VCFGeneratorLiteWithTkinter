@@ -19,6 +19,7 @@
 
 ### 变更
 
+- 构建与测试运行时切换到 Python 3.15t（自由线程版）；Python ZIP 应用与 wheel 仍支持 Python 3.12 及以上版本。
 - Tkinter 绑定缺失时的启动提示改为指明 Tkinter 而非 Tcl/Tk，并说明应安装的 Python 组件或发行版软件包。
 
 ## [6.0.2] - 2026-10-12
