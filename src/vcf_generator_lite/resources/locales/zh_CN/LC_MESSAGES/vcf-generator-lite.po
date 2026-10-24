@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VCF Generator Lite 6.0.0\n"
 "Report-Msgid-Bugs-To: jesse205@qq.com\n"
-"POT-Creation-Date: 2026-10-13 20:29+0800\n"
+"POT-Creation-Date: 2026-10-24 17:14+0800\n"
 "PO-Revision-Date: 2026-10-11 22:10+0800\n"
 "Last-Translator: Jesse205 <jesse205@qq.com>\n"
 "Language: zh_Hans_CN\n"
@@ -18,155 +18,155 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: .stdlib_symbol/argparse.py:246
+#: .stdlib_symbol/argparse.py:276
 #, python-format
 msgid "%(heading)s:"
 msgstr "%(heading)s："
 
-#: .stdlib_symbol/argparse.py:325
+#: .stdlib_symbol/argparse.py:355
 msgid "usage: "
 msgstr "用法："
 
-#: .stdlib_symbol/argparse.py:753
+#: .stdlib_symbol/argparse.py:868
 #, python-format
 msgid " (default: %(default)s)"
 msgstr "（默认：%(default)s）"
 
-#: .stdlib_symbol/argparse.py:815
+#: .stdlib_symbol/argparse.py:936
 #, python-format
 msgid "argument %(argument_name)s: %(message)s"
 msgstr "参数 %(argument_name)s：%(message)s"
 
-#: .stdlib_symbol/argparse.py:1190
+#: .stdlib_symbol/argparse.py:1323
 msgid "show program's version number and exit"
 msgstr "显示程序版本号并退出"
 
-#: .stdlib_symbol/argparse.py:1304
+#: .stdlib_symbol/argparse.py:1437
 #, python-format
 msgid "unknown parser %(parser_name)r (choices: %(choices)s)"
 msgstr "未知解析器 %(parser_name)r (可选值: %(choices)s)"
 
-#: .stdlib_symbol/argparse.py:1308
+#: .stdlib_symbol/argparse.py:1441
 #, python-format
 msgid "command '%(parser_name)s' is deprecated"
 msgstr "命令 '%(parser_name)s' 已弃用"
 
-#: .stdlib_symbol/argparse.py:1375
+#: .stdlib_symbol/argparse.py:1508
 #, python-format
 msgid "argument \"-\" with mode %r"
 msgstr "参数 \"-\" 的模式为 %r"
 
-#: .stdlib_symbol/argparse.py:1384
+#: .stdlib_symbol/argparse.py:1517
 #, python-format
 msgid "can't open '%(filename)s': %(error)s"
 msgstr "无法打开文件 '%(filename)s': %(error)s"
 
-#: .stdlib_symbol/argparse.py:1722
+#: .stdlib_symbol/argparse.py:1861
 #, python-format
 msgid "conflicting option string: %s"
 msgid_plural "conflicting option strings: %s"
 msgstr[0] "冲突的选项字符串: %s"
 
-#: .stdlib_symbol/argparse.py:1905
+#: .stdlib_symbol/argparse.py:2047
 msgid "positional arguments"
 msgstr "位置参数"
 
-#: .stdlib_symbol/argparse.py:1906
+#: .stdlib_symbol/argparse.py:2048
 msgid "options"
 msgstr "选项"
 
-#: .stdlib_symbol/argparse.py:1919
+#: .stdlib_symbol/argparse.py:2061
 msgid "show this help message and exit"
 msgstr "显示此帮助信息并退出"
 
-#: .stdlib_symbol/argparse.py:1956
+#: .stdlib_symbol/argparse.py:2098
 msgid "subcommands"
 msgstr "子命令"
 
-#: .stdlib_symbol/argparse.py:2007 .stdlib_symbol/argparse.py:2570
+#: .stdlib_symbol/argparse.py:2151 .stdlib_symbol/argparse.py:2714
 #, python-format
 msgid "unrecognized arguments: %s"
 msgstr "无法识别的参数：%s"
 
-#: .stdlib_symbol/argparse.py:2113
+#: .stdlib_symbol/argparse.py:2257
 #, python-format
 msgid "not allowed with argument %s"
 msgstr "不允许与参数 %s 共用"
 
-#: .stdlib_symbol/argparse.py:2132
+#: .stdlib_symbol/argparse.py:2276
 #, python-format
 msgid "ambiguous option: %(option)s could match %(matches)s"
 msgstr "模糊选项：%(option)s 可能匹配 %(matches)s"
 
-#: .stdlib_symbol/argparse.py:2164 .stdlib_symbol/argparse.py:2196
+#: .stdlib_symbol/argparse.py:2308 .stdlib_symbol/argparse.py:2340
 #, python-format
 msgid "ignored explicit argument %r"
 msgstr "忽略了显式参数 %r"
 
-#: .stdlib_symbol/argparse.py:2216
+#: .stdlib_symbol/argparse.py:2360
 #, python-format
 msgid "option '%(option)s' is deprecated"
 msgstr "选项“%(option)s”已弃用"
 
-#: .stdlib_symbol/argparse.py:2248
+#: .stdlib_symbol/argparse.py:2392
 #, python-format
 msgid "argument '%(argument_name)s' is deprecated"
 msgstr "参数“%(argument_name)s”已弃用"
 
-#: .stdlib_symbol/argparse.py:2341
+#: .stdlib_symbol/argparse.py:2485
 #, python-format
 msgid "the following arguments are required: %s"
 msgstr "以下参数是必需的：%s"
 
-#: .stdlib_symbol/argparse.py:2356
+#: .stdlib_symbol/argparse.py:2500
 #, python-format
 msgid "one of the arguments %s is required"
 msgstr "参数 %s 是必需的"
 
-#: .stdlib_symbol/argparse.py:2400
+#: .stdlib_symbol/argparse.py:2544
 msgid "expected one argument"
 msgstr "需要一个参数"
 
-#: .stdlib_symbol/argparse.py:2401
+#: .stdlib_symbol/argparse.py:2545
 msgid "expected at most one argument"
 msgstr "最多只能有一个参数"
 
-#: .stdlib_symbol/argparse.py:2402
+#: .stdlib_symbol/argparse.py:2546
 msgid "expected at least one argument"
 msgstr "至少需要一个参数"
 
-#: .stdlib_symbol/argparse.py:2406
+#: .stdlib_symbol/argparse.py:2550
 #, python-format
 msgid "expected %s argument"
 msgid_plural "expected %s arguments"
 msgstr[0] "预期参数 %s"
 
-#: .stdlib_symbol/argparse.py:2516
+#: .stdlib_symbol/argparse.py:2660
 #, python-format
 msgid "unexpected option string: %s"
 msgstr "意外的选项字符串：%s"
 
-#: .stdlib_symbol/argparse.py:2664
+#: .stdlib_symbol/argparse.py:2808
 #, python-format
 msgid "invalid %(type)s value: %(value)r"
 msgstr "无效的 %(type)s 值：%(value)r"
 
-#: .stdlib_symbol/argparse.py:2682
+#: .stdlib_symbol/argparse.py:2826
 #, python-format
 msgid "invalid choice: %(value)r (choose from %(choices)s)"
 msgstr "无效选择：%(value)r（请从 %(choices)s 中选择）"
 
-#: .stdlib_symbol/argparse.py:2690
+#: .stdlib_symbol/argparse.py:2834
 #, python-format
 msgid "invalid choice: %(value)r, maybe you meant %(closest)r? (choose from %(choices)s)"
 msgstr "无效选择：%(value)r，您的意思可能是%(closest)r？（可选范围：%(choices)s）"
 
-#: .stdlib_symbol/argparse.py:2782
+#: .stdlib_symbol/argparse.py:2953
 #, python-format
 msgid "%(prog)s: error: %(message)s\n"
 msgstr "%(prog)s：错误：%(message)s\n"
 
-#: .stdlib_symbol/argparse.py:2786
+#: .stdlib_symbol/argparse.py:2962
 #, python-format
 msgid "%(prog)s: warning: %(message)s\n"
 msgstr "%(prog)s：警告：%(message)s\n"
@@ -192,12 +192,12 @@ msgctxt "startup.tcltk_unsupported_error"
 msgid "⚠️ERROR: Tcl/Tk {current_version} is not supported. Please upgrade to Tcl/Tk {minimum_version} or later."
 msgstr "⚠️错误：不支持 Tcl/Tk {current_version}，请升级到 Tcl/Tk {minimum_version} 或更高版本。"
 
-#: src/vcf_generator_lite/bootstrap.py:151
+#: src/vcf_generator_lite/bootstrap.py:150
 msgctxt "startup.tkinter_not_available_error"
 msgid "⚠️ERROR: Tkinter is not available in the current Python environment. Please reinstall Python with its Tcl/Tk component, or install the Tkinter package provided by your distribution."
 msgstr "⚠️错误：当前 Python 环境不含 Tkinter。请重新安装 Python 并启用其 Tcl/Tk 组件，或安装发行版提供的 Tkinter 软件包。"
 
-#: src/vcf_generator_lite/bootstrap.py:161
+#: src/vcf_generator_lite/bootstrap.py:160
 msgctxt "startup.tkinter_missing_hint_windows"
 msgid "On Windows, the component is named 'tcl/tk and IDLE' in the Python installer."
 msgstr "在 Windows 中，该组件在 Python 安装程序里名为 “tcl/tk and IDLE”。"
@@ -333,49 +333,49 @@ msgctxt "dialog_invalid_items.title"
 msgid "vCard File Generation Complete"
 msgstr "生成 vCard 文件完成"
 
-#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:48
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:50
 #, python-brace-format
 msgctxt "dialog_invalid_items.message"
 msgid "File exported to {path}, invalid numbers have been ignored."
 msgstr "已导出文件到 {path}，异常的号码已被忽略。"
 
-#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:59
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:61
 msgctxt "dialog_invalid_items.label_invalid_numbers"
 msgid "Invalid numbers: "
 msgstr "异常的号码："
 
-#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:84
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:86
 msgctxt "dialog_invalid_items.heading_row"
 msgid "Position"
 msgstr "位置"
 
-#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:89
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:91
 msgctxt "dialog_invalid_items.heading_original"
 msgid "Original Content"
 msgstr "原始内容"
 
-#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:94
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:96
 msgctxt "dialog_invalid_items.heading_reason"
 msgid "Reason"
 msgstr "原因"
 
-#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:102
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:104
 msgctxt "dialog_invalid_items.cell_loading"
 msgid "Loading..."
 msgstr "加载中……"
 
-#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:118
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:120
 msgctxt "common.button_ok"
 msgid "OK"
 msgstr "确定"
 
-#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:133
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:135
 #, python-brace-format
 msgctxt "dialog_invalid_items.cell_row"
 msgid "Row {row}"
 msgstr "第 {row} 行"
 
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:33
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:44
 msgctxt "window_main.label_usage"
 msgid ""
 "Instructions:\n"
@@ -388,7 +388,7 @@ msgstr ""
 "2. 点击“生成”，选择一个路径保存文件。\n"
 "3. 您可以将生成后的 vCard 文件用在您需要的地方，例如导入到手机或者邮箱。"
 
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:59
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:70
 msgctxt "window_main.entry_content"
 msgid ""
 "Qu Yuan\t13333333333\tPoet of the Warring States period\n"
@@ -401,25 +401,23 @@ msgstr ""
 "陶渊明\t13555555555\n"
 "谢灵运\t13666666666\n"
 
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:92
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:140
-msgctxt "window_main.label_generating"
-msgid "Generating..."
-msgstr "正在生成……"
-
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:96
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:135
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:160
 msgctxt "window_main.button_generate"
 msgid "Generate"
 msgstr "开始生成"
 
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:139
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:143
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:166
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:171
 msgctxt "window_main.button_stop"
 msgid "Stop"
 msgstr "停止"
 
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:144
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:167
+msgctxt "window_main.label_generating"
+msgid "Generating..."
+msgstr "正在生成……"
+
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:172
 msgctxt "window_main.label_stopping"
 msgid "Stopping..."
 msgstr "正在停止……"
@@ -596,12 +594,12 @@ msgctxt "window_save_vcf.default_file_name"
 msgid "My Contacts.vcf"
 msgstr "我的联系人.vcf"
 
-#: src/vcf_generator_lite/ui/windows/main_window/window.py:163
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:148
 msgctxt "window_save_vcf.title"
 msgid "Select File Save Location"
 msgstr "选择文件保存位置"
 
-#: src/vcf_generator_lite/ui/windows/main_window/window.py:166
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:151
 msgctxt "window_save_vcf.label_type_vcf"
 msgid "vCard File (*.vcf)"
 msgstr "vCard 文件 (*.vcf)"
