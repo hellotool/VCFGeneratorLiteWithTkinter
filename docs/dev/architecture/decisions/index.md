@@ -8,13 +8,15 @@
 | --- | --- | --- | --- | --- |
 | [0001](./0001-markdown-lint-with-rumdl.md) | 使用 rumdl 做 Markdown 风格门禁 | 已采纳 | 2026-07-23 | 采用 rumdl，配置源 = 根目录 `rumdl.toml`，删除 `.markdownlint.yml`，链接检查不纳入 |
 | [0002](./0002-local-precommit-as-verification-contract.md) | 本地 precommit 作为验证契约 | 已取代（由 [0004](./0004-rename-precommit-to-ensure-quality.md) 取代） | 2026-07-23 | `precommit`（后更名 `ensure-quality`）= `format → check → test` 为验证契约，`check` 内含 rumdl，CI 仅跑 test 为已知缺口 |
-| [0003](./0003-poe-tasks-in-dedicated-file.md) | Poe 任务定义置于独立文件 | 已采纳 | 2026-09-06 | 任务定义迁至根目录 `poe_tasks.toml`，`pyproject.toml` 仅留 `executor` + `include` 指针；弃用 packaged tasks |
+| [0003](./0003-poe-tasks-in-dedicated-file.md) | Poe 任务定义置于独立文件 | 已取代（由 [0010](./0010-poe-tasks-in-yaml-file.md) 取代） | 2026-09-06 | 任务定义迁至根目录 `poe_tasks.toml`，`pyproject.toml` 仅留 `executor` + `include` 指针；弃用 packaged tasks |
 | [0004](./0004-rename-precommit-to-ensure-quality.md) | 将 precommit 任务更名为 ensure-quality | 已取代（由 [0005](./0005-restructure-check-lint-fix-tasks.md) 取代） | 2026-09-26 | `precommit` 更名为 `ensure-quality`，仍等于 `format → check → test`；散落的 `format + check + test` 序列统一为单个 `poe ensure-quality`；CI 不受影响 |
 | [0005](./0005-restructure-check-lint-fix-tasks.md) | 按 lint / check / fix 语义重组校验任务 | 已采纳 | 2026-10-07 | 裸动词等于工具默认行为（`lint` 只读、`format` 写文件），后缀标出反面（`lint-fix`、`format-check`）；`check` = `format-check` + `lint` 全只读，`fix` = `lint-fix → format → check` 用 `sequence` 保序且不含 `test`，本地校验为 `fix` + `test` 两条 |
 | [0006](./0006-preflight-runtime-version-checks.md) | 启动阶段前置校验运行时版本 | 已采纳 | 2026-10-11 | `require_python` / `require_tkinter` 按 `setup_l10n` 前后分工（前者提示不翻译、后者可翻译），阈值集中到 `constants.py`，失败即 `sys.exit(1)`；已知缺口是 `console=False` 产物中提示被静默丢弃 |
 | [0007](./0007-register-import-alias-instead-of-ignoring-rule.md) | 用显式别名登记替代整条导入别名规则豁免 | 已采纳 | 2026-10-11 | 不再 `ignore` `unconventional-import-alias`，改为 `aliases` 只登记 `gettext` → `gettextlib`；刻意取其替换语义以放弃 `pd` 一类简写约定，代价是不再约束其他模块的别名 |
 | [0008](./0008-attest-build-provenance-for-release-artifacts.md) | 发布产物生成 GitHub 溯源声明 | 已采纳 | 2026-10-12 | 四种产物在 `build.yml` 各自构建步骤后加一步 `actions/attest@v4`，权限在 callee 与 caller 两侧各写一份且内容相同；同时开启仓库的不可变发布；不做 SBOM 与校验和文件 |
 | [0009](./0009-platform-tiered-test-matrix-with-xvfb.md) | 测试矩阵按平台分层并在 Linux 上启用 Xvfb | 已采纳 | 2026-10-17 | `test.yml` 改为 `os × python-version`：Linux 全测 `3.12/3.13/3.14t`，Windows 与 macOS 只测最老与最新（排除 `3.13`），`fail-fast: false`；Linux 用 `xvfb-run -a` 包裹 `poe test`（缺 `Xvfb` 才安装）；不改 pytest 全局捕获模式，GUI 测试保持会话级单根窗口以避开 `每用例建根窗口 × --capture=fd` 的偶发 `TclError` |
+| [0010](./0010-poe-tasks-in-yaml-file.md) | Poe 任务文件改用 YAML 并移除 include 指针 | 已采纳 | 2026-10-24 | 任务定义迁到根目录 `poe_tasks.yml`，`executor` 写在文件内，删除 `pyproject.toml` 的 `[tool.poe]`；靠 poe 的约定名自动发现，代价是放弃 0003 的可发现性理由；首行声明 partial-poe schema 供编辑器校验 |
+| [0011](./0011-dependency-groups-include-basic.md) | 各依赖组自带 basic | 已采纳 | 2026-10-24 | `lint`/`test`/`build`/`docs`/`l10n` 均 include `basic`，任一功能组单独安装即可运行 poe；`dev` 仍聚合全部；CI 中现存的 `--group basic` 变为冗余但无害 |
 
 ## 风格
 

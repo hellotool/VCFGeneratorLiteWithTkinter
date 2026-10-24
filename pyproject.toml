@@ -1,58 +1,52 @@
 [project]
-name = "vcf-generator-lite"
-version = "6.0.2"
-description = "A lightweight VCF creation tool written in Python."
-authors = [{ name = "Jesse205", email = "jesse205@qq.com" }]
-license = "Apache-2.0"
-license-files = ["LICENSE"]
-readme = "README_pypi.md"
-requires-python = ">=3.12"
-dependencies = ["ttk-text==0.3.4"]
-import-names = ["vcf_generator_lite"]
+authors=[{name="Jesse205", email="jesse205@qq.com"}]
+dependencies=["ttk-text==0.3.4"]
+description="A lightweight VCF creation tool written in Python."
+import-names=["vcf_generator_lite"]
+license="Apache-2.0"
+license-files=["LICENSE"]
+name="vcf-generator-lite"
+readme="README_pypi.md"
+requires-python=">=3.12"
+version="6.0.2"
 
 [project.optional-dependencies]
-console = ["colorlog>=6.12.0"]
-
-[dependency-groups]
-basic = ["poethepoet>=0.48.0"]
-lint = ["pyright>=1.1.414", "ruff>=0.17.0"]
-test = ["pytest>=9.1.1"]
-build = ["packaging>=26.3", "pyinstaller>=6.22.3", "requests>=2.34.2"]
-docs = ["jinja2>=3.1.6", "rumdl>=0.2.79"]
-l10n = ["babel>=2.18.0"]
-dev = [
-    "colorlog>=6.12.0",
-    { include-group = "basic" },
-    { include-group = "lint" },
-    { include-group = "test" },
-    { include-group = "build" },
-    { include-group = "docs" },
-    { include-group = "l10n" },
-]
+console=["colorlog>=6.12.0"]
 
 [project.urls]
-Repository = "https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter"
-Github = "https://github.com/hellotool/VCFGeneratorLiteWithTkinter"
-Issues = "https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/issues/new/choose"
+Github="https://github.com/hellotool/VCFGeneratorLiteWithTkinter"
+Issues="https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/issues/new/choose"
+Repository="https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter"
 
 [project.gui-scripts]
-vcf-generator-lite = "vcf_generator_lite.__main__:main"
+vcf-generator-lite="vcf_generator_lite.__main__:main"
+
+[dependency-groups]
+basic=["poethepoet>=0.49.0"]
+build=[
+    "packaging>=26.3",
+    "pyinstaller>=6.22.3",
+    "requests>=2.34.2",
+    {include-group="basic"},
+]
+dev=[
+    "colorlog>=6.12.0",
+    {include-group="basic"},
+    {include-group="build"},
+    {include-group="docs"},
+    {include-group="l10n"},
+    {include-group="lint"},
+    {include-group="test"},
+]
+docs=["jinja2>=3.1.6", "rumdl>=0.3.0", {include-group="basic"}]
+l10n=["babel>=2.18.0", {include-group="basic"}]
+lint=["pyright>=1.1.414", "ruff>=0.17.2", {include-group="basic"}]
+test=["pytest>=9.1.1", {include-group="basic"}]
+
 
 [build-system]
-requires = ["uv_build>=0.13.1,<0.14"]
-build-backend = "uv_build"
-
-[tool.poe]
-executor = "uv"
-include = "poe_tasks.toml"
+build-backend="uv_build"
+requires=["uv_build>=0.13.1,<0.14"]
 
 [tool.uv.build-backend]
-source-exclude = ["*.pot", "*.po"]
-
-[tool.babel]
-
-[[tool.babel.mappings]]
-encoding = "utf-8"
-method = "python"
-pattern = "**.py"
-keywords = ["pgettext_menu_label:1c,2", "LazyPgettext:1c,2"]
+source-exclude=["*.po", "*.pot"]

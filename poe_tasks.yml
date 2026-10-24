@@ -1,0 +1,128 @@
+# yaml-language-server: $schema=https://json.schemastore.org/partial-poe.json
+
+executor: uv
+tasks:
+  test:
+    cmd: pytest
+    help: Run tests
+
+  format:
+    default_item_type: cmd
+    help: Format code and docs
+    parallel:
+      - ruff format
+      - rumdl fmt
+
+  format-check:
+    default_item_type: cmd
+    help: Check formatting without modifying files
+    parallel:
+      - ruff format --check
+      - rumdl fmt --check
+
+  lint:
+    default_item_type: cmd
+    help: Lint and type-check code and docs
+    parallel:
+      - pyright
+      - ruff check
+      - rumdl check
+
+  lint-fix:
+    default_item_type: cmd
+    help: Apply autofixable lint fixes without formatting
+    parallel:
+      - ruff check --fix
+      - rumdl check --fix
+
+  check:
+    help: Run all read-only checks (format-check + lint)
+    parallel:
+      - format-check
+      - lint
+
+  fix:
+    help: Fix code and docs, then verify (lint-fix -> format -> check)
+    sequence:
+      - lint-fix
+      - format
+      - check
+
+  build-installer:
+    help: Build installer (*-setup.exe)
+    script: scripts.build_app:build_installer
+    args:
+      - help: Don't verify SSL
+        name: no_verify_ssl
+        options:
+          - --no-verify-ssl
+        type: boolean
+      - help: Force rebuild upstream outputs (PyInstaller dist)
+        name: force
+        options:
+          - --force
+        type: boolean
+      - help: Force online download InnoSetup extensions
+        name: force_download
+        options:
+          - --force-download
+        type: boolean
+
+  build-portable:
+    help: Build portable package (*-portable.zip)
+    script: scripts.build_app:build_portable
+    args:
+      - help: Force rebuild upstream outputs (PyInstaller dist)
+        name: force
+        options:
+          - --force
+        type: boolean
+
+  build-zipapp:
+    help: Build zipapp (*.pyzw)
+    script: scripts.build_app:build_zipapp
+    args:
+      - help: Force rebuild upstream outputs (wheel)
+        name: force
+        options:
+          - --force
+        type: boolean
+
+  build-wheel:
+    cmd: uv build --wheel
+    help: Build wheel (*.whl)
+
+  l10n-extract:
+    help: Extract localization files
+    script: scripts.l10n:extract
+
+  l10n-init:
+    help: Initialize localization files
+    script: scripts.l10n:initialize
+    args:
+      - help: Locale
+        name: locale
+        options:
+          - --locale
+          - -l
+        required: true
+        type: string
+
+  l10n-update:
+    help: Update localization files
+    script: scripts.l10n:update
+
+  l10n-compile:
+    help: Compile localization files
+    script: scripts.l10n:compile_
+    args:
+      - help: Locale
+        name: locale
+        options:
+          - --locale
+          - -l
+        type: string
+
+  gen-notices:
+    help: Generate NOTICES files
+    script: scripts.gen_notices:render

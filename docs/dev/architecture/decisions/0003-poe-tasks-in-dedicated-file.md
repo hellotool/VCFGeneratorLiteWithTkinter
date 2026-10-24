@@ -1,6 +1,6 @@
 # 0003 Poe Tasks Defined in a Dedicated File
 
-- 状态: 已采纳
+- 状态: 已取代（由 [0010](./0010-poe-tasks-in-yaml-file.md) 取代）
 - 日期: 2026-09-06
 
 ## 背景
