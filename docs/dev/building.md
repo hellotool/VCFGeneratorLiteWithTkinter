@@ -6,12 +6,12 @@
 
 在构建之前，请确保已完成开发环境搭建（参见 [快速上手](./getting-started.md)），并根据目标产物确认以下依赖：
 
-| 依赖                            | 适用产物         | 安装方式                                   |
-| ------------------------------- | ---------------- | ------------------------------------------ |
-| PyInstaller                     | 安装程序、便携包 | `uv sync` 自动安装。                       |
-| [InnoSetup][innosetup-homepage] | 安装程序         | 手动安装并添加到系统 PATH。                |
-| InnoSetup 中文简体语言文件      | 安装程序         | 首次构建安装程序时自动下载，无需手动准备。 |
-| zipapp                          | ZIP 应用         | Python 标准库，无需额外安装。              |
+| 依赖                                           | 适用产物         | 安装方式                                   |
+| ---------------------------------------------- | ---------------- | ------------------------------------------ |
+| [PyInstaller][pyinstaller-homepage]            | 安装程序、便携包 | `uv sync` 自动安装。                       |
+| [InnoSetup][innosetup-homepage]                | 安装程序         | 手动安装并添加到系统 PATH。                |
+| [InnoSetup 简体中文语言文件][innosetup-chinese] | 安装程序         | 首次构建安装程序时自动下载，无需手动准备。 |
+| zipapp                                         | ZIP 应用         | Python 标准库，无需额外安装。              |
 
 ## 构建产物
 
@@ -118,3 +118,5 @@ uv run poe build-zipapp --force
 本地构建与 CI 使用相同的 Poe 命令，产出的文件内容一致；差别在于溯源声明只能由 GitHub Actions 用作业身份签发，本地构建不产生声明。详细的发布步骤参见 [发布流程](./release/release-process.md)。
 
 [innosetup-homepage]: https://jrsoftware.org/isinfo.php
+[innosetup-chinese]: https://github.com/kira-96/Inno-Setup-Chinese-Simplified-Translation
+[pyinstaller-homepage]: https://pyinstaller.org/

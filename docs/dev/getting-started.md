@@ -4,19 +4,19 @@
 
 ## 技术栈
 
-| 类别       | 技术                                       | 版本要求                        |
-| ---------- | ------------------------------------------ | ------------------------------- |
-| 语言环境   | Python                                     | 3.12+                           |
-| UI 框架    | Tkinter                                    | Python 标准库                   |
-| 包管理     | uv                                         | 0.10.1+                         |
-| 版本控制   | Git                                        | 任意版本                        |
-| IDE        | Visual Studio Code 或 PyCharm              | PyCharm 2026.1+（如使用）       |
-| 任务运行器 | Poe the Poet                               | 0.46.0+                         |
-| 国际化     | gettext                                    | -                               |
-| 测试       | pytest                                     | 9.0.3+                          |
-| 代码质量   | Ruff（格式化 + 检查）、Pyright（类型检查） | Ruff 0.15.13+、Pyright 1.1.409+ |
-| 构建       | PyInstaller、InnoSetup、zipapp             | PyInstaller 6.20.0+             |
-| 文档质量   | rumdl（格式化 + 检查）                    | rumdl 0.2.40+                     |
+| 类别       | 工具                                                                                            | 版本要求        |
+| ---------- | ----------------------------------------------------------------------------------------------- | --------------- |
+| 语言环境   | [Python][python-homepage]                                                                       | 3.12+           |
+| UI 框架    | [Tkinter][tkinter-homepage] ([Tcl/Tk][tcl-homepage])                                            | Tcl/Tk 8.6+     |
+| 包管理     | [uv][uv-homepage]                                                                               | 0.13.1+         |
+| 版本控制   | [Git][git-homepage]                                                                             | -               |
+| IDE        | [Visual Studio Code][vscode-homepage] 或 [PyCharm][pycharm-homepage]                            | PyCharm 2026.1+ |
+| 任务运行器 | [Poe the Poet][poethepoet-homepage]                                                             | -               |
+| 国际化     | [gettext][gettext-homepage]                                                                     | -               |
+| 测试       | [pytest][pytest-homepage]                                                                       | -               |
+| 代码质量   | [Ruff][ruff-homepage]（格式化 + 检查）、[Pyright][pyright-homepage]（类型检查）                 | -               |
+| 构建       | [PyInstaller][pyinstaller-homepage]、[InnoSetup][innosetup-homepage]、[zipapp][zipapp-homepage] | -               |
+| 文档质量   | [rumdl][rumdl-homepage]（格式化 + 检查）                                                        | -               |
 
 ## 项目结构
 
@@ -28,15 +28,14 @@
 
 | 类别     | 工具                          |
 | -------- | ----------------------------- |
-| 语言环境 | Python                        |
-| 版本控制 | Git                           |
-| 包管理   | uv                            |
-| IDE      | Visual Studio Code 或 PyCharm |
+| 语言环境 | [Python][python-homepage]       |
+| 版本控制 | [Git][git-homepage]           |
+| 包管理   | [uv][uv-homepage]             |
+| IDE      | [Visual Studio Code][vscode-homepage] 或 [PyCharm][pycharm-homepage] |
 
 ## 获取源码
 
 ```bash
-# 克隆仓库
 git clone https://github.com/hellotool/VCFGeneratorLiteWithTkinter.git
 cd VCFGeneratorLiteWithTkinter
 ```
@@ -56,27 +55,20 @@ cd VCFGeneratorLiteWithTkinter
 uv sync
 ```
 
-该命令会创建虚拟环境并安装所有必需的开发依赖，包括：
-
-- poethepoet（任务运行器）
-- pyright（类型检查）
-- ruff（代码检查和格式化）
-- pytest（测试框架）
-- babel（国际化）
-- pyinstaller（构建工具）
+该命令会创建虚拟环境并安装所有开发依赖。
 
 ## 常用命令
 
 项目使用 Poe the Poet 作为任务运行器，常用命令如下：
 
-| 命令                      | 说明                                    |
-| ------------------------- | --------------------------------------- |
-| `uv run poe test`         | 运行测试                                |
-| `uv run poe format`       | 格式化代码与文档（改写文件）            |
-| `uv run poe format-check` | 检查格式（只读）                        |
-| `uv run poe lint`         | 静态检查（Ruff + Pyright + rumdl）      |
-| `uv run poe lint-fix`     | 修复可自动修复的 lint 问题（不改格式）  |
-| `uv run poe check`        | 全量只读检查（`format-check` + `lint`） |
+| 命令                      | 说明                                          |
+| ------------------------- | --------------------------------------------- |
+| `uv run poe test`         | 运行测试                                      |
+| `uv run poe format`       | 格式化代码与文档（改写文件）                  |
+| `uv run poe format-check` | 检查格式（只读）                              |
+| `uv run poe lint`         | 静态检查（Ruff + Pyright + rumdl）            |
+| `uv run poe lint-fix`     | 修复可自动修复的 lint 问题（不改格式）        |
+| `uv run poe check`        | 全量只读检查（`format-check` + `lint`）       |
 | `uv run poe fix`          | 修复并验证（`lint-fix` → `format` → `check`） |
 
 ## 运行应用
@@ -96,3 +88,20 @@ uv run python -m vcf_generator_lite -vv
 ## 下一步
 
 - 阅读 [项目概览](./architecture/overview.md) 了解项目架构。
+
+[poethepoet-homepage]: https://poethepoet.natn.io/
+[pytest-homepage]: https://docs.pytest.org/en/stable/
+[innosetup-homepage]: https://jrsoftware.org/isinfo.php
+[pyinstaller-homepage]: https://pyinstaller.org/
+[rumdl-homepage]: https://rumdl.dev/
+[pyright-homepage]: https://microsoft.github.io/pyright/
+[ruff-homepage]: https://docs.astral.sh/ruff/
+[tcl-homepage]: https://www.tcl-lang.org/
+[uv-homepage]: https://docs.astral.sh/uv/
+[python-homepage]: https://www.python.org/
+[git-homepage]: https://git-scm.com/
+[vscode-homepage]: https://code.visualstudio.com/
+[pycharm-homepage]: https://www.jetbrains.com/zh-cn/pycharm/
+[gettext-homepage]: https://docs.python.org/zh-cn/3.15/library/gettext.html
+[zipapp-homepage]: https://docs.python.org/zh-cn/3.15/library/zipapp.html
+[tkinter-homepage]: https://docs.python.org/zh-cn/3.15/library/tkinter.html
