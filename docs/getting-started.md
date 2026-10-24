@@ -46,14 +46,14 @@ gh attestation verify -o hellotool \
    ```
    > [!TIP]
    >
-   > 如果您需要从 Excel 工作簿导入联系人数据，请参阅 [导入联系人](./guides/import-contacts.md)。
+   > 如果您需要从 Excel 工作簿添加联系人数据，请参阅 [添加联系人](./guides/add-contacts.md)。
 3. 点击 **开始生成** 按钮，选择保存路径。
 4. 等待生成完成。如有无法识别的条目，应用会弹出无效条目窗口提示您修正。
 5. 将生成的 `.vcf` 文件传输到目标设备或服务。
 
 ## 后续步骤
 
-- 学习 [使用 vCard 文件](./guides/vcard-usage.md)，将生成的文件导入到各类设备和服务。
+- 学习 [使用 vCard 文件](./guides/vcard-usage.md)，将联系人导入到各类设备和服务。
 - 阅读 [应用功能](./reference/functions.md) 了解完整功能。
 - 遇到问题时查阅 [常见问题](./troubleshooting/faq.md)。
 

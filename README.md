@@ -18,7 +18,7 @@
 
 </div>
 
-VCF Generator Lite is a simple and efficient application that converts contact lists into a single vCard (`.vcf`) file. Generated files can be batch-imported into mobile phone contacts or used for various other purposes.
+VCF Generator Lite is a simple and efficient desktop tool that converts contact lists into a single vCard (`.vcf`) file, making it easy to batch import contacts into your phone's address book, email, or other contact applications.
 
 Built with Python and Tkinter for a native desktop application.
 
@@ -114,11 +114,11 @@ For system requirements, vCard compatibility, and known issues, see [Compatibili
 
 Parts of this project were generated with AI assistance:
 
-- **Trae**: Code generation, document optimization, code optimization, language translation  
-- **Qoder**: Code completion, document optimization, coding guidance  
-- **DeepSeek**: Coding guidance, code generation, document optimization, language translation  
-- **Yuanbao**: Coding guidance, code generation, language translation  
-- **WorkBuddy**: Code review, document optimization  
+- **Qoder**: Code generation, document optimization, coding guidance, language translation
+- **Trae**: Code generation, document optimization, code optimization, language translation
+- **DeepSeek**: Coding guidance, code generation, document optimization, language translation
+- **Yuanbao**: Coding guidance, code generation, language translation
+- **WorkBuddy**: Code review, document optimization
 - **OpenCode**: Document optimization
 
 ## License
