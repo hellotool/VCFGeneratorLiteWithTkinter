@@ -1,4 +1,5 @@
 # $schema: https://json.schemastore.org/rumdl.json
+#:schema https://json.schemastore.org/rumdl.json
 
 # https://rumdl.dev/global-settings/
 exclude = ["build", "dist", ".venv", ".pytest_cache"]

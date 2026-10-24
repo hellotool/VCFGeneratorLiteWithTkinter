@@ -1,4 +1,5 @@
 # $schema: https://json.schemastore.org/ruff.json
+#:schema https://json.schemastore.org/ruff.json
 
 line-length = 120
 include = [

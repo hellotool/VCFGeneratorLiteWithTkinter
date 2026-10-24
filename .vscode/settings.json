@@ -1,6 +1,6 @@
 {
   "explorer.fileNesting.patterns": {
-    "pyproject.toml": "uv.lock, .python-version, .editorconfig, rumdl.toml, pytest.toml, pyrightconfig.json, ruff.toml, uv.toml, babel.toml, poe_tasks.toml",
+    "pyproject.toml": "uv.lock, .python-version, .pdm-python, .editorconfig, *.toml, *.json, *.yml",
     "README.md": "README_*.md",
     "*": "${basename}.*.${extname}"
   },
@@ -20,9 +20,4 @@
   },
   "rumdl.enable": true,
   "rumdl.configPath": "rumdl.toml",
-  "evenBetterToml.schema.associations": {
-    ".*/ruff.toml": "https://json.schemastore.org/ruff.json",
-    ".*/rumdl.toml": "https://json.schemastore.org/rumdl.json",
-    ".*/uv.toml": "https://json.schemastore.org/uv.json",
-  },
 }

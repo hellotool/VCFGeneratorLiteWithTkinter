@@ -1,4 +1,5 @@
 # $schema: https://json.schemastore.org/pytest.json
+#:schema https://json.schemastore.org/pytest.json
 
 [pytest]
 testpaths = ["tests"]

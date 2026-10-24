@@ -1,4 +1,5 @@
 # $schema: https://json.schemastore.org/uv.json
+#:schema https://json.schemastore.org/uv.json
 
 required-version = ">=0.13.1"
 
