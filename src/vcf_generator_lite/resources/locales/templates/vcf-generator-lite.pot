@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VCF Generator Lite 6.0.2\n"
 "Report-Msgid-Bugs-To: Jesse205 <jesse205@qq.com>\n"
-"POT-Creation-Date: 2026-10-13 20:29+0800\n"
+"POT-Creation-Date: 2026-10-24 17:14+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,157 +17,157 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: .stdlib_symbol/argparse.py:246
+#: .stdlib_symbol/argparse.py:276
 #, python-format
 msgid "%(heading)s:"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:325
+#: .stdlib_symbol/argparse.py:355
 msgid "usage: "
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:753
+#: .stdlib_symbol/argparse.py:868
 #, python-format
 msgid " (default: %(default)s)"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:815
+#: .stdlib_symbol/argparse.py:936
 #, python-format
 msgid "argument %(argument_name)s: %(message)s"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:1190
+#: .stdlib_symbol/argparse.py:1323
 msgid "show program's version number and exit"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:1304
+#: .stdlib_symbol/argparse.py:1437
 #, python-format
 msgid "unknown parser %(parser_name)r (choices: %(choices)s)"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:1308
+#: .stdlib_symbol/argparse.py:1441
 #, python-format
 msgid "command '%(parser_name)s' is deprecated"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:1375
+#: .stdlib_symbol/argparse.py:1508
 #, python-format
 msgid "argument \"-\" with mode %r"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:1384
+#: .stdlib_symbol/argparse.py:1517
 #, python-format
 msgid "can't open '%(filename)s': %(error)s"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:1722
+#: .stdlib_symbol/argparse.py:1861
 #, python-format
 msgid "conflicting option string: %s"
 msgid_plural "conflicting option strings: %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: .stdlib_symbol/argparse.py:1905
+#: .stdlib_symbol/argparse.py:2047
 msgid "positional arguments"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:1906
+#: .stdlib_symbol/argparse.py:2048
 msgid "options"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:1919
+#: .stdlib_symbol/argparse.py:2061
 msgid "show this help message and exit"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:1956
+#: .stdlib_symbol/argparse.py:2098
 msgid "subcommands"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2007 .stdlib_symbol/argparse.py:2570
+#: .stdlib_symbol/argparse.py:2151 .stdlib_symbol/argparse.py:2714
 #, python-format
 msgid "unrecognized arguments: %s"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2113
+#: .stdlib_symbol/argparse.py:2257
 #, python-format
 msgid "not allowed with argument %s"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2132
+#: .stdlib_symbol/argparse.py:2276
 #, python-format
 msgid "ambiguous option: %(option)s could match %(matches)s"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2164 .stdlib_symbol/argparse.py:2196
+#: .stdlib_symbol/argparse.py:2308 .stdlib_symbol/argparse.py:2340
 #, python-format
 msgid "ignored explicit argument %r"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2216
+#: .stdlib_symbol/argparse.py:2360
 #, python-format
 msgid "option '%(option)s' is deprecated"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2248
+#: .stdlib_symbol/argparse.py:2392
 #, python-format
 msgid "argument '%(argument_name)s' is deprecated"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2341
+#: .stdlib_symbol/argparse.py:2485
 #, python-format
 msgid "the following arguments are required: %s"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2356
+#: .stdlib_symbol/argparse.py:2500
 #, python-format
 msgid "one of the arguments %s is required"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2400
+#: .stdlib_symbol/argparse.py:2544
 msgid "expected one argument"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2401
+#: .stdlib_symbol/argparse.py:2545
 msgid "expected at most one argument"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2402
+#: .stdlib_symbol/argparse.py:2546
 msgid "expected at least one argument"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2406
+#: .stdlib_symbol/argparse.py:2550
 #, python-format
 msgid "expected %s argument"
 msgid_plural "expected %s arguments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: .stdlib_symbol/argparse.py:2516
+#: .stdlib_symbol/argparse.py:2660
 #, python-format
 msgid "unexpected option string: %s"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2664
+#: .stdlib_symbol/argparse.py:2808
 #, python-format
 msgid "invalid %(type)s value: %(value)r"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2682
+#: .stdlib_symbol/argparse.py:2826
 #, python-format
 msgid "invalid choice: %(value)r (choose from %(choices)s)"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2690
+#: .stdlib_symbol/argparse.py:2834
 #, python-format
 msgid "invalid choice: %(value)r, maybe you meant %(closest)r? (choose from %(choices)s)"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2782
+#: .stdlib_symbol/argparse.py:2953
 #, python-format
 msgid "%(prog)s: error: %(message)s\n"
 msgstr ""
 
-#: .stdlib_symbol/argparse.py:2786
+#: .stdlib_symbol/argparse.py:2962
 #, python-format
 msgid "%(prog)s: warning: %(message)s\n"
 msgstr ""
@@ -193,12 +193,12 @@ msgctxt "startup.tcltk_unsupported_error"
 msgid "⚠️ERROR: Tcl/Tk {current_version} is not supported. Please upgrade to Tcl/Tk {minimum_version} or later."
 msgstr ""
 
-#: src/vcf_generator_lite/bootstrap.py:151
+#: src/vcf_generator_lite/bootstrap.py:150
 msgctxt "startup.tkinter_not_available_error"
 msgid "⚠️ERROR: Tkinter is not available in the current Python environment. Please reinstall Python with its Tcl/Tk component, or install the Tkinter package provided by your distribution."
 msgstr ""
 
-#: src/vcf_generator_lite/bootstrap.py:161
+#: src/vcf_generator_lite/bootstrap.py:160
 msgctxt "startup.tkinter_missing_hint_windows"
 msgid "On Windows, the component is named 'tcl/tk and IDLE' in the Python installer."
 msgstr ""
@@ -334,49 +334,49 @@ msgctxt "dialog_invalid_items.title"
 msgid "vCard File Generation Complete"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:48
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:50
 #, python-brace-format
 msgctxt "dialog_invalid_items.message"
 msgid "File exported to {path}, invalid numbers have been ignored."
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:59
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:61
 msgctxt "dialog_invalid_items.label_invalid_numbers"
 msgid "Invalid numbers: "
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:84
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:86
 msgctxt "dialog_invalid_items.heading_row"
 msgid "Position"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:89
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:91
 msgctxt "dialog_invalid_items.heading_original"
 msgid "Original Content"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:94
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:96
 msgctxt "dialog_invalid_items.heading_reason"
 msgid "Reason"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:102
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:104
 msgctxt "dialog_invalid_items.cell_loading"
 msgid "Loading..."
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:118
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:120
 msgctxt "common.button_ok"
 msgid "OK"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:133
+#: src/vcf_generator_lite/ui/windows/invalid_items_dialog/layout.py:135
 #, python-brace-format
 msgctxt "dialog_invalid_items.cell_row"
 msgid "Row {row}"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:33
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:44
 msgctxt "window_main.label_usage"
 msgid ""
 "Instructions:\n"
@@ -385,7 +385,7 @@ msgid ""
 "3. You can use the generated vCard file wherever you need it, such as importing it into your phone or email."
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:59
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:70
 msgctxt "window_main.entry_content"
 msgid ""
 "Qu Yuan\t13333333333\tPoet of the Warring States period\n"
@@ -394,25 +394,23 @@ msgid ""
 "Xie Lingyun\t13666666666\n"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:92
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:140
-msgctxt "window_main.label_generating"
-msgid "Generating..."
-msgstr ""
-
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:96
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:135
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:160
 msgctxt "window_main.button_generate"
 msgid "Generate"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:139
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:143
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:166
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:171
 msgctxt "window_main.button_stop"
 msgid "Stop"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/layout.py:144
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:167
+msgctxt "window_main.label_generating"
+msgid "Generating..."
+msgstr ""
+
+#: src/vcf_generator_lite/ui/windows/main_window/layout.py:172
 msgctxt "window_main.label_stopping"
 msgid "Stopping..."
 msgstr ""
@@ -587,12 +585,12 @@ msgctxt "window_save_vcf.default_file_name"
 msgid "My Contacts.vcf"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/window.py:163
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:148
 msgctxt "window_save_vcf.title"
 msgid "Select File Save Location"
 msgstr ""
 
-#: src/vcf_generator_lite/ui/windows/main_window/window.py:166
+#: src/vcf_generator_lite/ui/windows/main_window/window.py:151
 msgctxt "window_save_vcf.label_type_vcf"
 msgid "vCard File (*.vcf)"
 msgstr ""

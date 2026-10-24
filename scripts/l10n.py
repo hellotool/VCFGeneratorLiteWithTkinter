@@ -1,5 +1,4 @@
 import argparse
-import os
 import subprocess
 import sysconfig
 
@@ -17,6 +16,8 @@ PATH_ARG_PARSER_SYMBOL_RELATIVE = PATH_STD_LIB_SYMBOL_RELATIVE / PATH_ARG_PARSER
 PATH_LOCALES_RELATIVE = PATH_SOURCE_RELATIVE / "vcf_generator_lite" / "resources" / "locales"
 PATH_MSG_POT_RELATIVE = PATH_LOCALES_RELATIVE / "templates" / f"{APP_DOMAIN}.pot"
 
+PATH_MAPPING_RELATIVE = Path("babel.toml")
+
 
 def require_babel() -> Path:
     return require_external_tool("pybabel", "Babel")
@@ -29,10 +30,6 @@ def extract():
     PATH_STD_LIB_SYMBOL_RELATIVE.symlink_to(PATH_STD_LIB, target_is_directory=True)
     try:
         PATH_MSG_POT_RELATIVE.parent.mkdir(parents=True, exist_ok=True)
-        env = os.environ.copy()
-        scripts_root = str(Path(__file__).resolve().parent.parent)
-        existing_pythonpath = env.get("PYTHONPATH", "")
-        env["PYTHONPATH"] = scripts_root + (os.pathsep + existing_pythonpath if existing_pythonpath else "")
         dynamic_args = []
         if app_metadata.copyright:
             dynamic_args.extend(("--copyright-holder", app_metadata.author))
@@ -43,7 +40,7 @@ def extract():
                 babel_path,
                 "extract",
                 "--mapping-file",
-                Path("babel.toml"),
+                PATH_MAPPING_RELATIVE,
                 "--output-file",
                 PATH_MSG_POT_RELATIVE,
                 "--no-wrap",
@@ -57,7 +54,6 @@ def extract():
                 PATH_ARG_PARSER_SYMBOL_RELATIVE,
             ],
             check=True,
-            env=env,
         )
     finally:
         if PATH_STD_LIB_SYMBOL_RELATIVE.exists():
