@@ -13,6 +13,8 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 ## [Unreleased]
 
+## [6.0.3] - 2026-10-25
+
 ### Added
 
 - Added `Ctrl+Enter` (`⌘+Enter` on macOS) to start or stop generation while the caret is inside the input box, where `Enter` keeps inserting a newline.
@@ -421,7 +423,8 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 - Initial release.
 
-[Unreleased]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v6.0.2...HEAD
+[Unreleased]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v6.0.3...HEAD
+[6.0.3]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.3
 [6.0.2]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.2
 [6.0.1]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.1
 [6.0.0]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.0

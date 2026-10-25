@@ -13,6 +13,8 @@
 
 ## [未发布]
 
+## [6.0.3] - 2026-10-25
+
 ### 新增
 
 - 新增 `Ctrl+Enter`（macOS 为 `⌘+Enter`）快捷键：焦点在输入框内时也能开始或停止生成，输入框内的 `Enter` 仍保持换行。
@@ -421,7 +423,8 @@
 
 - 初始版本发布。
 
-[未发布]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v6.0.2...HEAD
+[未发布]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/compare/v6.0.3...HEAD
+[6.0.3]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.3
 [6.0.2]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.2
 [6.0.1]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.1
 [6.0.0]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/releases/tag/v6.0.0
