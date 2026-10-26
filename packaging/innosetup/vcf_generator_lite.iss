@@ -42,6 +42,7 @@ Name: zh_cn; MessagesFile: ".extensions\Languages\ChineseSimplified.isl"
 
 [CustomMessages]
 MyAppName=VCF Generator Lite
+MyAppDescription=Merge contacts into a vCard file
 en_us.MyAppName=VCF Generator Lite
 en_us.MyAppPublisher=Jesse205
 en_us.MyAppPublisherURL=https://github.com/Jesse205
@@ -51,6 +52,7 @@ en_us.OSNotSupportedMessage=The version of Windows you are currently using is to
 en_us.UninstallFailed=Uninstall failed
 
 zh_cn.MyAppName=VCF 生成器 轻量版
+zh_cn.MyAppDescription=将联系人合并为 vCard 文件
 zh_cn.MyAppPublisher=Jesse205
 zh_cn.MyAppPublisherURL=https://gitee.com/Jesse205
 zh_cn.MyAppReadmeFile=https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/blob/master/README.md
@@ -128,8 +130,8 @@ Source: "..\..\dist\vcf_generator_lite\*"; DestDir: "{app}"; Flags: ignoreversio
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{autoprograms}\{cm:MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{autodesktop}\{cm:MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+Name: "{autoprograms}\{cm:MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Comment: "{cm:MyAppDescription}"
+Name: "{autodesktop}\{cm:MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon; Comment: "{cm:MyAppDescription}"
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{cm:MyAppName}}"; Flags: nowait postinstall skipifsilent
