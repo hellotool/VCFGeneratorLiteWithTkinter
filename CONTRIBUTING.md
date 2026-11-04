@@ -31,11 +31,11 @@ If you encounter problems or have improvement suggestions while using the applic
 
 Localization work includes adding **phone detectors** to support more number types, and translating **application interface** texts (including phone detector names).
 
-> [!TIP]  
+> [!TIP]
 >
-> **Using AI-Assisted Localization**  
+> **Using AI Agent to assist with localization**
 >
-> If you're unfamiliar with code or translation file formats, you can leverage modern AI tools like GitHub Copilot or Trae. Simply describe your needs in natural language, and the AI will automatically generate compliant code or complete translations.
+> If you are not familiar with coding or the translation process, you can use various AI Agent tools like Trae and Codex to assist with localization. Simply describe your needs in natural language, and the AI Agent tool will automatically complete all the work for you.
 
 Detailed guides for each task:
 

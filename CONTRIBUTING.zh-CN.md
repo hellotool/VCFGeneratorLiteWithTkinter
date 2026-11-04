@@ -33,11 +33,9 @@
 
 > [!TIP]
 >
-> **使用 AI 辅助本地化**
+> **使用 AI Agent 辅助本地化**
 >
-> 如果您不熟悉代码或翻译文件格式，可以使用 GitHub Copilot、Trae 等现代 AI 工具，只需用自然语言描述需求，AI 工具会自动生成符合规范的代码或完成翻译。
-
-详细步骤请参考：
+> 如果您不熟悉编写代码或翻译流程，可以使用 Trae、WorkBuddy 等各种 AI Agent 工具辅助完成本地化工作。只需用自然语言描述需求，AI Agent 工具会自动为您完成所有工作。
 
 - [添加号码检测器](./docs/dev/globalization/phone-detector.md)
 - [翻译应用](./docs/dev/globalization/translation.md)
