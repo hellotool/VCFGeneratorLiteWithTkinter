@@ -6,8 +6,6 @@
 /dist
 *.egg-info
 
-/packaging/innosetup/.extensions
-
 # Caches
 __pycache__
 

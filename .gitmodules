@@ -1,0 +1,3 @@
+[submodule "third-party/kira-96/Inno-Setup-Chinese-Simplified-Translation"]
+	path = third-party/kira-96/Inno-Setup-Chinese-Simplified-Translation
+	url = https://github.com/kira-96/Inno-Setup-Chinese-Simplified-Translation.git

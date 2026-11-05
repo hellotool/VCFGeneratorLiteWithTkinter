@@ -52,20 +52,11 @@ tasks:
     help: Build installer (*-setup.exe)
     script: scripts.build_app:build_installer
     args:
-      - help: Don't verify SSL
-        name: no_verify_ssl
-        options:
-          - --no-verify-ssl
-        type: boolean
       - help: Force rebuild upstream outputs (PyInstaller dist)
         name: force
         options:
           - --force
-        type: boolean
-      - help: Force online download InnoSetup extensions
-        name: force_download
-        options:
-          - --force-download
+          - -f
         type: boolean
 
   build-portable:
@@ -76,6 +67,7 @@ tasks:
         name: force
         options:
           - --force
+          - -f
         type: boolean
 
   build-zipapp:
@@ -86,6 +78,7 @@ tasks:
         name: force
         options:
           - --force
+          - -f
         type: boolean
 
   build-wheel:
