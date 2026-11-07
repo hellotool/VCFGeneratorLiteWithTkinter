@@ -1,4 +1,3 @@
-import sys
 import tkinter.font
 from typing import override
 
@@ -32,13 +31,11 @@ class DefaultThemePatcher(BaseThemePatcher):
         self.app.option_add("*Menu.activeForeground", select_foreground, "startupFile")
         self.app.option_add("*Toplevel.background", background, "startupFile")
 
-        if sys.platform == "win32":
-            # Windows 7 中菜单默认不使用 TkMenuFont，因此需要手动设置字体。
-            self.app.option_add("*Menu.font", "TkMenuFont", "startupFile")
+        # Windows 7 中菜单默认不使用 TkMenuFont，因此需要手动设置字体。
+        self.app.option_add("*Menu.font", "TkMenuFont", "startupFile")
 
     def _patch_builtin_theme_common(self) -> None:
-        treeview_font = lookup_font(self.style, "Treeview", "font", default="TkDefaultFont")
-        treeview_font_metrics = treeview_font.metrics()
+        treeview_font_metrics = lookup_font(self.style, "Treeview", "font", default="TkDefaultFont").metrics()
 
         # 重写部分配置以适配高分屏
         self.style.configure("TButton", padding="2.5p")
@@ -48,11 +45,7 @@ class DefaultThemePatcher(BaseThemePatcher):
         self._convert_fonts_to_point()
 
     def _patch_vista_theme(self) -> None:
-        self.style.configure(
-            "ThemedText.TEntry",
-            padding=0,
-            borderwidth="1.5p",
-        )
+        self.style.configure("ThemedText.TEntry", padding=0, borderwidth="1.5p")
         # 使输入框在没有获取焦点时也显示选择的文字
         self.style.map("ThemedText.TEntry", selectbackground=[], selectforeground=[])
 
@@ -62,12 +55,14 @@ class DefaultThemePatcher(BaseThemePatcher):
         self.style.configure("DialogHeaderContent.TLabel", background="systemWindow")
 
     def _patch_builtin_cross_platform_theme(self) -> None:
-        self.style.configure("Vertical.TScrollbar", arrowsize="9p")
-        self.style.configure("Horizontal.TScrollbar", arrowsize="9p")  # 选择文件时使用
+        # 低版本 Tk 8.6 中，arrowsize 可能只支持像素单位。详见 https://core.tcl-lang.org/tk/info/e306996882
+        arrowsize = self.app.winfo_pixels("9p")
+        self.style.configure("Vertical.TScrollbar", arrowsize=arrowsize)
+        self.style.configure("Horizontal.TScrollbar", arrowsize=arrowsize)  # 选择文件时使用
 
     def _convert_fonts_to_point(self) -> None:
         """
-        将字体绝对大小转换为点。
+        将字体绝对大小转换为榜。
 
         默认的字体大小可能以绝对像素指定。x11中tk 8.6可能存在这个问题。详见 `TIP #564 <https://core.tcl-lang.org/tips/doc/trunk/tip/564.md>`_。
         """
