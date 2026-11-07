@@ -2,29 +2,33 @@
 
 本文介绍如何构建项目的四种发布包。所有构建产物输出到 `dist/` 目录。
 
+## 构建产物
+
+请确认您需要构建的产物：
+
+| 产物             | 运行平台 | 文件名格式                                            |
+| ---------------- | -------- | ----------------------------------------------------- |
+| Windows 安装程序 | Windows  | `VCFGeneratorLite-v{version}-{platform}-setup.exe`    |
+| Windows 便携包   | Windows  | `VCFGeneratorLite-v{version}-{platform}-portable.zip` |
+| Python Wheel     | 跨平台   | `vcf_generator_lite-{version}-py3-none-any.whl`       |
+| Python ZIP 应用  | 跨平台   | `VCFGeneratorLite-v{version}-py3.pyzw`                |
+
+其中 `{version}` 为项目当前版本号，`{platform}` 为构建平台标识（如 `win-amd64`、`win-arm64`）。
+
 ## 前置条件
 
 在构建之前，请确保已完成开发环境搭建（参见 [快速上手](./getting-started.md)），并根据目标产物确认以下依赖：
 
-| 依赖                                           | 适用产物         | 安装方式                                   |
-| ---------------------------------------------- | ---------------- | ------------------------------------------ |
-| [PyInstaller][pyinstaller-homepage]            | 安装程序、便携包 | `uv sync` 自动安装。                       |
-| [InnoSetup][innosetup-homepage]                | 安装程序         | 手动安装并添加到系统 PATH。                |
-| [InnoSetup 简体中文语言文件][innosetup-chinese] | 安装程序         | 首次构建安装程序时自动下载，无需手动准备。 |
-| zipapp                                         | ZIP 应用         | Python 标准库，无需额外安装。              |
-
-## 构建产物
-
-| 产物             | 文件名格式                                            | 运行平台 |
-| ---------------- | ----------------------------------------------------- | -------- |
-| Windows 安装程序 | `VCFGeneratorLite-v{version}-{platform}-setup.exe`    | Windows  |
-| Windows 便携包   | `VCFGeneratorLite-v{version}-{platform}-portable.zip` | Windows  |
-| Python Wheel     | `vcf_generator_lite-{version}-py3-none-any.whl`       | 跨平台   |
-| Python ZIP 应用  | `VCFGeneratorLite-v{version}-py3.pyzw`                | 跨平台   |
-
-其中 `{version}` 为项目当前版本号，`{platform}` 为构建平台标识（如 `win-amd64`、`win-arm64`）。
+| 依赖                                            | 适用产物         | 安装方式                                          |
+| ----------------------------------------------- | ---------------- | ------------------------------------------------- |
+| [PyInstaller][pyinstaller-homepage]             | 安装程序、便携包 | `uv sync` 自动安装。                              |
+| [InnoSetup][innosetup-homepage]                 | 安装程序         | 手动安装并添加到系统 PATH。                       |
+| [InnoSetup 简体中文语言文件][innosetup-chinese] | 安装程序         | 初始化 Git 子模块： `git submodule update --init` |
+| zipapp                                          | ZIP 应用         | Python 标准库，无需额外安装。                     |
 
 ## 构建命令
+
+执行以下命令构建目标产物：
 
 ### 构建安装程序
 
@@ -95,14 +99,8 @@ build-wheel     ──→ 源码
 # 强制重建 PyInstaller 分发包后打包便携版
 uv run poe build-portable --force
 
-# 强制重建 PyInstaller 分发包 + 强制下载扩展后构建安装程序
-uv run poe build-installer --force --force-download
-
-# 只强制下载扩展（不强制重建上游）
-uv run poe build-installer --force-download
-
-# 下载扩展时不验证 SSL
-uv run poe build-installer --no-verify-ssl
+# 强制重建 PyInstaller 分发包后构建安装程序
+uv run poe build-installer --force
 
 # 强制重建 Wheel 后打包 ZIP 应用
 uv run poe build-zipapp --force
