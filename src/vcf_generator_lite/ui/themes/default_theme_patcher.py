@@ -1,4 +1,5 @@
 import sys
+import tkinter.font
 from typing import override
 
 from vcf_generator_lite.ui.themes.base import BaseThemePatcher
@@ -44,6 +45,7 @@ class DefaultThemePatcher(BaseThemePatcher):
         self.style.configure("TMenubutton", padding="2.5p")
         self.style.configure("Treeview", rowheight=treeview_font_metrics["linespace"] + self.app.winfo_pixels("2.5p"))
         self.style.configure("Heading", padding="1.5p")
+        self._convert_fonts_to_point()
 
     def _patch_vista_theme(self) -> None:
         self.style.configure(
@@ -62,3 +64,15 @@ class DefaultThemePatcher(BaseThemePatcher):
     def _patch_builtin_cross_platform_theme(self) -> None:
         self.style.configure("Vertical.TScrollbar", arrowsize="9p")
         self.style.configure("Horizontal.TScrollbar", arrowsize="9p")  # 选择文件时使用
+
+    def _convert_fonts_to_point(self) -> None:
+        """
+        将字体绝对大小转换为点。
+
+        默认的字体大小可能以绝对像素指定。x11中tk 8.6可能存在这个问题。详见 `TIP #564 <https://core.tcl-lang.org/tips/doc/trunk/tip/564.md>`_。
+        """
+        fonts = (tkinter.font.nametofont(name, self.app) for name in tkinter.font.names())
+        for font in fonts:
+            font_size = font.cget("size")
+            if font_size < 0:
+                font.configure(size=int(-font_size * 0.75))

@@ -12,12 +12,7 @@ def lookup_font(
     default: Any | None = None,  # ruff: ignore[any-type]
 ) -> Font:
     """Lookup font from style object and return Font object."""
-    treeview_font_lookup = style_obj.lookup(
-        style=style_name,
-        option=option,
-        state=state,
-        default=default,
-    )
-    if isinstance(treeview_font_lookup, Font):
-        return treeview_font_lookup
-    return nametofont(str(treeview_font_lookup))
+    font_lookup = style_obj.lookup(style=style_name, option=option, state=state, default=default)
+    if isinstance(font_lookup, Font):
+        return font_lookup
+    return nametofont(str(font_lookup))
