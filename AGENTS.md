@@ -18,6 +18,7 @@ VCF 生成器 轻量版 是一个轻量级 vCard 文件生成器，用户提供�
   - 格式化工具：Ruff
   - 代码检查：Ruff、Pyright
 - 文档质量：rumdl
+- 配置文件质量：tombi
 
 ## 设置命令
 

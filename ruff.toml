@@ -3,62 +3,62 @@
 
 line-length = 120
 include = [
-    "ruff.toml",
-    "pyproject.toml",
-    "src/**/*.py",
-    "tests/**/*.py",
-    "scripts/**/*.py",
-    "packaging/**/*.py",
-    "packaging/pyinstaller/*.spec",
+  "ruff.toml",
+  "pyproject.toml",
+  "src/**/*.py",
+  "tests/**/*.py",
+  "scripts/**/*.py",
+  "packaging/**/*.py",
+  "packaging/pyinstaller/*.spec",
 ]
 
 [lint]
 preview = true
 ignore = [
-    "undocumented-public-module",    # 有时候文档不是必须的
-    "undocumented-public-class",
-    "undocumented-public-method",
-    "undocumented-public-function",
-    "undocumented-public-package",
-    "undocumented-public-init",
-    "missing-trailing-period",    # 不支持中文标点
-    "import-outside-top-level", # 为了防止兼容性问题或者不必要的代码运行，需要将导入放到函数内。
-    "boolean-type-hint-positional-argument",  # 在设置单个值时不需要命名参数
-    "boolean-positional-value-in-call",
-    "print",    # 有 CLI 需求
-    "too-many-arguments", # 参数多不是问题，问题是参数多且没使用命名参数
-    "magic-value-comparison", # 一些长度判断、常见状态码不需要常量
-    "request-without-timeout",    # 万一就是要等很长时间
-    "missing-type-kwargs",  # 无法做到
-    "missing-return-type-undocumented-public-function",  # 为了保持简洁，None 类型不写返回类型
-    "missing-return-type-private-function",
-    "missing-return-type-special-method",
-    "missing-trailing-comma",  # 可能与 Formatter 冲突
-    "raise-vanilla-args",  # 没有必要嵌套业务错误类
-    "raw-string-in-exception",
-    "f-string-in-exception",
-    "missing-copyright-notice", # 有例外版权再加
-    "docstring-missing-returns", #有时这些文档说明不是必须的
-    "docstring-missing-yields",
-    "docstring-missing-exception",
-    "suspicious-subprocess-import",
+  "undocumented-public-module",  # 有时候文档不是必须的
+  "undocumented-public-class",
+  "undocumented-public-method",
+  "undocumented-public-function",
+  "undocumented-public-package",
+  "undocumented-public-init",
+  "missing-trailing-period",  # 不支持中文标点
+  "import-outside-top-level",  # 为了防止兼容性问题或者不必要的代码运行，需要将导入放到函数内。
+  "boolean-type-hint-positional-argument",  # 在设置单个值时不需要命名参数
+  "boolean-positional-value-in-call",
+  "print",  # 有 CLI 需求
+  "too-many-arguments",  # 参数多不是问题，问题是参数多且没使用命名参数
+  "magic-value-comparison",  # 一些长度判断、常见状态码不需要常量
+  "request-without-timeout",  # 万一就是要等很长时间
+  "missing-type-kwargs",  # 无法做到
+  "missing-return-type-undocumented-public-function",  # 为了保持简洁，None 类型不写返回类型
+  "missing-return-type-private-function",
+  "missing-return-type-special-method",
+  "missing-trailing-comma",  # 可能与 Formatter 冲突
+  "raise-vanilla-args",  # 没有必要嵌套业务错误类
+  "raw-string-in-exception",
+  "f-string-in-exception",
+  "missing-copyright-notice",  # 有例外版权再加
+  "docstring-missing-returns",  # 有时这些文档说明不是必须的
+  "docstring-missing-yields",
+  "docstring-missing-exception",
+  "suspicious-subprocess-import",
 ]
 select = [
-    "correctness",
-    "suspicious",
-    "complexity",
-    "performance",
-    "style",
-    "security",
-    "formatting",
-    "pedantic",
-    "restriction",
+  "correctness",
+  "suspicious",
+  "complexity",
+  "performance",
+  "style",
+  "security",
+  "formatting",
+  "pedantic",
+  "restriction",
 ]
-allowed-confusables = ["，", "：", "（", "）", "；"] # 允许中文符号
+allowed-confusables = ["，", "：", "（", "）", "；"]  # 允许中文符号
 exclude = ["tests/**"]
 
 [lint.flake8-import-conventions.aliases]
-"gettext"="gettextlib"
+"gettext" = "gettextlib"
 
 [lint.pydocstyle]
 convention = "pep257"
@@ -66,4 +66,3 @@ convention = "pep257"
 [format]
 docstring-code-format = true
 line-ending = "lf"
-

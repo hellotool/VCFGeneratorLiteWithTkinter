@@ -9,40 +9,49 @@ tasks:
   format:
     default_item_type: cmd
     help: Format code and docs
+    ignore_fail: 'return_non_zero'
     parallel:
       - ruff format
       - rumdl fmt
+      - tombi format
 
   format-check:
     default_item_type: cmd
     help: Check formatting without modifying files
+    ignore_fail: 'return_non_zero'
     parallel:
       - ruff format --check
       - rumdl fmt --check
+      - tombi format --check
 
   lint:
     default_item_type: cmd
     help: Lint and type-check code and docs
+    ignore_fail: 'return_non_zero'
     parallel:
       - pyright
       - ruff check
       - rumdl check
+      - tombi check
 
   lint-fix:
     default_item_type: cmd
     help: Apply autofixable lint fixes without formatting
+    ignore_fail: 'return_non_zero'
     parallel:
       - ruff check --fix
       - rumdl check --fix
 
   check:
     help: Run all read-only checks (format-check + lint)
+    ignore_fail: 'return_non_zero'
     parallel:
       - format-check
       - lint
 
   fix:
     help: Fix code and docs, then verify (lint-fix -> format -> check)
+    ignore_fail: 'return_non_zero'
     sequence:
       - lint-fix
       - format

@@ -19,5 +19,5 @@ tab_width = 2
 [*.{har,json,jsonc}]
 indent_size = 2
 
-[*.{yaml,yml}]
+[*.{yaml,yml,toml}]
 indent_size = 2

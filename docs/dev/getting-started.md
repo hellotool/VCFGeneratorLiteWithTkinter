@@ -4,19 +4,20 @@
 
 ## 技术栈
 
-| 类别       | 工具                                                                                            | 版本要求        |
-| ---------- | ----------------------------------------------------------------------------------------------- | --------------- |
-| 语言环境   | [Python][python-homepage]                                                                       | 3.12+           |
-| UI 框架    | [Tkinter][tkinter-homepage] ([Tcl/Tk][tcl-homepage])                                            | Tcl/Tk 8.6+     |
-| 包管理     | [uv][uv-homepage]                                                                               | 0.13.1+         |
-| 版本控制   | [Git][git-homepage]                                                                             | -               |
-| IDE        | [Visual Studio Code][vscode-homepage] 或 [PyCharm][pycharm-homepage]                            | PyCharm 2026.1+ |
-| 任务运行器 | [Poe the Poet][poethepoet-homepage]                                                             | -               |
-| 国际化     | [gettext][gettext-homepage]                                                                     | -               |
-| 测试       | [pytest][pytest-homepage]                                                                       | -               |
-| 代码质量   | [Ruff][ruff-homepage]（格式化 + 检查）、[Pyright][pyright-homepage]（类型检查）                 | -               |
-| 构建       | [PyInstaller][pyinstaller-homepage]、[InnoSetup][innosetup-homepage]、[zipapp][zipapp-homepage] | -               |
-| 文档质量   | [rumdl][rumdl-homepage]（格式化 + 检查）                                                        | -               |
+| 类别         | 工具                                                                                            | 版本要求        |
+| ------------ | ----------------------------------------------------------------------------------------------- | --------------- |
+| 语言环境     | [Python][python-homepage]                                                                       | 3.12+           |
+| UI 框架      | [Tkinter][tkinter-homepage] ([Tcl/Tk][tcl-homepage])                                            | Tcl/Tk 8.6+     |
+| 包管理       | [uv][uv-homepage]                                                                               | 0.13.1+         |
+| 版本控制     | [Git][git-homepage]                                                                             | -               |
+| IDE          | [Visual Studio Code][vscode-homepage] 或 [PyCharm][pycharm-homepage]                            | PyCharm 2026.1+ |
+| 任务运行器   | [Poe the Poet][poethepoet-homepage]                                                             | -               |
+| 国际化       | [gettext][gettext-homepage]                                                                     | -               |
+| 测试         | [pytest][pytest-homepage]                                                                       | -               |
+| 代码质量     | [Ruff][ruff-homepage]（格式化 + 检查）、[Pyright][pyright-homepage]（类型检查）                 | -               |
+| 构建         | [PyInstaller][pyinstaller-homepage]、[InnoSetup][innosetup-homepage]、[zipapp][zipapp-homepage] | -               |
+| 文档质量     | [rumdl][rumdl-homepage]（格式化 + 检查）                                                        | -               |
+| 配置文件质量 | [tombi][tombi-homepage]（格式化 + 检查）                                                        | -               |
 
 ## 项目结构
 
@@ -26,11 +27,11 @@
 
 在开始之前，请确保您的系统已安装以下工具：
 
-| 类别     | 工具                          |
-| -------- | ----------------------------- |
-| 语言环境 | [Python][python-homepage]       |
-| 版本控制 | [Git][git-homepage]           |
-| 包管理   | [uv][uv-homepage]             |
+| 类别     | 工具                                                                 |
+| -------- | -------------------------------------------------------------------- |
+| 语言环境 | [Python][python-homepage]                                            |
+| 版本控制 | [Git][git-homepage]                                                  |
+| 包管理   | [uv][uv-homepage]                                                    |
 | IDE      | [Visual Studio Code][vscode-homepage] 或 [PyCharm][pycharm-homepage] |
 
 ## 获取源码
@@ -105,3 +106,4 @@ uv run python -m vcf_generator_lite -vv
 [gettext-homepage]: https://docs.python.org/zh-cn/3.15/library/gettext.html
 [zipapp-homepage]: https://docs.python.org/zh-cn/3.15/library/zipapp.html
 [tkinter-homepage]: https://docs.python.org/zh-cn/3.15/library/tkinter.html
+[tombi-homepage]: https://tombi-toml.github.io/tombi/
