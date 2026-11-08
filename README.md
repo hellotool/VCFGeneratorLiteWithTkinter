@@ -67,8 +67,8 @@ Built with Python and Tkinter for a native desktop application.
 
 ## Screenshots
 
-<img src="./assets/images/screenshots/main_window.zh-CN.webp" width="451" alt="Main window" />
-<img src="./assets/images/screenshots/invalid_lines_window.zh-CN.webp" width="362" alt="Invalid Lines Window" />
+<img src="./assets/images/screenshots/main_window.webp" width="451" alt="Main window" />
+<img src="./assets/images/screenshots/invalid_lines_window.webp" width="362" alt="Invalid Lines Window" />
 
 ## Download and Installation
 
