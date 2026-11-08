@@ -17,7 +17,7 @@ AppPublisherURL={cm:AppPublisherURL}
 AppReadmeFile={cm:AppReadmeFile}
 AppUpdatesURL={cm:AppUpdatesURL}
 
-DefaultDirName={autopf}\{#AppPublisher}\{#AppName}
+DefaultDirName={autopf}\Hello Tool\{#AppName}
 DisableProgramGroupPage=yes
 LicenseFile=..\..\LICENSE
 PrivilegesRequired=lowest
@@ -42,6 +42,7 @@ Name: zh_cn; MessagesFile: "..\..\third-party\kira-96\Inno-Setup-Chinese-Simplif
 
 [CustomMessages]
 AppName=VCF Generator Lite
+AppSeries=Hello Tool
 AppDescription=Merge contacts into a vCard file
 AppPublisher=Jesse205
 AppPublisherURL=https://github.com/Jesse205
@@ -51,6 +52,7 @@ OSNotSupportedMessage=The version of Windows you are currently using is too old,
 UninstallFailed=Uninstall failed
 
 zh_cn.AppName=VCF 生成器 轻量版
+zh_cn.AppSeries=哈兔工具
 zh_cn.AppDescription=将联系人合并为 vCard 文件
 zh_cn.AppPublisher=Jesse205
 zh_cn.AppPublisherURL=https://gitee.com/Jesse205
@@ -130,7 +132,7 @@ Source: "..\..\dist\vcf_generator_lite\*"; DestDir: "{app}"; Flags: ignoreversio
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{autoprograms}\{cm:AppName}"; Filename: "{app}\{#AppExeName}"; Comment: "{cm:AppDescription}"
+Name: "{autoprograms}\{#cm:AppName}"; Filename: "{app}\{#AppExeName}"; Comment: "{cm:AppDescription}"
 Name: "{autodesktop}\{cm:AppName}"; Filename: "{app}\{#AppExeName}"; Tasks: desktopicon; Comment: "{cm:AppDescription}"
 
 [Run]

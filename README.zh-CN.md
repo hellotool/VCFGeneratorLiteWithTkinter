@@ -1,7 +1,7 @@
 <div align="center">
 <img src="./assets/images/icon.svg" width="192" height="192" alt="应用图标" />
 
-# VCF 生成器 轻量版 ![使用 Tkinter](https://img.shields.io/badge/使用-Tkinter-00319C)
+# 哈兔 VCF 生成器 轻量版 ![使用 Tkinter](https://img.shields.io/badge/使用-Tkinter-00319C)
 
 **仓库**：
 [![Gitee 主仓库](https://img.shields.io/badge/Gitee-主仓库-C71D23?logo=gitee)][repository-gitee]
