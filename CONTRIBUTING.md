@@ -47,7 +47,7 @@ Detailed guides for each task:
 1. Ensure there are no related pull requests (PRs) in the [Gitee repository][repository-gitee] or [GitHub repository][repository-github].
 2. Fork this repository.
 3. Clone the repository locally using [Git][git-homepage].
-4. Read the [Development Guide](./docs/dev/index.md) to familiarize yourself with the project's development practices.
+4. Read the [Development Guide](./docs/dev/index.md) to familiarize yourself with the project development methods and related conventions.
 5. Create a branch, such as `feature/xxx` or `bugfix/xxx`.
 6. Write your code.
 7. Run the following commands to ensure the code complies with standards and introduces no errors:
@@ -62,25 +62,17 @@ Detailed guides for each task:
 
 ### Code Standards
 
-#### Python Code (`.py`)
+Relevant conventions can be found in the [Development Guide](./docs/dev/index.md).
 
-- Function parameters must have type annotations.
-- Maximum line length is 120 characters.
-- For all other cases, follow [PEP 8][pep-0008].
-
-#### Markdown Documents (`.md`)
-
-- No maximum line length restriction
-- Refer to the root `rumdl.toml` for specific rules.
-- For all other cases, follow [Markdownlint][markdownlint-repository-github].
-
-For more details, refer to `.editorconfig`.
+You can write code to your heart's content; the `uv run poe fix` command and your IDE will help you check and fix minor issues.
 
 ### Documentation Standards
 
 Documentation follows the [Google Developer Style Guide][google-style-guide] and the [Google Technical Writing][google-technical-writing] courses for clarity, voice, accessibility, and inclusive language. The [Chinese Technical Documentation Style Guide][zh-style-guide] supplements these as a reference for Chinese-language writing.
 
 Documentation is organized using the [Diátaxis][diataxis] framework into four categories: Tutorials, How-to guides, Reference, and Explanation.
+
+You can write the documentation to your heart's content; the `uv run poe fix` command and your IDE will help you check and fix minor issues.
 
 ### Git Commit Standards
 
@@ -91,7 +83,6 @@ Follow [Conventional Commits][conventionalcommits-homepage].
 [issues-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/issues
 [issues-github]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/issues
 
-[markdownlint-repository-github]: https://github.com/DavidAnson/markdownlint
 [git-homepage]: https://git-scm.com/
 [conventionalcommits-homepage]: https://www.conventionalcommits.org/en/v1.0.0/
 
@@ -102,5 +93,4 @@ Follow [Conventional Commits][conventionalcommits-homepage].
 [google-style-guide]: https://developers.google.com/style
 [google-technical-writing]: https://developers.google.com/tech-writing
 
-[pep-0008]: https://peps.python.org/pep-0008/
 [diataxis]: https://diataxis.fr/

@@ -45,7 +45,7 @@
 1. 确保 [Gitee 仓库][repository-gitee] 或 [GitHub 仓库][repository-github] 中没有相关的拉取请求（PR）。
 2. Fork 本仓库。
 3. 使用 [Git][git-homepage] 将仓库克隆到本地。
-4. 阅读[开发指南](./docs/dev/index.md)，熟悉项目开发方法。
+4. 阅读[开发指南](./docs/dev/index.md)，熟悉项目开发方法和相关约定。
 5. 创建分支，如 `feature/xxx` 或 `bugfix/xxx`。
 6. 编写代码。
 7. 运行以下命令，确保代码符合规范且未引入错误：
@@ -60,25 +60,17 @@
 
 ### 代码规范
 
-#### Python 代码（`.py`）
+相关的约定请参见[开发指南](./docs/dev/index.md)。
 
-- 函数参数必须声明类型注解。
-- 单行最大 120 字符
-- 其他情况以 [PEP 8][pep-0008] 为准。
-
-#### Markdown 文档（`.md`）
-
-- 不限制单行最大长度。
-- 具体规则参考根目录 `rumdl.toml`。
-- 其他情况遵循 [Markdownlint][markdownlint-repository-github]。
-
-更多细节请参考 `.editorconfig`。
+您可以尽情地编写代码，`uv run poe fix` 命令和您的 IDE 会帮助您检查并修复一些小问题。
 
 ### 文档规范
 
 文档写作以 [Google 开发者风格指南][google-style-guide] 与 [Google 技术写作课程][google-technical-writing] 为准，关注清晰、语气、无障碍与包容性用语；针对中文写作，[中文技术文档写作风格指南][zh-style-guide] 作为补充参考。
 
 文档按 [Diátaxis][diataxis] 框架组织为四类：入门教程、操作指南、技术参考、原理解析。
+
+您可以尽情地编写文档，`uv run poe fix` 命令和您的 IDE 会帮助您检查并修复一些小问题。
 
 ### Git 提交规范
 
@@ -89,7 +81,6 @@
 [issues-gitee]: https://gitee.com/hellotool/VCFGeneratorLiteWithTkinter/issues
 [issues-github]: https://github.com/hellotool/VCFGeneratorLiteWithTkinter/issues
 
-[markdownlint-repository-github]: https://github.com/DavidAnson/markdownlint
 [git-homepage]: https://git-scm.com/
 [conventionalcommits-homepage]: https://www.conventionalcommits.org/zh-hans/v1.0.0/
 
@@ -100,5 +91,4 @@
 [google-style-guide]: https://developers.google.com/style
 [google-technical-writing]: https://developers.google.com/tech-writing
 
-[pep-0008]: https://peps.python.org/pep-0008/
 [diataxis]: https://diataxis.fr/
