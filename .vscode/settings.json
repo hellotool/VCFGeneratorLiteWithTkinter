@@ -15,7 +15,9 @@
   },
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": "always"
+    "source.fixAll.ruff": "always",
+    "source.fixAll.rumdl": "always",
+    "source.fixAll.pylance": "always",
   },
   "python.testing.unittestEnabled": false,
   "python.testing.pytestEnabled": true,
