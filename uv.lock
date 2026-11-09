@@ -583,24 +583,24 @@ wheels = [
 
 [[package]]
 name = "tombi"
-version = "1.10.0"
+version = "1.11.1"
 source = { registry = "https://mirrors.cernet.edu.cn/pypi/web/simple" }
-sdist = { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/b9/60/e5ef49958639a9c3bb714b6c678893c3b64aa0f8ac67e108396c88b32a33/tombi-1.10.0.tar.gz", hash = "sha256:8c63a7548b43a1b1a8ceb4b84111be0f6b243fa5c3586f6343b12cfc0ae7bf56", size = 908205, upload-time = "2026-11-04T10:53:07.298Z" }
+sdist = { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/f1/3e/3e248bf1ffe3fb92de5eda69ae60bd23c6de4e984713faa1ccd22613e40e/tombi-1.11.1.tar.gz", hash = "sha256:851def0512b9c702ccaf133823068ec59da85cbc557b332bf98591c245494a10", size = 934431, upload-time = "2026-11-09T00:13:11.539Z" }
 wheels = [
-    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/79/d3/e7501a39a37cf1965f3a71e07af5d0ffc7ba4435a3b4bb08d7b9ba0c8051/tombi-1.10.0-py3-none-macosx_10_12_x86_64.whl", hash = "sha256:1cc8265e62ecdada04903283d3013124c25d0d8fcb46bb0b2ed02fefb8beccdd", size = 8780377, upload-time = "2026-11-04T10:52:01.492Z" },
-    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/f4/93/0e46961d8918415bf7665eed13d402256d064fa4d1463d12925d742ec60e/tombi-1.10.0-py3-none-macosx_11_0_arm64.whl", hash = "sha256:0da7fe9e7f656a035cad4ea25235564dffbe03a9ba0d401423beecd39212f89f", size = 8267412, upload-time = "2026-11-04T10:52:04.385Z" },
-    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/72/fe/56808f611617715cc3b5431392cf592e6fba98b84152532c674ef7bb4d61/tombi-1.10.0-py3-none-manylinux2014_armv7l.manylinux_2_17_armv7l.whl", hash = "sha256:d0e2c8f1a3313675b04ab95327df9a6451064aa3a2442f5968063347ac260d66", size = 8649059, upload-time = "2026-11-04T10:52:06.581Z" },
-    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/a2/57/582b4ec328bcd78579b42b3cb4f1530366db83376f249f8d1e295b70da82/tombi-1.10.0-py3-none-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:e62106857d7aefa5acbb2d277e12bcd06469900123c3f01e081aead7652feaf0", size = 9127844, upload-time = "2026-11-04T10:52:09.563Z" },
-    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/9d/1b/fde53a92b941f0dfb03dee1ac80a77b8f4c2396d5292eea4932c7aeb067e/tombi-1.10.0-py3-none-manylinux2014_ppc64le.manylinux_2_17_ppc64le.whl", hash = "sha256:e5b635d5e1598167c02455592581ea4014683879eca00bc2130618f585f76257", size = 9377356, upload-time = "2026-11-04T10:52:12.09Z" },
-    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/ea/ad/04601bb049ad6d391a9ab080f7330078b6dc6ae5236f6abaa725afdc0825/tombi-1.10.0-py3-none-manylinux2014_s390x.manylinux_2_17_s390x.whl", hash = "sha256:75d4c942dc9ba69e6d9b22a2927fb9d76c8184236f0cae499eecb68df75516cd", size = 9360943, upload-time = "2026-11-04T10:52:15.121Z" },
-    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/49/98/5c818c531c050079299d30111e58e2eb10914f23299658ce3729cd68fc5f/tombi-1.10.0-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:85ebb5d1e886fb9351818a14d0740f34ff329d24fddcc59dcdf58b787f21017b", size = 9106260, upload-time = "2026-11-04T10:52:17.74Z" },
-    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/31/8f/4f570305eac8a8241ceb0a721d259d012bab943ac9d6f390887554ab7356/tombi-1.10.0-py3-none-manylinux_2_28_aarch64.whl", hash = "sha256:c3a58acb7445ea73efa00f76fb9ae51b450bdfc991886d2cef2599504e479bf0", size = 8480329, upload-time = "2026-11-04T10:52:20.474Z" },
-    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/f4/db/e0224b7ebbe1c0f62448daee416fd6e081cdbf1201e7c7352ae9ee749952/tombi-1.10.0-py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:f4630d3ed8c734e0b986d72dd1794456acc4e6c3cb04f9510fa5f8095f595b83", size = 8500539, upload-time = "2026-11-04T10:52:22.874Z" },
-    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/bc/8c/50634085c34388a1d7bee8c7d8f71b59e840e4b3c3246289d764768338ec/tombi-1.10.0-py3-none-musllinux_1_2_armv7l.whl", hash = "sha256:98e5f105a773377f6f128a99dcfec80f174523af967c9ccd539f2e9ced1df87a", size = 8667080, upload-time = "2026-11-04T10:52:25.669Z" },
-    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/9b/22/141e180a6bc42c791a6ebbb20ff67d8f1ab195057ecb3c78eb08884a0d8c/tombi-1.10.0-py3-none-musllinux_1_2_i686.whl", hash = "sha256:7db38692d94f20b9c3b7ad9be48ed00f7bca7a24fa213ee4bedbc62cb939d021", size = 8951387, upload-time = "2026-11-04T10:52:28.421Z" },
-    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/de/71/70c35c41eb9c467e42fb04b7c34f732127f30bd53a8e75d0d793da7082c5/tombi-1.10.0-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:a753f227caff62bb5a15802f194c0448748def9c896e3786c8b698d7f55282c8", size = 9198091, upload-time = "2026-11-04T10:52:30.893Z" },
-    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/a7/eb/597d7f83a49ce2efa29d6a6772fbf28f780e10e4551cd5562a5c899c8990/tombi-1.10.0-py3-none-win32.whl", hash = "sha256:226907781f6ef68773fe5790919e44a1190eac7e7c4ec7f3f8337c9345ea3798", size = 8523607, upload-time = "2026-11-04T10:52:33.438Z" },
-    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/30/fe/2f9dc8501fe04f8a35ebe91132b8aaca2f8d8467fcf8e8cc8dffbbcfaca6/tombi-1.10.0-py3-none-win_amd64.whl", hash = "sha256:71358deb15a032bba6bdafc607d6fe1c157ffa05b63e43e65027d50adc0ef19b", size = 9974269, upload-time = "2026-11-04T10:52:35.929Z" },
+    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/bd/c5/870d2b9f677c36bb71620aabc8d6701dd1d503c392fb77180ef237e1d3f6/tombi-1.11.1-py3-none-macosx_10_12_x86_64.whl", hash = "sha256:9ad7e6a57729f365809559e64501f9b1b3a7410da5e0383538c3355ed33f9f80", size = 9200792, upload-time = "2026-11-09T00:12:02.802Z" },
+    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/fe/ac/aabbf7ad8e8c9bbecf27dee02e11a7b50d9ba958eb7816ac5212deecb05d/tombi-1.11.1-py3-none-macosx_11_0_arm64.whl", hash = "sha256:5b92aebef19d510e2b62f205332d852adb379024436644669206cdb635506ae6", size = 8686606, upload-time = "2026-11-09T00:12:05.682Z" },
+    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/6c/74/898b48149e0ff8a7a7581cf4d9f19a10c9305e8c0181bf5dba9ed08ee102/tombi-1.11.1-py3-none-manylinux2014_armv7l.manylinux_2_17_armv7l.whl", hash = "sha256:de4d1275629e46fe68e724b47e89ab026dbe44eb60903bc451b0ab5f2acf0c11", size = 9091948, upload-time = "2026-11-09T00:12:08.126Z" },
+    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/2b/f0/2d6e1f7059d7f57e623daf666d25e2ee17658d775d91ef68530ff6f17a99/tombi-1.11.1-py3-none-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:c88884b1689f21ee537599184f6dfc6c706107ea461aeab31e725fa8351cc30e", size = 9542042, upload-time = "2026-11-09T00:12:10.556Z" },
+    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/ca/e2/2507d682566dc890f9db43ad21c2e050e8bce563cf0e77706984d6237bfa/tombi-1.11.1-py3-none-manylinux2014_ppc64le.manylinux_2_17_ppc64le.whl", hash = "sha256:515c2fefb4c14ab710218a7aec5334cf561bc750a1aface84e7f0182701a88eb", size = 9839720, upload-time = "2026-11-09T00:12:13.427Z" },
+    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/59/3d/1c7a4c0098092c37130587f103efea9559149d219d1a50215724bdc9d8d9/tombi-1.11.1-py3-none-manylinux2014_s390x.manylinux_2_17_s390x.whl", hash = "sha256:e5b981b868b071ce19566117d2607ac79e5cb736dd6cb49226ee1d47596a217a", size = 9776179, upload-time = "2026-11-09T00:12:16.061Z" },
+    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/7d/ae/6efff4d9d8799fba2957cb88c1cadd455415426d29c9cd8427ee1a88e6f7/tombi-1.11.1-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:a7aee7941ace5d6eb9105f41f2e909000d3306361fed5a5a079079b95dde86f0", size = 9583085, upload-time = "2026-11-09T00:12:18.538Z" },
+    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/d5/3d/88ad45c8fa8bb7efe6446b5f585169b1ae07e4d7e212b83aca67cb3c18c0/tombi-1.11.1-py3-none-manylinux_2_28_aarch64.whl", hash = "sha256:b46f197094c42cdbcd78327e378c04855d98c21a4e3386b87875f788d9fb0a24", size = 8927891, upload-time = "2026-11-09T00:12:21.133Z" },
+    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/44/b5/343025ffb762f69771de2c74ff14e2b5bbc80975dd5a2ce2aaa3b1d8e3e6/tombi-1.11.1-py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:9debc76ca749647b51dd867a2b2ddf2c16494987842347c6ac38503c6e60e919", size = 8950916, upload-time = "2026-11-09T00:12:23.692Z" },
+    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/f6/51/f9fbf38c54310835687711d08e1edac73d364bf731a2dc9151410e32ec59/tombi-1.11.1-py3-none-musllinux_1_2_armv7l.whl", hash = "sha256:568fcb668af3761cc1314a2ef3610095d2210e9add88eb66902396e4e123a010", size = 9109220, upload-time = "2026-11-09T00:12:26.434Z" },
+    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/f8/58/5ffb4960c98f2dfaecd277797aa46cdec927c9f9788eae80f80c4d1205a7/tombi-1.11.1-py3-none-musllinux_1_2_i686.whl", hash = "sha256:d9d454f9ca06f491ccc00f9286cadf4973439022031a948acf98fc47f74322e9", size = 9361675, upload-time = "2026-11-09T00:12:29.23Z" },
+    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/5b/25/568d4245aeede7c85b484084455b2b5e8d50ee3fce796b32d022a3f4cdde/tombi-1.11.1-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:b8d4b7e0a2f104361241bf1cb11d8e552be234ade3735cd49e25c7957744242b", size = 9674256, upload-time = "2026-11-09T00:12:32.143Z" },
+    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/10/7f/6202633486e7ca5f231cbb634861ee5411f2b2899ee496a5df501d69ffa3/tombi-1.11.1-py3-none-win32.whl", hash = "sha256:1b5eaab33c3c8a0962bc2294923de8dd8459505b073f6e7a514375f002c0f913", size = 9068760, upload-time = "2026-11-09T00:12:35.127Z" },
+    { url = "https://mirrors.bfsu.edu.cn/pypi/web/packages/d5/7e/fbff2464764bade7fd4dd8ba415ff3d84bfae04edec9365c7d64b166ed35/tombi-1.11.1-py3-none-win_amd64.whl", hash = "sha256:3e31f45d3cd9c0b1e1692658e37cba930362416fa875e7d69793dc1864593962", size = 10482687, upload-time = "2026-11-09T00:12:38.068Z" },
 ]
 
 [[package]]
@@ -713,7 +713,7 @@ dev = [
     { name = "requests", specifier = ">=2.34.2" },
     { name = "ruff", specifier = ">=0.17.4" },
     { name = "rumdl", specifier = ">=0.3.2" },
-    { name = "tombi", specifier = ">=1.10.0" },
+    { name = "tombi", specifier = ">=1.11.1" },
 ]
 docs = [
     { name = "jinja2", specifier = ">=3.1.6" },
@@ -728,7 +728,7 @@ lint = [
     { name = "poethepoet", specifier = ">=0.49.0" },
     { name = "pyright", specifier = ">=1.1.414" },
     { name = "ruff", specifier = ">=0.17.4" },
-    { name = "tombi", specifier = ">=1.10.0" },
+    { name = "tombi", specifier = ">=1.11.1" },
 ]
 test = [
     { name = "poethepoet", specifier = ">=0.49.0" },
