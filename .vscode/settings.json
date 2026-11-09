@@ -6,11 +6,16 @@
   },
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff",
-    "editor.formatOnSave": true
   },
   "[markdown]": {
     "editor.defaultFormatter": "rvben.rumdl",
-    "editor.formatOnSave": true
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "tombi-toml.tombi"
+  },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always"
   },
   "python.testing.unittestEnabled": false,
   "python.testing.pytestEnabled": true,
