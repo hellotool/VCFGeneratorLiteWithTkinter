@@ -67,8 +67,51 @@ Built with Python and Tkinter for a native desktop application.
 
 ## Screenshots
 
-<img src="./assets/images/screenshots/main_window.webp" width="451" alt="Main window" />
-<img src="./assets/images/screenshots/invalid_lines_window.webp" width="362" alt="Invalid Lines Window" />
+<table>
+  <thead>
+    <tr>
+      <th align="center">Windows</th>
+      <th align="center">Linux (Breeze)</th>
+      <th align="center">macOS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center"><img src="./assets/images/screenshots/windows/main_window.webp" width="380" alt="Main window (Windows)" /></td>
+      <td align="center"><img src="./assets/images/screenshots/linux/breeze/main_window.webp" width="380" alt="Main window (Linux, Breeze)" /></td>
+      <td align="center"><img src="./assets/images/screenshots/macos/main_window.webp" width="380" alt="Main window (macOS)" /></td>
+    </tr>
+    <tr>
+      <td align="center"><img src="./assets/images/screenshots/windows/invalid_lines_window.webp" width="380" alt="Invalid Lines Window (Windows)" /></td>
+      <td align="center"><img src="./assets/images/screenshots/linux/breeze/invalid_lines_window.webp" width="380" alt="Invalid Lines Window (Linux, Breeze)" /></td>
+      <td align="center"><img src="./assets/images/screenshots/macos/invalid_lines_window.webp" width="380" alt="Invalid Lines Window (macOS)" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<details>
+<summary>More screenshots</summary>
+
+<table>
+  <thead>
+    <tr>
+      <th align="center">Linux (clam)</th>
+      <th align="center">Linux (Arc)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center"><img src="./assets/images/screenshots/linux/clam/main_window.webp" width="380" alt="Main window (Linux, clam)" /></td>
+      <td align="center"><img src="./assets/images/screenshots/linux/arc/main_window.webp" width="380" alt="Main window (Linux, Arc)" /></td>
+    </tr>
+    <tr>
+      <td align="center"><img src="./assets/images/screenshots/linux/clam/invalid_lines_window.webp" width="380" alt="Invalid Lines Window (Linux, clam)" /></td>
+      <td align="center"><img src="./assets/images/screenshots/linux/arc/invalid_lines_window.webp" width="380" alt="Invalid Lines Window (Linux, Arc)" /></td>
+    </tr>
+  </tbody>
+</table>
+
+</details>
 
 ## Download and Installation
 

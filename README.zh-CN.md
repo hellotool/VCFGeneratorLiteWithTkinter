@@ -67,8 +67,51 @@ VCF 生成器 轻量版 是一款简单高效的桌面工具，可将联系人�
 
 ## 软件截图
 
-<img src="./assets/images/screenshots/main_window.zh-CN.webp" width="451" alt="主窗口" />
-<img src="./assets/images/screenshots/invalid_lines_window.zh-CN.webp" width="362" alt="错误行展示窗口" />
+<table>
+  <thead>
+    <tr>
+      <th align="center">Windows</th>
+      <th align="center">Linux（Breeze）</th>
+      <th align="center">macOS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center"><img src="./assets/images/screenshots/windows/main_window.zh-CN.webp" width="380" alt="主窗口（Windows）" /></td>
+      <td align="center"><img src="./assets/images/screenshots/linux/breeze/main_window.zh-CN.webp" width="380" alt="主窗口（Linux，Breeze）" /></td>
+      <td align="center"><img src="./assets/images/screenshots/macos/main_window.zh-CN.webp" width="380" alt="主窗口（macOS）" /></td>
+    </tr>
+    <tr>
+      <td align="center"><img src="./assets/images/screenshots/windows/invalid_lines_window.zh-CN.webp" width="380" alt="错误行展示窗口（Windows）" /></td>
+      <td align="center"><img src="./assets/images/screenshots/linux/breeze/invalid_lines_window.zh-CN.webp" width="380" alt="错误行展示窗口（Linux，Breeze）" /></td>
+      <td align="center"><img src="./assets/images/screenshots/macos/invalid_lines_window.zh-CN.webp" width="380" alt="错误行展示窗口（macOS）" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<details>
+<summary>更多截图</summary>
+
+<table>
+  <thead>
+    <tr>
+      <th align="center">Linux（clam）</th>
+      <th align="center">Linux（Arc）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center"><img src="./assets/images/screenshots/linux/clam/main_window.zh-CN.webp" width="380" alt="主窗口（Linux，clam）" /></td>
+      <td align="center"><img src="./assets/images/screenshots/linux/arc/main_window.zh-CN.webp" width="380" alt="主窗口（Linux，Arc）" /></td>
+    </tr>
+    <tr>
+      <td align="center"><img src="./assets/images/screenshots/linux/clam/invalid_lines_window.zh-CN.webp" width="380" alt="错误行展示窗口（Linux，clam）" /></td>
+      <td align="center"><img src="./assets/images/screenshots/linux/arc/invalid_lines_window.zh-CN.webp" width="380" alt="错误行展示窗口（Linux，Arc）" /></td>
+    </tr>
+  </tbody>
+</table>
+
+</details>
 
 ## 下载与安装
 
