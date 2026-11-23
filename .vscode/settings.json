@@ -27,4 +27,16 @@
   },
   "rumdl.enable": true,
   "rumdl.configPath": "rumdl.toml",
+  // pyright 不识别 pyrightconfig.json 顶层的 "$schema" 键（每次 lint 会输出
+  // unrecognized setting 警告），因此 schema 绑定在此处以 json.schemas 提供，
+  // 保证 pyrightconfig.json 在编辑器中仍有字段补全与校验。
+  // 参见 https://github.com/DetachHead/basedpyright/issues/1651
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "pyrightconfig.json"
+      ],
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/pyright@main/packages/vscode-pyright/schemas/pyrightconfig.schema.json"
+    }
+  ],
 }
