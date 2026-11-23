@@ -1,5 +1,4 @@
 {
-  "$schema": "https://cdn.jsdelivr.net/gh/microsoft/pyright@main/packages/vscode-pyright/schemas/pyrightconfig.schema.json",
   "strictListInference": true,
   "strictDictionaryInference": true,
   "strictSetInference": true,
