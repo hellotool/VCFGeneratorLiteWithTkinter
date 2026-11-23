@@ -13,6 +13,11 @@ The logs in "Unreleased" are scattered across various language files and will be
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed the missing separator between the warning header and the list content in the invalid lines dialog.
+- Fixed an exception when computing the list row height with themes that configure style fonts as font descriptions (e.g. Breeze).
+
 ## [6.0.3] - 2026-10-25
 
 ### Added
