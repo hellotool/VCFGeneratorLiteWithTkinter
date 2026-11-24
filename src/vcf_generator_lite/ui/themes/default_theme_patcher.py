@@ -8,6 +8,7 @@ from vcf_generator_lite.utils.tkinter.style import lookup_font
 class DefaultThemePatcher(BaseThemePatcher):
     @override
     def patch(self):
+        self._patch_treeview_rowheight()
         theme_name = self.style.theme_use()
         if theme_name in {"vista", "winnative", "xpnative"}:
             self._patch_builtin_theme_common()
@@ -16,6 +17,12 @@ class DefaultThemePatcher(BaseThemePatcher):
             self._patch_builtin_theme_common()
             self._patch_builtin_cross_platform_theme()
         self._patch_legacy_widgets()
+
+    def _patch_treeview_rowheight(self) -> None:
+        if self.style.lookup("Treeview", "rowheight"):
+            return
+        treeview_font_metrics = lookup_font(self.style, "Treeview", "font", default="TkDefaultFont").metrics()
+        self.style.configure("Treeview", rowheight=treeview_font_metrics["linespace"] + self.app.winfo_pixels("2.5p"))
 
     def _patch_legacy_widgets(self) -> None:
         background = self.style.lookup(".", "background")
@@ -35,12 +42,9 @@ class DefaultThemePatcher(BaseThemePatcher):
         self.app.option_add("*Menu.font", "TkMenuFont", "startupFile")
 
     def _patch_builtin_theme_common(self) -> None:
-        treeview_font_metrics = lookup_font(self.style, "Treeview", "font", default="TkDefaultFont").metrics()
-
         # 重写部分配置以适配高分屏
         self.style.configure("TButton", padding="2.5p")
         self.style.configure("TMenubutton", padding="2.5p")
-        self.style.configure("Treeview", rowheight=treeview_font_metrics["linespace"] + self.app.winfo_pixels("2.5p"))
         self.style.configure("Heading", padding="1.5p")
         self._convert_fonts_to_point()
 
